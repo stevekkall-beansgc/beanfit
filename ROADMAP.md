@@ -61,7 +61,9 @@ Prereq for everything; no behavior change beyond packaging.
 - [ ] **T0.1** Package: `pyproject.toml`, `beanfit` console entry point,
       pipx/uv install path; keep zero-arg default UX. *(S)*
 - [ ] **T0.2** Split monolith into modules: `hw/`, `catalog/`, `engine/`,
-      `emit/`. *(S)*
+      `emit/`. *(S)* Deliberately supersedes the prototype-era "single-file
+      bias" (SESSION-BRIEF convention) — cross-platform detectors don't fit
+      one file; stdlib-only stays.
 - [ ] **T0.3** Test suite: golden-output fixtures per chip profile; CI matrix
       macos/arm64 + ubuntu + windows (red now → green as phases land). *(M)*
 - [ ] **T0.4** Catalog integrity gate: release script validates every
