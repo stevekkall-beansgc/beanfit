@@ -162,6 +162,16 @@ runtime ourselves.
 
 ## 5. Sequencing summary
 
+> **Amendment 2026-08-23 (Steve's call):** the relationship layer was pulled
+> ahead of Phases 1–2 as a customer-experience-first move. Shipped same day
+> as **beanfit-app v0** (github.com/stevekkall-beansgc/beanfit-app):
+> accounts, `beanfit register` pairing flow, device registry, recommendation
+> snapshots, drift-watch outbox schema — E2E-tested locally, deploy pending
+> Cloudflare account setup (DEPLOY.md). Registered devices also supersede the
+> anonymous beacon for B1' retention signal (stronger: identifiable, opt-in,
+> revocable). Phase 1 remains next for CLI hardware breadth; the beacon items
+> in T3.1/T3.5 collapse into the app pairing flow.
+
 ```
 Phase 0 ──► Phase 1 ──► Phase 2 ──► Phase 3 ──► GATE (day-75 signal) ──► Phase 4/5
  pack       any device   runtimes    beanfit init        │
