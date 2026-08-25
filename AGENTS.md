@@ -30,7 +30,7 @@ omit decision recorded in `models.py` comments), measured q4/q8 GiB.
 `catalog/validate.py` fails the build on dead pins (401 counts as dead).
 
 ## Known debt
-Audit findings in `~/Desktop/BeanLabs/AUDIT-2026-08/findings/BF-*.md`:
+Audit findings in `~/beans/labs/beanlabs/AUDIT-2026-08/findings/BF-*.md`:
 NamedTuple catalog rows, assumptions()-from-constants, Intel cap gating,
 exact-pin bandwidth lookup.
 
