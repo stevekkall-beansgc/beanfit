@@ -1,5 +1,8 @@
 name: gate
 on: [pull_request, push]
 jobs:
-  tiny:
-    uses: stevekkall-beansgc/gate-kit/.github/workflows/tiny.yml@main
+  compliance:
+    uses: stevekkall-beansgc/gate-kit/.github/workflows/compliance.yml@v0.2
+    with:
+      repo: beanfit
+      full: false
