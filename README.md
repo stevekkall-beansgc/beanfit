@@ -81,3 +81,7 @@ git clone https://github.com/stevekkall-beansgc/beanfit && cd beanfit
 PYTHONPATH=src python3 -m unittest discover -s tests   # stdlib only, no install needed
 python scripts/validate_catalog.py                     # live registry check
 ```
+
+---
+
+**Agents:** see [AGENTS.md](AGENTS.md) before changing anything here.
