@@ -23,7 +23,13 @@ class BuildPairPayload(unittest.TestCase):
 class CredentialFile(unittest.TestCase):
     def test_saved_with_restricted_mode(self):
         import os
+        import sys
         import tempfile
+        if sys.platform == "win32":
+            # Windows has no POSIX permission bits; os.open(mode=0o600) is a
+            # no-op there and st_mode reports the default ACL mapping (0o666).
+            # The owner-only property is enforced where the platform can.
+            self.skipTest("POSIX mode bits do not exist on Windows")
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "sub", "device.json")
             save_device_credential(path, {"device_token": "secret"})
