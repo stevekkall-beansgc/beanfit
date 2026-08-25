@@ -59,6 +59,9 @@ class DetectMacOS(unittest.TestCase):
             hw = macos.detect()
         self.assertEqual(hw["arch"], "other")
         self.assertEqual(hw["backend"], "unknown")
+        self.assertEqual(hw["metal_cap_gib"], 12.0)
+        self.assertEqual(hw["model_budget_gib"], 12.0)
+        self.assertEqual(hw["metal_cap_gib"], hw["model_budget_gib"])
 
 
 if __name__ == "__main__":

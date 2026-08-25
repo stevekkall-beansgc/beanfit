@@ -3,16 +3,12 @@ from __future__ import annotations
 from beanfit.catalog.models import CATALOG, mlx_repo_for
 
 # Policy: pinned MLX repos and ollama tags must return HTTP 200 (401 counts
-# as failure — gated mirrors would break emitted commands). Models without a
-# pin get a heuristic check that can only WARN, never fail the build.
+# as failure — gated mirrors would break emitted commands). Entries without a
+# vetted MLX pin are checked against their ollama tag only; nothing guessed.
 
 
 def ollama_url(tag: str) -> str:
     return f"https://ollama.com/library/{tag}"
-
-
-def heuristic_mlx_repo(tag: str) -> str:
-    return f"mlx-community/{tag.replace(':', '-')}-4bit"
 
 
 def mlx_url(repo: str) -> str:
@@ -31,10 +27,6 @@ def validate_catalog(fetch_status, sleep=lambda _s: None) -> list[dict]:
         repo = mlx_repo_for(tag)
         if repo:
             targets.append(("hf-pinned", repo, mlx_url(repo), True))
-        else:
-            targets.append(
-                ("hf-heuristic", heuristic_mlx_repo(tag), mlx_url(heuristic_mlx_repo(tag)), False)
-            )
         for kind, ident, url, blocking in targets:
             try:
                 status = fetch_status(url)

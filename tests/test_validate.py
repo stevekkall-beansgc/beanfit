@@ -1,7 +1,6 @@
 import unittest
 
 from beanfit.catalog.validate import (
-    heuristic_mlx_repo,
     ollama_url,
     validate_catalog,
 )
@@ -19,15 +18,16 @@ class ValidateCatalog(unittest.TestCase):
     def test_all_ok(self):
         results = validate_catalog(lambda _u: 200)
         self.assertTrue(all(r["ok"] for r in results))
-        self.assertEqual(len(results), 18)  # 9 ollama + 8 pinned + 1 heuristic
+        self.assertEqual(len(results), 17)  # 9 ollama + 8 pinned, nothing guessed
 
-    def test_heuristic_only_entry_is_non_blocking(self):
-        def dead_heuristics(url):
-            return 404 if "4bit" in url else 200
-        results = validate_catalog(dead_heuristics)
-        heuristics = [r for r in results if r["kind"] == "hf-heuristic"]
-        self.assertTrue(heuristics and not any(r["ok"] for r in heuristics))
-        self.assertFalse(any(r["blocking"] for r in heuristics))
+    def test_unpinned_entry_gets_ollama_target_only(self):
+        results = validate_catalog(lambda _u: 200)
+        kinds_by_model = {}
+        for r in results:
+            kinds_by_model.setdefault(r["model"], set()).add(r["kind"])
+        kimi_kinds = kinds_by_model["Kimi K2.6 A1B (MoE)"]
+        self.assertEqual(kimi_kinds, {"ollama"})
+        self.assertTrue(all(r["blocking"] for r in results))
 
     def test_pinned_401_counts_as_failure(self):
         results = validate_catalog(lambda _u: 401)
@@ -44,7 +44,6 @@ class ValidateCatalog(unittest.TestCase):
 
     def test_urls_follow_emitter_conventions(self):
         self.assertEqual(ollama_url("gemma4:31b"), "https://ollama.com/library/gemma4:31b")
-        self.assertEqual(heuristic_mlx_repo("gemma4:31b"), "mlx-community/gemma4-31b-4bit")
 
 
 if __name__ == "__main__":

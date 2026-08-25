@@ -5,7 +5,9 @@ import re
 
 from beanfit.hw.bandwidth import lookup
 from beanfit.hw.util import sh
-from beanfit.profile import DeviceProfile
+from beanfit.profile import MODEL_BUDGET_FLOOR_GIB, OS_HEADROOM_GIB, DeviceProfile
+
+DEFAULT_WIRED_RATIO = 0.75
 
 
 def detect() -> DeviceProfile:
@@ -14,15 +16,23 @@ def detect() -> DeviceProfile:
     wired = int(sh("sysctl", "-n", "iogpu.wired_limit_mb") or 0)  # 0 => default
 
     ram_gib = ram_bytes / 2**30 if ram_bytes else 8.0
-    # macOS caps GPU-wired memory at ~75% of RAM by default.
-    metal_cap_gib = (wired / 1024) if wired > 0 else round(ram_gib * 0.75, 1)
-    # keep headroom for OS + apps regardless of cap
-    budget_gib = max(4.0, min(metal_cap_gib, ram_gib - 4))
-
     m = re.search(r"Apple (M\d+)(?:\s*(Pro|Max|Ultra))?", chip)
     fam, var = (m.group(1), m.group(2) or "") if m else ("", "")
-    bw, bw_source = lookup(fam, var)
     is_as = fam.startswith("M")
+    bw, bw_source = lookup(fam, var)
+
+    if is_as:
+        # macOS caps GPU-wired memory at ~75% of RAM by default.
+        metal_cap_gib = (wired / 1024) if wired > 0 else round(ram_gib * DEFAULT_WIRED_RATIO, 1)
+        budget_gib = max(MODEL_BUDGET_FLOOR_GIB, min(metal_cap_gib, ram_gib - OS_HEADROOM_GIB))
+    else:
+        # No Metal GPU-wired limit exists — derive the cap from RAM alone,
+        # never from a fabricated GPU percentage.
+        metal_cap_gib = model_budget = round(
+            max(MODEL_BUDGET_FLOOR_GIB, ram_gib - OS_HEADROOM_GIB), 1
+        )
+        budget_gib = model_budget
+
     return DeviceProfile(
         os="macos",
         arch="apple_silicon" if is_as else "other",

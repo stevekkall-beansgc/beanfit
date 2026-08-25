@@ -30,8 +30,12 @@ FALLBACK_SOURCE = "unknown_fallback"
 
 
 def lookup(family: str, variant: str) -> tuple[float, str]:
-    """Return (bandwidth GB/s, source class); conservative on unknown chips."""
-    hit = BANDWIDTH.get((family, variant), BANDWIDTH.get((family, "")))
+    """Return (bandwidth GB/s, source class); conservative on unknown chips.
+
+    Only exact (family, variant) matches count — unknown variants are never
+    rescued by the family's base value.
+    """
+    hit = BANDWIDTH.get((family, variant))
     if hit is None:
         return FALLBACK_GBS, FALLBACK_SOURCE
     return float(hit[0]), hit[1]

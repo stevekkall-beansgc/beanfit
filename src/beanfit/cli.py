@@ -32,11 +32,18 @@ def main(argv: list[str] | None = None) -> int:
     if args.export_catalog:
         from beanfit.catalog.models import CATALOG, MLX_REPOS
 
-        keys = ("name", "runtime_tag", "params_b", "mem_q4", "mem_q8", "kv32k",
-                "qual_coding", "qual_reasoning", "qual_chat")
+        # Export-key aliases for fields whose names carry unit suffixes.
+        export_aliases = {
+            "mem_q4_gib": "mem_q4",
+            "mem_q8_gib": "mem_q8",
+            "kv32k_gib": "kv32k",
+        }
         print(json.dumps({
             "version": __version__,
-            "models": [dict(zip(keys, row)) for row in CATALOG],
+            "models": [
+                {export_aliases.get(k, k): v for k, v in entry._asdict().items()}
+                for entry in CATALOG
+            ],
             "mlx_repos": MLX_REPOS,
         }, indent=2))
         return 0

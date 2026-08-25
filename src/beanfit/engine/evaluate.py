@@ -4,6 +4,12 @@ from beanfit.catalog.models import CATALOG
 from beanfit.engine.estimate import band_for, decode_tok_s
 from beanfit.profile import DeviceProfile
 
+SCORE_QUALITY_WEIGHT = 12
+SPEED_CAP_TOK_S = 60
+SPEED_TIEBREAK = 0.15
+FIT_BONUS = 10
+NO_FIT_PENALTY = -40
+
 
 def evaluate(hw: DeviceProfile, use_case: str) -> list[dict]:
     rows = []
@@ -26,7 +32,9 @@ def evaluate(hw: DeviceProfile, use_case: str) -> list[dict]:
         fits = bool(best)
         speed = best["est_tok_s"] if best else 0
         # score: quality dominates, usable speed breaks ties, no-fit disqualifies
-        s = qual * 12 + min(speed, 60) * 0.15 + (10 if fits else -40)
+        s = (qual * SCORE_QUALITY_WEIGHT
+             + min(speed, SPEED_CAP_TOK_S) * SPEED_TIEBREAK
+             + (FIT_BONUS if fits else NO_FIT_PENALTY))
         rows.append({"name": name, "runtime_tag": tag, "quality": qual,
                      "fits": fits, **(best or {}), "score": round(s, 1)})
     return sorted(rows, key=lambda r: r["score"], reverse=True)

@@ -1,7 +1,7 @@
 import unittest
 
 from beanfit.engine.estimate import band_for, decode_tok_s
-from beanfit.hw.bandwidth import FALLBACK_GBS, lookup
+from beanfit.hw.bandwidth import FALLBACK_GBS, FALLBACK_SOURCE, lookup
 
 
 class Estimate(unittest.TestCase):
@@ -24,9 +24,12 @@ class Bandwidth(unittest.TestCase):
     def test_known_chip(self):
         self.assertEqual(lookup("M3", "Max"), (400.0, "spec_sheet"))
 
-    def test_variant_fallback_uses_family_base(self):
-        gbs, source = lookup("M2", "UltraFusionX")  # unknown variant
-        self.assertEqual((gbs, source), (100.0, "spec_sheet"))
+    def test_unknown_variant_gets_conservative_fallback(self):
+        gbs, source = lookup("M2", "UltraFusionX")  # unknown variant: no rescue
+        self.assertEqual((gbs, source), (FALLBACK_GBS, "unknown_fallback"))
+
+    def test_exact_pin_required_m5_ultra(self):
+        self.assertEqual(lookup("M5", "Ultra"), (60.0, FALLBACK_SOURCE))
 
     def test_unknown_family(self):
         self.assertEqual(lookup("M99", ""), (FALLBACK_GBS, "unknown_fallback"))

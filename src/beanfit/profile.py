@@ -2,6 +2,11 @@ from __future__ import annotations
 
 from typing import TypedDict
 
+# Shared budget-model knobs: reserve this much RAM for OS + apps, and never
+# promise a model budget below this floor. Used by every platform detector.
+OS_HEADROOM_GIB = 4.0
+MODEL_BUDGET_FLOOR_GIB = 4.0
+
 
 class DeviceProfile(TypedDict):
     """Normalized hardware description the scoring engine consumes.
