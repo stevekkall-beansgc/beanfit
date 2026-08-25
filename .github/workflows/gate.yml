@@ -1,5 +1,5 @@
 name: gate
 on: [pull_request, push]
 jobs:
-  compliance:
-    uses: stevekkall-beansgc/gate-kit/.github/workflows/compliance.yml@main
+  tiny:
+    uses: stevekkall-beansgc/gate-kit/.github/workflows/tiny.yml@main
