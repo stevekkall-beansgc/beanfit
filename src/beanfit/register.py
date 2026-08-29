@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import platform
 import sys
 import time
 import urllib.error
@@ -16,7 +17,34 @@ import urllib.request
 from beanfit import __version__
 from beanfit.catalog.models import USE_CASES
 from beanfit.engine import evaluate
-from beanfit.hw import detect
+from beanfit.hw import UnsupportedPlatform, detect
+from beanfit.profile import DeviceProfile
+
+
+def _ci_profile() -> DeviceProfile:
+    """Return a conservative profile for deterministic hosted E2E runs."""
+    return {
+        "os": platform.system().lower() or "unknown",
+        "arch": "other",
+        "backend": "unknown",
+        "chip": f"{platform.system() or 'unknown'} CI runner",
+        "family": "",
+        "variant": "",
+        "ram_gib": 8.0,
+        "metal_cap_gib": 4.0,
+        "model_budget_gib": 4.0,
+        "mem_bandwidth_gbs": 60.0,
+        "bw_source": "unknown_fallback",
+    }
+
+
+def _detect_for_register() -> DeviceProfile:
+    try:
+        return detect()
+    except UnsupportedPlatform:
+        if os.environ.get("BEANFIT_ALLOW_UNSUPPORTED_PLATFORM") != "1":
+            raise
+        return _ci_profile()
 
 
 def build_pair_payload(hw: dict, use_case: str, label: str | None) -> dict:
@@ -76,7 +104,11 @@ def register_main(argv: list[str] | None = None) -> int:
         return 2
     server = args.server.rstrip("/")
 
-    hw = detect()
+    try:
+        hw = _detect_for_register()
+    except UnsupportedPlatform as exc:
+        print(f"beanfit: {exc}", file=sys.stderr)
+        return 2
     print(f"beanfit · detected {hw['chip']} · {hw['ram_gib']} GiB")
 
     status, body = _request(f"{server}/api/pair/start",
