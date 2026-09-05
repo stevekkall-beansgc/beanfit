@@ -1,0 +1,41 @@
+  [PASS] beanfit-app
+  [PASS] beanfit
+  [PASS] agency
+  [PASS] beanlaunch
+  [PASS] bean-sched
+  [PASS] model-harness
+  [PASS] beanmind
+  [PASS] skillz
+  [PASS] beanlabs
+  [PASS] bean-commons
+  [PASS] jumping-beans
+  [PASS] jumping-beans-v2
+  [PASS] qa-kit
+  [PASS] gate-kit
+  [PASS] agents
+
+docs standard: 15/15 repos conform
+STANDARDS.md ok — 10 kernel anchors verified
+test_agency_setup_fails_closed_on_missing_or_failed_bootstrap (test_units.TestManifestContract.test_agency_setup_fails_closed_on_missing_or_failed_bootstrap) ... ok
+test_agency_setup_preserves_older_checkouts_without_clawstr (test_units.TestManifestContract.test_agency_setup_preserves_older_checkouts_without_clawstr) ... ok
+test_agency_setup_runs_clawstr_bootstrap_after_python (test_units.TestManifestContract.test_agency_setup_runs_clawstr_bootstrap_after_python) ... ok
+test_agency_setup_stops_after_python_install_failure (test_units.TestManifestContract.test_agency_setup_stops_after_python_install_failure) ... ok
+test_agency_setup_validates_runtime_and_installs_dependencies (test_units.TestManifestContract.test_agency_setup_validates_runtime_and_installs_dependencies) ... ok
+test_2xx_is_up (test_units.TestProbeUrl.test_2xx_is_up) ... /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/case.py:615: ResourceWarning: unclosed <socket.socket fd=3, family=2, type=1, proto=0, laddr=('127.0.0.1', 58709)>
+  result = method()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_5xx_is_down_by_definition (test_units.TestProbeUrl.test_5xx_is_down_by_definition) ... /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 503: 'Service Unavailable'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/case.py:615: ResourceWarning: unclosed <socket.socket fd=3, family=2, type=1, proto=0, laddr=('127.0.0.1', 58711)>
+  result = method()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_refused_is_down (test_units.TestProbeUrl.test_refused_is_down) ... ok
+test_is_git_repo (test_units.TestReconcile.test_is_git_repo) ... ok
+test_cross_repo_target_falls_back_to_canonical_workspace (test_units.TestStandardsResolution.test_cross_repo_target_falls_back_to_canonical_workspace) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.815s
+
+OK

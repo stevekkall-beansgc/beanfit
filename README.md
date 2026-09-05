@@ -85,3 +85,12 @@ python scripts/validate_catalog.py                     # live registry check
 ---
 
 **Agents:** see [AGENTS.md](AGENTS.md) before changing anything here.
+
+## BF-CER activation candidate
+
+The [first-dollar activation package](docs/activation/README.md) contains a
+synthetic-only order ledger, Stripe test transport, correction/refund controls,
+anonymized five-prospect distribution plan and verification receipts. It is not live or
+customer-ready. Run `python3 scripts/check_activation_qa.py` for its
+central QA registration and `python3 scripts/activation_demo.py` for the offline
+end-to-end fixture; neither creates provider payments.

@@ -1,0 +1,73 @@
+{
+  "agency_gated": true,
+  "agency_state": "queued",
+  "agency_task": 192,
+  "apify_bridge_account_snapshot": {
+    "active_jobs": 0,
+    "build_id": "GQ41FN91r9DraYJiC",
+    "build_number": "1.0.2",
+    "build_status": "SUCCEEDED",
+    "cap": 5,
+    "credits": 5,
+    "is_paying": false,
+    "owner_matches": true,
+    "plan": "FREE",
+    "plan_enabled": true,
+    "usage": 0.005956648690197203
+  },
+  "apify_bridge_preflight": {
+    "actor_isPublic": false,
+    "actor_pricingInfo_present": false,
+    "actor_pricingInfos_present": false,
+    "cash_spend_initiated": 0,
+    "default_access_verified": false,
+    "error": "APIFY_PRIVATE_UNPRICED_REQUIRED",
+    "historical_run_chargedEventCounts": null,
+    "historical_run_generalAccess": "FOLLOW_USER_SETTING",
+    "historical_run_id": "ggaGTBeaz3zGUoqO3",
+    "historical_run_pricingInfo": null,
+    "new_runs_started": 0,
+    "note": "No current pricing/default-access meaning inferred from optional absent fields. Existing historical proof remains separately scoped.",
+    "observed_at": "2026-09-05T12:57:10.533573+00:00",
+    "status": "BLOCKED_BEFORE_START"
+  },
+  "apify_console": {
+    "access_or_pricing_settings_changed": false,
+    "observed_at": "2026-09-05T12:59:14.302220+00:00",
+    "observed_url": "https://console.apify.com/sign-in",
+    "requested_url": "https://console.apify.com/actors/X457S8llVBn25IEYB",
+    "status": "BLOCKED_AUTHENTICATION"
+  },
+  "apify_read_only_preflight": {
+    "currentUsageUsd": 0.005954244946632121,
+    "isPaying": false,
+    "maxMonthlyUsageUsd": 5,
+    "monthlyUsageCreditsUsd": 5,
+    "new_builds_or_runs": 0,
+    "note": "Read-only account meter snapshot; not invoice or payout reconciliation. Prior released provider receipt remains historical run proof.",
+    "plan": "FREE",
+    "plan_enabled": true,
+    "remaining_free_credits_usd_arithmetic": 4.994045755053368,
+    "usageTotalUsd": null,
+    "writes": 0
+  },
+  "cash_spend_initiated": 0,
+  "classification": "EXCLUDED_TEST",
+  "customer_inputs_accepted": 0,
+  "live_charges": 0,
+  "observed_date": "2026-09-05",
+  "prospects_contacted": 0,
+  "publication_or_pricing_changes": 0,
+  "stripe": {
+    "account_fee_and_payout_verified": false,
+    "evidence": "Chrome accessibility state showed Sign in to your account, email/password fields; no authenticated test dashboard.",
+    "observed_url": "https://dashboard.stripe.com/login?redirect=%2Ftest%2Fproducts",
+    "product_price_payment_link_session_created": false,
+    "requested_url": "https://dashboard.stripe.com/test/products",
+    "status": "BLOCKED_AUTHENTICATION",
+    "test_payment_completed": false,
+    "test_refund_completed": false,
+    "vault_test_key_name_found": false,
+    "webhook_received": false
+  }
+}

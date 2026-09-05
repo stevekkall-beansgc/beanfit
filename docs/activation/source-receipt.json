@@ -1,0 +1,89 @@
+{
+  "recorded_at": "2026-09-05T12:49:41.096929+00:00",
+  "beanfit_base": "4ec003e8f9c7ce8de821a9c24561ce023b79526f",
+  "portfolio_checkout": "24b51b77c0b9942f20e5b7c399e14e013c00dba5",
+  "inputs": [
+    {
+      "repository": "beanfit",
+      "path": "AGENTS.md",
+      "sha256": "58952966638ae3f20161c6ceb6048f047bf8615596864eb01726d3a96aee67ab"
+    },
+    {
+      "repository": "beanfit",
+      "path": "docs/apify.md",
+      "sha256": "3acf549ceeeb2d9006b62c4e7b4389469be7e40ffd1fc72f62dab54b0a8d2752"
+    },
+    {
+      "repository": "beanfit",
+      "path": "docs/apify/VALIDATION-RECEIPT.md",
+      "sha256": "0571c591805e32fd8cca53c44f107d5acb94ac325b8434d5b49dc33771bdee2a"
+    },
+    {
+      "repository": "beanfit",
+      "path": "docs/apify/provider-receipt.json",
+      "sha256": "0f5afafb3d1b7a880d840fdf9dca7202d2b51b295528898fcc29d37f5aa4c287"
+    },
+    {
+      "repository": "beanfit",
+      "path": "docs/apify/DEPLOYMENT-GATE.md",
+      "sha256": "ee36edce81c557712d30f4ce8c8a779a5f813bfa9a770d6ef6dc7c6ebf351a19"
+    },
+    {
+      "repository": "beanfit",
+      "path": "docs/apify/sample-report.md",
+      "sha256": "e414f5f52b046767cdba51b405c67f7dccafd7301d421b6c15bb77b9502db036"
+    },
+    {
+      "repository": "beanfit",
+      "path": "docs/apify/sample-report.json",
+      "sha256": "e36076810035e6c8aac1df66a9aac58c08ad6bd91d410e698a1117a159800827"
+    },
+    {
+      "repository": "beanfit",
+      "path": "docs/apify/SCHEMA-CORRECTION.md",
+      "sha256": "85d8578788fa08b5f6f6e03f5e82b5633888a7bb8e3806265d5d0b46e1d28e87"
+    },
+    {
+      "repository": "beanfit",
+      "path": "docs/apify/VALIDATION-HISTORY.md",
+      "sha256": "a270e417da81c53ef4243cda8af8d3dbc7244439a11eacf442bc71416afbb548"
+    },
+    {
+      "repository": "beanlabs",
+      "path": "AGENTS.md",
+      "sha256": "b0d97488153785cecea3c0ab15eaff9093182309669fe1af0ea479c61e24501a"
+    },
+    {
+      "repository": "beanlabs",
+      "path": "ventures/06-autonomous-revenue-portfolio/OFFER-CONTRACT.md",
+      "sha256": "795834b0875d160fb186462a81652a35f031e287c4f5860e320d7b21b7511ed5"
+    },
+    {
+      "repository": "beanlabs",
+      "path": "ventures/06-autonomous-revenue-portfolio/BEANFIT-COMPATIBILITY-EVIDENCE-REPORT-SAMPLE.md",
+      "sha256": "8db1a43687c851ab6314f1beb82d54ea3667c0c84e8811210899ce4138638252"
+    },
+    {
+      "repository": "beanlabs",
+      "path": "ventures/06-autonomous-revenue-portfolio/SETUP-RECEIPTS.md",
+      "sha256": "d6028f4d6a2cb2cf390f6f03525b712a04d8c475d76c18009c834d3457cb4f12"
+    },
+    {
+      "repository": "beanlabs",
+      "path": "ventures/06-autonomous-revenue-portfolio/OPERATING-RUNBOOK.md",
+      "sha256": "2f5fc7a146150abd2897dab5185f30d27d52d20eeb352b38942712856bb14725"
+    },
+    {
+      "repository": "beanlabs",
+      "path": "ventures/06-autonomous-revenue-portfolio/LEDGER.md",
+      "sha256": "b5d0a77b161b6f3f741044b483eca2ebc7e9a3c57e0064ce4fcafebc072e46c3"
+    },
+    {
+      "repository": "beanlabs",
+      "path": "ventures/06-autonomous-revenue-portfolio/PROSPECTUS.md",
+      "sha256": "3c822eb570d20c675914cbba44910eff739a6d4633a303999a29556d32dfbeaf"
+    }
+  ],
+  "portfolio_latest_release_tag": "v0.5.0",
+  "portfolio_latest_release_commit": "24b51b77c0b9942f20e5b7c399e14e013c00dba5"
+}

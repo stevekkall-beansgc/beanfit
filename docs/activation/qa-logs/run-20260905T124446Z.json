@@ -1,0 +1,27 @@
+{
+  "when": "20260905T124446Z",
+  "results": [
+    {
+      "repo": "beanfit",
+      "kind": "docs",
+      "ok": true,
+      "secs": 0.0,
+      "tail": ""
+    },
+    {
+      "repo": "beanfit",
+      "kind": "unit",
+      "ok": true,
+      "secs": 0.2,
+      "tail": ".........................................................................../Users/stephenkall/beans/worktrees/beanfit-first-dollar/tests/test_register.py:44: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/20/kj7t9pzj11j9750__pkq01vm0000gn/T/tmpqhc6d65z/sub/device.json' mode='r' encoding='UTF-8'>\n  doc = json.loads(open(path).read())\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n......................................\n----------------------------------------------------------------------\nRan 113 tests in 0.108s\n\nOK"
+    },
+    {
+      "repo": "beanfit",
+      "kind": "e2e",
+      "ok": true,
+      "secs": 0.1,
+      "tail": "{\"status\": \"OFFLINE_SYNTHETIC_PASS\", \"provider_calls\": 0, \"checkout_create_effects\": 1, \"refund_create_effects\": 1, \"report_revisions\": 2}"
+    }
+  ],
+  "planned_skipped": []
+}

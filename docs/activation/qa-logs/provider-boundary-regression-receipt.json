@@ -1,0 +1,13 @@
+{
+  "classification": "OFFLINE_SYNTHETIC_MUTATION_PROOF",
+  "date": "2026-09-05",
+  "method": "Restored pre-fix behavior only in an in-memory module: omit expected_order_id and omit preexisting-file validation. This is mutation proof, not a historical checkout test run.",
+  "runtime_files_modified": false,
+  "network_calls": 0,
+  "source_sha256": "53a28ed5fe5242af653821b82a3c31647888d9f44d98a54fa9a5b39c91e52b7d",
+  "mutant_sha256": "f07396f32155b4057576dfe2a215a405313209548930f07a38f42e1e0347d6e9",
+  "tests_run": 2,
+  "expected_failures": 2,
+  "unexpected_errors": 0,
+  "output": "test_other_bound_order_event_cannot_mutate_ledger (tests.test_activation_provider.ProviderBoundaryTests.test_other_bound_order_event_cannot_mutate_ledger) ... FAIL\ntest_existing_ledger_symlink_rejected_before_provider_call (tests.test_activation_provider.ProviderBoundaryTests.test_existing_ledger_symlink_rejected_before_provider_call) ... FAIL\n\n======================================================================\nFAIL: test_other_bound_order_event_cannot_mutate_ledger (tests.test_activation_provider.ProviderBoundaryTests.test_other_bound_order_event_cannot_mutate_ledger)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/stephenkall/beans/worktrees/beanfit-first-dollar/tests/test_activation_provider.py\", line 116, in test_other_bound_order_event_cannot_mutate_ledger\n    with self.assertRaises(ActivationError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: ActivationError not raised\n\n======================================================================\nFAIL: test_existing_ledger_symlink_rejected_before_provider_call (tests.test_activation_provider.ProviderBoundaryTests.test_existing_ledger_symlink_rejected_before_provider_call)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/stephenkall/beans/worktrees/beanfit-first-dollar/tests/test_activation_provider.py\", line 128, in test_existing_ledger_symlink_rejected_before_provider_call\n    with self.assertRaises(ActivationError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: ActivationError not raised\n\n----------------------------------------------------------------------\nRan 2 tests in 0.011s\n\nFAILED (failures=2)\n"
+}

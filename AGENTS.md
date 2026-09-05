@@ -13,6 +13,7 @@ Mac. Detection → fit engine → honest emission.
 
 ## Test commands
 - All: `PYTHONPATH=src python3 -m unittest discover -s tests`
+- Activation E2E: `python3 scripts/activation_demo.py`
 - Golden scores are load-bearing: `tests/test_evaluate.py` pins ranking
   output (121.8 et al). Never "update" a golden number to make a change pass.
 
