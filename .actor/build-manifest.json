@@ -3,7 +3,7 @@
   "source_sha256": {
     "src/beanfit/__init__.py": "ddb850b92be960458a073831be37b22bcd34b98a11fe66d6fe4e32ed1cbc5c65",
     "src/beanfit/__main__.py": "9d7b2870c8196bd35db5b0b3393517ed08f34d4e55441c8c7579131154f38c47",
-    "src/beanfit/apify_actor.py": "b50b76f6b6409bb37cd51c67e91b00a87d230196fcb0e47cf9cd4f59f69d938b",
+    "src/beanfit/apify_actor.py": "2f09ca77f53d5edaecc173d6333b548538f3cceeab8d8981b6bdb65ce50a3ec0",
     "src/beanfit/catalog/__init__.py": "5622540201f062dab7de82057777cf01c077af813df429ddc481ec4ea2076a1b",
     "src/beanfit/catalog/models.py": "087bae391f4e2271660f986683ce907b48fb2bbb235912ffbed3b636114627cc",
     "src/beanfit/catalog/validate.py": "eb8cc3717b02422e4423563a7654f10279c682a364c002823a0f37ebadc19bc6",

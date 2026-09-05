@@ -17,10 +17,10 @@ def prepare(root=ROOT):
         raise RuntimeError('Pinned Beanfit core changed; provenance review required')
     source_paths = sorted((root/'src').rglob('*.py'))
     manifest = {'repository_revision':BASE_REVISION,
-                'source_sha256':{str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}}
+                'source_sha256':{p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}}
     (root/'.actor/build-manifest.json').write_text(json.dumps(manifest, indent=2, sort_keys=True)+'\n')
     selected = source_paths + [root/'.actor'/n for n in ('actor.json','input_schema.json','Dockerfile','build-manifest.json')] + [root/'docs/apify.md', root/'.dockerignore']
-    files = [{'name':str(p.relative_to(root)), 'format':'TEXT', 'content':p.read_text()} for p in selected]
+    files = [{'name':p.relative_to(root).as_posix(), 'format':'TEXT', 'content':p.read_text()} for p in selected]
     payload = {
         'name':'beanfit-compatibility-evidence-report', 'title':'Beanfit Compatibility Evidence Report',
         'description':'Private validation of BF-CER-v1.0; one device, one workload, one Markdown and JSON report.',

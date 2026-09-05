@@ -66,7 +66,7 @@ def verify_provenance(manifest_path, root):
     if not re.fullmatch(r"[0-9a-f]{40}", manifest.get("repository_revision", "")):
         raise RuntimeError("PROVENANCE_INVALID")
     expected = manifest.get("source_sha256", {})
-    actual = {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+    actual = {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in (Path(root) / "src").rglob("*.py")}
     if not actual or actual != expected:
         raise RuntimeError("PROVENANCE_INVALID")
