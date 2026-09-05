@@ -1,0 +1,8 @@
+**
+!src/
+!src/beanfit/
+!src/beanfit/**
+!.actor/
+!.actor/**
+**/__pycache__/
+**/*.pyc

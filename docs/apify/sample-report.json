@@ -1,0 +1,295 @@
+{
+  "contract_version": "BF-CER-v1.0",
+  "generated_at": "2026-09-04T22:12:51.722222+00:00",
+  "accepted_inputs": {
+    "device_chip": "Apple M4 Pro",
+    "memory_gib": 48,
+    "use_case": "coding",
+    "operating_system": "macOS 15.6 arm64",
+    "preferred_runtime": "no preference",
+    "latency_preference": "balanced",
+    "minimum_context_tokens": 16384,
+    "installed_runtime_versions": {},
+    "constraints": ""
+  },
+  "provenance": {
+    "device_chip": "buyer-supplied",
+    "memory_gib": "buyer-supplied",
+    "use_case": "buyer-supplied",
+    "operating_system": "buyer-supplied",
+    "preferred_runtime": "documented fallback",
+    "latency_preference": "documented fallback",
+    "minimum_context_tokens": "documented fallback",
+    "installed_runtime_versions": "documented fallback",
+    "constraints": "documented fallback"
+  },
+  "versions": {
+    "beanfit": "0.2.0.dev0",
+    "repository_revision": "e8ec4507b89b3b0471894515e1f80794eb92664f",
+    "catalog_sha256": "087bae391f4e2271660f986683ce907b48fb2bbb235912ffbed3b636114627cc",
+    "catalog_hash_scope": "src/beanfit/catalog/models.py bytes",
+    "report_source_sha256": "2eba6e0e142cbae80d6fac1239b4f744334142ce3c68f22d7fe4643176d8c2a1"
+  },
+  "device_profile": {
+    "os": "macos",
+    "arch": "apple_silicon",
+    "backend": "unified",
+    "chip": "Apple M4 Pro",
+    "family": "M4",
+    "variant": "Pro",
+    "ram_gib": 48,
+    "metal_cap_gib": 36.0,
+    "model_budget_gib": 36.0,
+    "mem_bandwidth_gbs": 273.0,
+    "bw_source": "spec_sheet"
+  },
+  "assumptions": {
+    "formula": "tok/s \u2248 mem_bandwidth_GBs / total_weights_gib * 0.85 * quant_speedup",
+    "quant_speedup": {
+      "q4_K_M": 1.0,
+      "q8_0": 0.62
+    },
+    "context_assumption": "half of a 32k-token KV cache included in total GiB",
+    "budget_rule": "min(unified-memory cap, RAM - 4 GiB OS headroom), floor 4 GiB",
+    "uncertainty_pct_by_bw_source": {
+      "spec_sheet": 25,
+      "estimate": 40,
+      "unknown_fallback": 50
+    },
+    "score_weights": {
+      "quality_weight": 12,
+      "speed_cap_tok_s": 60,
+      "speed_tiebreak": 0.15,
+      "fit_bonus": 10,
+      "no_fit_penalty": -40
+    }
+  },
+  "ranked_options": [
+    {
+      "name": "DeepSeek Coder V2 16B",
+      "runtime_tag": "deepseek-coder-v2:16b",
+      "quality": 9,
+      "fits": true,
+      "quant": "q4_K_M",
+      "weights_gib": 10.5,
+      "total_gib": 11.2,
+      "est_tok_s": 20.8,
+      "est_uncertainty_pct": 25,
+      "score": 121.1,
+      "rank": 1,
+      "full_32k_kv_gib": 1.3,
+      "included_kv_gib": 0.65,
+      "calculation_total_gib": 11.15,
+      "headroom_gib": 24.85,
+      "budget_used_pct": 30.97222222222222,
+      "estimate_unrounded_tok_s": 20.81165919282511,
+      "estimate_band_tok_s": [
+        15.608744394618833,
+        26.01457399103139
+      ]
+    },
+    {
+      "name": "gpt-oss 20b (MXFP4)",
+      "runtime_tag": "gpt-oss:20b",
+      "quality": 9,
+      "fits": true,
+      "quant": "q4_K_M",
+      "weights_gib": 12.5,
+      "total_gib": 13.2,
+      "est_tok_s": 17.6,
+      "est_uncertainty_pct": 25,
+      "score": 120.6,
+      "rank": 2,
+      "full_32k_kv_gib": 1.4,
+      "included_kv_gib": 0.7,
+      "calculation_total_gib": 13.2,
+      "headroom_gib": 22.8,
+      "budget_used_pct": 36.666666666666664,
+      "estimate_unrounded_tok_s": 17.579545454545457,
+      "estimate_band_tok_s": [
+        13.184659090909093,
+        21.97443181818182
+      ]
+    },
+    {
+      "name": "Gemma 4 31B",
+      "runtime_tag": "gemma4:31b",
+      "quality": 9,
+      "fits": true,
+      "quant": "q4_K_M",
+      "weights_gib": 19.5,
+      "total_gib": 20.4,
+      "est_tok_s": 11.4,
+      "est_uncertainty_pct": 25,
+      "score": 119.7,
+      "rank": 3,
+      "full_32k_kv_gib": 1.8,
+      "included_kv_gib": 0.9,
+      "calculation_total_gib": 20.4,
+      "headroom_gib": 15.600000000000001,
+      "budget_used_pct": 56.666666666666664,
+      "estimate_unrounded_tok_s": 11.375,
+      "estimate_band_tok_s": [
+        8.53125,
+        14.21875
+      ]
+    },
+    {
+      "name": "Qwen3.6 35B-A3B (MoE)",
+      "runtime_tag": "qwen3.6:35b-a3b",
+      "quality": 9,
+      "fits": true,
+      "quant": "q4_K_M",
+      "weights_gib": 21.5,
+      "total_gib": 22.4,
+      "est_tok_s": 10.3,
+      "est_uncertainty_pct": 25,
+      "score": 119.5,
+      "rank": 4,
+      "full_32k_kv_gib": 1.9,
+      "included_kv_gib": 0.95,
+      "calculation_total_gib": 22.45,
+      "headroom_gib": 13.55,
+      "budget_used_pct": 62.361111111111114,
+      "estimate_unrounded_tok_s": 10.336302895322941,
+      "estimate_band_tok_s": [
+        7.752227171492206,
+        12.920378619153677
+      ]
+    },
+    {
+      "name": "Llama 4 Scout 17B",
+      "runtime_tag": "llama4:scout",
+      "quality": 8,
+      "fits": true,
+      "quant": "q4_K_M",
+      "weights_gib": 11.0,
+      "total_gib": 11.8,
+      "est_tok_s": 19.7,
+      "est_uncertainty_pct": 25,
+      "score": 109.0,
+      "rank": 5,
+      "full_32k_kv_gib": 1.5,
+      "included_kv_gib": 0.75,
+      "calculation_total_gib": 11.75,
+      "headroom_gib": 24.25,
+      "budget_used_pct": 32.63888888888889,
+      "estimate_unrounded_tok_s": 19.748936170212765,
+      "estimate_band_tok_s": [
+        14.811702127659574,
+        24.68617021276596
+      ]
+    },
+    {
+      "name": "Mistral Small 3.2 24B",
+      "runtime_tag": "mistral-small3.2",
+      "quality": 8,
+      "fits": true,
+      "quant": "q4_K_M",
+      "weights_gib": 15.0,
+      "total_gib": 15.8,
+      "est_tok_s": 14.7,
+      "est_uncertainty_pct": 25,
+      "score": 108.2,
+      "rank": 6,
+      "full_32k_kv_gib": 1.6,
+      "included_kv_gib": 0.8,
+      "calculation_total_gib": 15.8,
+      "headroom_gib": 20.2,
+      "budget_used_pct": 43.888888888888886,
+      "estimate_unrounded_tok_s": 14.686708860759492,
+      "estimate_band_tok_s": [
+        11.015031645569618,
+        18.358386075949365
+      ]
+    },
+    {
+      "name": "Qwen3.5 9B Instruct",
+      "runtime_tag": "qwen3.5:9b",
+      "quality": 7,
+      "fits": true,
+      "quant": "q4_K_M",
+      "weights_gib": 6.2,
+      "total_gib": 6.7,
+      "est_tok_s": 34.9,
+      "est_uncertainty_pct": 25,
+      "score": 99.2,
+      "rank": 7,
+      "full_32k_kv_gib": 0.9,
+      "included_kv_gib": 0.45,
+      "calculation_total_gib": 6.65,
+      "headroom_gib": 29.35,
+      "budget_used_pct": 18.47222222222222,
+      "estimate_unrounded_tok_s": 34.89473684210526,
+      "estimate_band_tok_s": [
+        26.171052631578945,
+        43.618421052631575
+      ]
+    },
+    {
+      "name": "Phi-4-reasoning 14B",
+      "runtime_tag": "phi4-reasoning:14b",
+      "quality": 7,
+      "fits": true,
+      "quant": "q4_K_M",
+      "weights_gib": 9.3,
+      "total_gib": 9.9,
+      "est_tok_s": 23.4,
+      "est_uncertainty_pct": 25,
+      "score": 97.5,
+      "rank": 8,
+      "full_32k_kv_gib": 1.2,
+      "included_kv_gib": 0.6,
+      "calculation_total_gib": 9.9,
+      "headroom_gib": 26.1,
+      "budget_used_pct": 27.500000000000004,
+      "estimate_unrounded_tok_s": 23.439393939393938,
+      "estimate_band_tok_s": [
+        17.579545454545453,
+        29.299242424242422
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "runtime": "ollama",
+      "catalog_tag": "deepseek-coder-v2:16b",
+      "command": "ollama pull deepseek-coder-v2:16b && ollama run deepseek-coder-v2:16b"
+    },
+    {
+      "runtime": "mlx",
+      "catalog_tag": "mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit",
+      "command": "pip install mlx-lm && mlx_lm.generate --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit"
+    }
+  ],
+  "limitations": [
+    "This is technical compatibility information, not a measured benchmark. No model is downloaded or executed to create this report.",
+    "Actual performance may fall outside the uncertainty band with thermals, OS pressure, context, prompt shape, runtime version, and model implementation.",
+    "The catalog budgets half of a 32k-token KV cache (16384 tokens). A requested context at or below that assumption does not guarantee a model's native context capacity; verify the model and runtime locally. Launch commands do not configure context.",
+    "Balanced ordering uses the original Beanfit score; quality ordering sorts by catalog quality then original score; speed ordering sorts by estimated decode speed then original score. These are deterministic adapter orderings, not new benchmarks. Nonempty workload constraints require manual review because arbitrary prose and personal-data content cannot be reliably interpreted or screened by this automated path.",
+    "The GPU working-set cap is a 75% RAM fallback, not measured on the buyer's device. Bandwidth is a versioned table lookup or explicitly labeled fallback.",
+    "Catalog quality scores and memory values are illustrative estimates. Fit does not prove output quality, model license suitability, privacy policy, or production reliability.",
+    "Catalog membership is checked offline; live registry tag availability and exact installed quantization are not verified. Generic runtime tags may resolve to a different quantization; verify the downloaded artifact before relying on memory estimates.",
+    "GB/s and GiB retain the original Beanfit estimator convention; this is an engineering approximation, not a precision physical model.",
+    "No investment advice, managed execution, performance or income promises, customer-fund custody, or trading/brokerage action is included."
+  ],
+  "policy": [
+    "USD $12 covers one device, one use case, and one report revision; delivery within one business day after complete input is accepted.",
+    "If delivery misses the SLA, the buyer may choose a full refund or a new agreed delivery time.",
+    "An operator-caused defect reported within seven calendar days receives one corrected report within one business day at no charge; if it cannot be corrected, issue a full refund.",
+    "For an incorrect or incomplete buyer-supplied device profile, one corrected run is included if requested within seven days; the SLA restarts on receipt of complete inputs.",
+    "A runtime/catalog change after the timestamp is not a defect and requires a new order, unless the cited tag was already invalid at delivery.",
+    "Support is limited to one clarification thread and one correction. No remote access, ongoing tuning, production incident support, installation, custom benchmarking, production deployment, unrelated troubleshooting, or unsupported configuration generation is included.",
+    "Preference disagreement is not a defect. A wrong accepted input, dead catalog tag, arithmetic error, missing required section, or command not matching the cited catalog is a defect.",
+    "Refunds and reversals are separate state events against the original transaction ID; they reduce promotion-eligible revenue and never overwrite earlier ledger entries."
+  ],
+  "catalog_live_validation": "not performed; offline catalog membership only",
+  "ranking_policy": {
+    "preference": "balanced",
+    "balanced": "original Beanfit score descending",
+    "quality": "catalog quality then original score descending",
+    "speed": "estimated decode speed then original score descending",
+    "source": "deterministic adapter ordering; estimator values unchanged"
+  },
+  "markdown": "# Beanfit Compatibility Evidence Report\n\nContract: BF-CER-v1.0 \u00b7 Generated: 2026-09-04T22:12:51.722222+00:00\n\n## Accepted inputs\n\n- device_chip: \"Apple M4 Pro\" (buyer-supplied)\n- memory_gib: 48 (buyer-supplied)\n- use_case: \"coding\" (buyer-supplied)\n- operating_system: \"macOS 15.6 arm64\" (buyer-supplied)\n- preferred_runtime: \"no preference\" (documented fallback)\n- latency_preference: \"balanced\" (documented fallback)\n- minimum_context_tokens: 16384 (documented fallback)\n- installed_runtime_versions: {} (documented fallback)\n- constraints: \"\" (documented fallback)\n\n## Versioned evidence\n\n- beanfit: `0.2.0.dev0`\n- repository_revision: `e8ec4507b89b3b0471894515e1f80794eb92664f`\n- catalog_sha256: `087bae391f4e2271660f986683ce907b48fb2bbb235912ffbed3b636114627cc`\n- catalog_hash_scope: `src/beanfit/catalog/models.py bytes`\n- report_source_sha256: `2eba6e0e142cbae80d6fac1239b4f744334142ce3c68f22d7fe4643176d8c2a1`\n- Bandwidth: 273 GB/s; source: spec_sheet.\n- Live registry validation: not performed; offline catalog membership only.\n\n## Fit and memory math\n\nBuyer-supplied RAM: 48 GiB. Fallback Metal cap: 36 GiB (75% RAM). Model budget: 36 GiB = max(4, min(36, 48 - 4)).\n\nAssumptions:\n```json\n{\n  \"budget_rule\": \"min(unified-memory cap, RAM - 4 GiB OS headroom), floor 4 GiB\",\n  \"context_assumption\": \"half of a 32k-token KV cache included in total GiB\",\n  \"formula\": \"tok/s \\u2248 mem_bandwidth_GBs / total_weights_gib * 0.85 * quant_speedup\",\n  \"quant_speedup\": {\n    \"q4_K_M\": 1.0,\n    \"q8_0\": 0.62\n  },\n  \"score_weights\": {\n    \"fit_bonus\": 10,\n    \"no_fit_penalty\": -40,\n    \"quality_weight\": 12,\n    \"speed_cap_tok_s\": 60,\n    \"speed_tiebreak\": 0.15\n  },\n  \"uncertainty_pct_by_bw_source\": {\n    \"estimate\": 40,\n    \"spec_sheet\": 25,\n    \"unknown_fallback\": 50\n  }\n}\n```\n\n## Ranked compatible options\n\n| Rank | Model | Quant | Total GiB | Estimated tok/s | Estimated band tok/s |\n|---:|---|---|---:|---:|---| \n| 1 | DeepSeek Coder V2 16B | q4_K_M | 11.15 | 20.8 | 15.61\u201326.01 (\u00b125%) |\n| 2 | gpt-oss 20b (MXFP4) | q4_K_M | 13.2 | 17.6 | 13.18\u201321.97 (\u00b125%) |\n| 3 | Gemma 4 31B | q4_K_M | 20.4 | 11.4 | 8.53\u201314.22 (\u00b125%) |\n| 4 | Qwen3.6 35B-A3B (MoE) | q4_K_M | 22.45 | 10.3 | 7.75\u201312.92 (\u00b125%) |\n| 5 | Llama 4 Scout 17B | q4_K_M | 11.75 | 19.7 | 14.81\u201324.69 (\u00b125%) |\n| 6 | Mistral Small 3.2 24B | q4_K_M | 15.8 | 14.7 | 11.02\u201318.36 (\u00b125%) |\n| 7 | Qwen3.5 9B Instruct | q4_K_M | 6.65 | 34.9 | 26.17\u201343.62 (\u00b125%) |\n| 8 | Phi-4-reasoning 14B | q4_K_M | 9.9 | 23.4 | 17.58\u201329.30 (\u00b125%) |\n\nTop choice: DeepSeek Coder V2 16B. Unrounded memory calculation: 10.5 + 1.3 / 2 = 11.15 GiB <= 36 GiB budget; headroom 24.85 GiB; budget use 30.9722%.\nEstimated decode uses bandwidth / unrounded total \u00d7 0.85 \u00d7 quant speedup; the table includes its uncertainty band.\n\n## Catalog-pinned commands\n\nPrimary ollama path:\n```sh\nollama pull deepseek-coder-v2:16b && ollama run deepseek-coder-v2:16b\n```\nAlternate mlx path:\n```sh\npip install mlx-lm && mlx_lm.generate --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit\n```\n\n## Local verification checklist\n\n- Check the cited runtime tag/repository still exists and confirm downloaded quantization and native context capacity.\n- Record installed runtime versions; run the chosen catalog command locally using a non-sensitive test prompt.\n- For Ollama use its --verbose option locally; compare measured throughput and memory pressure with the estimated band. This report does not claim a measured benchmark.\n- Stop if memory pressure is excessive. Retain the report and local measurements; never send secrets or private prompts to support.\n\n## Uncertainty and limitations\n\n- This is technical compatibility information, not a measured benchmark. No model is downloaded or executed to create this report.\n- Actual performance may fall outside the uncertainty band with thermals, OS pressure, context, prompt shape, runtime version, and model implementation.\n- The catalog budgets half of a 32k-token KV cache (16384 tokens). A requested context at or below that assumption does not guarantee a model's native context capacity; verify the model and runtime locally. Launch commands do not configure context.\n- Balanced ordering uses the original Beanfit score; quality ordering sorts by catalog quality then original score; speed ordering sorts by estimated decode speed then original score. These are deterministic adapter orderings, not new benchmarks. Nonempty workload constraints require manual review because arbitrary prose and personal-data content cannot be reliably interpreted or screened by this automated path.\n- The GPU working-set cap is a 75% RAM fallback, not measured on the buyer's device. Bandwidth is a versioned table lookup or explicitly labeled fallback.\n- Catalog quality scores and memory values are illustrative estimates. Fit does not prove output quality, model license suitability, privacy policy, or production reliability.\n- Catalog membership is checked offline; live registry tag availability and exact installed quantization are not verified. Generic runtime tags may resolve to a different quantization; verify the downloaded artifact before relying on memory estimates.\n- GB/s and GiB retain the original Beanfit estimator convention; this is an engineering approximation, not a precision physical model.\n- No investment advice, managed execution, performance or income promises, customer-fund custody, or trading/brokerage action is included.\n\n## Correction, refund, and support policy\n\n- USD $12 covers one device, one use case, and one report revision; delivery within one business day after complete input is accepted.\n- If delivery misses the SLA, the buyer may choose a full refund or a new agreed delivery time.\n- An operator-caused defect reported within seven calendar days receives one corrected report within one business day at no charge; if it cannot be corrected, issue a full refund.\n- For an incorrect or incomplete buyer-supplied device profile, one corrected run is included if requested within seven days; the SLA restarts on receipt of complete inputs.\n- A runtime/catalog change after the timestamp is not a defect and requires a new order, unless the cited tag was already invalid at delivery.\n- Support is limited to one clarification thread and one correction. No remote access, ongoing tuning, production incident support, installation, custom benchmarking, production deployment, unrelated troubleshooting, or unsupported configuration generation is included.\n- Preference disagreement is not a defect. A wrong accepted input, dead catalog tag, arithmetic error, missing required section, or command not matching the cited catalog is a defect.\n- Refunds and reversals are separate state events against the original transaction ID; they reduce promotion-eligible revenue and never overwrite earlier ledger entries.\n"
+}

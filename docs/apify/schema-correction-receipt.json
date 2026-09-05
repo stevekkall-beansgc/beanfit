@@ -1,0 +1,22 @@
+{
+  "status": "LOCAL_ONLY_CORRECTION",
+  "actor_id": "X457S8llVBn25IEYB",
+  "version": "1.0",
+  "failed_build_id": "czIituktgMxxpVkAx",
+  "failed_build_number": "1.0.1",
+  "failed_build_cost_usd": 0.00022222222222222223,
+  "provider_outcome_source": "originating task report; no new API verification in this correction task",
+  "changed_remote_source_files": [
+    ".actor/input_schema.json"
+  ],
+  "preserved_source_files": 26,
+  "python_source_manifest_unchanged": true,
+  "schema_sha256": "24fca86043643790b3f6ff4784a34d9e77cc933608be082b60700c62aa878220",
+  "create_payload_sha256": "e4d40f816d5fd159cb7f38a2316714c4f3e0a035e57d17d45ad965c1bf9d9aed",
+  "version_update_payload_sha256": "770393b01d7b9b3f06f7c880273b59e63ab5fe53e0cf3e0d5c9c0e914ab0c15d",
+  "local_tests_passed": 72,
+  "qa_passed": 2,
+  "uploads_this_correction": 0,
+  "builds_this_correction": 0,
+  "runs_this_correction": 0
+}

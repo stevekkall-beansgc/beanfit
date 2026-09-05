@@ -1,0 +1,101 @@
+{
+  "title": "BF-CER-v1.0 \u2014 private validation only",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "One Apple Silicon Mac, one use case, one report. Synthetic data only during private validation.",
+  "additionalProperties": false,
+  "properties": {
+    "device_chip": {
+      "type": "string",
+      "title": "Apple chip",
+      "description": "Exact Apple Silicon chip label, for example Apple M4 Pro.",
+      "editor": "textfield"
+    },
+    "memory_gib": {
+      "type": "integer",
+      "title": "Installed unified memory (GiB)",
+      "minimum": 1,
+      "editor": "number",
+      "description": "Automatic report supports 8\u20134096 GiB; physically unsupported profiles are rejected."
+    },
+    "use_case": {
+      "type": "string",
+      "title": "Use case",
+      "enum": [
+        "chat",
+        "coding",
+        "reasoning"
+      ],
+      "editor": "select",
+      "description": "Select one workload to rank the catalog: chat, coding, or reasoning."
+    },
+    "operating_system": {
+      "type": "string",
+      "title": "macOS version and architecture",
+      "description": "For example macOS 15.6 arm64.",
+      "editor": "textfield"
+    },
+    "preferred_runtime": {
+      "type": "string",
+      "title": "Preferred runtime",
+      "enum": [
+        "ollama",
+        "mlx",
+        "no preference"
+      ],
+      "editor": "select",
+      "description": "Choose Ollama, MLX, or no preference. Omitted means no preference; commands use only catalog-listed tags."
+    },
+    "minimum_context_tokens": {
+      "type": "integer",
+      "title": "Minimum context tokens",
+      "minimum": 1,
+      "editor": "number",
+      "description": "Positive integer; omitted assumes 16384 tokens. Larger context returns NEEDS_REVIEW without fulfillment."
+    },
+    "latency_preference": {
+      "type": "string",
+      "title": "Latency preference",
+      "enum": [
+        "quality",
+        "balanced",
+        "speed"
+      ],
+      "editor": "select",
+      "description": "Choose quality, balanced, or speed. Omitted means balanced; preferences order existing Beanfit estimates without benchmarking."
+    },
+    "installed_runtime_versions": {
+      "type": "object",
+      "title": "Installed runtime versions",
+      "description": "Object containing only ollama and/or mlx version strings, e.g. {\"ollama\":\"0.11.0\"}. No credentials or logs.",
+      "editor": "json",
+      "additionalProperties": false,
+      "properties": {
+        "ollama": {
+          "type": "string",
+          "title": "Ollama version",
+          "description": "Installed ollama numeric version string only, for example 0.12.3. Never supply credentials or logs.",
+          "editor": "textfield"
+        },
+        "mlx": {
+          "type": "string",
+          "title": "MLX version",
+          "description": "Installed mlx numeric version string only, for example 0.12.3. Never supply credentials or logs.",
+          "editor": "textfield"
+        }
+      }
+    },
+    "constraints": {
+      "type": "string",
+      "title": "Workload constraints",
+      "description": "At most 500 words; nonempty workload constraints return NEEDS_REVIEW. Never send personal data, secrets, keys, tokens, or logs.",
+      "editor": "textarea"
+    }
+  },
+  "required": [
+    "device_chip",
+    "memory_gib",
+    "use_case",
+    "operating_system"
+  ]
+}

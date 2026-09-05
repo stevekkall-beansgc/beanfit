@@ -1,0 +1,26 @@
+{
+  "status": "PROPOSAL_ONLY_DO_NOT_APPLY",
+  "contract": "BF-CER-v1.0",
+  "currency": "USD",
+  "pricingModel": "PAY_PER_EVENT",
+  "pricingPerEvent": {
+    "actorChargeEvents": {
+      "report-generated": {
+        "eventTitle": "Compatibility Evidence Report",
+        "eventDescription": "One complete BF-CER-v1.0 Markdown report and JSON for one Apple Silicon device and one use case. No charge for rejected or failed reports.",
+        "eventPriceUsd": 12,
+        "isPrimaryEvent": true,
+        "isOneTimeEvent": true
+      }
+    }
+  },
+  "minimalMaxTotalChargeUsd": 12,
+  "activation_requires": [
+    "Explicit owner authorization for public publication and paid activation",
+    "Verified private build and bounded synthetic test receipts",
+    "Verified delivery and durable transaction deduplication across retries and corrections",
+    "Tested report-generated charging and ambiguous-response reconciliation",
+    "Confirmed provider payout, reimbursement and current fee behavior",
+    "Current catalog tags verified at delivery"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "actor_create_calls": 1,
+  "actor_create_status": "CREATED_PRIVATE",
+  "actor_id": "X457S8llVBn25IEYB",
+  "build_calls": 2,
+  "builds": [
+    {
+      "error": "Input schema is not valid (Field schema.properties.use_case.description is required)",
+      "id": "czIituktgMxxpVkAx",
+      "number": "1.0.1",
+      "status": "FAILED",
+      "usageTotalUsd": 0.00022222222222222223
+    },
+    {
+      "computeUnits": 0.0232,
+      "id": "GQ41FN91r9DraYJiC",
+      "number": "1.0.2",
+      "status": "SUCCEEDED",
+      "usageTotalUsd": 0.00464
+    }
+  ],
+  "cash_spend_initiated_usd": 0,
+  "classification": "EXCLUDED_TEST",
+  "create_attempted": true,
+  "current_disposition": "PRIVATE_VALIDATION_PASS",
+  "governance_task_state": "queued",
+  "governance_task_verified": true,
+  "isPublic": false,
+  "is_gated": true,
+  "latest_preflight": {
+    "at": "2026-09-04T23:07:07Z",
+    "currentUsageUsd": 0.005870139998886321,
+    "isPaying": false,
+    "maxMonthlyUsageUsd": 5,
+    "monthlyCreditsUsd": 5,
+    "plan": "FREE",
+    "remainingFreeCreditsUsd": 4.994129860001114
+  },
+  "matching_actors": [
+    {
+      "id": "X457S8llVBn25IEYB",
+      "isPublic": false
+    }
+  ],
+  "observed_total_usage_usd": 0.006483456558379863,
+  "pricing_activated": false,
+  "run_calls": 3,
+  "runs": [
+    {
+      "billingEventsEmitted": 0,
+      "buildNumber": "1.0.2",
+      "computeUnits": 0.00006482638888888888,
+      "id": "ggaGTBeaz3zGUoqO3",
+      "inputDeleted": true,
+      "outputStatus": "SUCCEEDED",
+      "platformStatus": "SUCCEEDED",
+      "reportHashesVerified": true,
+      "usageTotalUsd": 0.0005246888679729567
+    },
+    {
+      "billingEventsEmitted": 0,
+      "buildNumber": "1.0.2",
+      "computeUnits": 0.00004993055555555556,
+      "id": "DoY2OWQcJBsYFr1mo",
+      "inputDeleted": true,
+      "outputStatus": "SUCCEEDED",
+      "platformStatus": "SUCCEEDED",
+      "reportHashesVerified": true,
+      "stableEvidenceEqualToRun1": true,
+      "usageTotalUsd": 0.0005257844238347478
+    },
+    {
+      "billingEventsEmitted": 0,
+      "buildNumber": "1.0.2",
+      "computeUnits": 0.00005065972222222222,
+      "exitCode": 1,
+      "id": "CNXdhRtsWIXak8F8p",
+      "inputDeleted": true,
+      "outputStatus": "NEEDS_REVIEW",
+      "platformStatus": "FAILED_EXPECTED",
+      "reportArtifactsAbsent": true,
+      "usageTotalUsd": 0.0005707610443499354
+    }
+  ],
+  "source_uploaded": true,
+  "synthetic_resource_cleanup": {
+    "at": "2026-09-04T23:14:58Z",
+    "attempted": true,
+    "completed": true,
+    "deleted_resources": {
+      "datasets": 3,
+      "keyValueStores": 3,
+      "requestQueues": 3
+    },
+    "deleted_resources_verified_not_found": 9,
+    "private_actor_retained": true,
+    "run_records_retained": 3,
+    "successful_build_retained": true
+  },
+  "task": 190
+}

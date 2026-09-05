@@ -1,0 +1,26 @@
+{
+  "repository_revision": "e8ec4507b89b3b0471894515e1f80794eb92664f",
+  "source_sha256": {
+    "src/beanfit/__init__.py": "ddb850b92be960458a073831be37b22bcd34b98a11fe66d6fe4e32ed1cbc5c65",
+    "src/beanfit/__main__.py": "9d7b2870c8196bd35db5b0b3393517ed08f34d4e55441c8c7579131154f38c47",
+    "src/beanfit/apify_actor.py": "b50b76f6b6409bb37cd51c67e91b00a87d230196fcb0e47cf9cd4f59f69d938b",
+    "src/beanfit/catalog/__init__.py": "5622540201f062dab7de82057777cf01c077af813df429ddc481ec4ea2076a1b",
+    "src/beanfit/catalog/models.py": "087bae391f4e2271660f986683ce907b48fb2bbb235912ffbed3b636114627cc",
+    "src/beanfit/catalog/validate.py": "eb8cc3717b02422e4423563a7654f10279c682a364c002823a0f37ebadc19bc6",
+    "src/beanfit/cli.py": "84514cfd5c2ed8e20e1f0c52db517898986087e832d2641247c6c18e900c030b",
+    "src/beanfit/emit/__init__.py": "f12f67d40245660db2d48743a45fcbfe23b5d6a7ef1ebe8fccab832ec0863a6f",
+    "src/beanfit/emit/json_out.py": "789285fd34a4a166e31481fe0732db6f67bd0dc83e7b15785f6349821b40331c",
+    "src/beanfit/emit/launch.py": "399413d5d26e3ff0cf97594a187aea805cfec78efbe4e87e85324c1bb30abe0b",
+    "src/beanfit/emit/table.py": "2c1eece552b7463102179e47716769ab6c1e29fcce30bf6be4ed650af72dab85",
+    "src/beanfit/engine/__init__.py": "bf6cde008a21161786d795da3b4f037a0557f318fbbfa20e168d2d0af106c739",
+    "src/beanfit/engine/estimate.py": "ce4c17d145f52255d6f51510eac0d6a6c075dee8ad4e06686c958eca23bc720a",
+    "src/beanfit/engine/evaluate.py": "ed8a67922794b942601cac681d69447da5821eb89e4419f21c57d2a1814b8741",
+    "src/beanfit/hw/__init__.py": "354896f600e2adbf2f11a5ab57765245be8502a846d2ddd62f69e27f85fdf68e",
+    "src/beanfit/hw/bandwidth.py": "47f28eb348f6ebe9497d58a754ecc1ad95d81298e6332bc1b6d21863b09230b5",
+    "src/beanfit/hw/macos.py": "fa83422e8f93b99c49992acea3b7566038cb581ca449f0e18bf380434ab3da28",
+    "src/beanfit/hw/util.py": "7b5d44bc06147233ae459305784c1bbb15fbc25436c7fbe1e80ef32c7a16e158",
+    "src/beanfit/profile.py": "cc2f1d70d1697cd7accb69318f9fb8ce59c362ea4b31ba51d5318f4920d35942",
+    "src/beanfit/register.py": "95c2cbe603b2ad2d3852073ed802b3046a429d2c21d5c5aaee9101d716518d21",
+    "src/beanfit/report.py": "2eba6e0e142cbae80d6fac1239b4f744334142ce3c68f22d7fe4643176d8c2a1"
+  }
+}

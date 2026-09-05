@@ -1,0 +1,8 @@
+{
+  "actorSpecification": 1,
+  "name": "beanfit-compatibility-evidence-report",
+  "title": "Beanfit Compatibility Evidence Report",
+  "version": "1.0",
+  "dockerfile": "./Dockerfile",
+  "input": "./input_schema.json"
+}

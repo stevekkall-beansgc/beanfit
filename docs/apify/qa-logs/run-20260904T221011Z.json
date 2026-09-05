@@ -1,0 +1,20 @@
+{
+  "when": "20260904T221011Z",
+  "results": [
+    {
+      "repo": "beanfit",
+      "kind": "docs",
+      "ok": true,
+      "secs": 0.0,
+      "tail": ""
+    },
+    {
+      "repo": "beanfit",
+      "kind": "unit",
+      "ok": true,
+      "secs": 0.1,
+      "tail": ".........../opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'secret'>\n  _warnings.warn(self.warn_message, ResourceWarning)\n............................/Users/stephenkall/beans/worktrees/beanfit-bf-cer-apify/tests/test_register.py:44: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/20/kj7t9pzj11j9750__pkq01vm0000gn/T/tmpvaxa_i4y/sub/device.json' mode='r' encoding='UTF-8'>\n  doc = json.loads(open(path).read())\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n.....................\n----------------------------------------------------------------------\nRan 60 tests in 0.011s\n\nOK"
+    }
+  ],
+  "planned_skipped": []
+}
