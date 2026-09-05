@@ -56,7 +56,7 @@ Assumptions:
 ## Ranked compatible options
 
 | Rank | Model | Quant | Total GiB | Estimated tok/s | Estimated band tok/s |
-|---:|---|---|---:|---:|---| 
+|---:|---|---|---:|---:|---|
 | 1 | DeepSeek Coder V2 16B | q4_K_M | 11.15 | 20.8 | 15.61–26.01 (±25%) |
 | 2 | gpt-oss 20b (MXFP4) | q4_K_M | 13.2 | 17.6 | 13.18–21.97 (±25%) |
 | 3 | Gemma 4 31B | q4_K_M | 20.4 | 11.4 | 8.53–14.22 (±25%) |
