@@ -1,0 +1,20 @@
+{
+  "when": "20260905T021550Z",
+  "results": [
+    {
+      "repo": "beanfit",
+      "kind": "docs",
+      "ok": true,
+      "secs": 0.0,
+      "tail": ""
+    },
+    {
+      "repo": "beanfit",
+      "kind": "unit",
+      "ok": true,
+      "secs": 0.1,
+      "tail": "................................................./Users/stephenkall/beans/worktrees/beanfit-bf-cer-apify/tests/test_register.py:44: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/20/kj7t9pzj11j9750__pkq01vm0000gn/T/tmpinjdvb3j/sub/device.json' mode='r' encoding='UTF-8'>\n  doc = json.loads(open(path).read())\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n.......................\n----------------------------------------------------------------------\nRan 72 tests in 0.013s\n\nOK"
+    }
+  ],
+  "planned_skipped": []
+}
