@@ -4,6 +4,7 @@ from beanfit.catalog.validate import (
     ollama_url,
     validate_catalog,
 )
+from beanfit.catalog.models import CATALOG
 
 
 def fake_fetch(url):
@@ -18,15 +19,16 @@ class ValidateCatalog(unittest.TestCase):
     def test_all_ok(self):
         results = validate_catalog(lambda _u: 200)
         self.assertTrue(all(r["ok"] for r in results))
-        self.assertEqual(len(results), 17)  # 9 ollama + 8 pinned, nothing guessed
+        self.assertEqual(len(results), 16)  # 8 ollama + 8 pinned, nothing guessed
 
-    def test_unpinned_entry_gets_ollama_target_only(self):
+    def test_every_catalog_entry_has_ollama_and_pinned_mlx_targets(self):
         results = validate_catalog(lambda _u: 200)
         kinds_by_model = {}
         for r in results:
             kinds_by_model.setdefault(r["model"], set()).add(r["kind"])
-        kimi_kinds = kinds_by_model["Kimi K2.6 A1B (MoE)"]
-        self.assertEqual(kimi_kinds, {"ollama"})
+        self.assertEqual(set(kinds_by_model), {entry.name for entry in CATALOG})
+        self.assertTrue(all(kinds == {"ollama", "hf-pinned"}
+                            for kinds in kinds_by_model.values()))
         self.assertTrue(all(r["blocking"] for r in results))
 
     def test_pinned_401_counts_as_failure(self):
@@ -43,7 +45,7 @@ class ValidateCatalog(unittest.TestCase):
         self.assertIn("down", results[0]["error"])
 
     def test_urls_follow_emitter_conventions(self):
-        self.assertEqual(ollama_url("gemma4:31b"), "https://ollama.com/library/gemma4:31b")
+        self.assertEqual(ollama_url("gemma3:27b"), "https://ollama.com/library/gemma3:27b")
 
 
 if __name__ == "__main__":

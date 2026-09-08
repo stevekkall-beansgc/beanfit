@@ -12,22 +12,21 @@ Metal working-set cap ~96.0 GiB → model budget 96.0 GiB (~600 GB/s ±40% est [
 
 MODEL                     QUANT      TOTAL   TOK/S  FIT    SCORE
 ----------------------------------------------------------------
-Gemma 4 31B               q4_K_M     20.4G    25.0  yes    121.8
-Qwen3.6 35B-A3B (MoE)     q4_K_M     22.4G    22.7  yes    121.4
+Gemma 3 27B               q4_K_M     17.9G    28.5  yes    122.3
+Qwen3 30B-A3B (MoE)       q4_K_M     19.9G    25.6  yes    121.8
 ...
-Pick: Gemma 4 31B (q4_K_M) — quality 9/10, ~25.0 tok/s est (±40%). Verify: ollama run --verbose.
+Pick: Gemma 3 27B (q4_K_M) — quality 9/10, ~28.5 tok/s est (±40%). Verify: ollama run --verbose.
 Run it:
-  $ ollama pull gemma4:31b && ollama run gemma4:31b
+  $ ollama pull gemma3:27b && ollama run gemma3:27b
 ```
 
 ## Install
 
 ```bash
-# pipx or uv (recommended)
-pipx install beanfit        # or: uv tool install beanfit
-
-# no installer? run straight from a clone
-python3 -m beanfit
+# Run directly from a source clone (zero Python dependencies; package is not
+# published to PyPI).
+git clone https://github.com/stevekkall-beansgc/beanfit && cd beanfit
+PYTHONPATH=src python3 -m beanfit
 ```
 
 ## Why another fit-checker?

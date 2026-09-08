@@ -22,10 +22,10 @@ class ReportTests(unittest.TestCase):
         self.assertGreaterEqual(len(report["ranked_options"]), 3)
         self.assertEqual(report["device_profile"]["model_budget_gib"], 36)
         top = report["ranked_options"][0]
-        self.assertAlmostEqual(top["calculation_total_gib"], 11.15)
-        self.assertAlmostEqual(top["headroom_gib"], 24.85)
-        self.assertEqual(top["est_tok_s"], 20.8)
-        estimate = 273 / 11.15 * .85
+        self.assertAlmostEqual(top["calculation_total_gib"], 10.65)
+        self.assertAlmostEqual(top["headroom_gib"], 25.35)
+        self.assertEqual(top["est_tok_s"], 21.8)
+        estimate = 273 / 10.65 * .85
         self.assertAlmostEqual(top["estimate_band_tok_s"][0], estimate * .75)
         self.assertAlmostEqual(top["estimate_band_tok_s"][1], estimate * 1.25)
         self.assertEqual(report["provenance"]["memory_gib"], "buyer-supplied")

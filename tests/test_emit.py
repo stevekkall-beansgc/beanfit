@@ -12,19 +12,17 @@ def top_row(hw, use_case="chat"):
 class LaunchCommands(unittest.TestCase):
     def test_ollama_launch(self):
         row = top_row(M5_MAX_128)
-        self.assertEqual(launch_cmd(row), "ollama pull gemma4:31b && ollama run gemma4:31b")
+        self.assertEqual(launch_cmd(row), "ollama pull gemma3:27b && ollama run gemma3:27b")
 
     def test_mlx_repo_mapping(self):
         row = top_row(M5_MAX_128)
         self.assertEqual(
             mlx_cmd(row),
-            "pip install mlx-lm && mlx_lm.generate --model mlx-community/gemma-4-31b-it-4bit",
+            "pip install mlx-lm && mlx_lm.generate --model mlx-community/gemma-3-27b-it-4bit",
         )
 
     def test_unpinned_model_gets_no_mlx_alt(self):
-        kimi = next(r for r in evaluate(M5_MAX_128, "chat")
-                    if r["runtime_tag"] == "kimi-k2.6")
-        self.assertEqual(mlx_cmd(kimi), "")
+        self.assertEqual(mlx_cmd({"runtime_tag": "not-a-catalog-tag"}), "")
 
 
 class TableGolden(unittest.TestCase):
@@ -38,21 +36,21 @@ class TableGolden(unittest.TestCase):
             "\n"
             "MODEL                     QUANT      TOTAL   TOK/S  FIT    SCORE\n"
             "----------------------------------------------------------------\n"
-            "Gemma 4 31B               q4_K_M     20.4G    25.0  yes    121.8\n"
-            "Qwen3.6 35B-A3B (MoE)     q4_K_M     22.4G    22.7  yes    121.4\n"
-            "Qwen3.5 9B Instruct       q4_K_M      6.7G    76.7  yes    115.0\n"
-            "Llama 4 Scout 17B         q4_K_M     11.8G    43.4  yes    112.5\n"
-            "gpt-oss 20b (MXFP4)       q4_K_M     13.2G    38.6  yes    111.8\n"
-            "Mistral Small 3.2 24B     q4_K_M     15.8G    32.3  yes    110.8\n"
-            "Phi-4-reasoning 14B       q4_K_M      9.9G    51.5  yes    101.7\n"
-            "DeepSeek Coder V2 16B     q4_K_M     11.2G    45.7  yes     76.9\n"
+            "Gemma 3 27B               q4_K_M     17.9G    28.5  yes    122.3\n"
+            "Qwen3 30B-A3B (MoE)       q4_K_M     19.9G    25.6  yes    121.8\n"
+            "Qwen3 8B                  q4_K_M      5.7G    90.3  yes    115.0\n"
+            "gpt-oss 20b (MXFP4)       q4_K_M     14.7G    34.7  yes    111.2\n"
+            "Mistral Small 3.1 24B     q4_K_M     15.8G    32.3  yes    110.8\n"
+            "Llama 4 Scout 109B (16x17B MoE)q4_K_M     67.8G     7.5  yes    107.1\n"
+            "Phi-4-reasoning 14B       q4_K_M     11.6G    44.0  yes    100.6\n"
+            "DeepSeek Coder V2 16B     q4_K_M     10.7G    47.9  yes     77.2\n"
             "\n"
-            "Pick: Gemma 4 31B (q4_K_M) — quality 9/10, ~25.0 tok/s est (±40%). "
+            "Pick: Gemma 3 27B (q4_K_M) — quality 9/10, ~28.5 tok/s est (±40%). "
             "Verify: ollama run --verbose.\n"
             "Run it:\n"
-            "  $ ollama pull gemma4:31b && ollama run gemma4:31b\n"
+            "  $ ollama pull gemma3:27b && ollama run gemma3:27b\n"
             "MLX alternative (Apple Silicon, often faster decode):\n"
-            "  $ pip install mlx-lm && mlx_lm.generate --model mlx-community/gemma-4-31b-it-4bit"
+            "  $ pip install mlx-lm && mlx_lm.generate --model mlx-community/gemma-3-27b-it-4bit"
         )
         self.assertEqual(render_table(hw, rows, "chat"), golden)
 

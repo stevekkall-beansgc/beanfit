@@ -7,9 +7,9 @@ from tests.fixtures import INTEL_MAC_16, M2_BASE_8, M4_PRO_48, M5_MAX_128
 class EvaluateGolden(unittest.TestCase):
     def test_m5max_chat_top_pick(self):
         rows = evaluate(M5_MAX_128, "chat")
-        self.assertEqual(rows[0]["name"], "Gemma 4 31B")
+        self.assertEqual(rows[0]["name"], "Gemma 3 27B")
         self.assertEqual(rows[0]["quant"], "q4_K_M")
-        self.assertAlmostEqual(rows[0]["score"], 121.8, places=1)
+        self.assertAlmostEqual(rows[0]["score"], 122.3, places=1)
 
     def test_m5max_coding_top_pick(self):
         rows = evaluate(M5_MAX_128, "coding")
@@ -36,7 +36,7 @@ class EvaluateEdges(unittest.TestCase):
     def test_every_catalog_model_present_for_any_profile(self):
         for hw in (M5_MAX_128, M2_BASE_8, INTEL_MAC_16):
             rows = evaluate(hw, "reasoning")
-            self.assertEqual(len(rows), 9)
+            self.assertEqual(len(rows), 8)
 
     def test_uncertainty_band_follows_bw_source(self):
         by_source = {}

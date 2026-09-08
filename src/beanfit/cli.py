@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 
@@ -40,11 +41,18 @@ def main(argv: list[str] | None = None) -> int:
         }
         print(json.dumps({
             "version": __version__,
+            "artifact_schema": 1,
             "models": [
                 {export_aliases.get(k, k): v for k, v in entry._asdict().items()}
                 for entry in CATALOG
             ],
             "mlx_repos": MLX_REPOS,
+            "catalog_sha256": hashlib.sha256(
+                json.dumps([
+                    {export_aliases.get(k, k): v for k, v in entry._asdict().items()}
+                    for entry in CATALOG
+                ], sort_keys=True, separators=(",", ":")).encode()
+            ).hexdigest(),
         }, indent=2))
         return 0
 

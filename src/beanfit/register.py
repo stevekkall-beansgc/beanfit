@@ -59,12 +59,13 @@ def build_pair_payload(hw: dict, use_case: str, label: str | None) -> dict:
     }
 
 
-def _request(url: str, data: dict | None = None, timeout: int = 20) -> tuple[int, dict]:
+def _request(url: str, data: dict | None = None, timeout: int = 20,
+             headers: dict[str, str] | None = None) -> tuple[int, dict]:
     req = urllib.request.Request(
         url,
         data=json.dumps(data).encode() if data is not None else None,
         headers={"content-type": "application/json",
-                 "user-agent": f"beanfit-cli/{__version__}"},
+                 "user-agent": f"beanfit-cli/{__version__}", **(headers or {})},
     )
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -117,7 +118,7 @@ def register_main(argv: list[str] | None = None) -> int:
         print(f"Pairing failed ({status}): {body.get('error', 'unknown')}", file=sys.stderr)
         return 1
 
-    code, pair_id = body["code"], body["pair_id"]
+    code, pair_id, pair_claim = body["code"], body["pair_id"], body["pair_claim"]
     print(f"\nApprove this device in your browser:\n\n  {server}/pair\n\n"
           f"Pairing code: {code}\n\nWaiting for approval", end="", flush=True)
 
@@ -127,8 +128,15 @@ def register_main(argv: list[str] | None = None) -> int:
         status, body = _request(f"{server}/api/pair/status/{pair_id}")
         state = body.get("status", "?")
         if state == "approved":
-            cred = {"server": server, "device_id": body["device_id"],
-                    "device_token": body["device_token"], "registered_at": __version__}
+            status, credential = _request(
+                f"{server}/api/pair/claim/{pair_id}",
+                headers={"x-beanfit-pair-claim": pair_claim},
+            )
+            if status != 200 or not credential.get("device_token"):
+                print("\nApproval completed, but secure credential handoff failed. Run `beanfit register` again.")
+                return 1
+            cred = {"server": server, "device_id": credential["device_id"],
+                    "device_token": credential["device_token"], "registered_at": __version__}
             path = credential_path()
             save_device_credential(path, cred)
             print(f"\n\nApproved! Device registered.")
