@@ -18,6 +18,7 @@ from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_ope
 from beanfit.activation import ActivationError, canonical, digest, require
 from beanfit.apify_actor import _digest as actor_digest
 from beanfit.report import CONTRACT_VERSION, validate_input
+from beanfit.provider_evidence import object_or_empty, pricing_evidence
 
 ACTOR_ID = 'X457S8llVBn25IEYB'
 BUILD_ID = 'GQ41FN91r9DraYJiC'
@@ -95,23 +96,25 @@ class ApifyTestClient:
         require(isinstance(obj.get('data'), dict), 'APIFY_DATA_REQUIRED')
         return obj['data']
 
-    def preflight(self):
+    def preflight(self, *, include_evidence=False):
         # Never retain the whole user response: it may contain unrelated secrets/PII.
         user = self._request('GET', '/v2/users/me')
         limits = self._request('GET', '/v2/users/me/limits')
         actor = self._request('GET', '/v2/actors/' + ACTOR_ID)
         build = self._request('GET', '/v2/actor-builds/' + BUILD_ID)
-        plan = user.get('plan', {})
-        return dict(user_id=user.get('id'), plan=plan.get('tier'), enabled=plan.get('isEnabled'),
+        plan = object_or_empty(user.get('plan'))
+        proof = dict(user_id=user.get('id'), plan=plan.get('tier'), enabled=plan.get('isEnabled'),
                     is_paying=user.get('isPaying'), credits=plan.get('monthlyUsageCreditsUsd'),
-                    cap=limits.get('limits', {}).get('maxMonthlyUsageUsd'),
-                    usage=limits.get('current', {}).get('monthlyUsageUsd'),
-                    active_jobs=limits.get('current', {}).get('activeActorJobCount'),
+                    cap=object_or_empty(limits.get('limits')).get('maxMonthlyUsageUsd'),
+                    usage=object_or_empty(limits.get('current')).get('monthlyUsageUsd'),
+                    active_jobs=object_or_empty(limits.get('current')).get('activeActorJobCount'),
                     actor_id=actor.get('id'), owner=actor.get('userId'), private=actor.get('isPublic') is False,
-                    pricing_inactive=('pricingInfos' in actor and actor['pricingInfos'] in (None, [])
-                                      and actor.get('pricingInfo') is None),
+                    pricing_inactive=pricing_evidence(actor)['inactive_proved'],
                     build_id=build.get('id'), build_actor=build.get('actId'),
                     build_number=build.get('buildNumber'), build_status=build.get('status'))
+        if include_evidence:
+            proof['pricing_evidence'] = pricing_evidence(actor)
+        return proof
 
     def start(self, profile, *, synthetic=False):
         require(synthetic is True, 'CUSTOMER_INTAKE_DISABLED')

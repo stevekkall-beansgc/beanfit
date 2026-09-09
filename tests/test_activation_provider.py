@@ -80,6 +80,13 @@ class ProviderBoundaryTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
+        # Model separate checkout/state paths regardless of the caller's TMPDIR.
+        # Production's outside-repository restriction remains fully exercised.
+        self.repo = Path(self.tmp.name).resolve() / 'repository'
+        self.repo.mkdir()
+        root_patch = patch.object(DRIVER, 'ROOT', self.repo)
+        root_patch.start()
+        self.addCleanup(root_patch.stop)
         self.state = Path(self.tmp.name) / 'private'
         self.api = OfflineStripe()
         self.env = dict(STRIPE_TEST_KEY='sk_test_SYNTHETICBOUNDARYONLY',
@@ -182,7 +189,7 @@ class ProviderBoundaryTests(unittest.TestCase):
         self.assertEqual(self.api.calls, [])
 
     def test_state_inside_repo_is_rejected_without_creation(self):
-        path = ROOT / 'synthetic-provider-forbidden-state'
+        path = self.repo / 'synthetic-provider-forbidden-state'
         self.assertFalse(path.exists())
         with self.assertRaisesRegex(ActivationError, 'STATE_MUST_BE_OUTSIDE_REPOSITORY'):
             self.invoke('checkout', state=path)

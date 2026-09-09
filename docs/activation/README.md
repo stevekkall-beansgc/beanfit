@@ -7,6 +7,11 @@ candidate; Venture 06 financial records remain unchanged.
 
 ## What is ready to inspect
 
+- [Launch-readiness preparation](LAUNCH-READINESS.md): offline pricing/access
+  diagnostics, Stripe account-evidence review, supported-input preview, and the
+  concrete provider/customer/payout launch gates. Local snapshots cannot clear
+  live activation; the release version remains 0.3.0.
+
 - `src/beanfit/activation.py`: SQLite order claims, immutable intent identity,
   append-only zero-cash test events, payment binding, event aliases, atomic
   report publication, authenticated local retrieval, retries, one correction,

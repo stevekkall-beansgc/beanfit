@@ -1,6 +1,10 @@
 # Prepared synthetic Apify fulfillment bridge
 
 Status: **prepared and fake-provider tested; real provider gate blocked**.
+The [launch-readiness preparation](LAUNCH-READINESS.md) adds local field-state
+diagnostics and run/store identity review without accepting missing pricing or
+inherited access. `preflight(include_evidence=True)` exposes the pricing diagnosis
+through the existing four read-only API calls; default bridge behavior is unchanged.
 No run was started by this activation work. Read-only findings below were
 reported by the root task on 2026-09-05. They are observations, not a successful
 fulfillment rehearsal or permission to change account settings.

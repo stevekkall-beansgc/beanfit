@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import hmac
 import json
+import subprocess
 import sys
 import tempfile
 from pathlib import Path
@@ -58,6 +59,20 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--receipt',type=Path,help='Optional destination for a fresh synthetic receipt; no tracked file is overwritten by default')
     args=parser.parse_args()
+    launch_checks = {}
+    for action, payload, expected_code, expected_status in (
+        ('review', {}, 2, 'NO_GO'),
+        ('intake', PROFILE, 0, 'SUPPORTED'),
+        ('intake', dict(PROFILE, minimum_context_tokens=32768), 2, 'NEEDS_REVIEW'),
+    ):
+        result = subprocess.run([sys.executable, str(ROOT/'scripts/launch_preflight.py'), action],
+                                input=json.dumps(payload), text=True, capture_output=True, timeout=10)
+        assert result.returncode == expected_code
+        summary = json.loads(result.stdout)
+        assert summary['status'] == expected_status
+        assert summary.get('launch_authorized', False) is False
+        assert summary.get('checkout_allowed', False) is False
+        launch_checks[expected_status] = 'PASS'
     clock=lambda:1788609600
     with tempfile.TemporaryDirectory(prefix='bfcer-synthetic-') as tmp:
         ledger=Ledger(Path(tmp)/'ledger.sqlite',now=clock)
@@ -76,6 +91,7 @@ def main():
         second=ledger.download(oid,token)
         ledger.refund(oid,provider);ledger.refund(oid,provider)
         receipt=dict(status='OFFLINE_SYNTHETIC_PASS',provider_calls=0,provider_objects_created=0,
+                     launch_preflight_checks=launch_checks,
                      checkout_create_effects=provider.creates,refund_create_effects=provider.refunds,
                      report_revisions=2,first_artifact=first['manifest'],correction_artifact=second['manifest'],
                      audit=ledger.audit(),source_revision=source_revision(),baseline_revision=BASELINE_REVISION,
