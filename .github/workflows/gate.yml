@@ -11,7 +11,8 @@ concurrency:
 
 jobs:
   compliance:
-    uses: stevekkall-beansgc/gate-kit/.github/workflows/compliance.yml@v0.4.10
+    uses: stevekkall-beansgc/gate-kit/.github/workflows/compliance.yml@v0.4.11
     with:
       repo: beanfit
       full: false
+      runner: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'beans-mac' }}
