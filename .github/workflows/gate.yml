@@ -15,4 +15,3 @@ jobs:
     with:
       repo: beanfit
       full: false
-      runner: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'beans-mac' }}

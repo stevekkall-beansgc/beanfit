@@ -16,13 +16,14 @@ jobs:
       fail-fast: false
       matrix:
         os: ${{ fromJSON(github.event_name == 'pull_request' && '["macos-latest","ubuntu-latest","windows-latest"]' || '["beans-mac"]') }}
-        python: ["3.10", "3.13"]
+        python: ${{ fromJSON(github.event_name == 'pull_request' && '["3.10","3.13"]' || '["system"]') }}
     runs-on: ${{ matrix.os }}
     env:
       PYTHONPATH: src
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
+        if: matrix.python != 'system'
         with:
           python-version: ${{ matrix.python }}
       - name: Unit tests
@@ -33,6 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
+        if: github.event_name == 'pull_request'
         with:
           python-version: "3.12"
       - name: Offline synthetic activation from a shallow checkout
@@ -46,6 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
+        if: github.event_name == 'pull_request'
         with:
           python-version: "3.12"
       - name: Install package and exercise entry points
