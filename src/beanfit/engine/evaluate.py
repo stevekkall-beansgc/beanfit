@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from beanfit.catalog.models import CATALOG
-from beanfit.engine.estimate import band_for, decode_tok_s
+from beanfit.engine.estimate import band_for, decode_tok_s, KV_CACHE_HALF
 from beanfit.profile import DeviceProfile
 
 SCORE_QUALITY_WEIGHT = 12
@@ -18,7 +18,7 @@ def evaluate(hw: DeviceProfile, use_case: str) -> list[dict]:
         qual = {"chat": chat, "coding": code, "reasoning": reason}[use_case]
         best = None
         for quant, mem in (("q4_K_M", q4), ("q8_0", q8)):
-            total = mem + kv32k * 0.5          # half-32k context assumption
+            total = mem + kv32k * KV_CACHE_HALF          # half-32k context assumption
             if total <= hw["model_budget_gib"]:
                 tok_s = decode_tok_s(hw["mem_bandwidth_gbs"], total, quant)
                 best = {

@@ -1,6 +1,7 @@
 import unittest
 
 from beanfit.engine import evaluate
+from beanfit.engine.estimate import DECODE_FACTOR, KV_CACHE_HALF, INCLUDED_KV_TOKENS
 from tests.fixtures import INTEL_MAC_16, M2_BASE_8, M4_PRO_48, M5_MAX_128
 
 
@@ -25,6 +26,41 @@ class EvaluateGolden(unittest.TestCase):
                 self.assertIn("est_tok_s", r)
             else:
                 self.assertNotIn("est_tok_s", r)
+
+
+class CentralizedConstants(unittest.TestCase):
+    def test_decode_factor_constant(self):
+        self.assertEqual(DECODE_FACTOR, 0.85)
+
+    def test_kv_cache_half_constant(self):
+        self.assertEqual(KV_CACHE_HALF, 0.5)
+
+    def test_included_kv_tokens_constant(self):
+        self.assertEqual(INCLUDED_KV_TOKENS, 16384)
+
+    def test_golden_scores_preserved(self):
+        rows = evaluate(M5_MAX_128, "chat")
+        self.assertEqual(rows[0]["name"], "Gemma 3 27B")
+        self.assertAlmostEqual(rows[0]["score"], 122.3, places=1)
+
+    def test_total_gib_uses_kv_cache_half(self):
+        from beanfit.catalog.models import CATALOG
+        rows = evaluate(M4_PRO_48, "chat")
+        for r in rows:
+            if r["fits"]:
+                entry = next(e for e in CATALOG if e.runtime_tag == r["runtime_tag"])
+                expected_total = round(entry.mem_q4_gib + entry.kv32k_gib * KV_CACHE_HALF, 1)
+                self.assertEqual(r["total_gib"], expected_total)
+
+    def test_included_kv_in_report(self):
+        from beanfit.report import generate_report
+        report = generate_report(
+            dict(device_chip="Apple M4 Pro", memory_gib=48,
+                 use_case="coding", operating_system="macOS 15.6 arm64"),
+            generated_at="2026-09-04T18:00:00Z",
+            repository_revision="e8ec4507b89b3b0471894515e1f80794eb92664f",
+        )
+        self.assertIn("16384", report["markdown"])
 
 
 class EvaluateEdges(unittest.TestCase):

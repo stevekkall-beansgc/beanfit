@@ -5,7 +5,8 @@ import unittest
 from pathlib import Path
 
 from beanfit.catalog.models import CATALOG, MLX_REPOS
-from beanfit.report import InputRejected, NeedsReview, generate_report, validate_input
+from beanfit.engine.estimate import DECODE_FACTOR, INCLUDED_KV_TOKENS
+from beanfit.report import DEFAULT_CONTEXT_TOKENS, InputRejected, NeedsReview, generate_report, validate_input
 
 INPUT = dict(device_chip="Apple M4 Pro", memory_gib=48, use_case="coding", operating_system="macOS 15.6 arm64")
 META = dict(generated_at="2026-09-04T18:00:00Z", repository_revision="e8ec4507b89b3b0471894515e1f80794eb92664f")
@@ -25,11 +26,32 @@ class ReportTests(unittest.TestCase):
         self.assertAlmostEqual(top["calculation_total_gib"], 10.65)
         self.assertAlmostEqual(top["headroom_gib"], 25.35)
         self.assertEqual(top["est_tok_s"], 21.8)
-        estimate = 273 / 10.65 * .85
+        estimate = 273 / 10.65 * DECODE_FACTOR
         self.assertAlmostEqual(top["estimate_band_tok_s"][0], estimate * .75)
         self.assertAlmostEqual(top["estimate_band_tok_s"][1], estimate * 1.25)
         self.assertEqual(report["provenance"]["memory_gib"], "buyer-supplied")
         self.assertEqual(report["provenance"]["minimum_context_tokens"], "documented fallback")
+
+    def test_emitted_text_contains_correct_numbers(self):
+        report = generate_report(INPUT, **META)
+        md = report["markdown"]
+        self.assertIn("32k-token", md)
+        self.assertIn("16384", md)
+        self.assertIn("0.85", md)
+        self.assertIn("0.5", md)
+        self.assertIn("32k-token", report["assumptions"]["context_assumption"])
+        self.assertIn("16384", report["assumptions"]["context_assumption"])
+        self.assertIn("0.85", report["assumptions"]["formula"])
+
+    def test_default_context_matches_included_kv_budget(self):
+        self.assertEqual(DEFAULT_CONTEXT_TOKENS, INCLUDED_KV_TOKENS)
+        self.assertEqual(validate_input(INPUT)["minimum_context_tokens"], INCLUDED_KV_TOKENS)
+
+    def test_fstring_renders_not_literal_braces(self):
+        report = generate_report(INPUT, **META)
+        md = report["markdown"]
+        self.assertNotIn("{DECODE_FACTOR}", md)
+        self.assertNotIn("{KV_CACHE_HALF}", md)
 
     def test_catalog_hash_and_commands_pinned(self):
         report = generate_report(INPUT, **META)
@@ -70,6 +92,8 @@ class ReportTests(unittest.TestCase):
         self.assertIn("one clarification thread", report["markdown"])
         self.assertIn("full refund", report["markdown"])
         self.assertIn("original transaction ID", report["markdown"])
+        self.assertIn("32k-token", report["markdown"])
+        self.assertIn("16384", report["markdown"])
 
     def test_rejections_never_echo_private_payloads(self):
         invalid = [None, [], {}, dict(INPUT, token="SECRET_CANARY"), dict(INPUT, device_chip="SECRET_CANARY"), dict(INPUT, operating_system="SECRET_CANARY"), dict(INPUT, constraints="SECRET_CANARY"), dict(INPUT, installed_runtime_versions={"ollama":"SECRET_CANARY"}), dict(INPUT, use_case="SECRET_CANARY")]

@@ -16,9 +16,15 @@ UNCERTAINTY_PCT = {
 }
 DEFAULT_UNCERTAINTY_PCT = 50
 
+# Centralized model assumptions used by every calculation and display.
+DECODE_FACTOR = 0.85
+KV_CACHE_HALF = 0.5
+KV_CACHE_TOKENS = 32768
+INCLUDED_KV_TOKENS = int(KV_CACHE_TOKENS * KV_CACHE_HALF)
+
 
 def decode_tok_s(bandwidth_gbs: float, total_mem_gib: float, quant: str) -> float:
-    return bandwidth_gbs / total_mem_gib * 0.85 * QUANT_SPEEDUP[quant]
+    return bandwidth_gbs / total_mem_gib * DECODE_FACTOR * QUANT_SPEEDUP[quant]
 
 
 def band_for(bw_source: str) -> int:
@@ -38,9 +44,9 @@ def assumptions() -> dict:
     from beanfit.profile import MODEL_BUDGET_FLOOR_GIB, OS_HEADROOM_GIB
 
     return {
-        "formula": "tok/s ≈ mem_bandwidth_GBs / total_weights_gib * 0.85 * quant_speedup",
+        "formula": f"tok/s ≈ mem_bandwidth_GBs / weights_plus_included_kv_gib * {DECODE_FACTOR} * quant_speedup",
         "quant_speedup": QUANT_SPEEDUP,
-        "context_assumption": "half of a 32k-token KV cache included in total GiB",
+        "context_assumption": f"half of a {KV_CACHE_TOKENS // 1024}k-token KV cache ({INCLUDED_KV_TOKENS} tokens) included in total GiB",
         "budget_rule": (
             f"min(unified-memory cap, RAM - {OS_HEADROOM_GIB:g} GiB OS headroom), "
             f"floor {MODEL_BUDGET_FLOOR_GIB:g} GiB"

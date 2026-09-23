@@ -10,14 +10,14 @@ from pathlib import Path
 from beanfit import __version__
 from beanfit.catalog.models import CATALOG, MLX_REPOS
 from beanfit.engine.evaluate import evaluate
-from beanfit.engine.estimate import assumptions, decode_tok_s
+from beanfit.engine.estimate import assumptions, decode_tok_s, DECODE_FACTOR, KV_CACHE_HALF, KV_CACHE_TOKENS, INCLUDED_KV_TOKENS
 from beanfit.emit.launch import launch_cmd, mlx_cmd
 from beanfit.hw.bandwidth import lookup
 from beanfit.hw.macos import DEFAULT_WIRED_RATIO
 from beanfit.profile import MODEL_BUDGET_FLOOR_GIB, OS_HEADROOM_GIB
 
 CONTRACT_VERSION = "BF-CER-v1.0"
-DEFAULT_CONTEXT_TOKENS = 16384
+DEFAULT_CONTEXT_TOKENS = INCLUDED_KV_TOKENS
 REQUIRED = {"device_chip", "memory_gib", "use_case", "operating_system"}
 OPTIONAL = {"preferred_runtime", "minimum_context_tokens", "latency_preference", "installed_runtime_versions", "constraints"}
 POLICY = [
@@ -33,7 +33,7 @@ POLICY = [
 LIMITATIONS = [
     "This is technical compatibility information, not a measured benchmark. No model is downloaded or executed to create this report.",
     "Actual performance may fall outside the uncertainty band with thermals, OS pressure, context, prompt shape, runtime version, and model implementation.",
-    "The catalog budgets half of a 32k-token KV cache (16384 tokens). A requested context at or below that assumption does not guarantee a model's native context capacity; verify the model and runtime locally. Launch commands do not configure context.",
+    f"The catalog budgets half of a {KV_CACHE_TOKENS // 1024}k-token KV cache ({INCLUDED_KV_TOKENS} tokens). A requested context at or below that assumption does not guarantee a model's native context capacity; verify the model and runtime locally. Launch commands do not configure context.",
     "Balanced ordering uses the original Beanfit score; quality ordering sorts by catalog quality then original score; speed ordering sorts by estimated decode speed then original score. These are deterministic adapter orderings, not new benchmarks. Nonempty workload constraints require manual review because arbitrary prose and personal-data content cannot be reliably interpreted or screened by this automated path.",
     "The GPU working-set cap is a 75% RAM fallback, not measured on the buyer's device. Bandwidth is a versioned table lookup or explicitly labeled fallback.",
     "Catalog quality scores and memory values are illustrative estimates. Fit does not prove output quality, model license suitability, privacy policy, or production reliability.",
@@ -143,10 +143,10 @@ def generate_report(input_dict: dict, *, generated_at: str, repository_revision:
         if accepted["preferred_runtime"] == "mlx" and candidate["runtime_tag"] not in MLX_REPOS:
             continue
         entry = catalog_by_tag[candidate["runtime_tag"]]
-        total = candidate["weights_gib"] + entry.kv32k_gib * 0.5
+        total = candidate["weights_gib"] + entry.kv32k_gib * KV_CACHE_HALF
         estimate = decode_tok_s(bw, total, candidate["quant"])
         band = candidate["est_uncertainty_pct"] / 100
-        rows.append(dict(candidate, rank=len(rows) + 1, full_32k_kv_gib=entry.kv32k_gib, included_kv_gib=entry.kv32k_gib * 0.5, calculation_total_gib=total, headroom_gib=budget-total, budget_used_pct=total / budget * 100, estimate_unrounded_tok_s=estimate, estimate_band_tok_s=[estimate*(1-band), estimate*(1+band)]))
+        rows.append(dict(candidate, rank=len(rows) + 1, full_32k_kv_gib=entry.kv32k_gib, included_kv_gib=entry.kv32k_gib * KV_CACHE_HALF, calculation_total_gib=total, headroom_gib=budget-total, budget_used_pct=total / budget * 100, estimate_unrounded_tok_s=estimate, estimate_band_tok_s=[estimate*(1-band), estimate*(1+band)]))
     commands = []
     if rows:
         top = rows[0]
@@ -168,7 +168,7 @@ def generate_report(input_dict: dict, *, generated_at: str, repository_revision:
         lines += ["", f"Fewer than three compatible options fit the memory budget and requested runtime: {len(rows)} found."]
     if rows:
         top = rows[0]
-        lines += ["", f'Top choice: {top["name"]}. Unrounded memory calculation: {top["weights_gib"]} + {top["full_32k_kv_gib"]} / 2 = {top["calculation_total_gib"]:.12g} GiB <= {budget:g} GiB budget; headroom {top["headroom_gib"]:.12g} GiB; budget use {top["budget_used_pct"]:.6g}%.', "Estimated decode uses bandwidth / unrounded total × 0.85 × quant speedup; the table includes its uncertainty band."]
+        lines += ["", f'Top choice: {top["name"]}. Unrounded memory calculation: {top["weights_gib"]} + {top["full_32k_kv_gib"]} × {KV_CACHE_HALF:g} = {top["calculation_total_gib"]:.12g} GiB <= {budget:g} GiB budget; headroom {top["headroom_gib"]:.12g} GiB; budget use {top["budget_used_pct"]:.6g}%.', f"Estimated decode uses bandwidth / unrounded total × {DECODE_FACTOR:g} × quant speedup; the table includes its uncertainty band."]
     lines += ["", "## Catalog-pinned commands", ""]
     for index, command in enumerate(commands):
         lines += [f'{"Primary" if index == 0 else "Alternate"} {command["runtime"]} path:', "```sh", command["command"], "```"]
