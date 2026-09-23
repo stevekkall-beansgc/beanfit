@@ -29,6 +29,43 @@ git clone https://github.com/stevekkall-beansgc/beanfit && cd beanfit
 PYTHONPATH=src python3 -m beanfit
 ```
 
+## Five-minute showcase
+
+1. **Run the CLI (1 minute).** From the clone, try both renderers:
+   ```bash
+   PYTHONPATH=src python3 -m beanfit
+   PYTHONPATH=src python3 -m beanfit --json
+   ```
+   [`src/beanfit/cli.py`](src/beanfit/cli.py) shows argument parsing, hardware
+   detection, evaluation, and renderer selection in one small entry point.
+2. **Follow the core path (1 minute).** Start at
+   [`src/beanfit/hw/macos.py`](src/beanfit/hw/macos.py), then read
+   [`src/beanfit/engine/evaluate.py`](src/beanfit/engine/evaluate.py) and
+   [`src/beanfit/emit/table.py`](src/beanfit/emit/table.py).
+   [`src/beanfit/catalog/models.py`](src/beanfit/catalog/models.py) holds the
+   pinned model metadata used by that path.
+3. **Verify the contracts (2 minutes).** Run the complete stdlib suite:
+   ```bash
+   PYTHONPATH=src python3 -m unittest discover -s tests -q
+   ```
+   [`tests/test_cli.py`](tests/test_cli.py) and
+   [`tests/test_hw_macos.py`](tests/test_hw_macos.py) make the CLI and hardware
+   behavior directly checkable with fixtures and mocks.
+4. **Read the estimate model (1 minute).**
+   [`src/beanfit/engine/estimate.py`](src/beanfit/engine/estimate.py)
+   centralizes the decode formula, context assumption, quantization factors,
+   and uncertainty bands. Its `assumptions()` output is included in every JSON
+   response by [`src/beanfit/emit/json_out.py`](src/beanfit/emit/json_out.py).
+
+**Not a benchmark:** beanfit does not run model inference or measure tok/s,
+quality, thermals, prompts, runtime behavior, or context limits. Its speed
+numbers are estimates from static catalog and bandwidth inputs, so validate a
+generated command on the target machine.
+
+The fit showcase ends here. Activation and payment material is isolated under
+[Synthetic activation candidate](#synthetic-activation-candidate-separate) and
+is not evidence for the fit CLI's estimates.
+
 ## Why another fit-checker?
 
 llmfit, paddock, ModelFit & friends answer *"which model fits?"* beanfit is
@@ -103,15 +140,23 @@ Rule set is deliberately modest and meaningful: pyflakes `F` (syntax,
 undefined names, unused imports, basic errors) plus syntax-level runtime
 errors (`E9`). Configured under `[tool.ruff]` in `pyproject.toml`.
 
+## Security
+
+Report suspected vulnerabilities through the private channel described in
+[SECURITY.md](SECURITY.md). Do not post exploit details in public issues, pull
+requests, or discussions.
+
 ---
 
 **Agents:** see [AGENTS.md](AGENTS.md) before changing anything here.
 
-## BF-CER activation candidate
+## Synthetic activation candidate (separate)
 
-The [first-dollar activation package](docs/activation/README.md) contains a
+This material is separate from the fit CLI above. The
+[first-dollar activation package](docs/activation/README.md) contains a
 synthetic-only order ledger, Stripe test transport, correction/refund controls,
-anonymized five-prospect distribution plan and verification receipts. It is not live or
-customer-ready. Run `python3 scripts/check_activation_qa.py` for its
-central QA registration and `python3 scripts/activation_demo.py` for the offline
-end-to-end fixture; neither creates provider payments.
+anonymized five-prospect distribution plan, and verification receipts. It is not
+live, customer-ready, or evidence for the fit estimates. Run
+`python3 scripts/check_activation_qa.py` for its central QA registration and
+`python3 scripts/activation_demo.py` for the offline end-to-end fixture; neither
+creates provider payments.
