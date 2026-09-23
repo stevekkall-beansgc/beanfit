@@ -4,6 +4,7 @@ from unittest import mock
 
 from beanfit import __version__
 from beanfit.cli import main
+from beanfit.hw import macos
 from tests.fixtures import M5_MAX_128
 
 
@@ -42,6 +43,25 @@ class CliJson(unittest.TestCase):
                 code = main(["--json"])
         self.assertEqual(code, 2)
         self.assertIn("Phase 1", err.getvalue())
+
+    def test_intel_mac_exits_2_without_output(self):
+        import contextlib
+        import io
+
+        for argv in ([], ["--json"]):
+            with self.subTest(argv=argv):
+                out = io.StringIO()
+                err = io.StringIO()
+                with mock.patch("beanfit.cli.detect", side_effect=macos.detect), mock.patch.object(
+                    macos, "sh", return_value="Intel(R) Core(TM) i9"
+                ), mock.patch("beanfit.cli.evaluate") as evaluate:
+                    with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+                        code = main(argv)
+                self.assertEqual(code, 2)
+                self.assertEqual(out.getvalue(), "")
+                self.assertIn("unsupported platform", err.getvalue())
+                self.assertIn("Apple Silicon Macs only", err.getvalue())
+                evaluate.assert_not_called()
 
 
 if __name__ == "__main__":

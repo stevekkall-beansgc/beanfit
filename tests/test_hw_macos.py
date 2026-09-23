@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from beanfit.hw import macos
+from beanfit.hw import UnsupportedPlatform, macos
 
 
 def fake_sh(outputs):
@@ -50,18 +50,20 @@ class DetectMacOS(unittest.TestCase):
         self.assertEqual(hw["mem_bandwidth_gbs"], 60.0)
         self.assertEqual(hw["bw_source"], "unknown_fallback")
 
-    def test_intel_mac_flags_arch_other(self):
+    def test_intel_mac_fails_closed(self):
         outputs = {
             ("sysctl", "-n", "machdep.cpu.brand_string"): "Intel(R) Core(TM) i9",
-            ("sysctl", "-n", "hw.memsize"): str(16 * 2**30),
         }
-        with mock.patch.object(macos, "sh", fake_sh(outputs)):
-            hw = macos.detect()
-        self.assertEqual(hw["arch"], "other")
-        self.assertEqual(hw["backend"], "unknown")
-        self.assertEqual(hw["metal_cap_gib"], 12.0)
-        self.assertEqual(hw["model_budget_gib"], 12.0)
-        self.assertEqual(hw["metal_cap_gib"], hw["model_budget_gib"])
+        probe = mock.Mock(side_effect=fake_sh(outputs))
+        with mock.patch.object(macos, "sh", probe), mock.patch.object(macos, "lookup") as lookup:
+            with self.assertRaises(UnsupportedPlatform) as raised:
+                macos.detect()
+        message = str(raised.exception)
+        self.assertIn("unsupported platform", message)
+        self.assertIn("Apple Silicon Macs only", message)
+        self.assertIn("no hardware, throughput, fit, or launch recommendations", message)
+        probe.assert_called_once_with("sysctl", "-n", "machdep.cpu.brand_string")
+        lookup.assert_not_called()
 
 
 if __name__ == "__main__":
