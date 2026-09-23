@@ -74,7 +74,7 @@ Apple Silicon), context budget, agent-harness configs (`num_ctx`, sub-agent
 model tiers, `mcp.json` sizing), emitted as runnable commands — not tables.
 See [ROADMAP.md](ROADMAP.md) for the full plan.
 
-## Status: v0.4.2 (fit-estimate honesty and unsupported-hardware safeguards)
+## Status: v0.4.3 (fit-estimate honesty and unsupported-hardware safeguards)
 
 Works today on Apple Silicon Macs. Stdlib only, zero runtime dependencies.
 

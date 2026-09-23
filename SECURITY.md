@@ -6,7 +6,7 @@ Security support is limited to the current repository release.
 
 | Version | Supported |
 | --- | --- |
-| `v0.4.2` | Yes |
+| `v0.4.3` | Yes |
 | Earlier versions | No |
 
 ## Scope
