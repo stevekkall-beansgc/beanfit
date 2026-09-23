@@ -34,6 +34,18 @@ jobs:
       - name: Unit tests
         run: python -m unittest discover -s tests -v
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned Ruff
+        run: pip install -r requirements-lint.txt
+      - name: Pinned static check (ruff 0.16.8)
+        run: python scripts/static_check.py
+
   activation-e2e:
     runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'beans-mac' }}
     steps:

@@ -17,7 +17,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from beanfit.activation import ActivationError, Ledger
-from beanfit.stripe_test import StripeTestClient, StripeTestError, verify_webhook
+from beanfit.stripe_test import StripeTestClient, verify_webhook
 from activation_demo import PROFILE, producer
 
 

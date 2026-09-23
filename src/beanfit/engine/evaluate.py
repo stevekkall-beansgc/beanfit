@@ -28,7 +28,7 @@ def evaluate(hw: DeviceProfile, use_case: str) -> list[dict]:
                     "est_tok_s": round(tok_s, 1),
                     "est_uncertainty_pct": band,
                 }
-                break                          # highest-quality quant that fits first
+                break                          # q4-first policy; not a quality-maximizing choice
         fits = bool(best)
         speed = best["est_tok_s"] if best else 0
         # score: quality dominates, usable speed breaks ties, no-fit disqualifies

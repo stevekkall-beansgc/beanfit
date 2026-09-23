@@ -139,7 +139,7 @@ def register_main(argv: list[str] | None = None) -> int:
                     "device_token": credential["device_token"], "registered_at": __version__}
             path = credential_path()
             save_device_credential(path, cred)
-            print(f"\n\nApproved! Device registered.")
+            print("\n\nApproved! Device registered.")
             print(f"Credentials saved to {path} (keep private; revoke anytime "
                   f"from your account page).")
             return 0

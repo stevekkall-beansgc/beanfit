@@ -6,8 +6,8 @@ from typing import NamedTuple
 # sizes_gib = weights at that quant incl. activation slop;
 # kv32k_gib = KV cache cost for a 32k context window.
 # quality c/r/chat = coding / reasoning / chat, each 0-10.
-# Tags are reality-checked against ollama.com by scripts/validate_catalog.py;
-# CI fails the release if any tag 404s.
+# Tags can be checked against live registries by scripts/validate_catalog.py;
+# the scheduled/manual workflow is not currently a release gate.
 
 
 class ModelEntry(NamedTuple):

@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 """Bounded private validation only; no pricing, public access, or plan mutation."""
-import hashlib
 import json
 import subprocess
 import sys
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError

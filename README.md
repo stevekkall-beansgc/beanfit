@@ -42,8 +42,8 @@ See [ROADMAP.md](ROADMAP.md) for the full plan.
 Works today on Apple Silicon Macs. Stdlib only, zero runtime dependencies.
 
 - ✅ packaged CLI (`beanfit` / `python -m beanfit`), module layout, 3-OS CI
-- ✅ catalog tags validated against live registries weekly (CI-enforced);
-  MLX repos pinned to verified builds, not guessed
+- ✅ scheduled weekly and manual live catalog validation; MLX repository names
+  were selected from registry checks, not guessed
 - ✅ honesty bands: every speed number carries its uncertainty and source class
 - 🚧 Phase 1: Windows / Linux / discrete-GPU detection ([ROADMAP.md](ROADMAP.md))
 - 🚧 Phase 3: `beanfit init` — emit full stack config for your agent tooling
@@ -55,9 +55,13 @@ bandwidth comes from public spec sheets, ±40% for pre-release estimates,
 ±50% for unknown chips) and every `--json` output ships the full estimation
 model in `assumptions`. Verify against reality with `ollama run --verbose`.
 
-Model tags are checked against ollama.com and Hugging Face by CI weekly;
-a release cannot ship with dead tags. MLX repo names are pinned from live
-registry lookups because name-guessing produced broken launch commands in v0.1.
+Model tags are checked against ollama.com and Hugging Face by a scheduled
+weekly workflow and can be checked manually with `scripts/validate_catalog.py`.
+That check is not yet part of the release gate, so a release is **not**
+guaranteed to contain live tags; verify them again before relying on a command.
+MLX repo names were selected from live registry lookups because name-guessing
+produced broken launch commands in v0.1. The current selector tries q4 first
+and does not automatically choose q8 when both quantizations fit.
 
 ## Privacy
 
@@ -80,6 +84,24 @@ git clone https://github.com/stevekkall-beansgc/beanfit && cd beanfit
 PYTHONPATH=src python3 -m unittest discover -s tests   # stdlib only, no install needed
 python scripts/validate_catalog.py                     # live registry check
 ```
+
+### Static check (pinned Ruff)
+
+`scripts/static_check.py` is the one scripted static-check entry point for
+`src/`, `scripts/`, and `tests/`. The Ruff version is pinned in
+`requirements-lint.txt` (single pin source); the script refuses to run any
+other Ruff. CI's `lint` job installs that pin and runs this check as a
+non-ignored job — the regression test in `tests/test_static_check.py`
+keeps that wiring from silently drifting.
+
+```bash
+pip install -r requirements-lint.txt
+python scripts/static_check.py   # ruff 0.16.8, targets src/ scripts/ tests/
+```
+
+Rule set is deliberately modest and meaningful: pyflakes `F` (syntax,
+undefined names, unused imports, basic errors) plus syntax-level runtime
+errors (`E9`). Configured under `[tool.ruff]` in `pyproject.toml`.
 
 ---
 
