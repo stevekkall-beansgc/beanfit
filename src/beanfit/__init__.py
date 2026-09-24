@@ -1,3 +1,3 @@
 """beanfit — what local AI actually fits and runs well on THIS device."""
 
-__version__ = "0.4.3"
+__version__ = "0.4.4"
