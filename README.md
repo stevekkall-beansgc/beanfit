@@ -79,8 +79,10 @@ See [ROADMAP.md](ROADMAP.md) for the full plan.
 Works today on Apple Silicon Macs. Stdlib only, zero runtime dependencies.
 
 - ✅ packaged CLI (`beanfit` / `python -m beanfit`), module layout, 3-OS CI
-- ✅ scheduled weekly and manual live catalog validation; MLX repository names
-  were selected from registry checks, not guessed
+- ✅ scheduled weekly and manual live catalog validation; operators can create
+  receipts from a clean release checkout that record the exact source revision,
+  package version, validator script SHA-256, and observation time without
+  putting network calls in deterministic PR CI
 - ✅ honesty bands: every speed number carries its uncertainty and source class
 - 🚧 Phase 1: Windows / Linux / discrete-GPU detection ([ROADMAP.md](ROADMAP.md))
 - 🚧 Phase 3: `beanfit init` — emit full stack config for your agent tooling
@@ -94,8 +96,22 @@ model in `assumptions`. Verify against reality with `ollama run --verbose`.
 
 Model tags are checked against ollama.com and Hugging Face by a scheduled
 weekly workflow and can be checked manually with `scripts/validate_catalog.py`.
-That check is not yet part of the release gate, so a release is **not**
-guaranteed to contain live tags; verify them again before relying on a command.
+There is no automatic release-gate integration. To create a release-time
+receipt, an operator must use a clean checkout of the exact release commit and
+run manually:
+
+```bash
+git status --porcelain
+git rev-parse HEAD
+python3 scripts/validate_catalog.py --receipt .catalog-receipts/catalog-validation.json
+```
+
+The `git status --porcelain` output must be empty; the validator refuses a
+receipt from a dirty checkout. The receipt records the exact source revision,
+package version, SHA-256 of `scripts/validate_catalog.py`, UTC times, and
+pass/warn/fail results. Registry liveness is point-in-time and is not
+performance evidence; verify tags again before relying on a command. An
+unreachable registry is a failed check, not a pass.
 MLX repo names were selected from live registry lookups because name-guessing
 produced broken launch commands in v0.1. The current selector tries q4 first
 and does not automatically choose q8 when both quantizations fit.
@@ -119,7 +135,13 @@ beanfit --json                # machine-readable + full assumptions (agent consu
 ```bash
 git clone https://github.com/stevekkall-beansgc/beanfit && cd beanfit
 PYTHONPATH=src python3 -m unittest discover -s tests   # stdlib only, no install needed
-python scripts/validate_catalog.py                     # live registry check
+python3 scripts/activation_demo.py                    # offline synthetic demo
+python3 scripts/static_check.py                        # requires requirements-lint.txt
+python3 scripts/validate_catalog.py --json            # explicit live registry check
+# Manual release-time check from a clean checkout of the exact release commit:
+git status --porcelain
+git rev-parse HEAD
+python3 scripts/validate_catalog.py --receipt .catalog-receipts/catalog-validation.json
 ```
 
 ### Static check (pinned Ruff)
