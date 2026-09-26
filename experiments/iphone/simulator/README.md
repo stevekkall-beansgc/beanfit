@@ -1,5 +1,9 @@
 # Actual iOS Simulator model tests — 2026-09-26
 
+Follow-up: [five additional Hugging Face configurations](HUGGING-FACE-FOLLOWUP.md)
+have now been tested. None passed the full screen; LFM2.5 QAD and Qwen3.5 offer
+smaller-file candidates for further product-specific evaluation.
+
 **Four downloadable models ran successfully in an iOS Simulator process. None
 passed the complete fixed quality screen.** This is real model execution using
 fictional inputs, not synthetic inference or a Mac-hosted model-server call.

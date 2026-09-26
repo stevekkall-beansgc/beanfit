@@ -29,13 +29,32 @@ def grade(case, answer):
     return answer.strip().rstrip(".").strip().casefold() == case["expected"].casefold()
 
 
-def prompt_for(question, template):
-    prompt = ("<|im_start|>system\nYou are a helpful assistant. Follow the requested output format. "
-              "Use only the supplied facts. Never invent missing information.<|im_end|>\n"
+def prompt_for(question, template, system=None):
+    if system is None:
+        system = ("You are a helpful assistant. Follow the requested output format. "
+                  "Use only the supplied facts. Never invent missing information.")
+    # llama-simple adds the model's BOS automatically during tokenization.
+    # Gemma folds system instructions into the first user turn.
+    if template == "gemma3":
+        return ("<start_of_turn>user\n" + system + "\n\n" + question
+                + "<end_of_turn>\n<start_of_turn>model\n")
+    prompt = ("<|im_start|>system\n" + system + "<|im_end|>\n"
               "<|im_start|>user\n" + question + "<|im_end|>\n<|im_start|>assistant\n")
     if template == "qwen3-no-thinking":
         prompt += "<think>\n\n</think>\n\n"
     return prompt
+
+
+def extract_answer(stdout, prompt, template):
+    if isinstance(stdout, bytes):
+        stdout = stdout.decode("utf-8")
+    # Only remove the verified template-specific tokenized echo. Never search
+    # for the expected answer or strip formatting from generated content.
+    bos = {"lfm2": "<|startoftext|>", "gemma3": "<bos>"}.get(template, "")
+    echo = bos + prompt
+    if not stdout.startswith(echo):
+        raise ValueError("tokenized prompt echo mismatch")
+    return stdout[len(echo):].strip()
 
 
 def summarize(trials, workload):
@@ -61,7 +80,7 @@ def main():
     parser.add_argument("--simulator", required=True)
     parser.add_argument("--workload", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--template", choices=["chatml", "qwen3-no-thinking"], default="chatml")
+    parser.add_argument("--template", choices=["chatml", "qwen3-no-thinking", "lfm2", "gemma3"], default="chatml")
     args = parser.parse_args()
     hasher = hashlib.sha256()
     with args.model.open("rb") as model:
@@ -88,19 +107,22 @@ def main():
     for case in workload["cases"]:
         for repeat in range(workload["repeats"]):
             tid = f'{case["id"]}-{repeat}'
-            prompt = prompt_for(case["prompt"], args.template)
+            prompt = prompt_for(case["prompt"], args.template, workload.get("system_prompt"))
             start = time.monotonic()
             command = ["xcrun", "simctl", "spawn", args.simulator, str(args.binary),
                        "-m", str(args.model), "-ngl", "0", "-n", str(workload["max_output_tokens"]), prompt]
             try:
-                run = subprocess.run(command, capture_output=True, text=True, timeout=30)
+                run = subprocess.run(command, capture_output=True, timeout=30)
                 # Upstream llama-simple echoes input. Never grade the echo.
-                if run.returncode == 0 and run.stdout.startswith(prompt):
-                    answer, outcome = run.stdout[len(prompt):].strip(), "completed"
-                else:
+                try:
+                    answer = extract_answer(run.stdout, prompt, args.template)
+                    outcome = "completed" if run.returncode == 0 else "failed"
+                except ValueError:
                     answer, outcome = "", "failed"
-                (args.output / f"{tid}.stdout.txt").write_text(run.stdout)
-                (args.output / f"{tid}.stderr.txt").write_text(run.stderr)
+                # Preserve bytes: vocabulary diagnostics can include non-UTF8
+                # token pieces. Invalid generated UTF8 is still a failed trial.
+                (args.output / f"{tid}.stdout.txt").write_bytes(run.stdout)
+                (args.output / f"{tid}.stderr.txt").write_bytes(run.stderr)
             except subprocess.TimeoutExpired:
                 answer, outcome = "", "timeout"
             trial = {"id": tid, "case_id": case["id"], "outcome": outcome,

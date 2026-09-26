@@ -8,6 +8,32 @@ spec.loader.exec_module(module)
 
 
 class SimulatorEvaluatorTests(unittest.TestCase):
+    def test_bos_echo_is_removed_without_grading_prompt(self):
+        for template, bos in [("lfm2", "<|startoftext|>"), ("gemma3", "<bos>"),
+                              ("chatml", ""), ("qwen3-no-thinking", "")]:
+            prompt = module.prompt_for("Return amber", template)
+            self.assertEqual(module.extract_answer(bos + prompt + "violet\n", prompt, template), "violet")
+            with self.assertRaises(ValueError):
+                module.extract_answer("unexpected prefix" + bos + prompt + "amber", prompt, template)
+
+    def test_gemma_template_preserves_instructions_in_user_turn(self):
+        prompt = module.prompt_for("Return amber", "gemma3")
+        self.assertTrue(prompt.startswith("<start_of_turn>user\n"))
+        self.assertIn("Never invent missing information.\n\nReturn amber", prompt)
+        self.assertTrue(prompt.endswith("<end_of_turn>\n<start_of_turn>model\n"))
+        self.assertNotIn("<bos>", prompt)  # added by llama-simple, once
+
+    def test_bytes_capture_rejects_invalid_answer_encoding(self):
+        prompt = module.prompt_for("Return amber", "chatml")
+        self.assertEqual(module.extract_answer((prompt + "amber").encode(), prompt, "chatml"), "amber")
+        with self.assertRaises(ValueError):
+            module.extract_answer(prompt.encode() + b"\xc4", prompt, "chatml")
+
+    def test_supplemental_system_prompt_is_explicit(self):
+        prompt = module.prompt_for("Bluebird is paused", "lfm2", "Return JSON with a status key.")
+        self.assertTrue(prompt.startswith("<|im_start|>system\nReturn JSON with a status key.<|im_end|>"))
+        self.assertNotIn("You are a helpful assistant", prompt)
+
     def test_exact_output_not_substring(self):
         case = {"expected": "amber"}
         self.assertTrue(module.grade(case, " Amber. "))
