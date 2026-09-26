@@ -1,0 +1,39 @@
+{
+  "runtime_revision": "2145525a4081d66ff1a87cf43ef809f95a85ac0c",
+  "runner_sha256": "323449825d83d611598cf6acdbdca5b8ae9306e71c3e0ed80fb24b4e91b9f595",
+  "workload_sha256": "fff7142c6d49ae3294b77883ab44b5dfd1ac5a9a1908886ac1f7d43026bd5466",
+  "models": [
+    {
+      "repository": "unsloth/Qwen3.5-0.8B-GGUF",
+      "revision": "6ab461498e2023f6e3c1baea90a8f0fe38ab64d0",
+      "filename": "Qwen3.5-0.8B-Q4_K_M.gguf",
+      "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+      "bytes": 532517120,
+      "license_metadata": "apache-2.0"
+    },
+    {
+      "repository": "LiquidAI/LFM2.5-1.2B-Instruct-GGUF",
+      "revision": "8ed288026e23958ad9dfa92d53ed773a8eee7125",
+      "filename": "LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
+      "sha256": "b1b3de114215d9507409a662a501a631095a479a419584e8a2ded6304b19b4f5",
+      "bytes": 730895168,
+      "license_metadata": "other"
+    },
+    {
+      "repository": "LiquidAI/LFM2.5-350M-GGUF",
+      "revision": "657e078c94084481950a2d555a941481f715536b",
+      "filename": "LFM2.5-350M-QAD-Q4_0.gguf",
+      "sha256": "3d10b6ab8fc91a919534b9558e266255aca0bbc7f6d015963599aa9e74e05b1d",
+      "bytes": 219312832,
+      "license_metadata": "other"
+    },
+    {
+      "repository": "unsloth/Qwen3.5-2B-GGUF",
+      "revision": "f6d5376be1edb4d416d56da11e5397a961aca8ae",
+      "filename": "Qwen3.5-2B-Q4_K_M.gguf",
+      "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "bytes": 1280835840,
+      "license_metadata": "apache-2.0"
+    }
+  ]
+}

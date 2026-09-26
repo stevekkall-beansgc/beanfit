@@ -1,0 +1,53 @@
+{
+  "asr": {
+    "evidence_kind": "Mac-host synthetic-audio component smoke",
+    "human_speech_tested": false,
+    "iphone_tested": false,
+    "source_voice": "macOS Samantha",
+    "asr": "existing faster-whisper base.en CPU int8; local_files_only",
+    "rows": [
+      {
+        "id": 0,
+        "source": "I need a blue watch under two hundred dollars. No, sorry, under one hundred and fifty dollars.",
+        "transcript": "I need a blue watch under $200, no, sorry, under $150.",
+        "audio_seconds": 5.8824375,
+        "host_seconds": 0.30304412500117905,
+        "audio_file": "/Users/stephenkall/beans/outputs/beanfit-product-conversations-20260926/speech/verified-input-0.aiff"
+      },
+      {
+        "id": 1,
+        "source": "Black, not blue. Keep the one hundred and fifty dollar price limit.",
+        "transcript": "black, not blue, keep the $150 price limit.",
+        "audio_seconds": 4.0981875,
+        "host_seconds": 0.2637320420035394,
+        "audio_file": "/Users/stephenkall/beans/outputs/beanfit-product-conversations-20260926/speech/verified-input-1.aiff"
+      },
+      {
+        "id": 2,
+        "source": "Stop. Do not buy anything. Just tell me the price again.",
+        "transcript": "Stop, do not buy anything, just tell me the price again.",
+        "audio_seconds": 3.7296875,
+        "host_seconds": 0.27536058399709873,
+        "audio_file": "/Users/stephenkall/beans/outputs/beanfit-product-conversations-20260926/speech/verified-input-2.aiff"
+      }
+    ]
+  },
+  "tts": {
+    "evidence_kind": "Mac-host TTS component smoke",
+    "iphone_tested": false,
+    "subjective_listening_tested": false,
+    "voice": "af_heart",
+    "text": "I can't invent prices or stock. The only verified blue watch is the W1 Cedar watch at $120. Would you like to proceed with that, or do you have a different color in mind?",
+    "audio_seconds": 12.148,
+    "host_generation_seconds": 2.13795616599964,
+    "wav_sha256": "2cbdab40123b6c33734f39114c87a86f008e1b35b3ddca246d7e4eccf8b23143",
+    "wav": "/Users/stephenkall/beans/outputs/beanfit-product-conversations-20260926/speech/qwen2-kokoro-reply.wav"
+  },
+  "limits": [
+    "Mac components only; no iPhone audio test",
+    "Synthetic clean voice, not real microphone/noise/accent data",
+    "ASR outputs were not fed through an integrated conversation session",
+    "No streaming, barge-in, acoustic echo cancellation or whole-stack memory evidence",
+    "First sandboxed say attempt produced empty AIFFs; excluded after duration check. Retried with speech-service access and validated duration/amplitude."
+  ]
+}

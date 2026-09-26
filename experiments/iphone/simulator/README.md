@@ -1,5 +1,9 @@
 # Actual iOS Simulator model tests — 2026-09-26
 
+Product follow-up: [shopping, voice-transcript and conversational pilot](product-conversations/README.md)
+tested four model configurations in actual two-turn exchanges. Qwen3.5 2B passed
+the small shopping screen; speech and phone qualification remain separate.
+
 Latest: [focused extraction with validation and abstention](extraction-v2/README.md)
 compares four configurations on 24 fresh cases. These results are separate from
 the original mixed-task scores below.
