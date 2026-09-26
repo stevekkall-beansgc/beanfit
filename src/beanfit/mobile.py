@@ -13,6 +13,10 @@ import re
 import sys
 
 
+# Version of the public mobile profile/receipt/selection contracts.
+CONTRACT_VERSION = "v1"
+
+
 class EvidenceError(ValueError):
     pass
 
