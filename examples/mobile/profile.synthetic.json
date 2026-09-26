@@ -1,0 +1,23 @@
+{
+  "schema": "beanfit.mobile.profile.v1",
+  "product": "fictional badge extraction",
+  "device": "fixture phone",
+  "os_build": "fixture OS",
+  "stack_id": "text-only-v1",
+  "memory_method": "fixture whole-stack accounting",
+  "workload_sha256": "9e519a0c67735140751da91d1f45e1a029eba280daee2956695a82634751c2ff",
+  "context_tokens": 2048,
+  "output_limit_tokens": 128,
+  "memory_budget_bytes": 1000000000,
+  "headroom_fraction": 0.2,
+  "min_quality": 0.75,
+  "max_p95_latency_ms": 4000,
+  "min_repeats": 2,
+  "case_ids": [
+    "recall",
+    "missing-fact"
+  ],
+  "critical_case_ids": [
+    "missing-fact"
+  ]
+}

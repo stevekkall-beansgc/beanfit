@@ -1,5 +1,9 @@
 # BeanFit on iPhone: feasibility decision
 
+> **Scope update:** For the identified iPhone 14 Pro Max and the memory-first
+> product-enablement goal, use [the updated requirements](REQUIREMENTS.md).
+> The Apple-first recommendation below is historical and applies to eligible devices.
+
 Research date: 2026-09-26. Base: `c4072e9`. Hub task: **1233**, gated.
 Status: isolated research candidate; no phone installation or physical-device
 measurement. This is not a released BeanFit capability.

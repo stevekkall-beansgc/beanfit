@@ -182,3 +182,11 @@ live, customer-ready, or evidence for the fit estimates. Run
 `python3 scripts/check_activation_qa.py` for its central QA registration and
 `python3 scripts/activation_demo.py` for the offline end-to-end fixture; neither
 creates provider payments.
+
+## Mobile qualification prototype
+
+The isolated mobile selector chooses the smallest measured stack that passes a
+product-specific quality, reliability, latency and memory contract. It imports
+receipts; it does not run or install models on an iPhone. Start with the
+[offline synthetic demo](examples/mobile/README.md) and
+[mobile requirements](experiments/iphone/REQUIREMENTS.md).

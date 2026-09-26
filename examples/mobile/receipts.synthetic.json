@@ -1,0 +1,173 @@
+[
+  {
+    "device": "fixture phone",
+    "os_build": "fixture OS",
+    "stack_id": "text-only-v1",
+    "memory_method": "fixture whole-stack accounting",
+    "workload_sha256": "9e519a0c67735140751da91d1f45e1a029eba280daee2956695a82634751c2ff",
+    "context_tokens": 2048,
+    "output_limit_tokens": 128,
+    "schema": "beanfit.mobile.receipt.v1",
+    "evidence_kind": "synthetic",
+    "recorded_at": "2026-09-26T00:00:00Z",
+    "evidence_ref": "synthetic-test-only",
+    "candidate": {
+      "id": "tiny-unqualified",
+      "runtime": "fixture",
+      "runtime_revision": "fixture-v1",
+      "model_revision": "fixture-v1",
+      "weights_bytes": 100000000
+    },
+    "memory_scope": "whole_stack_incremental_peak",
+    "inference_location": "on_device",
+    "offline_verified": true,
+    "trials": [
+      {
+        "id": "recall-0",
+        "case_id": "recall",
+        "quality_pass": false,
+        "outcome": "completed",
+        "peak_stack_bytes": 100000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "recall-1",
+        "case_id": "recall",
+        "quality_pass": false,
+        "outcome": "completed",
+        "peak_stack_bytes": 100000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "missing-fact-0",
+        "case_id": "missing-fact",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 100000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "missing-fact-1",
+        "case_id": "missing-fact",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 100000000,
+        "latency_ms": 1000
+      }
+    ]
+  },
+  {
+    "device": "fixture phone",
+    "os_build": "fixture OS",
+    "stack_id": "text-only-v1",
+    "memory_method": "fixture whole-stack accounting",
+    "workload_sha256": "9e519a0c67735140751da91d1f45e1a029eba280daee2956695a82634751c2ff",
+    "context_tokens": 2048,
+    "output_limit_tokens": 128,
+    "schema": "beanfit.mobile.receipt.v1",
+    "evidence_kind": "synthetic",
+    "recorded_at": "2026-09-26T00:00:00Z",
+    "evidence_ref": "synthetic-test-only",
+    "candidate": {
+      "id": "small-qualified-demo",
+      "runtime": "fixture",
+      "runtime_revision": "fixture-v1",
+      "model_revision": "fixture-v1",
+      "weights_bytes": 100000000
+    },
+    "memory_scope": "whole_stack_incremental_peak",
+    "inference_location": "on_device",
+    "offline_verified": true,
+    "trials": [
+      {
+        "id": "recall-0",
+        "case_id": "recall",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 300000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "recall-1",
+        "case_id": "recall",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 300000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "missing-fact-0",
+        "case_id": "missing-fact",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 300000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "missing-fact-1",
+        "case_id": "missing-fact",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 300000000,
+        "latency_ms": 1000
+      }
+    ]
+  },
+  {
+    "device": "fixture phone",
+    "os_build": "fixture OS",
+    "stack_id": "text-only-v1",
+    "memory_method": "fixture whole-stack accounting",
+    "workload_sha256": "9e519a0c67735140751da91d1f45e1a029eba280daee2956695a82634751c2ff",
+    "context_tokens": 2048,
+    "output_limit_tokens": 128,
+    "schema": "beanfit.mobile.receipt.v1",
+    "evidence_kind": "synthetic",
+    "recorded_at": "2026-09-26T00:00:00Z",
+    "evidence_ref": "synthetic-test-only",
+    "candidate": {
+      "id": "large-qualified-demo",
+      "runtime": "fixture",
+      "runtime_revision": "fixture-v1",
+      "model_revision": "fixture-v1",
+      "weights_bytes": 100000000
+    },
+    "memory_scope": "whole_stack_incremental_peak",
+    "inference_location": "on_device",
+    "offline_verified": true,
+    "trials": [
+      {
+        "id": "recall-0",
+        "case_id": "recall",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 700000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "recall-1",
+        "case_id": "recall",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 700000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "missing-fact-0",
+        "case_id": "missing-fact",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 700000000,
+        "latency_ms": 1000
+      },
+      {
+        "id": "missing-fact-1",
+        "case_id": "missing-fact",
+        "quality_pass": true,
+        "outcome": "completed",
+        "peak_stack_bytes": 700000000,
+        "latency_ms": 1000
+      }
+    ]
+  }
+]
