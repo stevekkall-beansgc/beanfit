@@ -6,3 +6,8 @@ dist/
 build/
 .launch-qa/
 .catalog-receipts/
+
+# Local Xcode state and large model assets
+DerivedData/
+xcuserdata/
+*.gguf

@@ -190,3 +190,10 @@ product-specific quality, reliability, latency and memory contract. It imports
 receipts; it does not run or install models on an iPhone. Start with the
 [offline synthetic demo](examples/mobile/README.md) and
 [mobile requirements](experiments/iphone/REQUIREMENTS.md).
+
+## Native iPhone prototype
+
+[BeanFit Pocket](iphone/README.md) embeds local inference in a native iOS host,
+with verified model import, measurements, and a reviewable Jumping Beans sample
+flow. It is a prototype; device qualification and live product integration are
+separate release gates.

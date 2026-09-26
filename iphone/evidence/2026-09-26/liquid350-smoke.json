@@ -1,0 +1,17 @@
+{
+  "phoneQualified" : false,
+  "checks" : {
+    "invalid_preferences_rejected" : true,
+    "product_preferences" : true,
+    "unload" : true,
+    "inclusive_budget" : true,
+    "typed_preferences" : true,
+    "local_inference" : true,
+    "no_matches" : true,
+    "catalog_rule" : true,
+    "load" : true,
+    "review_required" : true
+  },
+  "model" : "liquid350",
+  "status" : "Local checks passed"
+}

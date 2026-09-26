@@ -1,0 +1,17 @@
+{
+  "phoneQualified" : false,
+  "checks" : {
+    "inclusive_budget" : true,
+    "review_required" : true,
+    "local_inference" : true,
+    "no_matches" : true,
+    "load" : true,
+    "product_preferences" : true,
+    "typed_preferences" : true,
+    "catalog_rule" : true,
+    "invalid_preferences_rejected" : true,
+    "unload" : true
+  },
+  "model" : "qwen08",
+  "status" : "Local checks passed"
+}
