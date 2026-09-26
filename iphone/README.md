@@ -86,3 +86,8 @@ and always state `qualified: false`. Whole-product memory, repeated reliability,
 latency budgets, thermal behavior, and capability-specific quality remain release
 gates. Choose the smallest model that passes those gates; do not select by file
 size alone.
+
+## Paused checkpoint
+
+See [the next-phase plan](NEXT-PHASE-PLAN.md) for the agreed purpose, remaining
+product work, qualification gates, and exact resume point.
