@@ -9,7 +9,7 @@ description = "What local AI actually fits — and runs well — on THIS device.
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "BeanLabs" }]
+authors = [{ name = "Legume Labs" }]
 keywords = ["local-ai", "llm", "ollama", "mlx", "apple-silicon"]
 
 [project.scripts]

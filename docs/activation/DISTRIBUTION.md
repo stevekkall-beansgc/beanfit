@@ -15,7 +15,7 @@ This is a recommendation, not authority to change either provider.
 
 The private operator roster identifies five public authors describing relevant
 needs; this release includes only anonymized profiles. They are **uncontacted prospects, not leads who consented, customers, or
-purchase-intent confirmations**. Their relationship to BeanLabs is unknown;
+purchase-intent confirmations**. Their relationship to Legume Labs is unknown;
 public identity alone does not prove an unrelated payer. Need evidence is not
 technical validation of commenters' performance claims. No addresses, private
 profiles, or identity enrichment were collected. Keep the named roster internal;
@@ -73,7 +73,7 @@ gate unmet; do not claim that the checkout validates demand.
 This is a proposed seven-day experiment after explicit final authorization.
 No continuing founder posting, sales calls, bespoke consulting, or paid media
 is assumed. The owner makes a one-time decision on channel/offer/payment scope;
-an authorized BeanLabs operator performs the finite steps and routine fulfillment.
+an authorized Legume Labs operator performs the finite steps and routine fulfillment.
 
 1. **Preflight:** verify activation receipts, supported-input prevalidation,
    catalog freshness, safe delivery/retention, corrections/refunds, real fee
