@@ -103,6 +103,13 @@ Freshness, thermal endurance and battery remain additional product acceptance
 checks; the current selector does not certify them. Source artifacts and raw
 measurement logs must be reviewed before integration or deployment.
 
+## Actual simulator follow-up
+
+Four pinned downloadable models have now run inside the iOS Simulator. See the
+[actual test report](simulator/README.md). None passed the complete screening
+contract; physical memory qualification remains pending. This supersedes the
+earlier no-download/no-inference validation status below for simulator work only.
+
 ## Delivered boundary and next gate
 
 Delivered: offline qualification/ranking module, CLI, synthetic contract and
