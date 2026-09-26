@@ -35,6 +35,10 @@ def prompt_for(question, template, system=None):
                   "Use only the supplied facts. Never invent missing information.")
     # llama-simple adds the model's BOS automatically during tokenization.
     # Gemma folds system instructions into the first user turn.
+    if template == "granite4":
+        return ("<|start_of_role|>system<|end_of_role|>" + system + "<|end_of_text|>\n"
+                "<|start_of_role|>user<|end_of_role|>" + question + "<|end_of_text|>\n"
+                "<|start_of_role|>assistant<|end_of_role|>")
     if template == "gemma3":
         return ("<start_of_turn>user\n" + system + "\n\n" + question
                 + "<end_of_turn>\n<start_of_turn>model\n")
@@ -80,7 +84,7 @@ def main():
     parser.add_argument("--simulator", required=True)
     parser.add_argument("--workload", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--template", choices=["chatml", "qwen3-no-thinking", "lfm2", "gemma3"], default="chatml")
+    parser.add_argument("--template", choices=["chatml", "qwen3-no-thinking", "lfm2", "gemma3", "granite4"], default="chatml")
     args = parser.parse_args()
     hasher = hashlib.sha256()
     with args.model.open("rb") as model:

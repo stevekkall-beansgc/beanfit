@@ -1,5 +1,10 @@
 # Requirements review — 2026-09-26
 
+Execution follow-up: the [focused extraction pass](simulator/extraction-v2/README.md)
+is complete. Four model configurations and a deterministic baseline were
+compared; none passed the frozen experimental contract. Qwen3.5 0.8B is the
+strongest measured lead for this schema, not a qualified phone selection.
+
 Recommendation: keep the smallest-qualified-stack objective, but qualify one
 product feature at a time. The existing fictional simulator screen is a useful
 diagnostic, not a universal product acceptance test. Its 90% floor and 12 cases

@@ -1,5 +1,9 @@
 # Actual iOS Simulator model tests — 2026-09-26
 
+Latest: [focused extraction with validation and abstention](extraction-v2/README.md)
+compares four configurations on 24 fresh cases. These results are separate from
+the original mixed-task scores below.
+
 Follow-up: [five additional Hugging Face configurations](HUGGING-FACE-FOLLOWUP.md)
 have now been tested. None passed the full screen; LFM2.5 QAD and Qwen3.5 offer
 smaller-file candidates for further product-specific evaluation.

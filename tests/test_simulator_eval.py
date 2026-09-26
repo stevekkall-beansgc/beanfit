@@ -8,6 +8,12 @@ spec.loader.exec_module(module)
 
 
 class SimulatorEvaluatorTests(unittest.TestCase):
+    def test_granite_template_has_native_role_boundaries(self):
+        self.assertEqual(module.prompt_for('Question', 'granite4', 'System'),
+                         '<|start_of_role|>system<|end_of_role|>System<|end_of_text|>\n'
+                         '<|start_of_role|>user<|end_of_role|>Question<|end_of_text|>\n'
+                         '<|start_of_role|>assistant<|end_of_role|>')
+
     def test_bos_echo_is_removed_without_grading_prompt(self):
         for template, bos in [("lfm2", "<|startoftext|>"), ("gemma3", "<bos>"),
                               ("chatml", ""), ("qwen3-no-thinking", "")]:

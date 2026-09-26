@@ -1,0 +1,3597 @@
+{
+  "LFM2.5-1.2B-Instruct-Q4_K_M.gguf": {
+    "raw_schema_valid": 48,
+    "total": 48,
+    "normalized_exact_correct": 30,
+    "accepted": 48,
+    "accepted_correct": 30,
+    "answerable_coverage": 1.0,
+    "accepted_accuracy": 0.625,
+    "unsupported_all_abstain": false,
+    "critical_accepted_errors": [
+      "distractor-0",
+      "distractor-1",
+      "status-change-0",
+      "status-change-1",
+      "correction-0",
+      "correction-1",
+      "schema-injection-0",
+      "schema-injection-1",
+      "absent-0",
+      "absent-1",
+      "empty-0",
+      "empty-1",
+      "conflict-0",
+      "conflict-1",
+      "unreadable-0",
+      "unreadable-1",
+      "extra-details-0",
+      "extra-details-1"
+    ],
+    "all_trials_complete": true,
+    "experimental_contract_pass": false,
+    "physical_device_qualified": false,
+    "peak_stack_bytes": null,
+    "rows": [
+      {
+        "case_id": "plain",
+        "id": "plain-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Atlas",
+          "status": "active",
+          "owner": "Nora",
+          "budget": 450
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "plain",
+        "id": "plain-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Atlas",
+          "status": "active",
+          "owner": "Nora",
+          "budget": 450
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Cedar",
+          "status": "paused",
+          "owner": "Leon",
+          "budget": 1200
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Cedar",
+          "status": "paused",
+          "owner": "Leon",
+          "budget": 1200
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Juniper",
+          "status": "cancelled",
+          "owner": "Imani",
+          "budget": 70
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Juniper",
+          "status": "cancelled",
+          "owner": "Imani",
+          "budget": 70
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Harbor",
+          "status": "paused",
+          "owner": "Jules",
+          "budget": 250
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Harbor",
+          "status": "paused",
+          "owner": "Jules",
+          "budget": 250
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Aurora",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Aurora",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Maple",
+          "status": "paused",
+          "owner": "Ava",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Maple",
+          "status": "paused",
+          "owner": "Ava",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ridge",
+          "status": "active",
+          "owner": "Omar",
+          "budget": 12.5
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ridge",
+          "status": "active",
+          "owner": "Omar",
+          "budget": 12.5
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Birch",
+          "status": "paused",
+          "owner": "Sage",
+          "budget": 900
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Birch",
+          "status": "paused",
+          "owner": "Sage",
+          "budget": 900
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Pearl",
+          "status": "active",
+          "owner": "Mateo",
+          "budget": 80
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Pearl",
+          "status": "active",
+          "owner": "Mateo",
+          "budget": 80
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Comet",
+          "status": "paused",
+          "owner": "Mei",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Comet",
+          "status": "paused",
+          "owner": "Mei",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Delta",
+          "status": "paused",
+          "owner": "Priya",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Delta",
+          "status": "paused",
+          "owner": "Priya",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Vale",
+          "status": "paused",
+          "owner": "Ezra",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Vale",
+          "status": "paused",
+          "owner": "Ezra",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ember",
+          "status": "active",
+          "owner": "Kim",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ember",
+          "status": "active",
+          "owner": "Kim",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Moss",
+          "status": "cancelled",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Moss",
+          "status": "cancelled",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Tide",
+          "status": "active",
+          "owner": null,
+          "budget": 500
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Tide",
+          "status": "active",
+          "owner": null,
+          "budget": 500
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Flint",
+          "status": "paused",
+          "owner": null,
+          "budget": 100
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Flint",
+          "status": "paused",
+          "owner": null,
+          "budget": 100
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Sable",
+          "status": "paused",
+          "owner": "Lena",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Sable",
+          "status": "paused",
+          "owner": "Lena",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Reed",
+          "status": "active",
+          "owner": null,
+          "budget": 99999
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Reed",
+          "status": "active",
+          "owner": null,
+          "budget": 99999
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Nova",
+          "status": "active",
+          "owner": "Hugo",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Nova",
+          "status": "active",
+          "owner": "Hugo",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Kite",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Kite",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Larch",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Larch",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Dune",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Dune",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Spruce",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Spruce",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Coral",
+          "status": "active",
+          "owner": "Tessa",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Coral",
+          "status": "active",
+          "owner": "Tessa",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": true
+      }
+    ]
+  },
+  "LFM2.5-350M-QAD-Q4_0.gguf": {
+    "raw_schema_valid": 30,
+    "total": 48,
+    "normalized_exact_correct": 6,
+    "accepted": 8,
+    "accepted_correct": 4,
+    "answerable_coverage": 0.2,
+    "accepted_accuracy": 0.5,
+    "unsupported_all_abstain": false,
+    "critical_accepted_errors": [
+      "distractor-0",
+      "distractor-1",
+      "correction-0",
+      "correction-1"
+    ],
+    "all_trials_complete": true,
+    "experimental_contract_pass": false,
+    "physical_device_qualified": false,
+    "peak_stack_bytes": null,
+    "rows": [
+      {
+        "case_id": "plain",
+        "id": "plain-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Atlas",
+          "status": "active",
+          "owner": "Nora",
+          "budget": 450
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "plain",
+        "id": "plain-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Atlas",
+          "status": "active",
+          "owner": "Nora",
+          "budget": 450
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ridge",
+          "status": "active",
+          "owner": "Omar",
+          "budget": 12.5
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ridge",
+          "status": "active",
+          "owner": "Omar",
+          "budget": 12.5
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Birch",
+          "status": "paused",
+          "owner": "Sage",
+          "budget": 900
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Birch",
+          "status": "paused",
+          "owner": "Sage",
+          "budget": 900
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Tide",
+          "status": "active",
+          "owner": "null",
+          "budget": 50
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Tide",
+          "status": "active",
+          "owner": "null",
+          "budget": 50
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      }
+    ]
+  },
+  "Qwen3.5-0.8B-Q4_K_M.gguf": {
+    "raw_schema_valid": 48,
+    "total": 48,
+    "normalized_exact_correct": 40,
+    "accepted": 38,
+    "accepted_correct": 34,
+    "answerable_coverage": 0.9,
+    "accepted_accuracy": 0.8947368421052632,
+    "unsupported_all_abstain": false,
+    "critical_accepted_errors": [
+      "schema-injection-0",
+      "schema-injection-1",
+      "absent-0",
+      "absent-1"
+    ],
+    "all_trials_complete": true,
+    "experimental_contract_pass": false,
+    "physical_device_qualified": false,
+    "peak_stack_bytes": null,
+    "rows": [
+      {
+        "case_id": "plain",
+        "id": "plain-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Atlas",
+          "status": "active",
+          "owner": "Nora",
+          "budget": 450
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "plain",
+        "id": "plain-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Atlas",
+          "status": "active",
+          "owner": "Nora",
+          "budget": 450
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Cedar",
+          "status": "paused",
+          "owner": "Leon",
+          "budget": 1200
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Cedar",
+          "status": "paused",
+          "owner": "Leon",
+          "budget": 1200
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Juniper",
+          "status": "cancelled",
+          "owner": "Imani",
+          "budget": 70
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Juniper",
+          "status": "cancelled",
+          "owner": "Imani",
+          "budget": 70
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Harbor",
+          "status": "paused",
+          "owner": "Jules",
+          "budget": 250
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Harbor",
+          "status": "paused",
+          "owner": "Jules",
+          "budget": 250
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Aurora",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Aurora",
+          "status": "active",
+          "owner": null,
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Maple",
+          "status": "paused",
+          "owner": "Ava",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Maple",
+          "status": "paused",
+          "owner": "Ava",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ridge",
+          "status": "active",
+          "owner": "Omar",
+          "budget": 12.5
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ridge",
+          "status": "active",
+          "owner": "Omar",
+          "budget": 12.5
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Birch",
+          "status": "paused",
+          "owner": "Sage",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Birch",
+          "status": "paused",
+          "owner": "Sage",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Pearl",
+          "status": "active",
+          "owner": "Mateo",
+          "budget": 80
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Pearl",
+          "status": "active",
+          "owner": "Mateo",
+          "budget": 80
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Comet",
+          "status": "active",
+          "owner": "Mei",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Comet",
+          "status": "active",
+          "owner": "Mei",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Delta",
+          "status": "paused",
+          "owner": "Priya",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Delta",
+          "status": "paused",
+          "owner": "Priya",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Vale",
+          "status": "paused",
+          "owner": "Ezra",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Vale",
+          "status": "paused",
+          "owner": "Ezra",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ember",
+          "status": "active",
+          "owner": "Kim",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ember",
+          "status": "active",
+          "owner": "Kim",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Tide",
+          "status": "active",
+          "owner": null,
+          "budget": 50
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Tide",
+          "status": "active",
+          "owner": null,
+          "budget": 50
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Flint",
+          "status": "paused",
+          "owner": null,
+          "budget": 100
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Flint",
+          "status": "paused",
+          "owner": null,
+          "budget": 100
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Sable",
+          "status": "paused",
+          "owner": "Lena",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Sable",
+          "status": "paused",
+          "owner": "Lena",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Reed",
+          "status": "active",
+          "owner": null,
+          "budget": 99999
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Reed",
+          "status": "active",
+          "owner": null,
+          "budget": 99999
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Nova",
+          "status": "active",
+          "owner": "Hugo",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Nova",
+          "status": "active",
+          "owner": "Hugo",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Coral",
+          "status": "active",
+          "owner": "Tessa",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Coral",
+          "status": "active",
+          "owner": "Tessa",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      }
+    ]
+  },
+  "granite-4.0-350m-Q4_K_M.gguf": {
+    "raw_schema_valid": 36,
+    "total": 48,
+    "normalized_exact_correct": 12,
+    "accepted": 36,
+    "accepted_correct": 12,
+    "answerable_coverage": 0.7,
+    "accepted_accuracy": 0.3333333333333333,
+    "unsupported_all_abstain": false,
+    "critical_accepted_errors": [
+      "missing-0",
+      "missing-1",
+      "distractor-0",
+      "distractor-1",
+      "reverse-entities-0",
+      "reverse-entities-1",
+      "status-change-0",
+      "status-change-1",
+      "correction-0",
+      "correction-1",
+      "author-0",
+      "author-1",
+      "schema-injection-0",
+      "schema-injection-1",
+      "absent-0",
+      "absent-1",
+      "empty-0",
+      "empty-1",
+      "conflict-0",
+      "conflict-1",
+      "unreadable-0",
+      "unreadable-1",
+      "extra-details-0",
+      "extra-details-1"
+    ],
+    "all_trials_complete": true,
+    "experimental_contract_pass": false,
+    "physical_device_qualified": false,
+    "peak_stack_bytes": null,
+    "rows": [
+      {
+        "case_id": "plain",
+        "id": "plain-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Atlas",
+          "status": "active",
+          "owner": "Nora",
+          "budget": 450
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "plain",
+        "id": "plain-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Atlas",
+          "status": "active",
+          "owner": "Nora",
+          "budget": 450
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Cedar",
+          "status": "paused",
+          "owner": "Leon",
+          "budget": 1200
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Cedar",
+          "status": "paused",
+          "owner": "Leon",
+          "budget": 1200
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Aurora",
+          "status": "active",
+          "owner": "Aurora",
+          "budget": 100000
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Aurora",
+          "status": "active",
+          "owner": "Aurora",
+          "budget": 100000
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Maple",
+          "status": "paused",
+          "owner": "Ava",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Maple",
+          "status": "paused",
+          "owner": "Ava",
+          "budget": 0
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ridge",
+          "status": "active",
+          "owner": "Omar",
+          "budget": 12.5
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ridge",
+          "status": "active",
+          "owner": "Omar",
+          "budget": 12.5
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Birch",
+          "status": "paused",
+          "owner": "Sage",
+          "budget": 900
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Birch",
+          "status": "paused",
+          "owner": "Sage",
+          "budget": 900
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Pearl",
+          "status": "cancelled",
+          "owner": "Iris",
+          "budget": 700
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Pearl",
+          "status": "cancelled",
+          "owner": "Iris",
+          "budget": 700
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Comet",
+          "status": "paused",
+          "owner": "Mei",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Comet",
+          "status": "paused",
+          "owner": "Mei",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ember",
+          "status": "active",
+          "owner": "Kim",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Ember",
+          "status": "active",
+          "owner": "Kim",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Tide",
+          "status": "active",
+          "owner": "Tide",
+          "budget": 50
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Tide",
+          "status": "active",
+          "owner": "Tide",
+          "budget": 50
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Flint",
+          "status": "paused",
+          "owner": "Ada",
+          "budget": 100
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Flint",
+          "status": "paused",
+          "owner": "Ada",
+          "budget": 100
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Sable",
+          "status": "paused",
+          "owner": "Lena",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Sable",
+          "status": "paused",
+          "owner": "Lena",
+          "budget": null
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Reed",
+          "status": "active",
+          "owner": "Reed",
+          "budget": 300
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Reed",
+          "status": "active",
+          "owner": "Reed",
+          "budget": 300
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Nova",
+          "status": "active",
+          "owner": "Hugo",
+          "budget": 1000
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Nova",
+          "status": "active",
+          "owner": "Hugo",
+          "budget": 1000
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Kite",
+          "status": "active",
+          "owner": "Kite",
+          "budget": 1000
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Kite",
+          "status": "active",
+          "owner": "Kite",
+          "budget": 1000
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Larch",
+          "status": "cancelled",
+          "owner": "Not specified",
+          "budget": 1000
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Larch",
+          "status": "cancelled",
+          "owner": "Not specified",
+          "budget": 1000
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Dune",
+          "status": "active",
+          "owner": "Dune",
+          "budget": 10000000
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Dune",
+          "status": "active",
+          "owner": "Dune",
+          "budget": 10000000
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-0",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-1",
+        "raw_schema_valid": false,
+        "accepted": false,
+        "abstained": false,
+        "correct": false,
+        "normalized": null,
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Coral",
+          "status": "active",
+          "owner": "Tessa",
+          "budget": 1000
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": false,
+        "normalized": {
+          "project": "Coral",
+          "status": "active",
+          "owner": "Tessa",
+          "budget": 1000
+        },
+        "critical": true,
+        "answerable": true
+      }
+    ]
+  },
+  "deterministic-key-value-baseline": {
+    "raw_schema_valid": 48,
+    "total": 48,
+    "normalized_exact_correct": 10,
+    "accepted": 2,
+    "accepted_correct": 2,
+    "answerable_coverage": 0.05,
+    "accepted_accuracy": 1.0,
+    "unsupported_all_abstain": true,
+    "critical_accepted_errors": [],
+    "all_trials_complete": true,
+    "experimental_contract_pass": false,
+    "physical_device_qualified": false,
+    "peak_stack_bytes": null,
+    "rows": [
+      {
+        "case_id": "plain",
+        "id": "plain-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "plain",
+        "id": "plain-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-0",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Cedar",
+          "status": "paused",
+          "owner": "Leon",
+          "budget": 1200.0
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "fields",
+        "id": "fields-1",
+        "raw_schema_valid": true,
+        "accepted": true,
+        "abstained": false,
+        "correct": true,
+        "normalized": {
+          "project": "Cedar",
+          "status": "paused",
+          "owner": "Leon",
+          "budget": 1200.0
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "reordered",
+        "id": "reordered-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "paraphrase",
+        "id": "paraphrase-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "missing",
+        "id": "missing-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "zero",
+        "id": "zero-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "decimal",
+        "id": "decimal-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": false,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "distractor",
+        "id": "distractor-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "reverse-entities",
+        "id": "reverse-entities-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "status-change",
+        "id": "status-change-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "owner-change",
+        "id": "owner-change-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negation",
+        "id": "negation-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "unknown-budget",
+        "id": "unknown-budget-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "cancelled",
+        "id": "cancelled-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "correction",
+        "id": "correction-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "author",
+        "id": "author-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "quoted-injection",
+        "id": "quoted-injection-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "schema-injection",
+        "id": "schema-injection-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "absent",
+        "id": "absent-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "empty",
+        "id": "empty-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "conflict",
+        "id": "conflict-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "unreadable",
+        "id": "unreadable-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": true,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": false
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "negative-budget",
+        "id": "negative-budget-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-0",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      },
+      {
+        "case_id": "extra-details",
+        "id": "extra-details-1",
+        "raw_schema_valid": true,
+        "accepted": false,
+        "abstained": true,
+        "correct": false,
+        "normalized": {
+          "abstain": true
+        },
+        "critical": true,
+        "answerable": true
+      }
+    ]
+  }
+}

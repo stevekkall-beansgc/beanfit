@@ -1,0 +1,1812 @@
+{
+  "runtime_commit": "2145525a4081d66ff1a87cf43ef809f95a85ac0c",
+  "candidates": [
+    {
+      "source_repository": "LiquidAI/LFM2.5-1.2B-Instruct-GGUF",
+      "revision": "8ed288026e23958ad9dfa92d53ed773a8eee7125",
+      "result": {
+        "schema": "beanfit.simulator.quality.v1",
+        "evidence_kind": "simulator",
+        "recorded_at": "2026-09-26T16:22:36.540856+00:00",
+        "simulator": "BeanFit-Model-Test",
+        "simulator_runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+        "model_file": "LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
+        "model_sha256": "b1b3de114215d9507409a662a501a631095a479a419584e8a2ded6304b19b4f5",
+        "model_bytes": 730895168,
+        "binary_sha256": "6214abe4436376644422d6541e673ba07fd1280a62a94f47eb9b170e3bbd7dac",
+        "workload_sha256": "e319dfa09c3937360cd7138a1d726a39764af529a44b58b65894b686c7a983e0",
+        "backend": "CPU-only; Metal and Accelerate disabled",
+        "template": "lfm2",
+        "sampling": "greedy",
+        "context": "upstream llama-simple: prompt tokens + output cap - 1",
+        "summary": {
+          "passed": 30,
+          "total": 48,
+          "quality": 0.625,
+          "failed_cases": [
+            "absent",
+            "conflict",
+            "correction",
+            "distractor",
+            "empty",
+            "extra-details",
+            "schema-injection",
+            "status-change",
+            "unreadable"
+          ],
+          "critical_failures": [
+            "absent",
+            "conflict",
+            "correction",
+            "distractor",
+            "empty",
+            "extra-details",
+            "schema-injection",
+            "status-change",
+            "unreadable"
+          ],
+          "simulator_quality_screen_pass": false,
+          "physical_device_qualified": false,
+          "peak_stack_bytes": null
+        },
+        "trials": [
+          {
+            "id": "plain-0",
+            "case_id": "plain",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Atlas\",\n  \"status\": \"active\",\n  \"owner\": \"Nora\",\n  \"budget\": 450\n}",
+            "quality_pass": true,
+            "wall_ms": 1367.0
+          },
+          {
+            "id": "plain-1",
+            "case_id": "plain",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Atlas\",\n  \"status\": \"active\",\n  \"owner\": \"Nora\",\n  \"budget\": 450\n}",
+            "quality_pass": true,
+            "wall_ms": 1512.28
+          },
+          {
+            "id": "fields-0",
+            "case_id": "fields",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Cedar\",\n  \"status\": \"paused\",\n  \"owner\": \"Leon\",\n  \"budget\": 1200\n}",
+            "quality_pass": true,
+            "wall_ms": 1591.68
+          },
+          {
+            "id": "fields-1",
+            "case_id": "fields",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Cedar\",\n  \"status\": \"paused\",\n  \"owner\": \"Leon\",\n  \"budget\": 1200\n}",
+            "quality_pass": true,
+            "wall_ms": 1382.45
+          },
+          {
+            "id": "reordered-0",
+            "case_id": "reordered",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Juniper\",\n  \"status\": \"cancelled\",\n  \"owner\": \"Imani\",\n  \"budget\": 70\n}",
+            "quality_pass": true,
+            "wall_ms": 1465.5
+          },
+          {
+            "id": "reordered-1",
+            "case_id": "reordered",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Juniper\",\n  \"status\": \"cancelled\",\n  \"owner\": \"Imani\",\n  \"budget\": 70\n}",
+            "quality_pass": true,
+            "wall_ms": 1431.94
+          },
+          {
+            "id": "paraphrase-0",
+            "case_id": "paraphrase",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Harbor\",\n  \"status\": \"paused\",\n  \"owner\": \"Jules\",\n  \"budget\": 250\n}",
+            "quality_pass": true,
+            "wall_ms": 1427.89
+          },
+          {
+            "id": "paraphrase-1",
+            "case_id": "paraphrase",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Harbor\",\n  \"status\": \"paused\",\n  \"owner\": \"Jules\",\n  \"budget\": 250\n}",
+            "quality_pass": true,
+            "wall_ms": 1467.09
+          },
+          {
+            "id": "missing-0",
+            "case_id": "missing",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Aurora\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1291.6
+          },
+          {
+            "id": "missing-1",
+            "case_id": "missing",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Aurora\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1269.61
+          },
+          {
+            "id": "zero-0",
+            "case_id": "zero",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Maple\",\n  \"status\": \"paused\",\n  \"owner\": \"Ava\",\n  \"budget\": 0\n}",
+            "quality_pass": true,
+            "wall_ms": 1313.93
+          },
+          {
+            "id": "zero-1",
+            "case_id": "zero",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Maple\",\n  \"status\": \"paused\",\n  \"owner\": \"Ava\",\n  \"budget\": 0\n}",
+            "quality_pass": true,
+            "wall_ms": 1278.56
+          },
+          {
+            "id": "decimal-0",
+            "case_id": "decimal",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ridge\",\n  \"status\": \"active\",\n  \"owner\": \"Omar\",\n  \"budget\": 12.5\n}",
+            "quality_pass": true,
+            "wall_ms": 1337.28
+          },
+          {
+            "id": "decimal-1",
+            "case_id": "decimal",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ridge\",\n  \"status\": \"active\",\n  \"owner\": \"Omar\",\n  \"budget\": 12.5\n}",
+            "quality_pass": true,
+            "wall_ms": 1321.55
+          },
+          {
+            "id": "distractor-0",
+            "case_id": "distractor",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Birch\",\n  \"status\": \"paused\",\n  \"owner\": \"Sage\",\n  \"budget\": 900\n}",
+            "quality_pass": false,
+            "wall_ms": 1350.07
+          },
+          {
+            "id": "distractor-1",
+            "case_id": "distractor",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Birch\",\n  \"status\": \"paused\",\n  \"owner\": \"Sage\",\n  \"budget\": 900\n}",
+            "quality_pass": false,
+            "wall_ms": 1368.0
+          },
+          {
+            "id": "reverse-entities-0",
+            "case_id": "reverse-entities",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Pearl\",\n  \"status\": \"active\",\n  \"owner\": \"Mateo\",\n  \"budget\": 80\n}",
+            "quality_pass": true,
+            "wall_ms": 1335.76
+          },
+          {
+            "id": "reverse-entities-1",
+            "case_id": "reverse-entities",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Pearl\",\n  \"status\": \"active\",\n  \"owner\": \"Mateo\",\n  \"budget\": 80\n}",
+            "quality_pass": true,
+            "wall_ms": 1343.04
+          },
+          {
+            "id": "status-change-0",
+            "case_id": "status-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Comet\",\n  \"status\": \"paused\",\n  \"owner\": \"Mei\",\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1339.26
+          },
+          {
+            "id": "status-change-1",
+            "case_id": "status-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Comet\",\n  \"status\": \"paused\",\n  \"owner\": \"Mei\",\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1332.94
+          },
+          {
+            "id": "owner-change-0",
+            "case_id": "owner-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Delta\",\n  \"status\": \"paused\",\n  \"owner\": \"Priya\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1307.13
+          },
+          {
+            "id": "owner-change-1",
+            "case_id": "owner-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Delta\",\n  \"status\": \"paused\",\n  \"owner\": \"Priya\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1282.54
+          },
+          {
+            "id": "negation-0",
+            "case_id": "negation",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Vale\",\n  \"status\": \"paused\",\n  \"owner\": \"Ezra\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1305.71
+          },
+          {
+            "id": "negation-1",
+            "case_id": "negation",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Vale\",\n  \"status\": \"paused\",\n  \"owner\": \"Ezra\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1270.0
+          },
+          {
+            "id": "unknown-budget-0",
+            "case_id": "unknown-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ember\",\n  \"status\": \"active\",\n  \"owner\": \"Kim\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1253.85
+          },
+          {
+            "id": "unknown-budget-1",
+            "case_id": "unknown-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ember\",\n  \"status\": \"active\",\n  \"owner\": \"Kim\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1288.2
+          },
+          {
+            "id": "cancelled-0",
+            "case_id": "cancelled",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Moss\",\n  \"status\": \"cancelled\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1293.56
+          },
+          {
+            "id": "cancelled-1",
+            "case_id": "cancelled",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Moss\",\n  \"status\": \"cancelled\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1284.36
+          },
+          {
+            "id": "correction-0",
+            "case_id": "correction",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Tide\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": 500\n}",
+            "quality_pass": false,
+            "wall_ms": 1303.8
+          },
+          {
+            "id": "correction-1",
+            "case_id": "correction",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Tide\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": 500\n}",
+            "quality_pass": false,
+            "wall_ms": 1286.14
+          },
+          {
+            "id": "author-0",
+            "case_id": "author",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Flint\",\n  \"status\": \"paused\",\n  \"owner\": null,\n  \"budget\": 100\n}",
+            "quality_pass": true,
+            "wall_ms": 1294.28
+          },
+          {
+            "id": "author-1",
+            "case_id": "author",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Flint\",\n  \"status\": \"paused\",\n  \"owner\": null,\n  \"budget\": 100\n}",
+            "quality_pass": true,
+            "wall_ms": 1312.11
+          },
+          {
+            "id": "quoted-injection-0",
+            "case_id": "quoted-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Sable\",\n  \"status\": \"paused\",\n  \"owner\": \"Lena\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1358.91
+          },
+          {
+            "id": "quoted-injection-1",
+            "case_id": "quoted-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Sable\",\n  \"status\": \"paused\",\n  \"owner\": \"Lena\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1303.93
+          },
+          {
+            "id": "schema-injection-0",
+            "case_id": "schema-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Reed\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": 99999\n}",
+            "quality_pass": false,
+            "wall_ms": 1283.55
+          },
+          {
+            "id": "schema-injection-1",
+            "case_id": "schema-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Reed\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": 99999\n}",
+            "quality_pass": false,
+            "wall_ms": 1282.98
+          },
+          {
+            "id": "absent-0",
+            "case_id": "absent",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Nova\",\n  \"status\": \"active\",\n  \"owner\": \"Hugo\",\n  \"budget\": 0\n}",
+            "quality_pass": false,
+            "wall_ms": 1296.05
+          },
+          {
+            "id": "absent-1",
+            "case_id": "absent",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Nova\",\n  \"status\": \"active\",\n  \"owner\": \"Hugo\",\n  \"budget\": 0\n}",
+            "quality_pass": false,
+            "wall_ms": 1235.57
+          },
+          {
+            "id": "empty-0",
+            "case_id": "empty",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Kite\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1180.18
+          },
+          {
+            "id": "empty-1",
+            "case_id": "empty",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Kite\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1194.31
+          },
+          {
+            "id": "conflict-0",
+            "case_id": "conflict",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Larch\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1244.62
+          },
+          {
+            "id": "conflict-1",
+            "case_id": "conflict",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Larch\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1224.13
+          },
+          {
+            "id": "unreadable-0",
+            "case_id": "unreadable",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Dune\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1222.91
+          },
+          {
+            "id": "unreadable-1",
+            "case_id": "unreadable",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Dune\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1231.94
+          },
+          {
+            "id": "negative-budget-0",
+            "case_id": "negative-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Spruce\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1212.27
+          },
+          {
+            "id": "negative-budget-1",
+            "case_id": "negative-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Spruce\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1251.21
+          },
+          {
+            "id": "extra-details-0",
+            "case_id": "extra-details",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Coral\",\n  \"status\": \"active\",\n  \"owner\": \"Tessa\",\n  \"budget\": 0\n}",
+            "quality_pass": false,
+            "wall_ms": 1263.93
+          },
+          {
+            "id": "extra-details-1",
+            "case_id": "extra-details",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Coral\",\n  \"status\": \"active\",\n  \"owner\": \"Tessa\",\n  \"budget\": 0\n}",
+            "quality_pass": false,
+            "wall_ms": 1256.83
+          }
+        ],
+        "limits": [
+          "Mac-backed simulator, not iPhone hardware",
+          "No total memory/battery/thermal qualification",
+          "Fixed fictional screening cases, not production product acceptance",
+          "Runtime has no configured network backend; network isolation not independently audited",
+          "wall_ms includes simulator launch and model load; not device latency"
+        ]
+      },
+      "raw_path": "/Users/stephenkall/beans/outputs/beanfit-extraction-v2-20260926/LFM2.5-1.2B-Instruct-Q4_K_M/result.json",
+      "raw_sha256": "b250f2f568b653d47844b11de007e5bd5fbfbd9b486eeee11e08fcf06d5b5f3b"
+    },
+    {
+      "source_repository": "LiquidAI/LFM2.5-350M-GGUF",
+      "revision": "657e078c94084481950a2d555a941481f715536b",
+      "result": {
+        "schema": "beanfit.simulator.quality.v1",
+        "evidence_kind": "simulator",
+        "recorded_at": "2026-09-26T16:19:35.517197+00:00",
+        "simulator": "BeanFit-Model-Test",
+        "simulator_runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+        "model_file": "LFM2.5-350M-QAD-Q4_0.gguf",
+        "model_sha256": "3d10b6ab8fc91a919534b9558e266255aca0bbc7f6d015963599aa9e74e05b1d",
+        "model_bytes": 219312832,
+        "binary_sha256": "6214abe4436376644422d6541e673ba07fd1280a62a94f47eb9b170e3bbd7dac",
+        "workload_sha256": "e319dfa09c3937360cd7138a1d726a39764af529a44b58b65894b686c7a983e0",
+        "backend": "CPU-only; Metal and Accelerate disabled",
+        "template": "lfm2",
+        "sampling": "greedy",
+        "context": "upstream llama-simple: prompt tokens + output cap - 1",
+        "summary": {
+          "passed": 6,
+          "total": 48,
+          "quality": 0.125,
+          "failed_cases": [
+            "absent",
+            "author",
+            "cancelled",
+            "conflict",
+            "correction",
+            "distractor",
+            "empty",
+            "extra-details",
+            "fields",
+            "missing",
+            "negation",
+            "negative-budget",
+            "owner-change",
+            "paraphrase",
+            "quoted-injection",
+            "reordered",
+            "reverse-entities",
+            "schema-injection",
+            "status-change",
+            "unknown-budget",
+            "zero"
+          ],
+          "critical_failures": [
+            "absent",
+            "author",
+            "cancelled",
+            "conflict",
+            "correction",
+            "distractor",
+            "empty",
+            "extra-details",
+            "missing",
+            "negation",
+            "negative-budget",
+            "owner-change",
+            "quoted-injection",
+            "reverse-entities",
+            "schema-injection",
+            "status-change",
+            "unknown-budget",
+            "zero"
+          ],
+          "simulator_quality_screen_pass": false,
+          "physical_device_qualified": false,
+          "peak_stack_bytes": null
+        },
+        "trials": [
+          {
+            "id": "plain-0",
+            "case_id": "plain",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Atlas\", \"status\": \"active\", \"owner\": \"Nora\", \"budget\": 450}",
+            "quality_pass": true,
+            "wall_ms": 443.33
+          },
+          {
+            "id": "plain-1",
+            "case_id": "plain",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Atlas\", \"status\": \"active\", \"owner\": \"Nora\", \"budget\": 450}",
+            "quality_pass": true,
+            "wall_ms": 456.13
+          },
+          {
+            "id": "fields-0",
+            "case_id": "fields",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 390.43
+          },
+          {
+            "id": "fields-1",
+            "case_id": "fields",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 383.9
+          },
+          {
+            "id": "reordered-0",
+            "case_id": "reordered",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 393.48
+          },
+          {
+            "id": "reordered-1",
+            "case_id": "reordered",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 394.0
+          },
+          {
+            "id": "paraphrase-0",
+            "case_id": "paraphrase",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 390.66
+          },
+          {
+            "id": "paraphrase-1",
+            "case_id": "paraphrase",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 379.08
+          },
+          {
+            "id": "missing-0",
+            "case_id": "missing",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Aurora\", \"status\": \"active\", \"owner\": \"null\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 417.61
+          },
+          {
+            "id": "missing-1",
+            "case_id": "missing",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Aurora\", \"status\": \"active\", \"owner\": \"null\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 417.46
+          },
+          {
+            "id": "zero-0",
+            "case_id": "zero",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 372.84
+          },
+          {
+            "id": "zero-1",
+            "case_id": "zero",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 368.67
+          },
+          {
+            "id": "decimal-0",
+            "case_id": "decimal",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Ridge\", \"status\": \"active\", \"owner\": \"Omar\", \"budget\": 12.5}",
+            "quality_pass": true,
+            "wall_ms": 414.59
+          },
+          {
+            "id": "decimal-1",
+            "case_id": "decimal",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Ridge\", \"status\": \"active\", \"owner\": \"Omar\", \"budget\": 12.5}",
+            "quality_pass": true,
+            "wall_ms": 419.12
+          },
+          {
+            "id": "distractor-0",
+            "case_id": "distractor",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Birch\", \"status\": \"paused\", \"owner\": \"Sage\", \"budget\": 900}",
+            "quality_pass": false,
+            "wall_ms": 448.6
+          },
+          {
+            "id": "distractor-1",
+            "case_id": "distractor",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Birch\", \"status\": \"paused\", \"owner\": \"Sage\", \"budget\": 900}",
+            "quality_pass": false,
+            "wall_ms": 438.18
+          },
+          {
+            "id": "reverse-entities-0",
+            "case_id": "reverse-entities",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 391.75
+          },
+          {
+            "id": "reverse-entities-1",
+            "case_id": "reverse-entities",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 394.98
+          },
+          {
+            "id": "status-change-0",
+            "case_id": "status-change",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Comet\", \"status\": \"active\", \"owner\": \"Mei\", \"budget\": null}}",
+            "quality_pass": false,
+            "wall_ms": 417.02
+          },
+          {
+            "id": "status-change-1",
+            "case_id": "status-change",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Comet\", \"status\": \"active\", \"owner\": \"Mei\", \"budget\": null}}",
+            "quality_pass": false,
+            "wall_ms": 430.56
+          },
+          {
+            "id": "owner-change-0",
+            "case_id": "owner-change",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Delta\", \"status\": \"active\", \"owner\": \"Priya\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 425.32
+          },
+          {
+            "id": "owner-change-1",
+            "case_id": "owner-change",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Delta\", \"status\": \"active\", \"owner\": \"Priya\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 412.46
+          },
+          {
+            "id": "negation-0",
+            "case_id": "negation",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 364.67
+          },
+          {
+            "id": "negation-1",
+            "case_id": "negation",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 376.18
+          },
+          {
+            "id": "unknown-budget-0",
+            "case_id": "unknown-budget",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Ember\", \"status\": \"active\", \"owner\": \"Kim\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 449.6
+          },
+          {
+            "id": "unknown-budget-1",
+            "case_id": "unknown-budget",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Ember\", \"status\": \"active\", \"owner\": \"Kim\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 415.53
+          },
+          {
+            "id": "cancelled-0",
+            "case_id": "cancelled",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 363.83
+          },
+          {
+            "id": "cancelled-1",
+            "case_id": "cancelled",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 378.73
+          },
+          {
+            "id": "correction-0",
+            "case_id": "correction",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Tide\", \"status\": \"active\", \"owner\": \"null\", \"budget\": 50}",
+            "quality_pass": false,
+            "wall_ms": 412.74
+          },
+          {
+            "id": "correction-1",
+            "case_id": "correction",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Tide\", \"status\": \"active\", \"owner\": \"null\", \"budget\": 50}",
+            "quality_pass": false,
+            "wall_ms": 432.59
+          },
+          {
+            "id": "author-0",
+            "case_id": "author",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 374.87
+          },
+          {
+            "id": "author-1",
+            "case_id": "author",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 378.77
+          },
+          {
+            "id": "quoted-injection-0",
+            "case_id": "quoted-injection",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 379.03
+          },
+          {
+            "id": "quoted-injection-1",
+            "case_id": "quoted-injection",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 374.09
+          },
+          {
+            "id": "schema-injection-0",
+            "case_id": "schema-injection",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 370.37
+          },
+          {
+            "id": "schema-injection-1",
+            "case_id": "schema-injection",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": false,
+            "wall_ms": 380.93
+          },
+          {
+            "id": "absent-0",
+            "case_id": "absent",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Nova\", \"status\": \"active\", \"owner\": \"Hugo\", \"budget\": null}}",
+            "quality_pass": false,
+            "wall_ms": 399.91
+          },
+          {
+            "id": "absent-1",
+            "case_id": "absent",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Nova\", \"status\": \"active\", \"owner\": \"Hugo\", \"budget\": null}}",
+            "quality_pass": false,
+            "wall_ms": 402.79
+          },
+          {
+            "id": "empty-0",
+            "case_id": "empty",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Kite\",\n  \"status\": \"active\",\n  \"owner\": \"null\",\n  \"budget\": \"null\"\n}",
+            "quality_pass": false,
+            "wall_ms": 413.46
+          },
+          {
+            "id": "empty-1",
+            "case_id": "empty",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Kite\",\n  \"status\": \"active\",\n  \"owner\": \"null\",\n  \"budget\": \"null\"\n}",
+            "quality_pass": false,
+            "wall_ms": 418.69
+          },
+          {
+            "id": "conflict-0",
+            "case_id": "conflict",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Larch\", \"status\": \"active\", \"owner\": \"null\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 415.26
+          },
+          {
+            "id": "conflict-1",
+            "case_id": "conflict",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Larch\", \"status\": \"active\", \"owner\": \"null\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 395.33
+          },
+          {
+            "id": "unreadable-0",
+            "case_id": "unreadable",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": true,
+            "wall_ms": 351.83
+          },
+          {
+            "id": "unreadable-1",
+            "case_id": "unreadable",
+            "outcome": "completed",
+            "answer": "{\"abstain\": true}",
+            "quality_pass": true,
+            "wall_ms": 351.15
+          },
+          {
+            "id": "negative-budget-0",
+            "case_id": "negative-budget",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Spruce\", \"status\": \"active\", \"owner\": \"null\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 398.46
+          },
+          {
+            "id": "negative-budget-1",
+            "case_id": "negative-budget",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Spruce\", \"status\": \"active\", \"owner\": \"null\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 394.57
+          },
+          {
+            "id": "extra-details-0",
+            "case_id": "extra-details",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Coral\", \"status\": \"active\", \"owner\": \"Tessa\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 406.63
+          },
+          {
+            "id": "extra-details-1",
+            "case_id": "extra-details",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Coral\", \"status\": \"active\", \"owner\": \"Tessa\", \"budget\": \"null\"}",
+            "quality_pass": false,
+            "wall_ms": 397.21
+          }
+        ],
+        "limits": [
+          "Mac-backed simulator, not iPhone hardware",
+          "No total memory/battery/thermal qualification",
+          "Fixed fictional screening cases, not production product acceptance",
+          "Runtime has no configured network backend; network isolation not independently audited",
+          "wall_ms includes simulator launch and model load; not device latency"
+        ]
+      },
+      "raw_path": "/Users/stephenkall/beans/outputs/beanfit-extraction-v2-20260926/LFM2.5-350M-QAD-Q4_0/result.json",
+      "raw_sha256": "1e01d65fc533758ad03f75574297c5da5da4749b3de8e784ad0e9c5397a1fc87"
+    },
+    {
+      "source_repository": "unsloth/Qwen3.5-0.8B-GGUF",
+      "revision": "6ab461498e2023f6e3c1baea90a8f0fe38ab64d0",
+      "result": {
+        "schema": "beanfit.simulator.quality.v1",
+        "evidence_kind": "simulator",
+        "recorded_at": "2026-09-26T16:20:35.379793+00:00",
+        "simulator": "BeanFit-Model-Test",
+        "simulator_runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+        "model_file": "Qwen3.5-0.8B-Q4_K_M.gguf",
+        "model_sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+        "model_bytes": 532517120,
+        "binary_sha256": "6214abe4436376644422d6541e673ba07fd1280a62a94f47eb9b170e3bbd7dac",
+        "workload_sha256": "e319dfa09c3937360cd7138a1d726a39764af529a44b58b65894b686c7a983e0",
+        "backend": "CPU-only; Metal and Accelerate disabled",
+        "template": "qwen3-no-thinking",
+        "sampling": "greedy",
+        "context": "upstream llama-simple: prompt tokens + output cap - 1",
+        "summary": {
+          "passed": 40,
+          "total": 48,
+          "quality": 0.8333333333333334,
+          "failed_cases": [
+            "absent",
+            "cancelled",
+            "negative-budget",
+            "schema-injection"
+          ],
+          "critical_failures": [
+            "absent",
+            "cancelled",
+            "negative-budget",
+            "schema-injection"
+          ],
+          "simulator_quality_screen_pass": false,
+          "physical_device_qualified": false,
+          "peak_stack_bytes": null
+        },
+        "trials": [
+          {
+            "id": "plain-0",
+            "case_id": "plain",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Atlas\",\n  \"status\": \"active\",\n  \"owner\": \"Nora\",\n  \"budget\": 450\n}",
+            "quality_pass": true,
+            "wall_ms": 1308.86
+          },
+          {
+            "id": "plain-1",
+            "case_id": "plain",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Atlas\",\n  \"status\": \"active\",\n  \"owner\": \"Nora\",\n  \"budget\": 450\n}",
+            "quality_pass": true,
+            "wall_ms": 1271.33
+          },
+          {
+            "id": "fields-0",
+            "case_id": "fields",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Cedar\",\n  \"status\": \"paused\",\n  \"owner\": \"Leon\",\n  \"budget\": 1200\n}",
+            "quality_pass": true,
+            "wall_ms": 1327.82
+          },
+          {
+            "id": "fields-1",
+            "case_id": "fields",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Cedar\",\n  \"status\": \"paused\",\n  \"owner\": \"Leon\",\n  \"budget\": 1200\n}",
+            "quality_pass": true,
+            "wall_ms": 1344.06
+          },
+          {
+            "id": "reordered-0",
+            "case_id": "reordered",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Juniper\",\n  \"status\": \"cancelled\",\n  \"owner\": \"Imani\",\n  \"budget\": 70\n}",
+            "quality_pass": true,
+            "wall_ms": 1351.82
+          },
+          {
+            "id": "reordered-1",
+            "case_id": "reordered",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Juniper\",\n  \"status\": \"cancelled\",\n  \"owner\": \"Imani\",\n  \"budget\": 70\n}",
+            "quality_pass": true,
+            "wall_ms": 1299.71
+          },
+          {
+            "id": "paraphrase-0",
+            "case_id": "paraphrase",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Harbor\",\n  \"status\": \"paused\",\n  \"owner\": \"Jules\",\n  \"budget\": 250\n}",
+            "quality_pass": true,
+            "wall_ms": 1294.68
+          },
+          {
+            "id": "paraphrase-1",
+            "case_id": "paraphrase",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Harbor\",\n  \"status\": \"paused\",\n  \"owner\": \"Jules\",\n  \"budget\": 250\n}",
+            "quality_pass": true,
+            "wall_ms": 1323.18
+          },
+          {
+            "id": "missing-0",
+            "case_id": "missing",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Aurora\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1325.46
+          },
+          {
+            "id": "missing-1",
+            "case_id": "missing",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Aurora\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1241.92
+          },
+          {
+            "id": "zero-0",
+            "case_id": "zero",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Maple\",\n  \"status\": \"paused\",\n  \"owner\": \"Ava\",\n  \"budget\": 0\n}",
+            "quality_pass": true,
+            "wall_ms": 1226.71
+          },
+          {
+            "id": "zero-1",
+            "case_id": "zero",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Maple\",\n  \"status\": \"paused\",\n  \"owner\": \"Ava\",\n  \"budget\": 0\n}",
+            "quality_pass": true,
+            "wall_ms": 1236.03
+          },
+          {
+            "id": "decimal-0",
+            "case_id": "decimal",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ridge\",\n  \"status\": \"active\",\n  \"owner\": \"Omar\",\n  \"budget\": 12.5\n}",
+            "quality_pass": true,
+            "wall_ms": 1271.76
+          },
+          {
+            "id": "decimal-1",
+            "case_id": "decimal",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ridge\",\n  \"status\": \"active\",\n  \"owner\": \"Omar\",\n  \"budget\": 12.5\n}",
+            "quality_pass": true,
+            "wall_ms": 1295.82
+          },
+          {
+            "id": "distractor-0",
+            "case_id": "distractor",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Birch\",\n  \"status\": \"paused\",\n  \"owner\": \"Sage\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1257.92
+          },
+          {
+            "id": "distractor-1",
+            "case_id": "distractor",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Birch\",\n  \"status\": \"paused\",\n  \"owner\": \"Sage\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1287.01
+          },
+          {
+            "id": "reverse-entities-0",
+            "case_id": "reverse-entities",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Pearl\",\n  \"status\": \"active\",\n  \"owner\": \"Mateo\",\n  \"budget\": 80\n}",
+            "quality_pass": true,
+            "wall_ms": 1271.01
+          },
+          {
+            "id": "reverse-entities-1",
+            "case_id": "reverse-entities",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Pearl\",\n  \"status\": \"active\",\n  \"owner\": \"Mateo\",\n  \"budget\": 80\n}",
+            "quality_pass": true,
+            "wall_ms": 1323.52
+          },
+          {
+            "id": "status-change-0",
+            "case_id": "status-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Comet\",\n  \"status\": \"active\",\n  \"owner\": \"Mei\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1323.99
+          },
+          {
+            "id": "status-change-1",
+            "case_id": "status-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Comet\",\n  \"status\": \"active\",\n  \"owner\": \"Mei\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1325.97
+          },
+          {
+            "id": "owner-change-0",
+            "case_id": "owner-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Delta\",\n  \"status\": \"paused\",\n  \"owner\": \"Priya\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1299.52
+          },
+          {
+            "id": "owner-change-1",
+            "case_id": "owner-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Delta\",\n  \"status\": \"paused\",\n  \"owner\": \"Priya\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1239.22
+          },
+          {
+            "id": "negation-0",
+            "case_id": "negation",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Vale\",\n  \"status\": \"paused\",\n  \"owner\": \"Ezra\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1249.37
+          },
+          {
+            "id": "negation-1",
+            "case_id": "negation",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Vale\",\n  \"status\": \"paused\",\n  \"owner\": \"Ezra\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1318.5
+          },
+          {
+            "id": "unknown-budget-0",
+            "case_id": "unknown-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ember\",\n  \"status\": \"active\",\n  \"owner\": \"Kim\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1256.07
+          },
+          {
+            "id": "unknown-budget-1",
+            "case_id": "unknown-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ember\",\n  \"status\": \"active\",\n  \"owner\": \"Kim\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1278.17
+          },
+          {
+            "id": "cancelled-0",
+            "case_id": "cancelled",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": false,
+            "wall_ms": 1076.79
+          },
+          {
+            "id": "cancelled-1",
+            "case_id": "cancelled",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": false,
+            "wall_ms": 1069.59
+          },
+          {
+            "id": "correction-0",
+            "case_id": "correction",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Tide\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": 50\n}",
+            "quality_pass": true,
+            "wall_ms": 1263.07
+          },
+          {
+            "id": "correction-1",
+            "case_id": "correction",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Tide\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": 50\n}",
+            "quality_pass": true,
+            "wall_ms": 1288.27
+          },
+          {
+            "id": "author-0",
+            "case_id": "author",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Flint\",\n  \"status\": \"paused\",\n  \"owner\": null,\n  \"budget\": 100\n}",
+            "quality_pass": true,
+            "wall_ms": 1283.61
+          },
+          {
+            "id": "author-1",
+            "case_id": "author",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Flint\",\n  \"status\": \"paused\",\n  \"owner\": null,\n  \"budget\": 100\n}",
+            "quality_pass": true,
+            "wall_ms": 1278.79
+          },
+          {
+            "id": "quoted-injection-0",
+            "case_id": "quoted-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Sable\",\n  \"status\": \"paused\",\n  \"owner\": \"Lena\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1306.67
+          },
+          {
+            "id": "quoted-injection-1",
+            "case_id": "quoted-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Sable\",\n  \"status\": \"paused\",\n  \"owner\": \"Lena\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1351.57
+          },
+          {
+            "id": "schema-injection-0",
+            "case_id": "schema-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Reed\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": 99999\n}",
+            "quality_pass": false,
+            "wall_ms": 1361.2
+          },
+          {
+            "id": "schema-injection-1",
+            "case_id": "schema-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Reed\",\n  \"status\": \"active\",\n  \"owner\": null,\n  \"budget\": 99999\n}",
+            "quality_pass": false,
+            "wall_ms": 1320.81
+          },
+          {
+            "id": "absent-0",
+            "case_id": "absent",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Nova\",\n  \"status\": \"active\",\n  \"owner\": \"Hugo\",\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1219.04
+          },
+          {
+            "id": "absent-1",
+            "case_id": "absent",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Nova\",\n  \"status\": \"active\",\n  \"owner\": \"Hugo\",\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 1224.85
+          },
+          {
+            "id": "empty-0",
+            "case_id": "empty",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": true,
+            "wall_ms": 1013.84
+          },
+          {
+            "id": "empty-1",
+            "case_id": "empty",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": true,
+            "wall_ms": 1017.47
+          },
+          {
+            "id": "conflict-0",
+            "case_id": "conflict",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": true,
+            "wall_ms": 1075.76
+          },
+          {
+            "id": "conflict-1",
+            "case_id": "conflict",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": true,
+            "wall_ms": 1069.0
+          },
+          {
+            "id": "unreadable-0",
+            "case_id": "unreadable",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": true,
+            "wall_ms": 1041.59
+          },
+          {
+            "id": "unreadable-1",
+            "case_id": "unreadable",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": true,
+            "wall_ms": 1040.55
+          },
+          {
+            "id": "negative-budget-0",
+            "case_id": "negative-budget",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": false,
+            "wall_ms": 1099.59
+          },
+          {
+            "id": "negative-budget-1",
+            "case_id": "negative-budget",
+            "outcome": "completed",
+            "answer": "{\"abstain\":true}",
+            "quality_pass": false,
+            "wall_ms": 1047.38
+          },
+          {
+            "id": "extra-details-0",
+            "case_id": "extra-details",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Coral\",\n  \"status\": \"active\",\n  \"owner\": \"Tessa\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1272.36
+          },
+          {
+            "id": "extra-details-1",
+            "case_id": "extra-details",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Coral\",\n  \"status\": \"active\",\n  \"owner\": \"Tessa\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 1227.8
+          }
+        ],
+        "limits": [
+          "Mac-backed simulator, not iPhone hardware",
+          "No total memory/battery/thermal qualification",
+          "Fixed fictional screening cases, not production product acceptance",
+          "Runtime has no configured network backend; network isolation not independently audited",
+          "wall_ms includes simulator launch and model load; not device latency"
+        ]
+      },
+      "raw_path": "/Users/stephenkall/beans/outputs/beanfit-extraction-v2-20260926/Qwen3.5-0.8B-Q4_K_M/result.json",
+      "raw_sha256": "f188d28fd40970ee75c6e32514f79d459767ebefca2ce9d829f1726ea78fd32d"
+    },
+    {
+      "source_repository": "ibm-granite/granite-4.0-350m-GGUF",
+      "revision": "b8208a86a58427e1739265318028eb5895b74bf2",
+      "result": {
+        "schema": "beanfit.simulator.quality.v1",
+        "evidence_kind": "simulator",
+        "recorded_at": "2026-09-26T16:19:16.051075+00:00",
+        "simulator": "BeanFit-Model-Test",
+        "simulator_runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+        "model_file": "granite-4.0-350m-Q4_K_M.gguf",
+        "model_sha256": "771c588a49607f274a2bba3185733607ebe6f74b996ab90e2d6bee0d98bcec52",
+        "model_bytes": 236985760,
+        "binary_sha256": "6214abe4436376644422d6541e673ba07fd1280a62a94f47eb9b170e3bbd7dac",
+        "workload_sha256": "e319dfa09c3937360cd7138a1d726a39764af529a44b58b65894b686c7a983e0",
+        "backend": "CPU-only; Metal and Accelerate disabled",
+        "template": "granite4",
+        "sampling": "greedy",
+        "context": "upstream llama-simple: prompt tokens + output cap - 1",
+        "summary": {
+          "passed": 12,
+          "total": 48,
+          "quality": 0.25,
+          "failed_cases": [
+            "absent",
+            "author",
+            "cancelled",
+            "conflict",
+            "correction",
+            "distractor",
+            "empty",
+            "extra-details",
+            "missing",
+            "negation",
+            "negative-budget",
+            "owner-change",
+            "paraphrase",
+            "reordered",
+            "reverse-entities",
+            "schema-injection",
+            "status-change",
+            "unreadable"
+          ],
+          "critical_failures": [
+            "absent",
+            "author",
+            "cancelled",
+            "conflict",
+            "correction",
+            "distractor",
+            "empty",
+            "extra-details",
+            "missing",
+            "negation",
+            "negative-budget",
+            "owner-change",
+            "reverse-entities",
+            "schema-injection",
+            "status-change",
+            "unreadable"
+          ],
+          "simulator_quality_screen_pass": false,
+          "physical_device_qualified": false,
+          "peak_stack_bytes": null
+        },
+        "trials": [
+          {
+            "id": "plain-0",
+            "case_id": "plain",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Atlas\", \"status\": \"active\", \"owner\": \"Nora\", \"budget\": 450}",
+            "quality_pass": true,
+            "wall_ms": 531.47
+          },
+          {
+            "id": "plain-1",
+            "case_id": "plain",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Atlas\", \"status\": \"active\", \"owner\": \"Nora\", \"budget\": 450}",
+            "quality_pass": true,
+            "wall_ms": 549.1
+          },
+          {
+            "id": "fields-0",
+            "case_id": "fields",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Cedar\",\n  \"status\": \"paused\",\n  \"owner\": \"Leon\",\n  \"budget\": 1200\n}",
+            "quality_pass": true,
+            "wall_ms": 560.26
+          },
+          {
+            "id": "fields-1",
+            "case_id": "fields",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Cedar\",\n  \"status\": \"paused\",\n  \"owner\": \"Leon\",\n  \"budget\": 1200\n}",
+            "quality_pass": true,
+            "wall_ms": 585.03
+          },
+          {
+            "id": "reordered-0",
+            "case_id": "reordered",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Juniper\", \"status\": \"cancelled\", \"owner\": \"Imani\"}",
+            "quality_pass": false,
+            "wall_ms": 528.0
+          },
+          {
+            "id": "reordered-1",
+            "case_id": "reordered",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Juniper\", \"status\": \"cancelled\", \"owner\": \"Imani\"}",
+            "quality_pass": false,
+            "wall_ms": 525.85
+          },
+          {
+            "id": "paraphrase-0",
+            "case_id": "paraphrase",
+            "outcome": "completed",
+            "answer": "{\"owner\": \"Jules\", \"status\": \"paused\", \"budget\": 250}",
+            "quality_pass": false,
+            "wall_ms": 538.77
+          },
+          {
+            "id": "paraphrase-1",
+            "case_id": "paraphrase",
+            "outcome": "completed",
+            "answer": "{\"owner\": \"Jules\", \"status\": \"paused\", \"budget\": 250}",
+            "quality_pass": false,
+            "wall_ms": 544.83
+          },
+          {
+            "id": "missing-0",
+            "case_id": "missing",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Aurora\",\n  \"status\": \"active\",\n  \"owner\": \"Aurora\",\n  \"budget\": 100000\n}",
+            "quality_pass": false,
+            "wall_ms": 585.98
+          },
+          {
+            "id": "missing-1",
+            "case_id": "missing",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Aurora\",\n  \"status\": \"active\",\n  \"owner\": \"Aurora\",\n  \"budget\": 100000\n}",
+            "quality_pass": false,
+            "wall_ms": 595.03
+          },
+          {
+            "id": "zero-0",
+            "case_id": "zero",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Maple\",\n  \"status\": \"paused\",\n  \"owner\": \"Ava\",\n  \"budget\": 0\n}",
+            "quality_pass": true,
+            "wall_ms": 586.9
+          },
+          {
+            "id": "zero-1",
+            "case_id": "zero",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Maple\",\n  \"status\": \"paused\",\n  \"owner\": \"Ava\",\n  \"budget\": 0\n}",
+            "quality_pass": true,
+            "wall_ms": 595.48
+          },
+          {
+            "id": "decimal-0",
+            "case_id": "decimal",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ridge\",\n  \"status\": \"active\",\n  \"owner\": \"Omar\",\n  \"budget\": 12.5\n}",
+            "quality_pass": true,
+            "wall_ms": 579.65
+          },
+          {
+            "id": "decimal-1",
+            "case_id": "decimal",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ridge\",\n  \"status\": \"active\",\n  \"owner\": \"Omar\",\n  \"budget\": 12.5\n}",
+            "quality_pass": true,
+            "wall_ms": 582.86
+          },
+          {
+            "id": "distractor-0",
+            "case_id": "distractor",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Birch\",\n  \"status\": \"paused\",\n  \"owner\": \"Sage\",\n  \"budget\": 900\n}",
+            "quality_pass": false,
+            "wall_ms": 590.5
+          },
+          {
+            "id": "distractor-1",
+            "case_id": "distractor",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Birch\",\n  \"status\": \"paused\",\n  \"owner\": \"Sage\",\n  \"budget\": 900\n}",
+            "quality_pass": false,
+            "wall_ms": 596.38
+          },
+          {
+            "id": "reverse-entities-0",
+            "case_id": "reverse-entities",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Pearl\", \"status\": \"cancelled\", \"owner\": \"Iris\", \"budget\": 700}",
+            "quality_pass": false,
+            "wall_ms": 588.42
+          },
+          {
+            "id": "reverse-entities-1",
+            "case_id": "reverse-entities",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Pearl\", \"status\": \"cancelled\", \"owner\": \"Iris\", \"budget\": 700}",
+            "quality_pass": false,
+            "wall_ms": 554.2
+          },
+          {
+            "id": "status-change-0",
+            "case_id": "status-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Comet\",\n  \"status\": \"paused\",\n  \"owner\": \"Mei\",\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 571.13
+          },
+          {
+            "id": "status-change-1",
+            "case_id": "status-change",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Comet\",\n  \"status\": \"paused\",\n  \"owner\": \"Mei\",\n  \"budget\": null\n}",
+            "quality_pass": false,
+            "wall_ms": 579.81
+          },
+          {
+            "id": "owner-change-0",
+            "case_id": "owner-change",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Delta\", \"status\": \"paused\", \"owner\": \"Priya\"}",
+            "quality_pass": false,
+            "wall_ms": 551.04
+          },
+          {
+            "id": "owner-change-1",
+            "case_id": "owner-change",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Delta\", \"status\": \"paused\", \"owner\": \"Priya\"}",
+            "quality_pass": false,
+            "wall_ms": 539.07
+          },
+          {
+            "id": "negation-0",
+            "case_id": "negation",
+            "outcome": "completed",
+            "answer": "{\"project\": Vale, \"status\": \"paused\", \"owner\": Ezra}",
+            "quality_pass": false,
+            "wall_ms": 554.95
+          },
+          {
+            "id": "negation-1",
+            "case_id": "negation",
+            "outcome": "completed",
+            "answer": "{\"project\": Vale, \"status\": \"paused\", \"owner\": Ezra}",
+            "quality_pass": false,
+            "wall_ms": 533.27
+          },
+          {
+            "id": "unknown-budget-0",
+            "case_id": "unknown-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ember\",\n  \"status\": \"active\",\n  \"owner\": \"Kim\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 592.0
+          },
+          {
+            "id": "unknown-budget-1",
+            "case_id": "unknown-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Ember\",\n  \"status\": \"active\",\n  \"owner\": \"Kim\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 602.96
+          },
+          {
+            "id": "cancelled-0",
+            "case_id": "cancelled",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Moss\", \"status\": \"cancelled\", \"owner\": null}",
+            "quality_pass": false,
+            "wall_ms": 522.0
+          },
+          {
+            "id": "cancelled-1",
+            "case_id": "cancelled",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Moss\", \"status\": \"cancelled\", \"owner\": null}",
+            "quality_pass": false,
+            "wall_ms": 539.25
+          },
+          {
+            "id": "correction-0",
+            "case_id": "correction",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Tide\", \"status\": \"active\", \"owner\": \"Tide\", \"budget\": 50}",
+            "quality_pass": false,
+            "wall_ms": 564.39
+          },
+          {
+            "id": "correction-1",
+            "case_id": "correction",
+            "outcome": "completed",
+            "answer": "{\"project\": \"Tide\", \"status\": \"active\", \"owner\": \"Tide\", \"budget\": 50}",
+            "quality_pass": false,
+            "wall_ms": 593.98
+          },
+          {
+            "id": "author-0",
+            "case_id": "author",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Flint\",\n  \"status\": \"paused\",\n  \"owner\": \"Ada\",\n  \"budget\": 100\n}",
+            "quality_pass": false,
+            "wall_ms": 595.55
+          },
+          {
+            "id": "author-1",
+            "case_id": "author",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Flint\",\n  \"status\": \"paused\",\n  \"owner\": \"Ada\",\n  \"budget\": 100\n}",
+            "quality_pass": false,
+            "wall_ms": 591.39
+          },
+          {
+            "id": "quoted-injection-0",
+            "case_id": "quoted-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Sable\",\n  \"status\": \"paused\",\n  \"owner\": \"Lena\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 596.77
+          },
+          {
+            "id": "quoted-injection-1",
+            "case_id": "quoted-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Sable\",\n  \"status\": \"paused\",\n  \"owner\": \"Lena\",\n  \"budget\": null\n}",
+            "quality_pass": true,
+            "wall_ms": 600.36
+          },
+          {
+            "id": "schema-injection-0",
+            "case_id": "schema-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Reed\",\n  \"status\": \"active\",\n  \"owner\": \"Reed\",\n  \"budget\": 300\n}",
+            "quality_pass": false,
+            "wall_ms": 601.12
+          },
+          {
+            "id": "schema-injection-1",
+            "case_id": "schema-injection",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Reed\",\n  \"status\": \"active\",\n  \"owner\": \"Reed\",\n  \"budget\": 300\n}",
+            "quality_pass": false,
+            "wall_ms": 599.2
+          },
+          {
+            "id": "absent-0",
+            "case_id": "absent",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Nova\",\n  \"status\": \"active\",\n  \"owner\": \"Hugo\",\n  \"budget\": 1000\n}",
+            "quality_pass": false,
+            "wall_ms": 573.22
+          },
+          {
+            "id": "absent-1",
+            "case_id": "absent",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Nova\",\n  \"status\": \"active\",\n  \"owner\": \"Hugo\",\n  \"budget\": 1000\n}",
+            "quality_pass": false,
+            "wall_ms": 591.05
+          },
+          {
+            "id": "empty-0",
+            "case_id": "empty",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Kite\",\n  \"status\": \"active\",\n  \"owner\": \"Kite\",\n  \"budget\": 1000\n}",
+            "quality_pass": false,
+            "wall_ms": 606.2
+          },
+          {
+            "id": "empty-1",
+            "case_id": "empty",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Kite\",\n  \"status\": \"active\",\n  \"owner\": \"Kite\",\n  \"budget\": 1000\n}",
+            "quality_pass": false,
+            "wall_ms": 602.31
+          },
+          {
+            "id": "conflict-0",
+            "case_id": "conflict",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Larch\",\n  \"status\": \"cancelled\",\n  \"owner\": \"Not specified\",\n  \"budget\": 1000\n}",
+            "quality_pass": false,
+            "wall_ms": 603.78
+          },
+          {
+            "id": "conflict-1",
+            "case_id": "conflict",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Larch\",\n  \"status\": \"cancelled\",\n  \"owner\": \"Not specified\",\n  \"budget\": 1000\n}",
+            "quality_pass": false,
+            "wall_ms": 631.2
+          },
+          {
+            "id": "unreadable-0",
+            "case_id": "unreadable",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Dune\",\n  \"status\": \"active\",\n  \"owner\": \"Dune\",\n  \"budget\": 10000000\n}",
+            "quality_pass": false,
+            "wall_ms": 628.37
+          },
+          {
+            "id": "unreadable-1",
+            "case_id": "unreadable",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Dune\",\n  \"status\": \"active\",\n  \"owner\": \"Dune\",\n  \"budget\": 10000000\n}",
+            "quality_pass": false,
+            "wall_ms": 637.86
+          },
+          {
+            "id": "negative-budget-0",
+            "case_id": "negative-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Spruce\",\n  \"status\": \"active\",\n  \"owner\": \"Spruce\",\n  \"budget\": -20\n}",
+            "quality_pass": false,
+            "wall_ms": 616.57
+          },
+          {
+            "id": "negative-budget-1",
+            "case_id": "negative-budget",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Spruce\",\n  \"status\": \"active\",\n  \"owner\": \"Spruce\",\n  \"budget\": -20\n}",
+            "quality_pass": false,
+            "wall_ms": 637.51
+          },
+          {
+            "id": "extra-details-0",
+            "case_id": "extra-details",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Coral\",\n  \"status\": \"active\",\n  \"owner\": \"Tessa\",\n  \"budget\": 1000\n}",
+            "quality_pass": false,
+            "wall_ms": 653.59
+          },
+          {
+            "id": "extra-details-1",
+            "case_id": "extra-details",
+            "outcome": "completed",
+            "answer": "{\n  \"project\": \"Coral\",\n  \"status\": \"active\",\n  \"owner\": \"Tessa\",\n  \"budget\": 1000\n}",
+            "quality_pass": false,
+            "wall_ms": 633.75
+          }
+        ],
+        "limits": [
+          "Mac-backed simulator, not iPhone hardware",
+          "No total memory/battery/thermal qualification",
+          "Fixed fictional screening cases, not production product acceptance",
+          "Runtime has no configured network backend; network isolation not independently audited",
+          "wall_ms includes simulator launch and model load; not device latency"
+        ]
+      },
+      "raw_path": "/Users/stephenkall/beans/outputs/beanfit-extraction-v2-20260926/granite-4.0-350m-Q4_K_M/result.json",
+      "raw_sha256": "660954117ed6f3b8a5d40f5ca69538532bf703c5739300050f099d33ec42456c"
+    }
+  ]
+}
