@@ -15,6 +15,11 @@ loading, prefill, generation and any product-required speech/retrieval runtime.
 Parameter count and download size only help order experiments; they do not win
 selection. Quality is a minimum gate, not a score to maximize at any memory cost.
 
+After the simulator comparisons, see [requirements review](REQUIREMENTS-REVIEW.md)
+for a proposed feature-specific acceptance contract and bounded next model search.
+The fictional screening suite is not a universal product requirement; existing
+scores and selection gates are unchanged.
+
 A deterministic algorithm or small task-specific model should be evaluated
 before an LLM when it can meet the feature requirements. Products can choose
 different models. No general-purpose assistant model is imposed on the fleet.
