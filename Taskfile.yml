@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  validate:
+    desc: Run BeanFit's existing deterministic checks.
+    cmds:
+      - PYTHONPATH=src python3 -m unittest discover -s tests
+      - python3 scripts/offline_e2e.py
+      - python3 scripts/activation_demo.py
