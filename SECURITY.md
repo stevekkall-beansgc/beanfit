@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-The current source identifies itself as `0.5.2`. Its reporting scope is the
+The current source identifies itself as `0.6.0`. Its reporting scope is the
 CLI described below; this designation is not release proof or security
 clearance. Confirm publication through the annotated tag and GitHub Release
 at the same tested commit. The historical `v0.5.1` release embeds runtime/package
@@ -11,7 +11,7 @@ those already published artifacts.
 
 | Version | Supported |
 | --- | --- |
-| `0.5.2` source | Report suspected vulnerabilities; publication requires release proof |
+| `0.6.0` source | Report suspected vulnerabilities; publication requires release proof |
 | `v0.5.1` existing release | Report suspected vulnerabilities; identity mismatch above |
 | Earlier versions | No declared support |
 

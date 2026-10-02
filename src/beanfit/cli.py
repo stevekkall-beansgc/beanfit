@@ -37,6 +37,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.export_catalog:
         from beanfit.catalog.models import CATALOG, MLX_REPOS
+        from beanfit.catalog.quality import quality_basis
 
         # Export-key aliases for fields whose names carry unit suffixes.
         export_aliases = {
@@ -52,6 +53,7 @@ def main(argv: list[str] | None = None) -> int:
                 for entry in CATALOG
             ],
             "mlx_repos": MLX_REPOS,
+            "quality_basis": quality_basis(),
             "catalog_sha256": hashlib.sha256(
                 json.dumps([
                     {export_aliases.get(k, k): v for k, v in entry._asdict().items()}

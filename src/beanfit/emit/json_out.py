@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 
+from beanfit.catalog.quality import quality_basis
 from beanfit.engine.estimate import assumptions
 
 
@@ -11,6 +12,7 @@ def render_json(hw: dict, rows: list[dict], use_case: str, version: str) -> str:
         "hardware": hw,
         "use_case": use_case,
         "assumptions": assumptions(),
+        "quality_basis": quality_basis(use_case),
         "claim_limits": {
             "speed": "static estimate; not measured inference",
             "uncertainty": "assumed bands; not calibrated confidence intervals",

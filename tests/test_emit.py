@@ -53,7 +53,9 @@ class TableGolden(unittest.TestCase):
             "  $ pip install mlx-lm && mlx_lm.generate --model mlx-community/gemma-3-27b-it-4bit\n"
             "\nLimits: speed is not measured; bands are not calibrated confidence intervals. "
             "Quality ratings are illustrative, without a validated rubric. "
-            "MoE speed uses the shared total-footprint formula, not active-expert traffic."
+            "MoE speed uses the shared total-footprint formula, not active-expert traffic.\n"
+            "Quality basis: legacy editorial; historical assignment basis unknown "
+            "(metadata as of 2026-10-02). See docs/QUALITY-BASIS.md."
         )
         self.assertEqual(render_table(hw, rows, "chat"), golden)
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from beanfit.catalog.quality import QUALITY_METADATA_AS_OF
 from beanfit.emit.launch import launch_cmd, mlx_cmd
 
 
@@ -42,6 +43,8 @@ def render_table(hw: dict, rows: list[dict], use_case: str) -> str:
     out.append("\nLimits: speed is not measured; bands are not calibrated confidence intervals. "
                "Quality ratings are illustrative, without a validated rubric. "
                "MoE speed uses the shared total-footprint formula, not active-expert traffic.")
+    out.append("Quality basis: legacy editorial; historical assignment basis unknown "
+               f"(metadata as of {QUALITY_METADATA_AS_OF}). See docs/QUALITY-BASIS.md.")
     return "\n".join(out)
 
 

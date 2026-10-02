@@ -20,6 +20,7 @@ Run it:
   $ ollama pull gemma3:27b && ollama run gemma3:27b
 ...
 Limits: speed is not measured; bands are not calibrated confidence intervals. Quality ratings are illustrative, without a validated rubric. MoE speed uses the shared total-footprint formula, not active-expert traffic.
+Quality basis: legacy editorial; historical assignment basis unknown (metadata as of 2026-10-02). See docs/QUALITY-BASIS.md.
 ```
 
 ## Install
@@ -78,7 +79,7 @@ See [ROADMAP.md](ROADMAP.md) for the full plan.
 
 ## Current source candidate
 
-Package metadata and `beanfit --version` identify this source as `0.5.2`.
+Package metadata and `beanfit --version` identify this source as `0.6.0`.
 The sample above is a shortened fixture transcript, not a measured inference
 run or release proof. Confirm a published version through its annotated tag
 and GitHub Release at the same tested commit; a checkout alone is not proof
@@ -110,6 +111,13 @@ dominates ranking. JSON exposes these limits in `claim_limits`. Dense and MoE
 models share the total-footprint speed formula; it does not model active-expert
 memory traffic and can distort speed and ranking. Verify against reality with
 `ollama run --verbose`.
+
+[Quality basis and inventory](docs/QUALITY-BASIS.md) records all 24 legacy
+ratings, their unknown assignment history, and deterministic ranking examples.
+The metadata snapshot is dated 2026-10-02; it is not a measurement or original
+assignment date. `--json` and `--export-catalog` include additive `quality_basis`
+metadata. The document's future evaluation rubric is proposed, pending owner
+approval, and has not been applied or calibrated.
 
 Model tags are checked against ollama.com and Hugging Face by a scheduled
 weekly workflow and can be checked manually with `scripts/validate_catalog.py`.
@@ -143,8 +151,10 @@ described here before it ships.
 
 ```bash
 beanfit                       # chat picks
-beanfit --use-case coding     # coding/reasoning weights
+beanfit --use-case coding     # coding editorial ratings
+beanfit --use-case reasoning  # reasoning editorial ratings
 beanfit --json                # machine-readable + full assumptions (agent consumption)
+beanfit --export-catalog      # catalog + quality provenance (no hardware detection)
 ```
 
 ## Development
