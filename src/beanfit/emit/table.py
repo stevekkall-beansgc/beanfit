@@ -31,14 +31,17 @@ def render_table(hw: dict, rows: list[dict], use_case: str) -> str:
     if top:
         band = top.get("est_uncertainty_pct", 50)
         out.append(
-            f"\nPick: {top['name']} ({top['quant']}) — quality {top['quality']}/10, "
-            f"~{top['est_tok_s']} tok/s est (±{band}%). Verify: ollama run --verbose."
+            f"\nPick: {top['name']} ({top['quant']}) — editorial quality {top['quality']}/10, "
+            f"~{top['est_tok_s']} tok/s est (assumed ±{band}%). Verify: ollama run --verbose."
         )
         out.append(f"Run it:\n  $ {launch_cmd(top)}")
         mlx = mlx_cmd(top)
         if mlx:
             out.append("MLX alternative (Apple Silicon, often faster decode):\n"
                        f"  $ {mlx}")
+    out.append("\nLimits: speed is not measured; bands are not calibrated confidence intervals. "
+               "Quality ratings are illustrative, without a validated rubric. "
+               "MoE speed uses the shared total-footprint formula, not active-expert traffic.")
     return "\n".join(out)
 
 

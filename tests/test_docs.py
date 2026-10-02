@@ -9,6 +9,21 @@ PRIVATE_REPORT_URL = (
 
 
 class SecurityPolicy(unittest.TestCase):
+    def test_candidate_identity_and_existing_release_are_distinct(self):
+        import re
+        from beanfit import __version__
+
+        metadata = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+        self.assertEqual(re.search(r'^version = "([^"]+)"', metadata, re.M)[1], __version__)
+        self.assertEqual(__version__, "0.5.2")
+        for name in ("README.md", "SECURITY.md"):
+            text = (ROOT / name).read_text(encoding="utf-8")
+            self.assertIn(f"`{__version__}`", text)
+            self.assertNotIn("0.5.2.dev0", text)
+            self.assertIn("release proof", text)
+            self.assertIn("`v0.5.1`", text)
+            self.assertIn("`0.5.0`", text)
+
     def test_private_reporting_route(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")

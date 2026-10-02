@@ -15,9 +15,11 @@ MODEL                     QUANT      TOTAL   TOK/S  FIT    SCORE
 Gemma 3 27B               q4_K_M     17.9G    28.5  yes    122.3
 Qwen3 30B-A3B (MoE)       q4_K_M     19.9G    25.6  yes    121.8
 ...
-Pick: Gemma 3 27B (q4_K_M) — quality 9/10, ~28.5 tok/s est (±40%). Verify: ollama run --verbose.
+Pick: Gemma 3 27B (q4_K_M) — editorial quality 9/10, ~28.5 tok/s est (assumed ±40%). Verify: ollama run --verbose.
 Run it:
   $ ollama pull gemma3:27b && ollama run gemma3:27b
+...
+Limits: speed is not measured; bands are not calibrated confidence intervals. Quality ratings are illustrative, without a validated rubric. MoE speed uses the shared total-footprint formula, not active-expert traffic.
 ```
 
 ## Install
@@ -74,7 +76,16 @@ Apple Silicon), context budget, agent-harness configs (`num_ctx`, sub-agent
 model tiers, `mcp.json` sizing), emitted as runnable commands — not tables.
 See [ROADMAP.md](ROADMAP.md) for the full plan.
 
-## Status: v0.4.4 (public contribution guide and catalog receipt)
+## Current source candidate
+
+Package metadata and `beanfit --version` identify this source as `0.5.2`.
+The sample above is a shortened fixture transcript, not a measured inference
+run or release proof. Confirm a published version through its annotated tag
+and GitHub Release at the same tested commit; a checkout alone is not proof
+that publication completed.
+The historical `v0.5.1` release points to source with embedded runtime/package
+`0.5.0` and README/security labels `v0.4.4`. These changes do not modify those
+already published artifacts.
 
 Works today on Apple Silicon Macs. Stdlib only, zero runtime dependencies.
 
@@ -89,10 +100,16 @@ Works today on Apple Silicon Macs. Stdlib only, zero runtime dependencies.
 
 ## Honesty policy
 
-Speed numbers are **estimates with explicit uncertainty bands** (±25% when
+Speed numbers are **static estimates with assumed uncertainty bands** (±25% when
 bandwidth comes from public spec sheets, ±40% for pre-release estimates,
 ±50% for unknown chips) and every `--json` output ships the full estimation
-model in `assumptions`. Verify against reality with `ollama run --verbose`.
+model in `assumptions`. These bands are not calibrated confidence intervals:
+no measured error distribution or coverage is established. Quality scores are
+illustrative editorial catalog ratings without a validated rubric, and quality
+dominates ranking. JSON exposes these limits in `claim_limits`. Dense and MoE
+models share the total-footprint speed formula; it does not model active-expert
+memory traffic and can distort speed and ranking. Verify against reality with
+`ollama run --verbose`.
 
 Model tags are checked against ollama.com and Hugging Face by a scheduled
 weekly workflow and can be checked manually with `scripts/validate_catalog.py`.

@@ -45,12 +45,15 @@ class TableGolden(unittest.TestCase):
             "Phi-4-reasoning 14B       q4_K_M     11.6G    44.0  yes    100.6\n"
             "DeepSeek Coder V2 16B     q4_K_M     10.7G    47.9  yes     77.2\n"
             "\n"
-            "Pick: Gemma 3 27B (q4_K_M) — quality 9/10, ~28.5 tok/s est (±40%). "
+            "Pick: Gemma 3 27B (q4_K_M) — editorial quality 9/10, ~28.5 tok/s est (assumed ±40%). "
             "Verify: ollama run --verbose.\n"
             "Run it:\n"
             "  $ ollama pull gemma3:27b && ollama run gemma3:27b\n"
             "MLX alternative (Apple Silicon, often faster decode):\n"
-            "  $ pip install mlx-lm && mlx_lm.generate --model mlx-community/gemma-3-27b-it-4bit"
+            "  $ pip install mlx-lm && mlx_lm.generate --model mlx-community/gemma-3-27b-it-4bit\n"
+            "\nLimits: speed is not measured; bands are not calibrated confidence intervals. "
+            "Quality ratings are illustrative, without a validated rubric. "
+            "MoE speed uses the shared total-footprint formula, not active-expert traffic."
         )
         self.assertEqual(render_table(hw, rows, "chat"), golden)
 
@@ -58,6 +61,7 @@ class TableGolden(unittest.TestCase):
         out = render_table(M2_BASE_8, evaluate(M2_BASE_8, "chat"), "chat")
         self.assertNotIn("Pick:", out)
         self.assertIn("NO", out)
+        self.assertIn("bands are not calibrated confidence intervals", out)
 
 
 if __name__ == "__main__":

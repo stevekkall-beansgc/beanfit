@@ -29,6 +29,10 @@ class CliJson(unittest.TestCase):
         self.assertIn("formula", doc["assumptions"])
         top = doc["ranked"][0]
         self.assertEqual(top["est_uncertainty_pct"], 40)
+        self.assertIn("not measured", doc["claim_limits"]["speed"])
+        self.assertIn("not calibrated", doc["claim_limits"]["uncertainty"])
+        self.assertIn("editorial", doc["claim_limits"]["quality"])
+        self.assertIn("no MoE", doc["claim_limits"]["architecture"])
 
     def test_unsupported_platform_exits_2(self):
         from beanfit.hw import UnsupportedPlatform
