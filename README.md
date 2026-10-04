@@ -1,226 +1,80 @@
-# beanfit
+# BeanFit
 
-**What local AI actually fits — and runs well — on THIS device.**
+Choose a local model and runtime for your Apple Silicon Mac. BeanFit detects
+the device, estimates memory fit and speed, ranks model configurations, and
+prints a command you can try.
 
-beanfit detects your hardware, ranks local models by quant × runtime fit with
-honest speed estimates, and tells you exactly how to run the best one.
+**Not a benchmark:** speed is estimated, uncertainty bands are assumed rather
+than calibrated, and quality scores are editorial. Dense and mixture-of-experts
+models share a speed formula that does not model active-expert traffic. Treat
+the recommendations as a starting point to measure on your machine.
 
-```
-$ beanfit
-beanfit · Apple M5 Max · 128.0 GiB unified
-Metal working-set cap ~96.0 GiB → model budget 96.0 GiB (~600 GB/s ±40% est [BW estimate])
+## From your Mac to a starting recommendation
 
-MODEL                     QUANT      TOTAL   TOK/S  FIT    SCORE
-----------------------------------------------------------------
-Gemma 3 27B               q4_K_M     17.9G    28.5  yes    122.3
-Qwen3 30B-A3B (MoE)       q4_K_M     19.9G    25.6  yes    121.8
-...
-Pick: Gemma 3 27B (q4_K_M) — editorial quality 9/10, ~28.5 tok/s est (assumed ±40%). Verify: ollama run --verbose.
-Run it:
-  $ ollama pull gemma3:27b && ollama run gemma3:27b
-...
-Limits: speed is not measured; bands are not calibrated confidence intervals. Quality ratings are illustrative, without a validated rubric. MoE speed uses the shared total-footprint formula, not active-expert traffic.
-Quality basis: legacy editorial; historical assignment basis unknown (metadata as of 2026-10-02). See docs/QUALITY-BASIS.md.
-```
+![Hardware detection and the pinned catalog feed memory and speed estimates, which rank configurations and produce a table, JSON and a suggested command. This is estimation, not inference.](assets/readme-flow.svg)
+
+BeanFit estimates and ranks configurations. Running the suggested model command is a separate action.
+[Full-size diagram](assets/readme-flow.svg) · [Editable source](assets/readme-flow.mmd).
 
 ## Install
 
+Use Python 3.10+ from a source clone; there are no third-party runtime dependencies.
+The package is not published to PyPI.
+
 ```bash
-# Run directly from a source clone (zero Python dependencies; package is not
-# published to PyPI).
-git clone https://github.com/stevekkall-beansgc/beanfit && cd beanfit
+git clone https://github.com/stevekkall-beansgc/beanfit.git
+cd beanfit
 PYTHONPATH=src python3 -m beanfit
+PYTHONPATH=src python3 -m beanfit --json
 ```
+
+The table shows model, quantization, memory footprint, estimated speed and fit.
+JSON includes the assumptions and claim limits. Running BeanFit does not run
+model inference; separately executing a suggested Ollama command downloads
+and runs a model.
 
 ## Five-minute showcase
 
-1. **Run the CLI (1 minute).** From the clone, try both renderers:
-   ```bash
-   PYTHONPATH=src python3 -m beanfit
-   PYTHONPATH=src python3 -m beanfit --json
-   ```
-   [`src/beanfit/cli.py`](src/beanfit/cli.py) shows argument parsing, hardware
-   detection, evaluation, and renderer selection in one small entry point.
-2. **Follow the core path (1 minute).** Start at
-   [`src/beanfit/hw/macos.py`](src/beanfit/hw/macos.py), then read
-   [`src/beanfit/engine/evaluate.py`](src/beanfit/engine/evaluate.py) and
-   [`src/beanfit/emit/table.py`](src/beanfit/emit/table.py).
-   [`src/beanfit/catalog/models.py`](src/beanfit/catalog/models.py) holds the
-   pinned model metadata used by that path.
-3. **Verify the contracts (2 minutes).** Run the complete stdlib suite:
-   ```bash
-   PYTHONPATH=src python3 -m unittest discover -s tests -q
-   ```
-   [`tests/test_cli.py`](tests/test_cli.py) and
-   [`tests/test_hw_macos.py`](tests/test_hw_macos.py) make the CLI and hardware
-   behavior directly checkable with fixtures and mocks.
-4. **Read the estimate model (1 minute).**
-   [`src/beanfit/engine/estimate.py`](src/beanfit/engine/estimate.py)
-   centralizes the decode formula, context assumption, quantization factors,
-   and uncertainty bands. Its `assumptions()` output is included in every JSON
-   response by [`src/beanfit/emit/json_out.py`](src/beanfit/emit/json_out.py).
+Read the [CLI entry](src/beanfit/cli.py), then follow
+[hardware detection](src/beanfit/hw/macos.py),
+[ranking](src/beanfit/engine/evaluate.py) and
+[estimation](src/beanfit/engine/estimate.py). The
+[quality basis](docs/QUALITY-BASIS.md) explains the legacy ratings and their
+unknown assignment history.
 
-**Not a benchmark:** beanfit does not run model inference or measure tok/s,
-quality, thermals, prompts, runtime behavior, or context limits. Its speed
-numbers are estimates from static catalog and bandwidth inputs, so validate a
-generated command on the target machine.
+Check the behavior without model downloads:
 
-The fit showcase ends here. Activation and payment material is isolated under
-[Synthetic activation candidate](#synthetic-activation-candidate-separate) and
-is not evidence for the fit CLI's estimates.
+```bash
+PYTHONPATH=src python3 -m unittest discover -s tests -q
+python3 scripts/offline_e2e.py
+```
 
-## Why another fit-checker?
-
-llmfit, paddock, ModelFit & friends answer *"which model fits?"* beanfit is
-building toward **whole-stack configuration**: runtime choice (MLX-first on
-Apple Silicon), context budget, agent-harness configs (`num_ctx`, sub-agent
-model tiers, `mcp.json` sizing), emitted as runnable commands — not tables.
-See [ROADMAP.md](ROADMAP.md) for the full plan.
+[CLI fixtures](tests/test_cli.py) and
+[hardware fixtures](tests/test_hw_macos.py) make those paths inspectable.
+[The detailed guide](README-REFERENCE.md) retains the shortened fixture
+transcript, catalog controls, supported scope and development commands.
 
 ## Current source candidate
 
-Package metadata and `beanfit --version` identify this source as `0.6.1`.
-The sample above is a shortened fixture transcript, not a measured inference
-run or release proof. Confirm a published version through its annotated tag
-and GitHub Release at the same tested commit; a checkout alone is not proof
-that publication completed.
-The historical `v0.5.1` release points to source with embedded runtime/package
-`0.5.0` and README/security labels `v0.4.4`. These changes do not modify those
-already published artifacts.
+Source package identity is `0.6.1`; matching tags and GitHub Releases provide
+release proof. Historical `v0.5.1` embeds `0.5.0`; those published artifacts
+are unchanged. [Release history](https://github.com/stevekkall-beansgc/beanfit/releases)
+and the [roadmap](ROADMAP.md) distinguish shipped source from planned
+cross-platform detection and stack configuration.
 
-Works today on Apple Silicon Macs. Stdlib only, zero runtime dependencies.
+Catalog liveness is point-in-time, with no automatic release-gate integration.
+A receipt requires a clean checkout of the exact release commit and records the
+SHA-256 of `scripts/validate_catalog.py`; the
+[catalog guide](README-REFERENCE.md#honesty-policy) explains the live check.
+Liveness is not performance evidence. This version has no telemetry.
 
-- ✅ packaged CLI (`beanfit` / `python -m beanfit`), module layout, 3-OS CI
-- ✅ scheduled weekly and manual live catalog validation; operators can create
-  receipts from a clean release checkout that record the exact source revision,
-  package version, validator script SHA-256, and observation time without
-  putting network calls in deterministic PR CI
-- ✅ honesty bands: every speed number carries its uncertainty and source class
-- 🚧 Phase 1: Windows / Linux / discrete-GPU detection ([ROADMAP.md](ROADMAP.md))
-- 🚧 Phase 3: `beanfit init` — emit full stack config for your agent tooling
+## Related prototypes
 
-## Honesty policy
+The [activation package](docs/activation/README.md) is synthetic-only and
+separate from the fit estimates. The
+[mobile selector](examples/mobile/README.md) imports measurements rather than
+running models on an iPhone. [BeanFit Pocket](iphone/README.md) is a native
+prototype with separate device and integration gates.
 
-Speed numbers are **static estimates with assumed uncertainty bands** (±25% when
-bandwidth comes from public spec sheets, ±40% for pre-release estimates,
-±50% for unknown chips) and every `--json` output ships the full estimation
-model in `assumptions`. These bands are not calibrated confidence intervals:
-no measured error distribution or coverage is established. Quality scores are
-illustrative editorial catalog ratings without a validated rubric, and quality
-dominates ranking. JSON exposes these limits in `claim_limits`. Dense and MoE
-models share the total-footprint speed formula; it does not model active-expert
-memory traffic and can distort speed and ranking. Verify against reality with
-`ollama run --verbose`.
-
-[Quality basis and inventory](docs/QUALITY-BASIS.md) records all 24 legacy
-ratings, their unknown assignment history, and deterministic ranking examples.
-The metadata snapshot is dated 2026-10-02; it is not a measurement or original
-assignment date. `--json` and `--export-catalog` include additive `quality_basis`
-metadata. The document's future evaluation rubric is proposed, pending owner
-approval, and has not been applied or calibrated.
-
-Model tags are checked against ollama.com and Hugging Face by a scheduled
-weekly workflow and can be checked manually with `scripts/validate_catalog.py`.
-There is no automatic release-gate integration. To create a release-time
-receipt, an operator must use a clean checkout of the exact release commit and
-run manually:
-
-```bash
-git status --porcelain
-git rev-parse HEAD
-python3 scripts/validate_catalog.py --receipt .catalog-receipts/catalog-validation.json
-```
-
-The `git status --porcelain` output must be empty; the validator refuses a
-receipt from a dirty checkout. The receipt records the exact source revision,
-package version, SHA-256 of `scripts/validate_catalog.py`, UTC times, and
-pass/warn/fail results. Registry liveness is point-in-time and is not
-performance evidence; verify tags again before relying on a command. An
-unreachable registry is a failed check, not a pass.
-MLX repo names were selected from live registry lookups because name-guessing
-produced broken launch commands in v0.1. The current selector tries q4 first
-and does not automatically choose q8 when both quantizations fit.
-
-## Privacy
-
-No telemetry in this version. A documented, opt-in anonymous beacon is
-planned with `init` (roadmap Phase 3) — it will be off by default and
-described here before it ships.
-
-## Use cases
-
-```bash
-beanfit                       # chat picks
-beanfit --use-case coding     # coding editorial ratings
-beanfit --use-case reasoning  # reasoning editorial ratings
-beanfit --json                # machine-readable + full assumptions (agent consumption)
-beanfit --export-catalog      # catalog + quality provenance (no hardware detection)
-```
-
-## Development
-
-```bash
-git clone https://github.com/stevekkall-beansgc/beanfit && cd beanfit
-PYTHONPATH=src python3 -m unittest discover -s tests   # stdlib only, no install needed
-python3 scripts/activation_demo.py                    # offline synthetic demo
-python3 scripts/static_check.py                        # requires requirements-lint.txt
-python3 scripts/validate_catalog.py --json            # explicit live registry check
-# Manual release-time check from a clean checkout of the exact release commit:
-git status --porcelain
-git rev-parse HEAD
-python3 scripts/validate_catalog.py --receipt .catalog-receipts/catalog-validation.json
-```
-
-### Static check (pinned Ruff)
-
-`scripts/static_check.py` is the one scripted static-check entry point for
-`src/`, `scripts/`, and `tests/`. The Ruff version is pinned in
-`requirements-lint.txt` (single pin source); the script refuses to run any
-other Ruff. CI's `lint` job installs that pin and runs this check as a
-non-ignored job — the regression test in `tests/test_static_check.py`
-keeps that wiring from silently drifting.
-
-```bash
-pip install -r requirements-lint.txt
-python scripts/static_check.py   # ruff 0.16.8, targets src/ scripts/ tests/
-```
-
-Rule set is deliberately modest and meaningful: pyflakes `F` (syntax,
-undefined names, unused imports, basic errors) plus syntax-level runtime
-errors (`E9`). Configured under `[tool.ruff]` in `pyproject.toml`.
-
-## Security
-
-Report suspected vulnerabilities through the private channel described in
-[SECURITY.md](SECURITY.md). Do not post exploit details in public issues, pull
-requests, or discussions.
-
----
-
-**Agents:** see [AGENTS.md](AGENTS.md) before changing anything here.
-
-## Synthetic activation candidate (separate)
-
-This material is separate from the fit CLI above. The
-[first-dollar activation package](docs/activation/README.md) contains a
-synthetic-only order ledger, Stripe test transport, correction/refund controls,
-anonymized five-prospect distribution plan, and verification receipts. It is not
-live, customer-ready, or evidence for the fit estimates. Run
-`python3 scripts/check_activation_qa.py` for its central QA registration and
-`python3 scripts/activation_demo.py` for the offline end-to-end fixture; neither
-creates provider payments.
-
-## Mobile qualification prototype
-
-The isolated mobile selector chooses the smallest measured stack that passes a
-product-specific quality, reliability, latency and memory contract. It imports
-receipts; it does not run or install models on an iPhone. Start with the
-[offline synthetic demo](examples/mobile/README.md) and
-[mobile requirements](experiments/iphone/REQUIREMENTS.md).
-
-## Native iPhone prototype
-
-[BeanFit Pocket](iphone/README.md) embeds local inference in a native iOS host,
-with verified model import, measurements, and a reviewable Jumping Beans sample
-flow. It is a prototype; device qualification and live product integration are
-separate release gates.
+See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and
+[AGENTS.md](AGENTS.md) for development and reporting.
