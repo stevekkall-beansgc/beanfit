@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1150" viewBox="0 0 980 1150" role="img" aria-labelledby="title desc">
+<title id="title">BeanFit: Why one model fits and another does not.</title>
+<desc id="desc">Hardware detection and a pinned model catalog drive a memory-fit test, a bandwidth speed estimate and use-case ranking. A schematic 16 GiB device illustrates the budget, not benchmark results. Model inference is a separate user action.</desc>
+<!-- Editable source diagram. Shapes are explanatory, not a deployment or performance receipt. -->
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M1 1 L7 4 L1 7" fill="none" stroke="context-stroke" stroke-width="1.8"/></marker></defs>
+<rect width="980" height="100%" fill="#f8fafc"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="38" y="44" font-size="19" font-weight="700" fill="#0e756a" text-anchor="start">BEANFIT / HOW IT WORKS</text>
+<text x="38" y="100" font-size="39" font-weight="700" fill="#152d45" text-anchor="start">Why one model fits and another does not.</text>
+<text x="38" y="138" font-size="22" font-weight="400" fill="#4e6276" text-anchor="start">Memory first. An estimated speed and editorial quality score then order the</text>
+<text x="38" y="168.8" font-size="22" font-weight="400" fill="#4e6276" text-anchor="start">choices.</text>
+<rect x="38" y="195" width="438" height="177" rx="16" fill="#edf4fd" stroke="#d6e2ec" stroke-width="2"/>
+<rect x="38" y="211" width="5" height="145" rx="2" fill="#245fa5"/>
+<text x="60" y="225" font-size="18" font-weight="700" fill="#245fa5" text-anchor="start">HARDWARE DETECTION</text>
+<text x="60" y="255" font-size="24" font-weight="700" fill="#245fa5" text-anchor="start">Your Mac</text>
+<text x="60" y="295.6" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">sysctl → chip, RAM and wired limit</text>
+<text x="60" y="331" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">Chip table → bandwidth + its basis</text>
+<rect x="504" y="195" width="438" height="177" rx="16" fill="#eaf6f2" stroke="#d6e2ec" stroke-width="2"/>
+<rect x="504" y="211" width="5" height="145" rx="2" fill="#0e756a"/>
+<text x="526" y="225" font-size="18" font-weight="700" fill="#0e756a" text-anchor="start">INPUTS, NOT A LIVE BENCHMARK</text>
+<text x="526" y="255" font-size="24" font-weight="700" fill="#0e756a" text-anchor="start">Pinned model catalog</text>
+<text x="526" y="295.6" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">q4 / q8 weight sizes + KV cache</text>
+<text x="526" y="331" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">Runtime tags + use-case ratings</text>
+<polyline points="258,372 258,405 490,405 490,438" fill="none" stroke="#245fa5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="723,372 723,405 490,405" fill="none" stroke="#0e756a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="38" y="438" width="904" height="264" rx="16" fill="white" stroke="#d5e0ea" stroke-width="2"/>
+<text x="60" y="477" font-size="25" font-weight="700" fill="#245fa5" text-anchor="start">1  Build a model-memory budget</text>
+<text x="60" y="516" font-size="23" font-weight="400" fill="#152d45" text-anchor="start">Budget = max(4 GiB, min(wired cap, RAM − 4 GiB))</text>
+<text x="60" y="553" font-size="20" font-weight="400" fill="#4e6276" text-anchor="start">Schematic example: 16 GiB RAM; default wired cap = 12 GiB</text>
+<rect x="60" y="576" width="672" height="34" rx="6" fill="#deeee9" stroke="#deeee9" stroke-width="2"/>
+<rect x="60" y="576" width="504" height="34" rx="6" fill="#227c70" stroke="#227c70" stroke-width="2"/>
+<text x="76" y="601" font-size="21" font-weight="700" fill="white" text-anchor="start">12 GiB model budget</text>
+<text x="750" y="601" font-size="20" font-weight="400" fill="#4e6276" text-anchor="start">4 GiB reserve</text>
+<text x="60" y="649" font-size="23" font-weight="400" fill="#152d45" text-anchor="start">Fit test: weights + half of a 32k-token KV cache ≤ budget</text>
+<text x="60" y="684" font-size="21" font-weight="400" fill="#4e6276" text-anchor="start">q4 is tried first; q8 is not a quality-maximizing search.</text>
+<rect x="38" y="731" width="438" height="201" rx="16" fill="#edf4fd" stroke="#d6e2ec" stroke-width="2"/>
+<rect x="38" y="747" width="5" height="169" rx="2" fill="#245fa5"/>
+<text x="60" y="761" font-size="18" font-weight="700" fill="#245fa5" text-anchor="start">NOT MEASURED THROUGHPUT</text>
+<text x="60" y="791" font-size="24" font-weight="700" fill="#245fa5" text-anchor="start">2  Estimate decode speed</text>
+<text x="60" y="831.6" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">Bandwidth ÷ total model memory</text>
+<text x="60" y="867" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">× 0.85 × quantization factor</text>
+<text x="60" y="902.4" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">Assumed bands: ±25 / 40 / 50%</text>
+<rect x="504" y="731" width="438" height="201" rx="16" fill="#eaf6f2" stroke="#d6e2ec" stroke-width="2"/>
+<rect x="504" y="747" width="5" height="169" rx="2" fill="#0e756a"/>
+<text x="526" y="761" font-size="18" font-weight="700" fill="#0e756a" text-anchor="start">CHAT / CODING / REASONING</text>
+<text x="526" y="791" font-size="24" font-weight="700" fill="#0e756a" text-anchor="start">3  Rank for your use case</text>
+<text x="526" y="831.6" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">Editorial quality × 12</text>
+<text x="526" y="867" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">Capped speed breaks ties</text>
+<text x="526" y="902.4" font-size="21" font-weight="400" fill="#152d45" text-anchor="start">Fit: +10; no fit: −40</text>
+<polyline points="258,702 258,730" fill="none" stroke="#245fa5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="723,702 723,730" fill="none" stroke="#0e756a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="38" y="962" width="904" height="77" rx="16" fill="#152d45" stroke="#152d45" stroke-width="2"/>
+<text x="60" y="999" font-size="25" font-weight="700" fill="white" text-anchor="start">Table + JSON assumptions + a suggested launch command</text>
+<text x="60" y="1027" font-size="20" font-weight="400" fill="#d8e5f2" text-anchor="start">Downloading and running that model is your separate next step.</text>
+<polyline points="38,1044 942,1044" fill="none" stroke="#d5e0ea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="38" y="1074" font-size="20" font-weight="400" fill="#4e6276" text-anchor="start">The same speed formula is used for dense and mixture-of-experts models.</text>
+<text x="38" y="1102" font-size="20" font-weight="400" fill="#4e6276" text-anchor="start">These are starting estimates—not calibrated bands or measured quality.</text>
+</g>
+</svg>

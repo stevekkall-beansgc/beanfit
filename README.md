@@ -9,12 +9,15 @@ than calibrated, and quality scores are editorial. Dense and mixture-of-experts
 models share a speed formula that does not model active-expert traffic. Treat
 the recommendations as a starting point to measure on your machine.
 
+Start here: [Run BeanFit](#install).
+
 ## From your Mac to a starting recommendation
 
-![Hardware detection and the pinned catalog feed memory and speed estimates, which rank configurations and produce a table, JSON and a suggested command. This is estimation, not inference.](assets/readme-flow.svg)
+![Hardware detection and a pinned model catalog drive a memory-fit test, a bandwidth speed estimate and use-case ranking. A schematic 16 GiB device illustrates the budget, not benchmark results. Model inference is a separate user action.](assets/readme-methods.svg)
 
-BeanFit estimates and ranks configurations. Running the suggested model command is a separate action.
-[Full-size diagram](assets/readme-flow.svg) · [Editable source](assets/readme-flow.mmd).
+The memory budget and catalog sizes meet at the fit test. Speed is a separate bandwidth-based estimate, and use-case ranking adds editorial quality and fit weights. The 16 GiB sketch is illustrative—not a benchmark. [Budget detection](src/beanfit/hw/macos.py) · [Speed model](src/beanfit/engine/estimate.py) · [Ranking](src/beanfit/engine/evaluate.py).
+
+[Full-size diagram and editable SVG source](assets/readme-methods.svg).
 
 ## Install
 
