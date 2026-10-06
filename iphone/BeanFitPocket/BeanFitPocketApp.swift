@@ -145,6 +145,24 @@ import UniformTypeIdentifiers
         let arguments = ProcessInfo.processInfo.arguments
         if let argument = arguments.first(where: { $0.hasPrefix("--model=") }),
            let model = LocalModel.catalog.first(where: { $0.id == String(argument.dropFirst(8)) }) { selected = model }
+        let qualificationModel = selected
+        var completed = false
+        func checkpoint() {
+            #if targetEnvironment(simulator)
+            let kind = "simulator"
+            #else
+            let kind = "physical-device"
+            #endif
+            let report: [String: Any] = ["schema":"beanfit.pocket.catalog.preliminary.v1", "model":qualificationModel.id, "modelSHA256":qualificationModel.sha256,
+                "evidenceKind":kind, "phoneQualified":false, "completed":completed, "interrupted":generation != token || Task.isCancelled, "completedProbeCount":records.count, "records":records, "cancellation":cancellation, "liveCatalog":live,
+                "batteryStart":batteryStart, "batteryEnd":UIDevice.current.batteryLevel,
+                "missingGates":["20 repeated complete real product flows", "background/foreground observed UI", "complete resident/dirty/mapped whole-stack memory", "30-minute thermal/battery matched baseline", "durable distribution", "Steve release acceptance"]]
+            let destination = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("catalog-qualification.json")
+            do { try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted,.sortedKeys]).write(to: destination, options: .atomic); print("BeanFit qualification checkpoint: \(records.count) probes, completed=\(completed)") }
+            catch { print("BeanFit qualification checkpoint failed: \(error.localizedDescription)") }
+        }
+        checkpoint()
+        defer { checkpoint() }
         do {
             let loaded = try await runtime.load(selected)
             guard generation == token else { return }
@@ -172,6 +190,7 @@ import UniformTypeIdentifiers
                     record["modelPassed"] = false; record["error"] = error.localizedDescription
                 }
                 records.append(record)
+                checkpoint()
             }
             do {
             let task = Task { try await runtime.generate(system: "Reply concisely.", user: "Write a long description of coffee.", maxTokens: 256) }
@@ -183,6 +202,7 @@ import UniformTypeIdentifiers
             let stopMs = Date().timeIntervalSince(stopped) * 1000
             cancellation = ["run":true, "cancelled":didCancel, "durationMs":stopMs, "passed":didCancel && stopMs <= 2000]
             }
+            checkpoint()
             // Exactly one search and one review, only on explicitly requested live proof.
             // Retain status/count evidence only. Never export or cache live offers/images/URLs.
             if arguments.contains("--live-catalog") {
@@ -207,18 +227,9 @@ import UniformTypeIdentifiers
         await runtime.unload(); loadedID = nil
         guard generation == token else { return }
         export()
-        #if targetEnvironment(simulator)
-        let kind = "simulator"
-        #else
-        let kind = "physical-device"
-        #endif
-        let report: [String: Any] = ["schema":"beanfit.pocket.catalog.preliminary.v1", "model":selected.id, "modelSHA256":selected.sha256,
-            "evidenceKind":kind, "phoneQualified":false, "records":records, "cancellation":cancellation, "liveCatalog":live,
-            "batteryStart":batteryStart, "batteryEnd":UIDevice.current.batteryLevel,
-            "missingGates":["20 repeated complete real product flows", "background/foreground observed UI", "complete resident/dirty/mapped whole-stack memory", "30-minute thermal/battery matched baseline", "durable distribution", "Steve release acceptance"]]
-        let destination = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("catalog-qualification.json")
-        do { try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted,.sortedKeys]).write(to: destination, options: .atomic); status = "Preliminary qualification recorded; see failures and missing gates" }
-        catch { status = error.localizedDescription }
+        completed = records.count == CatalogQualificationCase.cases.count
+        checkpoint()
+        status = "Preliminary qualification recorded; see failures and missing gates"
     }
     func smoke() async {
         if ProcessInfo.processInfo.arguments.contains("--qualify-catalog") {

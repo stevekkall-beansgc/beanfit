@@ -30,7 +30,7 @@ parser. Model suggestions remain disabled unless explicitly enabled experimental
 | Owned simulator runtime E2E | 10/10 passed; historical sample/runtime flow only |
 | Independent FAVA source review | No unresolved actionable source findings; independently reran native contracts and diff check |
 | Development phone installation | Passed, existing Apple team; renewed profile expires October 13 |
-| Physical phone launch | Failed/blocked: iOS reports invalid signature/entitlements or profile not explicitly trusted; human trust/open required |
+| Physical phone launch | Passed after Steve trusted/opened the renewed profile; intermittent Mac device-tunnel failures retained |
 | Initial native live attempt | Launch timed out, no qualification file recovered; outcome unknown, no retry |
 | Repeated physical complete flow / background UI / restart | Unrun |
 | Complete resident/dirty/mapped whole-stack memory | Unrun; sampled app footprint is insufficient |
@@ -58,8 +58,25 @@ Both fail frozen correction/budget/abstention gates. Neither qualifies. The
 sampled footprint includes simulator/runtime effects and omits mapped/system
 accounting; it is not an iPhone RAM requirement. Do not spend 30 minutes on battery
 qualification for a model already rejected by semantic gates. No gates were relaxed.
-The bounded baseline is the simplest useful candidate; its real-phone/live-product
-flow remains blocked and must pass before a release claim.
+The bounded baseline is the simplest useful candidate; its complete real-phone/live-product
+flow still needs proof before a release claim.
+
+## Physical phone follow-up after profile trust
+
+The complete Liquid report from source `71e7569841df56ea2131c69e774bac12cf630b8b`
+was recovered after intermittent tunnel failures. Actual iPhone14ProMax
+(iPhone15,3), iOS26.6.1: model **2/20**, unchanged no-model parser **20/20**;
+extraction p95 **2.055 seconds**, verify/load **0.458 seconds**, cancellation
+**1.624 milliseconds**. Sampled app peak **109,200,520 bytes**; this is process-only,
+not complete memory qualification. Unmatched battery readings are not a battery
+pass. Liquid is rejected on semantics; longer battery qualification is unwarranted.
+
+The test runner now atomically checkpoints each completed synthetic probe and
+marks incomplete/interrupted runs. This retains no live offers or merchant URLs.
+FAVA reviewed this narrow fix with no findings; device and simulator builds and
+native contracts passed. Simulator execution retained all20 completed probes.
+Qwen was successfully launched on the physical phone, but retrieval remained
+intermittent. A missing or partial report is not a pass.
 
 ## Sources and next checkpoint
 
@@ -77,8 +94,8 @@ The [Qwen upstream card](https://huggingface.co/Qwen/Qwen3.5-0.8B) and cached
 Unsloth metadata declare Apache-2.0; exact quantized file hash remains checked on
 load. Pinned llama.cpp is `2145525a4081d66ff1a87cf43ef809f95a85ac0c`.
 
-Next: human trusts/opens the existing phone profile; verify actual launch and
-model import/readiness. Reconcile the uncertain live attempt before any new live
+Next: retrieve the Qwen physical report over a stable unlocked/USB connection.
+Reconcile the uncertain live attempt before any new live
 proof; coordinate shared 24/hour capacity. Qualify the no-model real shopping flow,
 then complete applicable lifecycle/resources/durable-distribution gates and obtain
 Steve acceptance. Signing/tests/reviewer approval alone are not release acceptance.
