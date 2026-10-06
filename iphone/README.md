@@ -1,5 +1,52 @@
 # BeanFit Pocket — native iPhone prototype
 
+## October 6 candidate
+
+The native host now supports reviewed US/USD filters over the current anonymous
+Beanshop catalog. **Inference stays on-device; catalog search and merchant links
+need internet.** The default flow needs no model: enter product keywords and an
+optional USD maximum, choose whether the maximum is inclusive, confirm review,
+and search. The bounded parser accepts coffee/watch keywords with `under $30`,
+`at most $30`, `up to $30`, and explicit `, actually ...` corrections. Unknown
+prose abstains; other product keywords can be entered manually.
+
+Search results are current-interaction discovery evidence. Tap **Review this exact
+variant** before a merchant link becomes available. The engine owns catalog truth,
+prices and qualification. Shipping, tax, checkout stock and merchant trust remain
+unknown until merchant confirmation. No checkout or preference persistence exists.
+Results/images are never written to disk, cached, or exported; no image bytes are
+loaded. Another catalog action, edits, Stop, backgrounding or restart retire handoffs.
+All clients share the existing provider capacity; there are no automatic retries.
+
+Local model suggestions are disabled in the normal preview: Liquid350M passed
+2/20 and Qwen08 5/20 frozen simulator semantic cases; the no-model baseline passed
+20/20. The failures include corrections, budget boundaries and abstention. This
+candidate is not a qualified model/product release. See [the frozen packet](QUALIFICATION-2026-10-06.md)
+and [the outcome](QUALIFICATION-RESULTS-2026-10-06.md).
+
+The existing development team built and installed the candidate on October 6.
+The renewed profile expires October 13 at 13:56:10 UTC / 09:56:10 America/New_York.
+iOS launch is blocked until the person trusts its existing development profile
+in Settings → General → VPN & Device Management, then opens Pocket. If the device
+is locked, unlock it before developer-tool launches. Installation success does
+not prove launch, local inference or real catalog handoff.
+
+For a local-only preliminary qualification run on a trusted phone:
+
+```sh
+xcrun devicectl device process launch --device YOUR_PHONE --terminate-existing \
+  com.beanlabs.BeanFitPocket --qualify-catalog --model=liquid350
+```
+
+Repeat with `--model=qwen08` only using the already imported exact pinned file.
+The report in Documents/catalog-qualification.json retains synthetic prompts,
+raw model outputs/failures and cancellation evidence; it always says unqualified.
+Use `--experimental-catalog` only for deliberate model-suggestion investigation.
+`--live-catalog` additionally attempts one search and one exact review: do not use
+it without confirmed shared capacity and authorization, and never automatically
+retry an uncertain attempt. This session's first live launch timed out with no
+recovered report; its outcome remains unknown.
+
 An installable SwiftUI host for an embedded local inference interface. Product
 code calls `LocalInferenceClient`; `EmbeddedInference` implements it with a
 single llama.cpp engine. `ShoppingAdapter` demonstrates a Jumping Beans flow:

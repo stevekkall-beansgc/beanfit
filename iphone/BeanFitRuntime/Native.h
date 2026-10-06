@@ -6,6 +6,7 @@ extern "C" {
 #endif
 void * bf_create(void);
 void bf_destroy(void * engine);
+void bf_prepare(void * engine);
 void bf_cancel(void * engine);
 int bf_load(void * engine, const char * path);
 void bf_unload(void * engine);

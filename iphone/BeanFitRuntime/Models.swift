@@ -28,13 +28,14 @@ enum ModelFiles {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Models", isDirectory: true)
     }
     static func url(_ model: LocalModel) -> URL { directory.appendingPathComponent(model.filename) }
-    static func verify(_ url: URL, model: LocalModel) throws {
+    static func verify(_ url: URL, model: LocalModel, shouldCancel: () -> Bool = { false }) throws {
         let size = try FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber
         guard size?.int64Value == model.bytes else { throw RuntimeFailure.message("Model size does not match the selected version") }
         let handle = try FileHandle(forReadingFrom: url); defer { try? handle.close() }
         var hash = SHA256()
         // Drain Foundation's temporary buffers between chunks, before loading weights.
         while try autoreleasepool(invoking: { () throws -> Bool in
+            if shouldCancel() { throw CancellationError() }
             guard let data = try handle.read(upToCount: 4 * 1024 * 1024), !data.isEmpty else { return false }
             hash.update(data: data)
             return true

@@ -22,9 +22,10 @@ void bf_unload(void *p) {
     if (e->model) { llama_model_free(e->model); e->model = nullptr; }
 }
 void bf_destroy(void *p) { bf_unload(p); delete static_cast<Engine *>(p); }
+void bf_prepare(void *p) { static_cast<Engine *>(p)->cancel = false; }
 void bf_cancel(void *p) { static_cast<Engine *>(p)->cancel = true; }
 int bf_load(void *p, const char *path) {
-    auto e = static_cast<Engine *>(p); bf_unload(p); e->cancel = false; e->error.clear();
+    auto e = static_cast<Engine *>(p); bf_unload(p); e->error.clear();
     auto params = llama_model_default_params(); params.n_gpu_layers = 0;
     params.progress_callback = progress; params.progress_callback_user_data = p;
     e->model = llama_model_load_from_file(path, params);
@@ -40,7 +41,7 @@ uint64_t bf_footprint() {
     return info.phys_footprint;
 }
 const char *bf_generate(void *p, const char *prompt, const char *grammar, int max_tokens) {
-    auto e = static_cast<Engine *>(p); e->cancel = false; e->error.clear(); e->result.clear(); e->tokens = 0; e->first = -1;
+    auto e = static_cast<Engine *>(p); e->error.clear(); e->result.clear(); e->tokens = 0; e->first = -1;
     if (!e->model) { e->error = "Load a model first"; return nullptr; }
     auto vocab = llama_model_get_vocab(e->model);
     std::string input(prompt);

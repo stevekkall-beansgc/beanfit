@@ -2,9 +2,9 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 @MainActor final class PocketModel: ObservableObject {
-    @Published var selected = LocalModel.catalog[0]
+    @Published var selected = LocalModel.catalog.first { $0.id == "liquid350" }!
     @Published var loadedID: String?
-    @Published var status = "Import a model to begin. Everything runs on this device."
+    @Published var status = "Filter suggestions run on this device. Catalog searches use the internet."
     @Published var busy = false
     @Published var answer = ""
     @Published var request = "A blue watch under $150"
@@ -16,14 +16,70 @@ import UniformTypeIdentifiers
     @Published var metrics: [Measurement] = []
     @Published var exportURL: URL?
     @Published var memoryWarnings = 0
+    @Published var catalogQuery = "coffee"
+    @Published var catalogRequest = "coffee under $30"
+    @Published var catalogBudget = ""
+    @Published var catalogInclusive = false
+    @Published var catalogReviewed = false
+    @Published var catalogResult: CatalogResponse?
+    @Published var catalogHandoff: MerchantOffer?
+    @Published var catalogStatus = "Review filters, then search the public merchant catalog."
     let runtime = EmbeddedInference()
+    private var activeTask: Task<Void, Never>?
+    private var generation = 0
+    func retireCatalog() { catalogResult = nil; catalogHandoff = nil; catalogReviewed = false }
+    func cancelWork() {
+        generation += 1; let token = generation
+        activeTask?.cancel(); runtime.cancel(); busy = true
+        retireCatalog(); hasDraft = false; offers = nil; answer = ""
+        Task {
+            await runtime.unload()
+            guard generation == token else { return }
+            loadedID = nil; busy = false; status = "Stopped; model released"
+        }
+    }
+    func catalogSuggest(useModel: Bool) {
+        retireCatalog()
+        let input = catalogRequest
+        perform(useModel ? "Suggesting catalog filters on this device…" : "Parsing filters without a model…") {
+            let draft: CatalogDraft
+            if useModel {
+                let (suggestion, result) = try await CatalogShoppingAdapter(runtime: self.runtime).suggest(input)
+                draft = suggestion; self.metrics.append(result.measurement)
+            } else { draft = try CatalogDraft.baseline(input) }
+            try Task.checkCancellation()
+            guard self.catalogRequest == input else { return }
+            self.catalogQuery = draft.query
+            self.catalogBudget = draft.maxPrice.map { String(format: "%.2f", $0) } ?? ""
+            self.catalogInclusive = draft.inclusive
+            self.catalogStatus = "Review and edit these filters before searching."
+        }
+    }
+    func searchCatalog(reviewing offer: MerchantOffer? = nil) {
+        catalogResult = nil; catalogHandoff = nil
+        guard catalogReviewed else { status = "Review the current filters first"; return }
+        let budget = catalogBudget.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard budget.isEmpty || Double(budget) != nil else { status = "Enter a valid USD budget"; return }
+        let draft = CatalogDraft(query: catalogQuery, maxPrice: budget.isEmpty ? nil : Double(budget), inclusive: catalogInclusive, supported: true)
+        perform("Searching the public catalog…") {
+            let result = try await PublicCatalogClient().search(draft, reviewing: offer)
+            try Task.checkCancellation()
+            guard self.catalogReviewed, self.catalogQuery == draft.query, self.catalogBudget == budget,
+                  self.catalogInclusive == draft.inclusive else { return }
+            self.catalogResult = result
+            if offer != nil, result.status == "ok" { self.catalogHandoff = result.offers.first }
+            self.catalogStatus = result.status == "ok" ? "Current merchant discovery. Review the exact variant before opening its link." : "Catalog status: \(result.status). No automatic retry."
+        }
+    }
     var ready: Bool { loadedID == selected.id && !busy }
+    var experimentalCatalogSuggestions: Bool { ProcessInfo.processInfo.arguments.contains("--experimental-catalog") }
     func perform(_ title: String, operation: @escaping () async throws -> Void) {
         guard !busy else { return }; busy = true; status = title; exportURL = nil
-        Task {
-            defer { busy = false }
-            do { try await operation(); status = "Ready" }
-            catch { if let failure = error as? MeasuredFailure { metrics.append(failure.measurement) }; status = error.localizedDescription }
+        generation += 1; let token = generation
+        activeTask = Task {
+            defer { if generation == token { busy = false; activeTask = nil } }
+            do { try Task.checkCancellation(); try await operation(); try Task.checkCancellation(); if generation == token { status = "Ready" } }
+            catch { if generation == token { if let failure = error as? MeasuredFailure { metrics.append(failure.measurement) }; if let rejected = error as? CatalogSuggestionError { metrics.append(rejected.result.measurement) }; status = error.localizedDescription } }
         }
     }
     func importModel(_ url: URL) {
@@ -37,7 +93,7 @@ import UniformTypeIdentifiers
         let model = selected
         perform("Verifying and loading model…") {
             self.loadedID = nil
-            self.metrics.append(try await self.runtime.load(model)); self.loadedID = model.id
+            let metric = try await self.runtime.load(model); try Task.checkCancellation(); self.metrics.append(metric); self.loadedID = model.id
         }
     }
     func unload() {
@@ -46,14 +102,14 @@ import UniformTypeIdentifiers
     func generate() {
         perform("Running on this device…") {
             let result = try await self.runtime.generate(system: "You are a concise local assistant. You have no tools or network access. Do not claim to save, send, purchase or execute actions.", user: self.chat, maxTokens: 128)
-            self.answer = result.text; self.metrics.append(result.measurement)
+            try Task.checkCancellation(); self.answer = result.text; self.metrics.append(result.measurement)
         }
     }
     func suggest() {
         hasDraft = false; offers = nil
         perform("Suggesting filters locally…") {
             let (draft, result) = try await ShoppingAdapter(runtime: self.runtime).suggest(self.request)
-            self.metrics.append(result.measurement)
+            try Task.checkCancellation(); self.metrics.append(result.measurement)
             self.budget = draft.maxPrice.map { String(format: "%g", $0) } ?? ""
             self.strap = draft.strap ?? "any"; self.hasDraft = true
         }
@@ -70,7 +126,7 @@ import UniformTypeIdentifiers
             let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("beanfit-measurements.json")
             let report = Report(schema: "beanfit.iphone.prototype.v1", runtimeRevision: "2145525a4081d66ff1a87cf43ef809f95a85ac0c", qualified: false, memoryWarnings: memoryWarnings, measurements: metrics)
             try encoder.encode(report).write(to: url, options: .atomic); exportURL = url
-        } catch { if let failure = error as? MeasuredFailure { metrics.append(failure.measurement) }; status = error.localizedDescription }
+        } catch { if let failure = error as? MeasuredFailure { metrics.append(failure.measurement) }; if let rejected = error as? CatalogSuggestionError { metrics.append(rejected.result.measurement) }; status = error.localizedDescription }
     }
     struct Report: Codable {
         let schema: String, runtimeRevision: String
@@ -78,7 +134,99 @@ import UniformTypeIdentifiers
         let memoryWarnings: Int
         let measurements: [Measurement]
     }
+    func qualifyCatalog() async {
+        generation += 1; let token = generation
+        busy = true; defer { if generation == token { busy = false; activeTask = nil } }
+        var records: [[String: Any]] = []
+        var live: [String: Any] = ["run": false]
+        var cancellation: [String: Any] = ["run": false]
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        let batteryStart = UIDevice.current.batteryLevel
+        let arguments = ProcessInfo.processInfo.arguments
+        if let argument = arguments.first(where: { $0.hasPrefix("--model=") }),
+           let model = LocalModel.catalog.first(where: { $0.id == String(argument.dropFirst(8)) }) { selected = model }
+        do {
+            let loaded = try await runtime.load(selected)
+            guard generation == token else { return }
+            try Task.checkCancellation()
+            metrics.append(loaded); loadedID = selected.id
+            for probe in CatalogQualificationCase.cases {
+                guard generation == token else { return }
+                try Task.checkCancellation()
+                let baseline = try? CatalogDraft.baseline(probe.request)
+                var record: [String: Any] = ["request": probe.request, "baselinePassed": baseline == probe.expected, "expectedAbstention": probe.expected == nil]
+                if let expected = probe.expected { record["expected"] = try JSONSerialization.jsonObject(with: JSONEncoder().encode(expected)) }
+                do {
+                    let output = try await runtime.generate(system: CatalogShoppingAdapter.systemPrompt, user: probe.request, grammar: CatalogShoppingAdapter.grammar, maxTokens: 128)
+                    guard generation == token else { return }
+                    metrics.append(output.measurement); record["rawOutput"] = output.text
+                    let draft = try? CatalogDraft.parse(output.text)
+                    let data = Data(output.text.utf8)
+                    let decoded = try? JSONDecoder().decode(CatalogDraft.self, from: data)
+                    record["modelPassed"] = probe.expected.map { draft == $0 } ?? (decoded?.supported == false)
+                    record["durationMs"] = output.measurement.durationMs
+                } catch {
+                    guard generation == token else { return }
+                    if error is CancellationError { throw error }
+                    if let failure = error as? MeasuredFailure { metrics.append(failure.measurement) }
+                    record["modelPassed"] = false; record["error"] = error.localizedDescription
+                }
+                records.append(record)
+            }
+            do {
+            let task = Task { try await runtime.generate(system: "Reply concisely.", user: "Write a long description of coffee.", maxTokens: 256) }
+            defer { task.cancel() }
+            try await Task.sleep(nanoseconds: 50_000_000)
+            let stopped = Date(); task.cancel()
+            var didCancel = false
+            do { _ = try await task.value } catch { didCancel = true; if let failure = error as? MeasuredFailure { metrics.append(failure.measurement) } }
+            let stopMs = Date().timeIntervalSince(stopped) * 1000
+            cancellation = ["run":true, "cancelled":didCancel, "durationMs":stopMs, "passed":didCancel && stopMs <= 2000]
+            }
+            // Exactly one search and one review, only on explicitly requested live proof.
+            // Retain status/count evidence only. Never export or cache live offers/images/URLs.
+            if arguments.contains("--live-catalog") {
+                guard generation == token else { return }
+                try Task.checkCancellation()
+                let draft = CatalogDraft(query:"whole bean coffee", maxPrice:25, inclusive:true, supported:true)
+                let found = try await PublicCatalogClient().search(draft)
+                guard generation == token else { return }
+                try Task.checkCancellation()
+                live = ["run":true, "searchStatus":found.status, "offerCount":found.offers.count, "nativeTransport":true, "provenance":found.provenance]
+                if found.status == "ok", let offer = found.offers.first {
+                    guard generation == token else { return }
+                    let reviewed = try await PublicCatalogClient().search(draft, reviewing:offer)
+                    live["reviewStatus"] = reviewed.status
+                    live["exactVariantHandoff"] = reviewed.status == "ok" && reviewed.offers.count == 1 && reviewed.offers[0].resolved
+                }
+            }
+        } catch {
+            live["error"] = error.localizedDescription
+            if let failure = error as? MeasuredFailure { metrics.append(failure.measurement) }
+        }
+        await runtime.unload(); loadedID = nil
+        guard generation == token else { return }
+        export()
+        #if targetEnvironment(simulator)
+        let kind = "simulator"
+        #else
+        let kind = "physical-device"
+        #endif
+        let report: [String: Any] = ["schema":"beanfit.pocket.catalog.preliminary.v1", "model":selected.id, "modelSHA256":selected.sha256,
+            "evidenceKind":kind, "phoneQualified":false, "records":records, "cancellation":cancellation, "liveCatalog":live,
+            "batteryStart":batteryStart, "batteryEnd":UIDevice.current.batteryLevel,
+            "missingGates":["20 repeated complete real product flows", "background/foreground observed UI", "complete resident/dirty/mapped whole-stack memory", "30-minute thermal/battery matched baseline", "durable distribution", "Steve release acceptance"]]
+        let destination = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("catalog-qualification.json")
+        do { try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted,.sortedKeys]).write(to: destination, options: .atomic); status = "Preliminary qualification recorded; see failures and missing gates" }
+        catch { status = error.localizedDescription }
+    }
     func smoke() async {
+        if ProcessInfo.processInfo.arguments.contains("--qualify-catalog") {
+            let task = Task { await self.qualifyCatalog() }
+            activeTask = task
+            await task.value
+            return
+        }
         guard ProcessInfo.processInfo.arguments.contains("--smoke") else { return }
         busy = true; defer { busy = false }
         if let argument = ProcessInfo.processInfo.arguments.first(where: { $0.hasPrefix("--model=") }),
@@ -126,13 +274,11 @@ import UniformTypeIdentifiers
             ContentView(model: model)
                 .task { await model.smoke() }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)) { _ in
-                    model.memoryWarnings += 1; model.runtime.cancel()
-                    Task { await model.runtime.unload(); model.loadedID = nil; model.status = "Memory warning: model released" }
+                    model.memoryWarnings += 1; model.cancelWork()
                 }
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .background {
-                        model.runtime.cancel()
-                        Task { await model.runtime.unload(); model.loadedID = nil }
+                        model.cancelWork()
                     }
                 }
         }
@@ -149,9 +295,44 @@ struct ContentView: View {
                     Label("Local intelligence for your products", systemImage: "iphone")
                     Text("Prototype · no remote inference").font(.caption).foregroundStyle(.secondary)
                     Text(model.status).accessibilityIdentifier("runtimeStatus")
-                    if model.busy { ProgressView(); Button("Stop") { model.runtime.cancel() } }
+                    if model.busy { ProgressView(); Button("Stop") { model.cancelWork() } }
                 }
-                Section("1. Choose a local model") {
+                Section("Shop the merchant catalog") {
+                    Text("Suggestions stay on this iPhone. Searching sends only your reviewed keywords and USD budget to Jumping Beans.").font(.caption).foregroundStyle(.secondary)
+                    TextField("Shopping request", text: $model.catalogRequest, axis: .vertical)
+                        .disabled(model.busy).onChange(of: model.catalogRequest) { _, _ in model.retireCatalog() }
+                    Text("Local model suggestions have not passed qualification. Use the parser or edit filters directly.").font(.caption)
+                    Button("Experimental local suggestions") { model.catalogSuggest(useModel: true) }.disabled(!model.ready || !model.experimentalCatalogSuggestions)
+                    Button("Parse without a model") { model.catalogSuggest(useModel: false) }.disabled(model.busy)
+                    TextField("Product keywords", text: $model.catalogQuery).disabled(model.busy)
+                        .onChange(of: model.catalogQuery) { _, _ in model.retireCatalog() }
+                    TextField("Maximum price in USD (optional)", text: $model.catalogBudget).keyboardType(.decimalPad).disabled(model.busy)
+                        .onChange(of: model.catalogBudget) { _, _ in model.retireCatalog() }
+                    Toggle("Include the maximum price", isOn: $model.catalogInclusive).disabled(model.busy)
+                        .onChange(of: model.catalogInclusive) { _, _ in model.retireCatalog() }
+                    Toggle("I reviewed these filters", isOn: $model.catalogReviewed).disabled(model.busy)
+                        .onChange(of: model.catalogReviewed) { _, reviewed in if !reviewed { model.catalogResult = nil; model.catalogHandoff = nil } }
+                    Button("Search reviewed filters") { model.searchCatalog() }.disabled(model.busy || !model.catalogReviewed)
+                    Text(model.catalogStatus).font(.caption)
+                    if let result = model.catalogResult {
+                        ForEach(result.limits, id: \.self) { Text($0).font(.caption2) }
+                        ForEach(result.offers) { offer in
+                            VStack(alignment: .leading) {
+                                Text(offer.title)
+                                Text(offer.variantTitle).font(.caption)
+                                Text("\(offer.sellerName) · \(Double(offer.price.amount) / 100, specifier: "%.2f") USD").font(.caption)
+                                Text("\(offer.verification) · \(offer.billing)").font(.caption2)
+                                Text("Shipping, tax, merchant trust and stock at checkout need merchant confirmation.").font(.caption2)
+                                if model.catalogHandoff?.id == offer.id, let url = model.catalogHandoff?.url {
+                                    Link("Open reviewed merchant variant", destination: url)
+                                } else {
+                                    Button("Review this exact variant") { model.searchCatalog(reviewing: offer) }.disabled(model.busy)
+                                }
+                            }
+                        }
+                    }
+                }
+                Section("Local model") {
                     Picker("Model", selection: $model.selected) {
                         ForEach(LocalModel.catalog) { Text($0.title).tag($0) }
                     }.disabled(model.busy || model.loadedID != nil)
@@ -161,14 +342,14 @@ struct ContentView: View {
                         Spacer()
                         Button("Unload") { model.unload() }.disabled(model.busy || model.loadedID == nil)
                     }.buttonStyle(.borderless)
-                    Text("Files are verified before loading. Download sizes are not memory requirements. Start with 0.8B to check your device.").font(.caption).foregroundStyle(.secondary)
+                    Text("Files are verified before loading. Download sizes are not memory requirements. Liquid 350M is the first qualification candidate; no model is qualified yet.").font(.caption).foregroundStyle(.secondary)
                 }
-                Section("2. Try local inference") {
+                Section("Runtime check") {
                     TextField("Ask something", text: $model.chat, axis: .vertical).lineLimit(2...4)
                     Button("Run locally") { model.generate() }.disabled(!model.ready)
                     if !model.answer.isEmpty { Text(model.answer).textSelection(.enabled).accessibilityIdentifier("localAnswer") }
                 }
-                Section("3. Jumping Beans demo") {
+                Section("Historical sample demo") {
                     Text("Sample watch catalog · no live offers, saving or purchases").font(.caption).foregroundStyle(.secondary)
                     TextField("What are you looking for?", text: $model.request, axis: .vertical)
                     Button("Suggest filters") { model.suggest() }.disabled(!model.ready)

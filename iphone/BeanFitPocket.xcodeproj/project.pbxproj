@@ -122,6 +122,7 @@
 				<string>000000000000000000000009</string>
 				<string>00000000000000000000000B</string>
 				<string>000000000000000000000101</string>
+				<string>000000000000000000000201</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -140,6 +141,7 @@
 				<string>000000000000000000000008</string>
 				<string>00000000000000000000000A</string>
 				<string>000000000000000000000102</string>
+				<string>000000000000000000000202</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -379,6 +381,24 @@
 			<string>000000000000000000000101</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>000000000000000000000201</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>JumpingBeansDemo/CatalogShopping.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>000000000000000000000202</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>fileRef</key>
+			<string>000000000000000000000201</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
