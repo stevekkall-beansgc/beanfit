@@ -5,5 +5,5 @@ import subprocess
 import sys
 
 root = Path(__file__).resolve().parents[1]
-for name in ("activation_demo.py", "mobile_demo.py"):
+for name in ("activation_demo.py", "mobile_demo.py", "on_device_demo.py"):
     subprocess.run([sys.executable, str(root / "scripts" / name)], cwd=root, check=True)

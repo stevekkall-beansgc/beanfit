@@ -14,6 +14,10 @@ from beanfit.hw import UnsupportedPlatform, detect
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == "suggest":
+        from beanfit.on_device import suggest_main
+
+        return suggest_main(argv[1:])
     if argv and argv[0] == "mobile":
         from beanfit.mobile import mobile_main
 
@@ -27,6 +31,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(
         prog="beanfit",
         description="What local AI actually fits — and runs well — on THIS device.",
+        epilog="Other commands: suggest (current iPhone candidates), mobile (reviewed trial selection), register (Mac pairing).",
     )
     ap.add_argument("--use-case", choices=list(USE_CASES), default="chat")
     ap.add_argument("--json", action="store_true")
@@ -38,6 +43,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.export_catalog:
         from beanfit.catalog.models import CATALOG, MLX_REPOS
         from beanfit.catalog.quality import quality_basis
+        from beanfit.on_device import catalog
 
         # Export-key aliases for fields whose names carry unit suffixes.
         export_aliases = {
@@ -48,6 +54,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({
             "version": __version__,
             "artifact_schema": 1,
+            "on_device_catalog": catalog(),
             "models": [
                 {export_aliases.get(k, k): v for k, v in entry._asdict().items()}
                 for entry in CATALOG

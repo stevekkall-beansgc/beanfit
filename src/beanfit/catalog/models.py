@@ -8,6 +8,10 @@ from typing import NamedTuple
 # quality c/r/chat = coding / reasoning / chat, each 0-10.
 # Tags can be checked against live registries by scripts/validate_catalog.py;
 # release operators can manually retain a receipt from a clean checkout.
+# Mobile entries live in on_device.json: exact HF GGUF/ONNX/source artifacts,
+# with q4/q8 file sizes where published. Ollama aliases and MLX mappings are
+# explicitly omitted there because the embedded mobile runtime uses neither;
+# file sizes must not be substituted for these legacy memory estimates.
 
 
 class ModelEntry(NamedTuple):

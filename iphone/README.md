@@ -1,5 +1,84 @@
 # BeanFit Pocket — native iPhone prototype
 
+For developers building local AI experiences in Legume Labs apps. Import a
+supported model to try short text requests on an iPhone, or review shopping
+filters before searching the public merchant catalog. Local inference works
+without a server; catalog searches need internet.
+
+Start with [Build and run](#build-and-run). You need Xcode, iOS 26 or newer,
+and a separately obtained model file. [Tests and evidence](#tests-and-evidence)
+explain how to check the prototype without treating a simulator as phone proof.
+
+## October 15 model refresh candidate
+
+The model chooser now shares BeanFit's pinned on-device catalog with the web
+companion. Select an experience and optionally prefer smaller downloads. Five
+text configurations can be imported: LFM2.5 230M, 350M QAD, 1.2B Instruct and
+Qwen3.5 0.8B/2B. The initial general-text comparison is 1.2B Instruct; this is
+an editorial starting point, not a qualified recommendation.
+
+Known Liquid350/Qwen08 shopping failures remain excluded from shopping trial
+suggestions. The normal shopping preview still uses reviewed manual filters or
+the bounded parser. LFM2.5-2.6B is cataloged but held out for reasoning-aware
+runtime support; vision and speech entries require additional integration.
+A test memory allowance conservatively excludes files that reach that allowance.
+File size is not resident memory; reviewed memory measurements own qualification.
+Smaller files still need measurement. Loading is blocked while the
+reported thermal state is serious or critical.
+
+Sources and exact files are visible in the chooser. No model is newly qualified,
+no phone installation is implied, and existing measurement limits still apply.
+See [catalog/suggestion contracts](../README-REFERENCE.md#on-device-catalog-and-suggestions).
+
+
+## October 6 candidate
+
+The native host now supports reviewed US/USD filters over the current anonymous
+Beanshop catalog. **Inference stays on-device; catalog search and merchant links
+need internet.** The default flow needs no model: enter product keywords and an
+optional USD maximum, choose whether the maximum is inclusive, confirm review,
+and search. The bounded parser accepts coffee/watch keywords with `under $30`,
+`at most $30`, `up to $30`, and explicit `, actually ...` corrections. Unknown
+prose abstains; other product keywords can be entered manually.
+
+Search results are current-interaction discovery evidence. Tap **Review this exact
+variant** before a merchant link becomes available. The engine owns catalog truth,
+prices and qualification. Shipping, tax, checkout stock and merchant trust remain
+unknown until merchant confirmation. No checkout or preference persistence exists.
+Results/images are never written to disk, cached, or exported; no image bytes are
+loaded. Another catalog action, edits, Stop, backgrounding or restart retire handoffs.
+All clients share the existing provider capacity; there are no automatic retries.
+
+Local model suggestions are disabled in the normal preview: Liquid350M passed
+2/20 and Qwen08 5/20 frozen simulator semantic cases; the no-model baseline passed
+20/20. The failures include corrections, budget boundaries and abstention. This
+candidate is not a qualified model/product release. See [the frozen packet](QUALIFICATION-2026-10-06.md)
+and [the outcome](QUALIFICATION-RESULTS-2026-10-06.md).
+
+The existing development team built and installed the candidate on October 6.
+That profile expired October 13 at 13:56:10 UTC / 09:56:10 America/New_York;
+a new phone installation needs a renewed profile.
+iOS launch is blocked until the person trusts its existing development profile
+in Settings → General → VPN & Device Management, then opens Pocket. If the device
+is locked, unlock it before developer-tool launches. Installation success does
+not prove launch, local inference or real catalog handoff.
+
+For a local-only preliminary qualification run on a trusted phone:
+
+```sh
+xcrun devicectl device process launch --device YOUR_PHONE --terminate-existing \
+  com.beanlabs.BeanFitPocket --qualify-catalog --model=liquid350
+```
+
+Repeat with `--model=qwen08` only using the already imported exact pinned file.
+The report in Documents/catalog-qualification.json retains synthetic prompts,
+raw model outputs/failures and cancellation evidence; it always says unqualified.
+Use `--experimental-catalog` only for deliberate model-suggestion investigation.
+`--live-catalog` additionally attempts one search and one exact review: do not use
+it without confirmed shared capacity and authorization, and never automatically
+retry an uncertain attempt. This session's first live launch timed out with no
+recovered report; its outcome remains unknown.
+
 An installable SwiftUI host for an embedded local inference interface. Product
 code calls `LocalInferenceClient`; `EmbeddedInference` implements it with a
 single llama.cpp engine. `ShoppingAdapter` demonstrates a Jumping Beans flow:
@@ -74,8 +153,10 @@ files. They run in Python's unit suite on macOS and are explicitly skipped on
 other hosts. Native E2E registration requires Xcode, a booted simulator, the built
 app, and the pinned model; the session's QA manifest supplies those paths.
 
-Developer smoke launches support `--model=qwen08`, `--model=liquid350`, and
-`--model=qwen2`. They write Documents/smoke.json and beanfit-measurements.json.
+Developer smoke launches accept `--model=liquid230`, `--model=liquid350`,
+`--model=liquid12`, `--model=qwen08`, and `--model=qwen2`. The simulator E2E
+accepts the same catalog IDs through `--model-id` (default `qwen08`) with a
+matching `--model` file. They write Documents/smoke.json and beanfit-measurements.json.
 These tiny functional checks are not a quality benchmark or a model winner.
 
 Memory is sampled app-process physical footprint every 20ms. It includes the
@@ -87,7 +168,7 @@ latency budgets, thermal behavior, and capability-specific quality remain releas
 gates. Choose the smallest model that passes those gates; do not select by file
 size alone.
 
-## Paused checkpoint
+## Next checkpoint
 
 See [the next-phase plan](NEXT-PHASE-PLAN.md) for the agreed purpose, remaining
 product work, qualification gates, and exact resume point.

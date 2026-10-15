@@ -1,6 +1,13 @@
 import Foundation
 import UIKit
 
+private final class CancellationState: @unchecked Sendable {
+    private let lock = NSLock()
+    private var value = false
+    var cancelled: Bool { lock.lock(); defer { lock.unlock() }; return value }
+    func cancel() { lock.lock(); value = true; lock.unlock() }
+}
+
 private final class FootprintSampler {
     private let queue = DispatchQueue(label: "beanfit.memory")
     private let timer: DispatchSourceTimer
@@ -57,13 +64,19 @@ final class EmbeddedInference: LocalInferenceClient, @unchecked Sendable {
                            thermalBefore: before, thermalAfter: ProcessInfo.processInfo.thermalState.rawValue)
     }
     func load(_ model: LocalModel) async throws -> Measurement {
-        try await withCheckedThrowingContinuation { continuation in
+        let cancellation = CancellationState()
+        return try await withTaskCancellationHandler(operation: {
+          try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Measurement, Error>) in
             queue.async {
                 let started = Date(), timer = FootprintSampler(), before = ProcessInfo.processInfo.thermalState.rawValue
                 do {
+                    if cancellation.cancelled { throw CancellationError() }
                     bf_unload(self.handle); self.loaded = nil
                     // Re-verify on every load, including developer-transferred files.
-                    try ModelFiles.verify(ModelFiles.url(model), model: model)
+                    try ModelFiles.verify(ModelFiles.url(model), model: model, shouldCancel: { cancellation.cancelled })
+                    if cancellation.cancelled { throw CancellationError() }
+                    bf_prepare(self.handle)
+                    if cancellation.cancelled { throw CancellationError() }
                     let ok = bf_load(self.handle, ModelFiles.url(model).path)
                     guard ok == 1 else { self.loaded = nil; throw RuntimeFailure.message(String(cString: bf_error(self.handle))) }
                     self.loaded = model
@@ -75,11 +88,17 @@ final class EmbeddedInference: LocalInferenceClient, @unchecked Sendable {
                     continuation.resume(throwing: MeasuredFailure(message: error.localizedDescription, measurement: metric))
                 }
             }
-        }
+          }
+        }, onCancel: { cancellation.cancel(); self.cancel() })
     }
     func generate(system: String, user: String, grammar: String? = nil, maxTokens: Int = 128) async throws -> InferenceResult {
-        try await withCheckedThrowingContinuation { continuation in
+        let cancellation = CancellationState()
+        return try await withTaskCancellationHandler(operation: {
+          try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<InferenceResult, Error>) in
             queue.async {
+                guard !cancellation.cancelled else { continuation.resume(throwing: CancellationError()); return }
+                bf_prepare(self.handle)
+                guard !cancellation.cancelled else { continuation.resume(throwing: CancellationError()); return }
                 guard let model = self.loaded else { continuation.resume(throwing: RuntimeFailure.message("Load a model first")); return }
                 let started = Date(), timer = FootprintSampler(), before = ProcessInfo.processInfo.thermalState.rawValue
                 let deadline = DispatchWorkItem { [weak self] in self?.cancel() }
@@ -93,6 +112,7 @@ final class EmbeddedInference: LocalInferenceClient, @unchecked Sendable {
                 guard let output = output else { continuation.resume(throwing: MeasuredFailure(message: String(cString: bf_error(self.handle)), measurement: metric)); return }
                 continuation.resume(returning: InferenceResult(text: String(cString: output), measurement: metric))
             }
-        }
+          }
+        }, onCancel: { cancellation.cancel(); self.cancel() })
     }
 }
