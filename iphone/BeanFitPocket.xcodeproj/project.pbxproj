@@ -123,6 +123,8 @@
 				<string>00000000000000000000000B</string>
 				<string>000000000000000000000101</string>
 				<string>000000000000000000000201</string>
+				<string>BF2026101500000000000001</string>
+				<string>BF2026101500000000000002</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -142,6 +144,8 @@
 				<string>00000000000000000000000A</string>
 				<string>000000000000000000000102</string>
 				<string>000000000000000000000202</string>
+				<string>BF2026101500000000000101</string>
+				<string>BF2026101500000000000102</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -399,6 +403,42 @@
 			<string>PBXBuildFile</string>
 			<key>fileRef</key>
 			<string>000000000000000000000201</string>
+		</dict>
+		<key>BF2026101500000000000001</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>BeanFitRuntime/ModelCatalog.generated.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BF2026101500000000000101</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>fileRef</key>
+			<string>BF2026101500000000000001</string>
+		</dict>
+		<key>BF2026101500000000000002</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>BeanFitRuntime/ModelSuggestions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BF2026101500000000000102</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>fileRef</key>
+			<string>BF2026101500000000000002</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

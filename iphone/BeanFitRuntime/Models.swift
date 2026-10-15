@@ -8,11 +8,12 @@ struct LocalModel: Identifiable, Codable, Equatable, Hashable {
     let sha256: String
     let bytes: Int64
     let template: String
-    static let catalog = [
-        LocalModel(id: "qwen08", title: "Qwen3.5 0.8B · 533 MB", filename: "Qwen3.5-0.8B-Q4_K_M.gguf", sha256: "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517", bytes: 532517120, template: "qwen"),
-        LocalModel(id: "qwen2", title: "Qwen3.5 2B · 1.28 GB", filename: "Qwen3.5-2B-Q4_K_M.gguf", sha256: "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223", bytes: 1280835840, template: "qwen"),
-        LocalModel(id: "liquid350", title: "Liquid 350M · 219 MB", filename: "LFM2.5-350M-QAD-Q4_0.gguf", sha256: "3d10b6ab8fc91a919534b9558e266255aca0bbc7f6d015963599aa9e74e05b1d", bytes: 219312832, template: "lfm2")
-    ]
+    static let catalog: [LocalModel] = ModelSuggestions.catalog.models.compactMap { model in
+        guard model.runtime_status == "native_text_candidate", let artifact = model.artifacts.first else { return nil }
+        return LocalModel(id: model.id, title: "\(model.name) · \(artifact.bytes / 1_000_000) MB",
+                          filename: artifact.filename, sha256: artifact.sha256,
+                          bytes: artifact.bytes, template: model.template)
+    }
     func prompt(system: String, user: String) -> String {
         "<|im_start|>system\n\(system)<|im_end|>\n<|im_start|>user\n\(user)<|im_end|>\n<|im_start|>assistant\n" + (template == "qwen" ? "<think>\n\n</think>\n\n" : "")
     }

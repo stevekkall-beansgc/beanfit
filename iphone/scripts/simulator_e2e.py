@@ -19,9 +19,15 @@ def main():
     parser.add_argument('--app', required=True)
     parser.add_argument('--device', required=True)
     parser.add_argument('--model', required=True)
+    parser.add_argument('--model-id', default='qwen08', help='Pinned native catalog ID for the supplied file')
     parser.add_argument('--output', required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
+    catalog = json.loads((root / 'src/beanfit/catalog/on_device.json').read_text())
+    model = next((m for m in catalog['models'] if m['id'] == args.model_id
+                  and m['runtime_status'] == 'native_text_candidate'), None)
+    if model is None or Path(args.model).name != model['artifacts'][0]['filename']:
+        parser.error('model ID and filename must match a runnable pinned catalog entry')
     subprocess.run(['python3', str(root / 'scripts/offline_e2e.py')], check=True)
     bundle = 'com.beanlabs.BeanFitPocket'
     run('xcrun', 'simctl', 'install', args.device, args.app)
@@ -34,7 +40,7 @@ def main():
     smoke = documents / 'smoke.json'
     smoke.unlink(missing_ok=True)
     subprocess.run(['xcrun', 'simctl', 'terminate', args.device, bundle], capture_output=True)
-    run('xcrun', 'simctl', 'launch', args.device, bundle, '--smoke', '--model=qwen08')
+    run('xcrun', 'simctl', 'launch', args.device, bundle, '--smoke', f'--model={args.model_id}')
     deadline = time.monotonic() + 240
     while not smoke.exists() and time.monotonic() < deadline:
         time.sleep(1)

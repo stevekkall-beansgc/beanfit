@@ -1,5 +1,13 @@
 # iPhone product enablement — checkpoint and next phase
 
+October 15 update: model-catalog and recommendation work resumed on the user's
+instruction. Current source preserves the October 6 shopping preview and failed
+model gates, adds pinned current candidates and task-specific trial suggestions,
+and keeps production selection dependent on reviewed physical whole-stack
+receipts. The historical checkpoint below is retained; the current task does
+not authorize or claim public deployment or durable distribution.
+
+
 Status: paused after the native prototype checkpoint, 2026-09-26.
 Resume only on a new user instruction. This release preserves the implementation,
 physical-device evidence, and this plan; it does not enable a live product.

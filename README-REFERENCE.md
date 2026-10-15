@@ -226,3 +226,79 @@ receipts; it does not run or install models on an iPhone. Start with the
 with verified model import, measurements, and a reviewable Jumping Beans sample
 flow. It is a prototype; device qualification and live product integration are
 separate release gates.
+
+
+## On-device catalog and suggestions
+
+The canonical catalog is `src/beanfit/catalog/on_device.json`, checked on
+2026-10-15 against exact Hugging Face revisions, file sizes and SHA-256 values.
+It has six text entries: LFM2.5 230M, 350M QAD, 1.2B Instruct, 2.6B, and
+Qwen3.5 0.8B/2B. Vision, transcription and speech-output components are also
+listed, with their required weight components counted together. Model-file
+sizes are not working-memory measurements or complete installation sizes.
+
+The current embedded runtime can trial five text entries. LFM2.5-2.6B always
+thinks before answering, so it is held out until reasoning-aware output handling
+and an appropriate token budget exist. Vision and speech entries require runtime
+integration. The native context/output caps remain 2048/256 tokens. The source
+catalog deliberately uses direct HF artifacts; Ollama aliases and MLX mappings
+are omitted for this runtime rather than guessed. The existing eight-row Mac
+catalog, its editorial ratings and golden scores are unchanged.
+
+```sh
+PYTHONPATH=src python3 -m beanfit suggest --catalog
+PYTHONPATH=src python3 -m beanfit suggest --device iPhone15,3 --ios 26 \
+  --experience structured_extraction --preference smallest_download
+PYTHONPATH=src python3 -m beanfit suggest --device iPhone15,3 --ios 26 \
+  --experience shopping_filters --memory-budget-mib 512
+```
+
+`trial_order` is editorial experiment ordering for the chosen task. It does not
+assert quality superiority, runtime compatibility proof, thermal endurance or
+memory fit. Unknown devices/OS versions, capabilities needing integration and
+known task failures cannot enter the runnable trial order. The optional memory
+allowance is an application's incremental budget, never nominal phone RAM. If
+weight files reach it, the candidate is conservatively excluded before testing;
+this is not a resident-memory bound. Memory mapping can make file size and
+resident memory differ. Passing the screen leaves `memory_fit: unknown` and
+`selection: null`. Reviewed measured trials bypass this file-size heuristic;
+the selector applies the actual peak memory and headroom requirement instead.
+
+The October 6 Liquid350 shopping failure on the actual phone and Qwen08
+simulator shopping failure remain exclusions for that task. See
+`iphone/QUALIFICATION-RESULTS-2026-10-06.md`. The reviewed manual-filter/bounded
+parser fallback stays available. These findings do not evaluate other tasks.
+
+For an actual smallest-memory selection among tested configurations:
+
+```sh
+PYTHONPATH=src python3 -m beanfit suggest --experience structured_extraction \
+  --profile /path/to/reviewed-profile.json --receipts /path/to/reviewed-trials.json
+```
+
+This uses the existing `beanfit.mobile.profile.v1` and receipt contracts plus
+`catalog_experience` and `ios_major` in the profile. Each receipt candidate must
+identify the catalog ID, `runtime: llama.cpp`, exact `runtime_revision`,
+`model_revision`, `repository`, `artifact_sha256` and integer `weights_bytes`.
+The wrapper checks exact pinned identity and task eligibility before invoking
+the existing whole-stack quality/reliability/memory/latency selector. Critical
+failures, partial runs, simulator observations and incompatible profiles cannot
+produce a real selection. Receipts are self-reported and still require raw-log
+and memory-method review; this does not attest measurements or prove a global
+best model. Freshness, battery and sustained thermals remain additional gates.
+
+Synchronize native and web snapshots, then verify metadata without downloading
+weights:
+
+```sh
+python3 scripts/sync_on_device_catalog.py --app-root /path/to/beanfit-app
+python3 scripts/sync_on_device_catalog.py --app-root /path/to/beanfit-app --check
+python3 scripts/validate_on_device_catalog.py --live --receipt /path/to/registry-check.json
+```
+
+The app's `/models` page and `/api/models/suggest` expose screening only; neither
+accepts private prompts, runs inference, nor uploads measurement receipts. The
+native model chooser uses the same catalog, shows task-specific trial ordering,
+verifies files on load and blocks known shopping failures in that task. It does
+not automatically download models or qualify a device. Catalog access/license
+terms, including the custom LFM license, still apply to each artifact.

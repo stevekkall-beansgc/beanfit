@@ -3,6 +3,18 @@ import CryptoKit
 
 @main struct ContractTests {
     static func main() throws {
+        precondition(Set(LocalModel.catalog.map(\.id)) == Set(["liquid230", "liquid350", "liquid12", "qwen08", "qwen2"]))
+        let textCandidates = ModelSuggestions.suggestions(experience: "text_assistant", device: "iPhone15,3", osMajor: 26)
+        precondition(textCandidates.first?.id == "liquid12")
+        precondition(textCandidates.filter { $0.eligibleForTrial }.count == 5)
+        let shoppingCandidates = ModelSuggestions.suggestions(experience: "shopping_filters", device: "iPhone15,3", osMajor: 26)
+        precondition(shoppingCandidates.filter { $0.eligibleForTrial }.map(\.id) == ["liquid230", "liquid12", "qwen2"])
+        let constrained = ModelSuggestions.suggestions(experience: "text_assistant", device: "iPhone15,3", osMajor: 26, memoryBudgetBytes: 200_000_000)
+        precondition(constrained.filter { $0.eligibleForTrial }.map(\.id) == ["liquid230"])
+        precondition(ModelSuggestions.suggestions(experience: "text_assistant", device: "iPhone14,5", osMajor: 26).allSatisfy { !$0.eligibleForTrial })
+        precondition(ModelSuggestions.suggestions(experience: "text_assistant", device: "iPhone15,3", osMajor: 25).allSatisfy { !$0.eligibleForTrial })
+        precondition(ModelSuggestions.suggestions(experience: "image_description", device: "iPhone15,3", osMajor: 26).allSatisfy { $0.status == "requires_runtime_integration" })
+        precondition(ModelSuggestions.suggestions(experience: "text_assistant", device: "iPhone15,3", osMajor: 26, memoryBudgetBytes: 0).allSatisfy { !$0.eligibleForTrial })
         let draft = try ShoppingDraft.parse(#"{"maxPrice":150,"strap":"blue"}"#)
         precondition(draft == ShoppingDraft(maxPrice: 150, strap: "blue"))
         let invalid = [#"{"maxPrice":-1,"strap":null}"#, #"{"maxPrice":true,"strap":null}"#,

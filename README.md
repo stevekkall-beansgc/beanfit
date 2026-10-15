@@ -71,6 +71,14 @@ SHA-256 of `scripts/validate_catalog.py`; the
 [catalog guide](README-REFERENCE.md#honesty-policy) explains the live check.
 Liveness is not performance evidence. This version has no telemetry.
 
+## Current iPhone model candidates
+
+`PYTHONPATH=src python3 -m beanfit suggest --device iPhone15,3 --ios 26`
+shows task-specific candidates from the October 15 pinned on-device catalog.
+These are test suggestions, not measured memory-fit or quality winners.
+[Candidate selection and app synchronization](README-REFERENCE.md#on-device-catalog-and-suggestions)
+explain the evidence gates and the separate legacy Mac estimates.
+
 ## Related prototypes
 
 The [activation package](docs/activation/README.md) is synthetic-only and

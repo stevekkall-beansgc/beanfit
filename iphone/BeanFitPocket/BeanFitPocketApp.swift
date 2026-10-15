@@ -2,7 +2,33 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 @MainActor final class PocketModel: ObservableObject {
-    @Published var selected = LocalModel.catalog.first { $0.id == "liquid350" }!
+    @Published var selected = LocalModel.catalog.first { $0.id == "liquid12" }!
+    @Published var selectedExperience = "text_assistant"
+    @Published var smallestDownload = false
+    @Published var testMemoryMiB = ""
+    var hardwareIdentifier: String {
+        #if targetEnvironment(simulator)
+        return ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "simulator"
+        #else
+        var value = utsname(); uname(&value)
+        let size = MemoryLayout.size(ofValue: value.machine)
+        return withUnsafePointer(to: &value.machine) { pointer in
+            pointer.withMemoryRebound(to: CChar.self, capacity: size) { String(cString: $0) }
+        }
+        #endif
+    }
+    var modelSuggestions: [ModelSuggestion] {
+        let text = testMemoryMiB.trimmingCharacters(in: .whitespacesAndNewlines)
+        let amount = Int64(text)
+        let budget: Int64? = text.isEmpty ? nil : (amount != nil && amount! > 0 && amount! <= 1_073_741_824 ? amount! * 1_048_576 : 0)
+        return ModelSuggestions.suggestions(experience: selectedExperience, device: hardwareIdentifier,
+            osMajor: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
+            memoryBudgetBytes: budget, smallestDownload: smallestDownload)
+    }
+    var selectedSuggestion: ModelSuggestion? { modelSuggestions.first { $0.id == selected.id } }
+    var modelOptions: [LocalModel] {
+        modelSuggestions.compactMap { suggestion in LocalModel.catalog.first { $0.id == suggestion.id } }
+    }
     @Published var loadedID: String?
     @Published var status = "Filter suggestions run on this device. Catalog searches use the internet."
     @Published var busy = false
@@ -71,7 +97,7 @@ import UniformTypeIdentifiers
             self.catalogStatus = result.status == "ok" ? "Current merchant discovery. Review the exact variant before opening its link." : "Catalog status: \(result.status). No automatic retry."
         }
     }
-    var ready: Bool { loadedID == selected.id && !busy }
+    var ready: Bool { loadedID == selected.id && !busy && selectedSuggestion?.eligibleForTrial == true }
     var experimentalCatalogSuggestions: Bool { ProcessInfo.processInfo.arguments.contains("--experimental-catalog") }
     func perform(_ title: String, operation: @escaping () async throws -> Void) {
         guard !busy else { return }; busy = true; status = title; exportURL = nil
@@ -90,6 +116,13 @@ import UniformTypeIdentifiers
         }
     }
     func load() {
+        guard selectedSuggestion?.eligibleForTrial == true else {
+            status = selectedSuggestion?.explanation ?? "Choose a supported candidate"; return
+        }
+        let thermal = ProcessInfo.processInfo.thermalState
+        guard thermal != .serious && thermal != .critical else {
+            status = "Let the phone cool before loading a model"; return
+        }
         let model = selected
         perform("Verifying and loading model…") {
             self.loadedID = nil
@@ -344,16 +377,33 @@ struct ContentView: View {
                     }
                 }
                 Section("Local model") {
-                    Picker("Model", selection: $model.selected) {
-                        ForEach(LocalModel.catalog) { Text($0.title).tag($0) }
+                    Picker("Experience", selection: $model.selectedExperience) {
+                        ForEach(ModelSuggestions.catalog.experiences.filter {
+                            ["text_assistant", "structured_extraction", "shopping_filters"].contains($0.id)
+                        }) { Text($0.name).tag($0.id) }
                     }.disabled(model.busy || model.loadedID != nil)
+                    Toggle("Smallest download first", isOn: $model.smallestDownload).disabled(model.busy || model.loadedID != nil)
+                    Picker("Model", selection: $model.selected) {
+                        ForEach(model.modelOptions) { Text($0.title).tag($0) }
+                    }.disabled(model.busy || model.loadedID != nil)
+                    if let suggestion = model.selectedSuggestion {
+                        Text(suggestion.explanation).font(.caption)
+                        Text(suggestion.model.summary).font(.caption).foregroundStyle(.secondary)
+                        if let artifact = suggestion.model.artifacts.first {
+                            Link("View the exact model file", destination: URL(string: "https://huggingface.co/\(artifact.repository)/blob/\(artifact.revision)/\(artifact.filename)")!)
+                        }
+                    }
+                    DisclosureGroup("Test memory allowance") {
+                        TextField("Optional allowance in MiB", text: $model.testMemoryMiB).keyboardType(.numberPad).disabled(model.busy || model.loadedID != nil)
+                        Text("Use an app allowance, not total phone RAM. Files reaching it are conservatively excluded. File size is not resident memory; complete working memory remains unverified.").font(.caption)
+                    }
                     Button("Import model from Files") { importer = true }.disabled(model.busy)
                     HStack {
-                        Button("Load") { model.load() }.disabled(model.busy || model.loadedID != nil)
+                        Button("Load") { model.load() }.disabled(model.busy || model.loadedID != nil || model.selectedSuggestion?.eligibleForTrial != true)
                         Spacer()
                         Button("Unload") { model.unload() }.disabled(model.busy || model.loadedID == nil)
                     }.buttonStyle(.borderless)
-                    Text("Files are verified before loading. Download sizes are not memory requirements. Liquid 350M is the first qualification candidate; no model is qualified yet.").font(.caption).foregroundStyle(.secondary)
+                    Text("Catalog checked \(ModelSuggestions.catalog.as_of). Task-specific ordering suggests what to test; no model is qualified yet. Files are verified before loading. Download sizes are not memory requirements.").font(.caption).foregroundStyle(.secondary)
                 }
                 Section("Runtime check") {
                     TextField("Ask something", text: $model.chat, axis: .vertical).lineLimit(2...4)
