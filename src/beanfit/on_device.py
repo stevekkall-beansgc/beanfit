@@ -12,6 +12,7 @@ import sys
 
 
 CATALOG_PATH = Path(__file__).with_name("catalog") / "on_device.json"
+CONTRACT_VERSION = "v1"
 
 
 def catalog():
@@ -72,7 +73,7 @@ def suggest(*, experience="text_assistant", device="unknown", os_major=None,
         rows.sort(key=lambda r: (r["download_bytes"], r["id"]))
     else:
         rows.sort(key=lambda r: (priority[r["id"]], r["id"]))
-    return {"schema": "beanfit.on-device.suggestions.v1", "catalog_as_of": doc["as_of"],
+    return {"schema": f"beanfit.on-device.suggestions.{CONTRACT_VERSION}", "catalog_as_of": doc["as_of"],
             "experience": experience, "device": device, "os_major": os_major,
             "context_tokens": context_tokens, "memory_budget_bytes": memory_budget_bytes,
             "preference": preference, "status": "needs_device_evidence", "selection": None,

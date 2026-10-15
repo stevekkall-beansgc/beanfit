@@ -2,8 +2,8 @@
 
 ## Supported versions
 
-The current source identifies itself as `0.6.1`. Its reporting scope is the
-CLI described below; this designation is not release proof or security
+The current source identifies itself as `0.7.0`. Its reporting scope is the
+CLI and experimental Pocket prototype described below; this designation is not release proof or security
 clearance. Confirm publication through the annotated tag and GitHub Release
 at the same tested commit. The historical `v0.5.1` release embeds runtime/package
 version `0.5.0`, and its policy identified `v0.4.4`. These edits do not modify
@@ -11,7 +11,7 @@ those already published artifacts.
 
 | Version | Supported |
 | --- | --- |
-| `0.6.1` source | Report suspected vulnerabilities; publication requires release proof |
+| `0.7.0` source | Report suspected vulnerabilities; publication requires release proof |
 | `v0.5.1` existing release | Report suspected vulnerabilities; identity mismatch above |
 | Earlier versions | No declared support |
 
@@ -19,7 +19,8 @@ those already published artifacts.
 
 This policy covers beanfit-owned source and behavior in the current candidate:
 the CLI, hardware detection, fit estimation and evaluation, catalog metadata,
-and output generation. Report vulnerabilities in external tools, runtimes, or
+output generation, the native Pocket host, model-file verification and public
+catalog handoff. Report vulnerabilities in external tools, runtimes, or
 downloaded models to their respective maintainers.
 
 ## Reporting a vulnerability
