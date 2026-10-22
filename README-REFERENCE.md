@@ -81,7 +81,7 @@ See [ROADMAP.md](ROADMAP.md) for the full plan.
 
 ## Current source candidate
 
-Package metadata and `beanfit --version` identify this source as `0.7.0`.
+Package metadata and `beanfit --version` identify this source as `0.8.0`.
 The sample above is a shortened fixture transcript, not a measured inference
 run or release proof. Confirm a published version through its annotated tag
 and GitHub Release at the same tested commit; a checkout alone is not proof
@@ -231,16 +231,33 @@ separate release gates.
 ## On-device catalog and suggestions
 
 The canonical catalog is `src/beanfit/catalog/on_device.json`, checked on
-2026-10-15 against exact Hugging Face revisions, file sizes and SHA-256 values.
+2026-10-22 against exact Hugging Face revisions, file sizes and SHA-256 values.
 It has six text entries: LFM2.5 230M, 350M QAD, 1.2B Instruct, 2.6B, and
 Qwen3.5 0.8B/2B. Vision, transcription and speech-output components are also
 listed, with their required weight components counted together. Model-file
 sizes are not working-memory measurements or complete installation sizes.
 
+The first experiences are short text, voice notes and semantic search. Voice
+notes prioritize Fluid Speech Mini's compiled Core ML package, including its
+four model directories, vocabulary, configuration and attribution files. Search
+starts with EmbeddingGemma 300M Q8; the local index is additional. Both require
+native integration before iPhone trials. d1 Omni 600M adds a separate named-choice
+and scoring experiment, not transcription or generated chat. Supertonic 3 adds
+a 31-language speech-output comparison alongside Kitten Nano and Supertonic 2.
+These additions have no device qualification or invented RAM estimates.
+
+`reference_models` contains three Mac-first research comparisons: Gemma 4 E2B
+QAT Q4_0 with its media component, LFM2.5 24B-A2B MLX 4-bit with all three shards,
+and EmbeddingGemma 2 full weights. They are excluded from every iPhone candidate
+and trial list. Direct artifacts are pinned; unreviewed alternate quantizations,
+Ollama aliases and quality ratings are deliberately omitted. The new references
+do not enter the legacy Mac estimate/ranking engine.
+
 The current embedded runtime can trial five text entries. LFM2.5-2.6B always
 thinks before answering, so it is held out until reasoning-aware output handling
 and an appropriate token budget exist. Vision and speech entries require runtime
-integration. The native context/output caps remain 2048/256 tokens. The source
+integration, as do search and decision classification. The native context/output
+caps remain 2048/256 tokens. The source
 catalog deliberately uses direct HF artifacts; Ollama aliases and MLX mappings
 are omitted for this runtime rather than guessed. The existing eight-row Mac
 catalog, its editorial ratings and golden scores are unchanged.
@@ -251,6 +268,8 @@ PYTHONPATH=src python3 -m beanfit suggest --device iPhone15,3 --ios 26 \
   --experience structured_extraction --preference smallest_download
 PYTHONPATH=src python3 -m beanfit suggest --device iPhone15,3 --ios 26 \
   --experience shopping_filters --memory-budget-mib 512
+PYTHONPATH=src python3 -m beanfit suggest --device iPhone15,3 --ios 26 --experience transcription
+PYTHONPATH=src python3 -m beanfit suggest --device iPhone15,3 --ios 26 --experience semantic_search
 ```
 
 `trial_order` is editorial experiment ordering for the chosen task. It does not

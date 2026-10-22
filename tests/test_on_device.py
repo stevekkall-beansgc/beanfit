@@ -33,11 +33,36 @@ class OnDeviceSuggestions(unittest.TestCase):
         self.assertEqual(next(r for r in result["candidates"] if r["id"] == "liquid12")["status"], "weights_exceed_memory_budget")
 
     def test_other_modalities_need_their_runtime_components(self):
-        for experience in ("image_description", "transcription", "speech_output"):
+        for experience in ("image_description", "transcription", "speech_output", "semantic_search", "decision_classification"):
             result = suggest(experience=experience, device="iPhone15,3", os_major=26)
             self.assertEqual(result["trial_order"], [])
             self.assertTrue(result["candidates"])
             self.assertTrue(all(r["status"] == "requires_runtime_integration" for r in result["candidates"]))
+
+    def test_voice_notes_search_and_decisions_have_complete_components(self):
+        voice = suggest(experience="transcription", device="iPhone15,3", os_major=26)
+        first = voice["candidates"][0]
+        self.assertEqual(first["id"], "fluid_speech_mini")
+        names = {a["filename"] for a in first["artifacts"]}
+        for component in ("Encoder", "Decoder", "JointDecision", "Preprocessor"):
+            self.assertIn(f"{component}.mlmodelc/model.mil", names)
+            self.assertIn(f"{component}.mlmodelc/weights/weight.bin", names)
+        self.assertIn("parakeet_v3_vocab.json", names)
+        self.assertIn("NOTICE", names)
+        search = suggest(experience="semantic_search", device="iPhone15,3", os_major=26)
+        self.assertEqual(search["candidates"][0]["id"], "embeddinggemma300")
+        self.assertEqual(search["candidates"][0]["download_bytes"], 333590944)
+        self.assertEqual(search["fallback"], "keyword_search_or_manual_browsing")
+        decision = suggest(experience="decision_classification", device="iPhone15,3", os_major=26)
+        self.assertEqual(decision["candidates"][0]["download_bytes"], 669998816)
+
+    def test_mac_references_never_enter_phone_suggestions(self):
+        doc = catalog()
+        reference_ids = {m["id"] for m in doc["reference_models"]}
+        self.assertEqual(len(reference_ids), 3)
+        for task in doc["experiences"]:
+            result = suggest(experience=task["id"], device="iPhone15,3", os_major=26)
+            self.assertTrue(reference_ids.isdisjoint(row["id"] for row in result["candidates"]))
 
     def test_unknown_or_older_devices_never_receive_an_automatic_trial(self):
         for device, os_major in (("iPhone", 26), ("iPhone14,5", 26), ("iPhone15,3", 25)):
