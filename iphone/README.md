@@ -9,6 +9,56 @@ Start with [Build and run](#build-and-run). You need Xcode, iOS 26 or newer,
 and a separately obtained model file. [Tests and evidence](#tests-and-evidence)
 explain how to check the prototype without treating a simulator as phone proof.
 
+## October 22: text in Pocket and beanSprout
+
+The development apps now offer **Write with local AI**: Summarize, Rewrite,
+and Draft a reply. Pocket opens it from **Write on this iPhone**; beanSprout
+opens it from the containing app's home screen. Tap **Load model**, choose the
+task, enter a short passage, then **Write draft**. Review the result before
+**Copy reviewed draft**. The exact LFM2.5 1.2B Q4_K_M file is already imported
+in both development installations on the test iPhone. Other installations need
+**Import model from Files** first; there is no automatic model download.
+
+This first integration deliberately uses one pinned candidate, `liquid12`, with
+2,400 UTF-8 input bytes, a 2,048-token context and at most 192 output tokens.
+`TextDraftAdapter` is shared by both apps. Drafts stay in the current view;
+only an explicit Copy writes to the clipboard. Edits retire the old draft.
+Stop, Done, backgrounding and memory warnings cancel and unload the runtime.
+Loading is blocked in serious/critical thermal states. No model-generated action
+can send a message or call a tool. Voice notes and search remain separate work.
+
+On October 22 both containing apps completed the frozen text packet on an iPhone
+14 Pro Max / iOS 26.6.1 using existing development signing. The six synthetic
+cases repeat twice, followed by cancellation/unload. These are short functional
+checks, not production writing-quality acceptance, full memory accounting,
+endurance or proof that this is the smallest/best model for every iPhone.
+The sampled process footprint excludes mapped/system allocations and cannot
+establish a fit budget. Every receipt remains `qualified: false`.
+
+beanSprout's optional build preparation is documented in its
+`experiments/local-text-integration/README.md`. Generation is added only to the
+containing app, not its Messages extension or App Clip. That local candidate
+includes a preserved, unmerged native baseline; it is not a public release.
+Existing token-expiry and inventory-freshness release gates remain failing.
+
+Run the owned physical-device packet after building and signing a development app:
+
+```sh
+xcrun devicectl list devices --json-output /private/tmp/connected-devices.json
+python3 iphone/scripts/device_text_e2e.py \
+  --device-inventory /private/tmp/connected-devices.json \
+  --app /absolute/path/BeanFitPocket.app --bundle com.beanlabs.BeanFitPocket \
+  --model /absolute/path/LFM2.5-1.2B-Instruct-Q4_K_M.gguf \
+  --output /absolute/path/text-phone-evidence
+```
+
+For beanSprout supply its prepared app and bundle
+`com.jumpingbeans.v2.imessageprototype`. Connect exactly one physical iPhone;
+the runner installs the supplied app and imports the verified file. Device IDs
+stay in memory. Only explicit `--text-smoke` launches export synthetic prompts,
+outputs, process measurements and the synthetic screen; ordinary drafts are not
+exported. Retain failed runs when comparing later attempts.
+
 ## October 15 model refresh candidate
 
 The model chooser now shares BeanFit's pinned on-device catalog with the web

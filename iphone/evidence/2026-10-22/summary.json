@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-22",
+  "device": "iPhone 14 Pro Max (iPhone15,3)",
+  "os": "26.6.1",
+  "qualified": false,
+  "native_public_release": false,
+  "apps": [
+    {
+      "app": "Pocket",
+      "bundle": "com.beanlabs.BeanFitPocket",
+      "run_id": "b88fcbaa-a935-4777-aad7-d40b6a9e4f17",
+      "passed": 13,
+      "checks": 13,
+      "memory_warnings": 0,
+      "model_unloaded": true,
+      "draft_seconds": {
+        "min": 2.109,
+        "median": 2.431,
+        "max": 2.746
+      },
+      "thermal_before": [
+        0,
+        1
+      ],
+      "thermal_after": [
+        0,
+        1
+      ]
+    },
+    {
+      "app": "beanSprout",
+      "bundle": "com.jumpingbeans.v2.imessageprototype",
+      "run_id": "ddcfb8f0-935b-4656-b117-9f3316099f7e",
+      "passed": 13,
+      "checks": 13,
+      "memory_warnings": 0,
+      "model_unloaded": true,
+      "draft_seconds": {
+        "min": 2.178,
+        "median": 2.559,
+        "max": 2.927
+      },
+      "thermal_before": [
+        1
+      ],
+      "thermal_after": [
+        1,
+        2
+      ]
+    }
+  ],
+  "limits": [
+    "Synthetic functional checks only; not gesture-driven UI or broad writing acceptance.",
+    "Process footprint is not whole-stack memory fit.",
+    "Thermal holds occurred after repeated tests; longer endurance remains open."
+  ],
+  "model_sha256": "b1b3de114215d9507409a662a501a631095a479a419584e8a2ded6304b19b4f5",
+  "runtime_revision": "2145525a4081d66ff1a87cf43ef809f95a85ac0c",
+  "shared_runtime_source_sha256": {
+    "Native.cpp": "b2068c2fa3bcc801fd2ed794e5dc4d42869e992644b134cf96a30563f28ac053",
+    "Native.h": "ba9fc835573e7996839bee5b9542d394e03b3004ebb9adb93611c18cd7713b22",
+    "Models.swift": "8abf1bafb4d98ab98c489df59f7479e96f6eb22e4e9fc046530de4c5f4c10ef4",
+    "RuntimeContracts.swift": "91781ab470a9b416637f4f95c2ed69cc32efb7ebc321a48701a907065a2fe3b7",
+    "LocalInference.swift": "43bf6abb1173f29c420e9e71159b7cc443ccec8aef68cb095861c12e4cfcfa22",
+    "ModelSuggestions.swift": "bd08c9e6b0f38978702ed5eea794a0051c5eba5cea0ee800393df6f69953d369",
+    "ModelCatalog.generated.swift": "5e17edd1253d3a72cd5090c5497eee75bae2fb7e3ac20d2636682d6ae44c4c82",
+    "TextDraft.swift": "b32f475e20eeeeb49693b49cdd57965fa7fe81ae121f0c488c641fe08df61417",
+    "TextDraftView.swift": "0b0e2289a6e69f52451e220e7850b6774e8f2f6b54ff0491f81917867b9b17fa"
+  },
+  "qa": {
+    "beanfit": "docs/unit/offline e2e pass; 252 unit tests including Swift contracts",
+    "beansprout_prepare": "pass; containing-app-only sources verified",
+    "beansprout_swift": "14 tests pass",
+    "beansprout_product": "held: existing WebMCP token margin and pet-supply inventory freshness failures"
+  }
+}

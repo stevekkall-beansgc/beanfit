@@ -125,6 +125,8 @@
 				<string>000000000000000000000201</string>
 				<string>BF2026101500000000000001</string>
 				<string>BF2026101500000000000002</string>
+				<string>F10000000000000000000000</string>
+				<string>F10000000000000000000001</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -146,6 +148,8 @@
 				<string>000000000000000000000202</string>
 				<string>BF2026101500000000000101</string>
 				<string>BF2026101500000000000102</string>
+				<string>F20000000000000000000000</string>
+				<string>F20000000000000000000001</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -439,6 +443,42 @@
 			<string>PBXBuildFile</string>
 			<key>fileRef</key>
 			<string>BF2026101500000000000002</string>
+		</dict>
+		<key>F10000000000000000000000</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>BeanFitRuntime/TextDraft.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F20000000000000000000000</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>fileRef</key>
+			<string>F10000000000000000000000</string>
+		</dict>
+		<key>F10000000000000000000001</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>BeanFitRuntime/TextDraftView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F20000000000000000000001</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>fileRef</key>
+			<string>F10000000000000000000001</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

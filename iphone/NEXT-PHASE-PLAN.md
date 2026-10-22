@@ -1,5 +1,21 @@
 # iPhone product enablement — checkpoint and next phase
 
+October 22 update: the user resumed **text first**, with voice notes and search
+deferred. Pocket and the actual beanSprout native containing app now expose the
+same local Summarize/Rewrite/Draft a reply feature using pinned LFM2.5 1.2B.
+Both were development-installed and exercised on the connected iPhone 14 Pro Max.
+The shared adapter, short-input guard, explicit copy and cancellation/unload are
+implemented. See [current text instructions](README.md#october-22-text-in-pocket-and-beansprout).
+
+The current resume point is representative text acceptance and complete phone
+resource/lifecycle testing. The tiny synthetic packet establishes basic function
+only. Keep the existing shopping-model failures and no-model baseline unchanged.
+Do not infer a production recommendation from download size or process-only
+footprint. beanSprout's unmerged native baseline and existing token/inventory
+release holds remain separate from this local integration. No App Store,
+TestFlight, voice or search rollout is claimed. Historical checkpoints below
+describe earlier states and do not override this update.
+
 October 15 update: model-catalog and recommendation work resumed on the user's
 instruction. Current source preserves the October 6 shopping preview and failed
 model gates, adds pinned current candidates and task-specific trial suggestions,
