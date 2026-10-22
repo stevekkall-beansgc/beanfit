@@ -316,7 +316,7 @@ import UniformTypeIdentifiers
     var body: some Scene {
         WindowGroup {
             Group {
-                if ProcessInfo.processInfo.arguments.contains("--text-smoke") { LocalTextDraftView() }
+                if (ProcessInfo.processInfo.arguments.contains("--text-smoke") || ProcessInfo.processInfo.arguments.contains("--text-qualify")) { LocalTextDraftView() }
                 else { ContentView(model: model).task { await model.smoke() } }
             }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)) { _ in

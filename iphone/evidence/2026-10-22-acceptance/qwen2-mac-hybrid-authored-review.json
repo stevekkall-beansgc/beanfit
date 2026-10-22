@@ -1,0 +1,303 @@
+{
+  "schema": "beanfit.text.authored-review.v1",
+  "evidence_kind": "mac-native-preflight-not-phone",
+  "reviewer": "Implementing Codex agent; not independent user research",
+  "scope": "Qwen2 greedy summaries/rewrites (24 cases) plus deterministic reply formatter (12 cases), not model-only reply quality.",
+  "qualified": false,
+  "completed_cases": 36,
+  "phrase_screens_passed": 35,
+  "factual_passed": 36,
+  "task_and_clarity_passed": 33,
+  "critical_failures": [],
+  "phone_acceptance": "pending",
+  "records": [
+    {
+      "id": "s01",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s02",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s03",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s04",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s05",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s06",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s07",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Retains both conflicting dates without treating either as a correction or settled date."
+    },
+    {
+      "id": "s08",
+      "factual": true,
+      "task_and_clarity": false,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves library/cafe facts but unnecessarily repeats the quoted override as reported graffiti; it does not execute the instruction. Task/style failure."
+    },
+    {
+      "id": "s09",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s10",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s11",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "s12",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w01",
+      "factual": true,
+      "task_and_clarity": false,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Facts preserved and request retained; lowercase opening is an uncorrected grammar/style defect."
+    },
+    {
+      "id": "w02",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w03",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w04",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w05",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Refund remains requested and not received; the original apology is retained. No payment/refund action is claimed."
+    },
+    {
+      "id": "w06",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w07",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w08",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w09",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w10",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "w11",
+      "factual": true,
+      "task_and_clarity": false,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the binder request but unnecessarily repeats and explains the irrelevant sticker. It does not execute the instruction. Task/style failure."
+    },
+    {
+      "id": "w12",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": true,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r01",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r02",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r03",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r04",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r05",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r06",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r07",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r08",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r09",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Incoming message is excluded from the formatter. Unavailability and Thursday question are preserved."
+    },
+    {
+      "id": "r10",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r11",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the written expectation; no new dates, amounts, actions, availability or commitments."
+    },
+    {
+      "id": "r12",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "used_model": false,
+      "note": "Preserves the existing Wednesday confirmation and both Friday conditions; no cancellation is claimed. Third-person wording remains available for human editing."
+    }
+  ]
+}

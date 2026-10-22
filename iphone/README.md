@@ -9,55 +9,72 @@ Start with [Build and run](#build-and-run). You need Xcode, iOS 26 or newer,
 and a separately obtained model file. [Tests and evidence](#tests-and-evidence)
 explain how to check the prototype without treating a simulator as phone proof.
 
-## October 22: text in Pocket and beanSprout
+## October 22: text acceptance in progress
 
-The development apps now offer **Write with local AI**: Summarize, Rewrite,
-and Draft a reply. Pocket opens it from **Write on this iPhone**; beanSprout
-opens it from the containing app's home screen. Tap **Load model**, choose the
-task, enter a short passage, then **Write draft**. Review the result before
-**Copy reviewed draft**. The exact LFM2.5 1.2B Q4_K_M file is already imported
-in both development installations on the test iPhone. Other installations need
-**Import model from Files** first; there is no automatic model download.
+The development apps expose **Write with local AI** in Pocket and the beanSprout
+containing app. Summarize and Rewrite use the pinned Qwen3.5 2B Q4_K_M candidate
+(`qwen2`, 1,280,835,840 bytes), with CPU inference, a 2,048-token context,
+2,400 UTF-8 input bytes and at most 192 output tokens. Import the exact model
+from Files, tap **Load model**, write a short passage and choose **Write draft**.
+Review the result before **Copy reviewed draft**. No automatic model download,
+sending, saving or tool access is enabled.
 
-This first integration deliberately uses one pinned candidate, `liquid12`, with
-2,400 UTF-8 input bytes, a 2,048-token context and at most 192 output tokens.
-`TextDraftAdapter` is shared by both apps. Drafts stay in the current view;
-only an explicit Copy writes to the clipboard. Edits retire the old draft.
-Stop, Done, backgrounding and memory warnings cancel and unload the runtime.
-Loading is blocked in serious/critical thermal states. No model-generated action
-can send a message or call a tool. Voice notes and search remain separate work.
+**Draft a reply** is a separate local formatter: enter your own complete facts
+and questions in the facts field. Supported “Ask…” directions become questions;
+other factual sentences are retained. The incoming message has no instruction
+channel and no model is loaded for this task. This preserves facts with much
+less memory, but is not a claim that an AI model passed reply-generation tests.
+Unsupported Ask directions fail with an instruction to write the question directly.
 
-On October 22 both containing apps completed the frozen text packet on an iPhone
-14 Pro Max / iOS 26.6.1 using existing development signing. The six synthetic
-cases repeat twice, followed by cancellation/unload. These are short functional
-checks, not production writing-quality acceptance, full memory accounting,
-endurance or proof that this is the smallest/best model for every iPhone.
-The sampled process footprint excludes mapped/system allocations and cannot
-establish a fit budget. Every receipt remains `qualified: false`.
+Edits retire output. Stop, Done, backgrounding, memory warnings and serious heat
+cancel and unload. The model releases after 30 seconds idle, uses two CPU threads
+at nominal temperature and one at fair, and spaces AI draft starts by 15 seconds.
+Loading requires model bytes plus 384 MiB of OS-reported available process memory.
+That value is a process budget, not free system RAM.
 
-beanSprout's optional build preparation is documented in its
-`experiments/local-text-integration/README.md`. Generation is added only to the
-containing app, not its Messages extension or App Clip. That local candidate
-includes a preserved, unmerged native baseline; it is not a public release.
-Existing token-expiry and inventory-freshness release gates remain failing.
+The [frozen 36-case acceptance protocol](Tests/TEXT-ACCEPTANCE.md) supersedes the
+six-case functional demonstration for release decisions. Initial LFM2.5 1.2B phone
+runs exposed critical factual failures; a later prompt variant reached serious
+heat and stopped. Failed attempts are retained. Qwen3.5 0.8B/2B and LFM1.2B were
+compared locally; Mac preflights are not phone qualification. Qwen2 with greedy
+sampling and the formatter is the current candidate, not a production selection.
 
-Run the owned physical-device packet after building and signing a development app:
+On iPhone 14 Pro Max / iOS 26.6.1, Pocket's revised resource packet passed five
+load/write/unload cycles, short-draft timing, Stop, idle unloading and injected
+warning/heat handlers. Peak resident memory including mapped pages was 1,384.5
+MiB; the conservative peak footprint plus full GGUF was 1,369.5 MiB, below the
+frozen 1,536 MiB cap. The subsequent quality packet completed four cases before
+an interrupted operation; it did not pass the full acceptance gate. The user
+needed the phone, so further physical tests stopped. Full quality, five-minute
+thermal runs, real UI lifecycle checks and the Instruments cross-check remain
+pending, including the corresponding beanSprout runs. Every raw receipt keeps
+`qualified: false`. See [the acceptance checkpoint](evidence/2026-10-22-acceptance/README.md).
+
+beanSprout embeds the shared runtime only in its containing app, excluding the
+Messages extension and App Clip. Its preserved native baseline is unmerged and
+not approved for publication. WebMCP token renewal and fresh member catalogs fix
+the local web release gates (870 assertions passed); those source fixes have not
+been deployed. Voice notes and search remain deferred.
+
+Run a physical packet after building/signing the candidate:
 
 ```sh
 xcrun devicectl list devices --json-output /private/tmp/connected-devices.json
-python3 iphone/scripts/device_text_e2e.py \
-  --device-inventory /private/tmp/connected-devices.json \
-  --app /absolute/path/BeanFitPocket.app --bundle com.beanlabs.BeanFitPocket \
-  --model /absolute/path/LFM2.5-1.2B-Instruct-Q4_K_M.gguf \
+python3 iphone/scripts/device_text_qualification.py \
+  --inventory /private/tmp/connected-devices.json \
+  --bundle com.beanlabs.BeanFitPocket --phase resource --model-id qwen2 \
+  --app /absolute/path/BeanFitPocket.app \
+  --model /absolute/path/Qwen3.5-2B-Q4_K_M.gguf \
   --output /absolute/path/text-phone-evidence
 ```
 
-For beanSprout supply its prepared app and bundle
-`com.jumpingbeans.v2.imessageprototype`. Connect exactly one physical iPhone;
-the runner installs the supplied app and imports the verified file. Device IDs
-stay in memory. Only explicit `--text-smoke` launches export synthetic prompts,
-outputs, process measurements and the synthetic screen; ordinary drafts are not
-exported. Retain failed runs when comparing later attempts.
+Use `--phase quality` and `--phase thermal` separately. For beanSprout use
+`com.jumpingbeans.v2.imessageprototype` and its prepared app. Device identifiers
+stay in private inventory; retained reports contain synthetic text only. Explicit
+`--text-smoke`/`--text-qualify` launches export synthetic test results; ordinary
+drafts are not exported. Simulator synthetic runs may bypass unavailable process
+headroom for functional checks only; they are labelled simulator and never phone
+memory evidence. Keep all failed runs when comparing candidates.
 
 ## October 15 model refresh candidate
 
@@ -179,7 +196,7 @@ A web product needs a native host/bridge before it can call this interface.
 
 Only one model is resident per engine. Contexts are created per request and freed
 afterward. Generation has a 2048-token context, a 256-token hard output maximum,
-and a 90-second cancellation deadline. It uses four CPU threads; Metal and
+and a 90-second cancellation deadline. It uses two CPU threads at nominal thermal state and one at fair; Metal and
 Accelerate are disabled in this first build. Stop cancels inference; unloading
 waits for serialized native work. Backgrounding and memory warnings request
 cancellation and unloading. Import/hash verification is not instantaneously

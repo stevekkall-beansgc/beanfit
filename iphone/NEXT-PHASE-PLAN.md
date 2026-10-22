@@ -1,20 +1,22 @@
 # iPhone product enablement — checkpoint and next phase
 
-October 22 update: the user resumed **text first**, with voice notes and search
-deferred. Pocket and the actual beanSprout native containing app now expose the
-same local Summarize/Rewrite/Draft a reply feature using pinned LFM2.5 1.2B.
-Both were development-installed and exercised on the connected iPhone 14 Pro Max.
-The shared adapter, short-input guard, explicit copy and cancellation/unload are
-implemented. See [current text instructions](README.md#october-22-text-in-pocket-and-beansprout).
+October 22 acceptance update: text remains first; voice notes and search are
+still deferred. The frozen 36-case packet exposed critical LFM1.2B factual
+failures and a hotter prompt variant failed sustained use. The current candidate
+uses Qwen3.5 2B for summaries/rewrites and an explicitly labelled non-model reply
+formatter. Pocket passed its revised resource packet on iPhone 14 Pro Max / iOS
+26.6.1. Full quality, sustained thermal, real UI and Instruments checks remain
+pending; beanSprout must complete the corresponding packets. The user needed
+the phone, so physical testing stopped with the model unloaded. Simulator/Mac
+checks do not fill the missing phone gates.
 
-The current resume point is representative text acceptance and complete phone
-resource/lifecycle testing. The tiny synthetic packet establishes basic function
-only. Keep the existing shopping-model failures and no-model baseline unchanged.
-Do not infer a production recommendation from download size or process-only
-footprint. beanSprout's unmerged native baseline and existing token/inventory
-release holds remain separate from this local integration. No App Store,
-TestFlight, voice or search rollout is claimed. Historical checkpoints below
-describe earlier states and do not override this update.
+See [current text instructions](README.md#october-22-text-acceptance-in-progress)
+and [the acceptance checkpoint](evidence/2026-10-22-acceptance/README.md).
+Existing shopping failures and no-model shopping behavior remain unchanged.
+The local web token/inventory fixes pass 870 product assertions, but are not
+published. beanSprout's preserved native baseline still needs release review.
+No App Store, TestFlight, voice or search rollout is claimed. Historical
+checkpoints below describe earlier states and do not override this update.
 
 October 15 update: model-catalog and recommendation work resumed on the user's
 instruction. Current source preserves the October 6 shopping preview and failed

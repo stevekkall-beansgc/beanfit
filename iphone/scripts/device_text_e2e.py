@@ -23,12 +23,14 @@ def main():
     parser.add_argument('--app', type=Path, required=True)
     parser.add_argument('--bundle', required=True)
     parser.add_argument('--model', type=Path, required=True)
+    parser.add_argument('--model-id', default='qwen2', choices=['liquid12', 'qwen08', 'qwen2'],
+                        help='Expected model in the supplied build; does not change the app model')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--skip-model-copy', action='store_true')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     catalog = json.loads((root / 'src/beanfit/catalog/on_device.json').read_text())
-    model = next(m for m in catalog['models'] if m['id'] == 'liquid12')['artifacts'][0]
+    model = next(m for m in catalog['models'] if m['id'] == args.model_id)['artifacts'][0]
     assert args.model.stat().st_size == model['bytes']
     hasher = hashlib.sha256()
     with args.model.open('rb') as stream:
