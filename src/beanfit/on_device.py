@@ -68,6 +68,7 @@ def suggest(*, experience="text_assistant", device="unknown", os_major=None,
                      "eligible_for_trial": status == "needs_device_evidence",
                      "download_bytes": size, "memory_fit": "unknown",
                      "qualified": False, "summary": model["summary"],
+                     "license": model["license"],
                      "source_url": model["source_url"], "artifacts": model["artifacts"]})
     if preference == "smallest_download":
         rows.sort(key=lambda r: (r["download_bytes"], r["id"]))

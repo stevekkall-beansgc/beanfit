@@ -74,7 +74,9 @@ Liveness is not performance evidence. This version has no telemetry.
 ## Current iPhone model candidates
 
 `PYTHONPATH=src python3 -m beanfit suggest --device iPhone15,3 --ios 26`
-shows task-specific candidates from the October 15 pinned on-device catalog.
+shows task-specific candidates from the October 22 pinned on-device catalog.
+Start with text, voice notes (`--experience transcription`) and search
+(`--experience semantic_search`). Voice notes and search still need app integration.
 These are test suggestions, not measured memory-fit or quality winners.
 [Candidate selection and app synchronization](README-REFERENCE.md#on-device-catalog-and-suggestions)
 explain the evidence gates and the separate legacy Mac estimates.

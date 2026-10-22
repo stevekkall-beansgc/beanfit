@@ -15,7 +15,8 @@ def cli(*args):
 
 
 doc = cli("--catalog")
-assert len(doc["models"]) == 11
+assert len(doc["models"]) == 15
+assert len(doc["reference_models"]) == 3
 base = ("--device", "iPhone15,3", "--ios", "26")
 general = cli(*base)
 assert general["selection"] is None and general["trial_order"][0] == "liquid12"
@@ -26,6 +27,15 @@ small = cli(*base, "--memory-budget-mib", "191")
 assert small["trial_order"] == ["liquid230"] and small["selection"] is None
 vision = cli(*base, "--experience", "image_description")
 assert vision["trial_order"] == [] and len(vision["candidates"][0]["artifacts"]) == 2
+for experience, first in (("transcription", "fluid_speech_mini"), ("semantic_search", "embeddinggemma300"),
+                          ("decision_classification", "d1_omni600")):
+    result = cli(*base, "--experience", experience)
+    assert result["candidates"][0]["id"] == first
+    assert result["trial_order"] == [] and result["selection"] is None
+    assert all(row["status"] == "requires_runtime_integration" for row in result["candidates"])
+reference_ids = {model["id"] for model in doc["reference_models"]}
+for experience in doc["experiences"]:
+    assert reference_ids.isdisjoint(row["id"] for row in cli(*base, "--experience", experience["id"])["candidates"])
 unknown = cli()
 assert unknown["trial_order"] == [] and unknown["selection"] is None
 print("On-device suggestion E2E passed: pinned catalog, task gates, resource screening, no invented winner")

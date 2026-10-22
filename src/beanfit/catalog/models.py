@@ -12,6 +12,12 @@ from typing import NamedTuple
 # with q4/q8 file sizes where published. Ollama aliases and MLX mappings are
 # explicitly omitted there because the embedded mobile runtime uses neither;
 # file sizes must not be substituted for these legacy memory estimates.
+# October 22 research comparisons live in on_device.json reference_models:
+# Gemma 4 E2B QAT GGUF, LFM2.5 24B-A2B MLX 4-bit, and EmbeddingGemma 2.
+# They intentionally have no Ollama aliases, inferred MLX alternatives, q8 size
+# where unpublished, memory estimates or editorial scores. Only the publisher's
+# exact listed artifacts are pinned; they never enter iPhone suggestions or the
+# legacy Mac ranking until their runtimes and evidence are reviewed.
 
 
 class ModelEntry(NamedTuple):
