@@ -59,7 +59,7 @@ transcript, catalog controls, supported scope and development commands.
 
 ## Current source candidate
 
-Source package identity is `0.7.0`; matching tags and GitHub Releases provide
+Source package identity is `0.8.0`; matching tags and GitHub Releases provide
 release proof. Historical `v0.5.1` embeds `0.5.0`; those published artifacts
 are unchanged. [Release history](https://github.com/stevekkall-beansgc/beanfit/releases)
 and the [roadmap](ROADMAP.md) distinguish shipped source from planned
