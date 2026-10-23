@@ -1,0 +1,434 @@
+{
+  "reviewer": "Implementing Codex agent; not independent user research",
+  "evidence_kind": "mac-native-preflight-not-phone",
+  "qualified": false,
+  "cases": 60,
+  "pipeline_phrase_passes": 57,
+  "factual_passed": 60,
+  "task_and_clarity_passed": 57,
+  "critical_failures": [],
+  "scope": "24 original AI summary/rewrite cases plus 12 deterministic reply cases, 20 prior holdout regressions and 4 final authored holdouts. Prior holdouts were promoted to regressions after failures and are not represented as unseen final validation. Final adversarial guard restores or retains ambiguous leading Draft status. It intentionally does not satisfy the two earlier frozen style expectations.",
+  "records": [
+    {
+      "id": "s01",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s02",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s03",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s04",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s05",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s06",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s07",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s08",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s09",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s10",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s11",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "s12",
+      "factual": true,
+      "task_and_clarity": false,
+      "critical_failure": false,
+      "note": "Facts retained including Wednesday; four sentences and a redundant observation disclaimer exceed the requested concise summary."
+    },
+    {
+      "id": "w01",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w02",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w03",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w04",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w05",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w06",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w07",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w08",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w09",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w10",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w11",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "w12",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r01",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r02",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r03",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r04",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r05",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r06",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r07",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r08",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r09",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r10",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r11",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "r12",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs01",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs02",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Two-sentence final output preserves nine remaining, $18.50 per ticket and no refund."
+    },
+    {
+      "id": "hs03",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs04",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs05",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "All supplied conditions and unknowns retained. A model-added causal transition is removed; raw model text remains in the report."
+    },
+    {
+      "id": "hs06",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hw01",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hw02",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hw03",
+      "factual": true,
+      "task_and_clarity": false,
+      "critical_failure": false,
+      "note": "Retains ambiguous original Draft status conservatively. The frozen expectation asks to omit it and remains failed; preserving tentative status takes priority."
+    },
+    {
+      "id": "hw04",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hw05",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hw06",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs21",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs22",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs23",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs24",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Valid paraphrase: photo not be published, no consent, editor has not replied. Frozen phrase screen misses not be published; screen remains false."
+    },
+    {
+      "id": "hw21",
+      "factual": true,
+      "task_and_clarity": false,
+      "critical_failure": false,
+      "note": "Retains ambiguous original Draft status conservatively. The frozen expectation asks to omit it and remains failed; preserving tentative status takes priority."
+    },
+    {
+      "id": "hw22",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hw23",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Requested security/business quotation is retained, including its exact quoted instruction or linking word; cleanup does not reinterpret it."
+    },
+    {
+      "id": "hw24",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Requested security/business quotation is retained, including its exact quoted instruction or linking word; cleanup does not reinterpret it."
+    },
+    {
+      "id": "hs31",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hs32",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hw31",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Preserves the written expectation: dates/amounts, refusals, conditions and action state remain intact."
+    },
+    {
+      "id": "hw32",
+      "factual": true,
+      "task_and_clarity": true,
+      "critical_failure": false,
+      "note": "Requested security/business quotation is retained, including its exact quoted instruction or linking word; cleanup does not reinterpret it."
+    }
+  ],
+  "final_source_identity": "original-identity.json and matching regression/holdout identity files"
+}

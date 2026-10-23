@@ -1,0 +1,67 @@
+{
+  "completed" : true,
+  "evidence_kind" : "mac-native-preflight-not-phone",
+  "memory_and_thermal_measurements" : false,
+  "model" : "qwen2",
+  "model_sha256" : "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+  "qualified" : false,
+  "records" : [
+    {
+      "duration_ms" : 2090.7490253448486,
+      "expectation" : "Keep delivery date, conditional help and unconfirmed price as separate facts.",
+      "id" : "hs31",
+      "input" : "Shelf delivery is scheduled for June 7. Sam can help only if the loading bay is available. The delivery price has not been confirmed.",
+      "normalized_causal_links" : 0,
+      "output" : "Shelf delivery is scheduled for June 7. Sam can help only if the loading bay is available. The delivery price has not been confirmed.",
+      "passed" : true,
+      "preserved_draft_status" : false,
+      "raw_model_output" : "Shelf delivery is scheduled for June 7. Sam can help only if the loading bay is available. The delivery price has not been confirmed.",
+      "raw_model_phrase_pass" : true,
+      "removed_annotations" : 0,
+      "used_model" : true
+    },
+    {
+      "duration_ms" : 2042.8119897842407,
+      "expectation" : "Preserve actual supplied cause, cancellation, unpaid refunds and update date.",
+      "id" : "hs32",
+      "input" : "Because the venue flooded, the concert was cancelled. Refunds have not been issued. Organizers will publish an update on July 16.",
+      "normalized_causal_links" : 0,
+      "output" : "Because the venue flooded, the concert was cancelled. Refunds have not been issued. Organizers will publish an update on July 16.",
+      "passed" : true,
+      "preserved_draft_status" : false,
+      "raw_model_output" : "Because the venue flooded, the concert was cancelled. Refunds have not been issued. Organizers will publish an update on July 16.",
+      "raw_model_phrase_pass" : true,
+      "removed_annotations" : 0,
+      "used_model" : true
+    },
+    {
+      "duration_ms" : 1917.2439575195312,
+      "expectation" : "Preserve invoice request, seven, unit amount and no authorization; no promise\/payment.",
+      "id" : "hw31",
+      "input" : "please send the revised invoice for seven items at $7.25 each. I have not authorized a charge.",
+      "normalized_causal_links" : 0,
+      "output" : "Please send the revised invoice for seven items at $7.25 each. I have not authorized a charge.",
+      "passed" : true,
+      "preserved_draft_status" : false,
+      "raw_model_output" : "Please send the revised invoice for seven items at $7.25 each. I have not authorized a charge.",
+      "raw_model_phrase_pass" : true,
+      "removed_annotations" : 0,
+      "used_model" : true
+    },
+    {
+      "duration_ms" : 2070.1140165328979,
+      "expectation" : "Preserve exact quoted connector and Wednesday-only condition.",
+      "id" : "hw32",
+      "input" : "Keep this exact quote: \"Therefore, the south door stays closed.\" The instruction applies only on Wednesday.",
+      "normalized_causal_links" : 0,
+      "output" : "Keep this exact quote: \"Therefore, the south door stays closed.\" The instruction applies only on Wednesday.",
+      "passed" : true,
+      "preserved_draft_status" : false,
+      "raw_model_output" : "Keep this exact quote: \"Therefore, the south door stays closed.\" The instruction applies only on Wednesday.",
+      "raw_model_phrase_pass" : true,
+      "removed_annotations" : 0,
+      "used_model" : true
+    }
+  ],
+  "sampling_profile" : 0
+}

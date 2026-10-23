@@ -9,6 +9,48 @@ Start with [Build and run](#build-and-run). You need Xcode, iOS 26 or newer,
 and a separately obtained model file. [Tests and evidence](#tests-and-evidence)
 explain how to check the prototype without treating a simulator as phone proof.
 
+## October 23: no-phone refinement
+
+The current source fixes editor focus across background/reopen and observes
+UIKit lifecycle notifications as well as SwiftUI scene state. This matters in
+the beanSprout host: its SwiftUI view did not inherit background scene state,
+so the previous containing app could keep the model loaded. The same real
+copy/edit/background/reload/dismiss tests now cover both app hosts in disposable
+simulators. This does not qualify physical phone memory, heat or latency.
+
+Summaries/rewrites use revised Qwen2 instructions with bounded output cleanup.
+The cleanup removes simple reported editorial output-control annotations and
+explicit rewrite labels. Ambiguous leading Draft status is retained or restored.
+It normalizes a few model-added causal transitions when the
+source has no recognized causal wording. It retains uncertain mixed clauses,
+requested literal/security text and business quotations. This is a limited
+style policy, not a semantic fact checker or prompt-injection security boundary.
+The UI marks normalized drafts for comparison with the original. Synthetic
+reports retain raw model text and edit counts; ordinary drafts stay in memory.
+Reply drafts still use the separate facts formatter without model inference.
+
+The original 36-case packet and additional frozen/regression packets retain
+all failures. See [the October 23 evidence and review](evidence/2026-10-23/README.md).
+The Mac results are source validation, not phone acceptance. Voice notes and
+search remain deferred. BeanFit's CLI, native chooser and companion now place
+Qwen2 first for comparison and hold the failed LFM1.2B text configuration.
+
+Two reproducible local harnesses are available:
+
+```sh
+python3 iphone/scripts/mac_text_preflight.py --help
+python3 iphone/scripts/simulator_text_ui.py --help
+```
+
+The first snapshots the actual Swift adapter before compiling it with a supplied,
+separately reviewed local native library. It verifies the pinned GGUF on load
+and records source, packet and library hashes. The second uses prebuilt simulator
+apps and an `.xctestrun` specification, creates its own account-free simulator,
+runs both host UI tests, requires finalized results plus background unload
+receipts, and deletes only its temporary simulator. Neither accesses a phone,
+downloads weights, creates signing assets or calls an AI provider. Raw Xcode
+bundles stay private; use the sanitized JSON reports when sharing evidence.
+
 ## October 22: text acceptance in progress
 
 The development apps expose **Write with local AI** in Pocket and the beanSprout

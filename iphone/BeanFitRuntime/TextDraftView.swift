@@ -9,6 +9,7 @@ import CryptoKit
         { didSet { if oldValue != input { retireDraft() } } }
     @Published var replyFacts = "" { didSet { if oldValue != replyFacts { retireDraft() } } }
     @Published private(set) var output = ""
+    @Published private(set) var draftNote = ""
     @Published private(set) var status = "Import the model once, then load it to write on this iPhone."
     @Published private(set) var loaded = false
     @Published private(set) var busy = false
@@ -25,6 +26,11 @@ import CryptoKit
     private var completedDrafts = 0
     private var lastDraftDurationMs: Double = 0
     private var lastDraftUsedModel = false
+    private var lastRawModelText: String?
+    private var lastRemovedAnnotations = 0
+    private var lastNormalizedCausalLinks = 0
+    private var lastPreservedDraftStatus = false
+    @Published private var backgrounded = false
     private var flowEvents: [[String:Any]] = []
     var syntheticTest: Bool { ProcessInfo.processInfo.arguments.contains("--text-smoke") || ProcessInfo.processInfo.arguments.contains("--text-qualify") }
     private func trace(_ event: String) {
@@ -32,21 +38,27 @@ import CryptoKit
         flowEvents.append(["event":event,"seconds":ProcessInfo.processInfo.systemUptime,
                            "revision":revision,"busy":busy,"loaded":loaded,"task":task.rawValue])
     }
-    var canGenerate: Bool { (loaded || task == .reply) && !busy && (try? TextDraftRequest(task: task, text: input, replyFacts: replyFacts)) != nil }
+    var canGenerate: Bool { !backgrounded && (loaded || task == .reply) && !busy && (try? TextDraftRequest(task: task, text: input, replyFacts: replyFacts)) != nil }
+    func becameActive() { backgrounded = false }
+    func enteredBackground() {
+        guard !backgrounded else { return }
+        backgrounded = true
+        stop(message:"Paused in background. Model memory released.")
+    }
     func chooseTask(_ value: TextDraftTask) {
         task = value
         if value == .reply { stop(message:"Reply drafts use your facts. No model is needed.") }
     }
     func retireDraft() {
         trace("input-or-task-edited")
-        output = ""; revision += 1
+        output = ""; draftNote = ""; lastRawModelText = nil; revision += 1
         if busy { stop() }
     }
     func stop(message: String = "Stopped. Model memory released.") {
         trace("stop: " + message)
         let started = ProcessInfo.processInfo.systemUptime
         revision += 1; let fence = revision
-        idle?.cancel(); idle = nil; work?.cancel(); runtime.cancel(); output = ""; busy = true
+        idle?.cancel(); idle = nil; work?.cancel(); runtime.cancel(); output = ""; draftNote = ""; lastRawModelText = nil; busy = true
         status = message
         work = Task {
             await runtime.unload()
@@ -100,6 +112,7 @@ import CryptoKit
         }
     }
     func load() {
+        guard !backgrounded else { status = "Paused in background. Model memory released."; return }
         let thermal = ProcessInfo.processInfo.thermalState
         guard thermal != .serious && thermal != .critical else { status = "Let the iPhone cool before loading."; return }
         #if targetEnvironment(simulator)
@@ -144,6 +157,11 @@ import CryptoKit
             guard self.input == input, self.task == task, self.replyFacts == facts else { return }
             if let measurement = result.measurement { self.measurements.append(measurement) }
             self.output = result.text; self.completedDrafts += 1
+            self.lastRawModelText = result.rawModelText; self.lastRemovedAnnotations = result.removedAnnotations
+            self.lastNormalizedCausalLinks = result.normalizedCausalLinks
+            self.lastPreservedDraftStatus = result.preservedDraftStatus
+            self.draftNote = result.preservedDraftStatus ? "Kept the original draft status. Review before copying." :
+                (result.removedAnnotations + result.normalizedCausalLinks > 0 ? "Cleaned up drafting notes or added linking words. Compare with the original before copying." : "")
             self.lastDraftDurationMs = Date().timeIntervalSince(started)*1000; self.lastDraftUsedModel = result.usedModel
         }
     }
@@ -302,8 +320,12 @@ extension TextDraftModel {
             let before = completedDrafts
             generate(); await work?.value
             guard !busy, !output.isEmpty, completedDrafts > before else { throw RuntimeFailure.message(status) }
-            records.append(["id":item.id,"task":item.task.rawValue,"input":item.text,"expectation":item.expectation,
-                "output":output,"passed":item.screens(output),"duration_ms":lastDraftDurationMs,"used_model":lastDraftUsedModel])
+            var record: [String:Any] = ["id":item.id,"task":item.task.rawValue,"input":item.text,"expectation":item.expectation,
+                "output":output,"passed":item.screens(output),"duration_ms":lastDraftDurationMs,"used_model":lastDraftUsedModel,
+                "removed_annotations":lastRemovedAnnotations,"normalized_causal_links":lastNormalizedCausalLinks,
+                "preserved_draft_status":lastPreservedDraftStatus]
+            if let raw = lastRawModelText { record["raw_model_output"] = raw; record["raw_model_phrase_pass"] = item.screens(raw) }
+            records.append(record)
             save()
         }
         save()
@@ -368,6 +390,8 @@ struct LocalTextDraftView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dismiss) private var dismiss
     @State private var importer = false
+    private enum Editor: Hashable { case source, facts }
+    @FocusState private var focusedEditor: Editor?
     var body: some View {
         NavigationStack {
             Form {
@@ -379,18 +403,19 @@ struct LocalTextDraftView: View {
                 }
                 Section("Your text") {
                     Picker("Help with", selection: model.syntheticTest ? .constant(model.task) : Binding(get:{model.task},set:{model.chooseTask($0)})) { ForEach(TextDraftTask.allCases) { Text($0.title).tag($0) } }.disabled(model.busy)
-                    TextEditor(text: model.syntheticTest ? .constant(model.input) : $model.input).frame(minHeight: 130).disabled(model.busy).accessibilityIdentifier("textDraftInput")
+                    TextEditor(text: model.syntheticTest ? .constant(model.input) : $model.input).frame(minHeight: 130).disabled(model.busy).focused($focusedEditor,equals:.source).accessibilityIdentifier("textDraftInput")
                     if model.task == .reply {
                         Text("Your facts for the reply").font(.caption)
-                        TextEditor(text:model.syntheticTest ? .constant(model.replyFacts) : $model.replyFacts).frame(minHeight:80).disabled(model.busy).accessibilityIdentifier("textReplyFacts")
+                        TextEditor(text:model.syntheticTest ? .constant(model.replyFacts) : $model.replyFacts).frame(minHeight:80).disabled(model.busy).focused($focusedEditor,equals:.facts).accessibilityIdentifier("textReplyFacts")
                         Text("Use complete facts in your own voice. Add questions directly, or use Ask about, Ask if, Ask how, or Ask for. No model is needed.").font(.caption)
                     }
-                    Button("Write draft") { model.generate() }.disabled(!model.canGenerate).accessibilityIdentifier("writeTextDraft")
+                    Button("Write draft") { focusedEditor = nil; model.generate() }.disabled(!model.canGenerate).accessibilityIdentifier("writeTextDraft")
                 }
                 Section("Draft to review") {
                     if model.output.isEmpty { Text("Your draft will appear here.").foregroundStyle(.secondary) }
                     else {
                         Text(model.output).textSelection(.enabled).accessibilityIdentifier("textDraftOutput")
+                        if !model.draftNote.isEmpty { Text(model.draftNote).font(.caption) }
                         Button("Copy reviewed draft") { model.copyReviewedDraft() }.disabled(model.busy)
                     }
                 }
@@ -405,7 +430,10 @@ struct LocalTextDraftView: View {
                     Text("Short English passages. Leave 15 seconds between drafts. The model releases after 30 seconds idle. Review every draft; details can be wrong.").font(.caption)
                 }
             }.scrollDismissesKeyboard(.interactively).navigationTitle("Write with local AI")
-                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Done") { model.stop(); dismiss() } } }
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) { Button("Done") { focusedEditor = nil; model.stop(); dismiss() } }
+                    ToolbarItemGroup(placement:.keyboard) { Spacer(); Button("Done typing") { focusedEditor = nil }.accessibilityIdentifier("finishTextEditing") }
+                }
         }
         .fileImporter(isPresented: $importer, allowedContentTypes: [.data], allowsMultipleSelection: false) { result in
             if case .success(let urls) = result, let url = urls.first { model.importModel(url) }
@@ -415,7 +443,16 @@ struct LocalTextDraftView: View {
             else { await model.smoke() }
         }
         .onDisappear { model.stop() }
-        .onChange(of: scenePhase) { _, phase in if phase == .background { model.stop(message:"Paused in background. Model memory released.") } }
+        .onChange(of: scenePhase) { _, phase in
+            if phase != .active { focusedEditor = nil }
+            if phase == .active { model.becameActive() }
+            if phase == .background { model.enteredBackground() }
+        }
+        // UIKit-hosted SwiftUI views do not inherit an App scenePhase. Observe
+        // the containing application's lifecycle as well; handlers are idempotent.
+        .onReceive(NotificationCenter.default.publisher(for:UIApplication.willResignActiveNotification)) { _ in focusedEditor = nil }
+        .onReceive(NotificationCenter.default.publisher(for:UIApplication.didEnterBackgroundNotification)) { _ in model.enteredBackground() }
+        .onReceive(NotificationCenter.default.publisher(for:UIApplication.didBecomeActiveNotification)) { _ in model.becameActive() }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)) { _ in model.memoryWarning() }
         .onReceive(NotificationCenter.default.publisher(for: ProcessInfo.thermalStateDidChangeNotification)) { _ in model.thermalChanged() }
     }

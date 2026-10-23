@@ -56,8 +56,12 @@ private final class NativePreflightRuntime: LocalInferenceClient {
                 let text = marker.map { String(item.text[..<$0.lowerBound]) } ?? item.text
                 let facts = marker.map { String(item.text[$0.upperBound...]) }
                 let result = try await TextDraftAdapter(runtime:runtime).draft(TextDraftRequest(task:item.task,text:text,replyFacts:facts))
-                records.append(["id":item.id,"input":item.text,"expectation":item.expectation,"output":result.text,
-                    "passed":item.screens(result.text),"duration_ms":result.durationMs,"used_model":result.usedModel])
+                var record: [String:Any] = ["id":item.id,"input":item.text,"expectation":item.expectation,"output":result.text,
+                    "passed":item.screens(result.text),"duration_ms":result.durationMs,"used_model":result.usedModel,
+                    "removed_annotations":result.removedAnnotations,"normalized_causal_links":result.normalizedCausalLinks,
+                    "preserved_draft_status":result.preservedDraftStatus]
+                if let raw = result.rawModelText { record["raw_model_output"] = raw; record["raw_model_phrase_pass"] = item.screens(raw) }
+                records.append(record)
             } catch { records.append(["id":item.id,"input":item.text,"expectation":item.expectation,"error":error.localizedDescription,"passed":false]) }
             try save(false)
         }

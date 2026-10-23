@@ -1,5 +1,15 @@
 # iPhone product enablement — checkpoint and next phase
 
+October 23 update: the authorized no-phone work fixes simulator editor focus and
+beanSprout's missing UIKit background notification path, refines text output
+with transparent bounded cleanup, and aligns the CLI/native/companion trial
+suggestions. Mac and simulator evidence is retained separately from physical
+qualification; every receipt remains unqualified. The source release candidate
+for web token/inventory fixes is isolated on current main, excluding the native
+baseline. Phone quality, resource/thermal and Instruments checks still remain;
+voice notes/search stay deferred. See the current [text guide](README.md) and
+[October 23 review](evidence/2026-10-23/README.md). Historical checkpoints follow.
+
 October 22 acceptance update: text remains first; voice notes and search are
 still deferred. The frozen 36-case packet exposed critical LFM1.2B factual
 failures and a hotter prompt variant failed sustained use. The current candidate

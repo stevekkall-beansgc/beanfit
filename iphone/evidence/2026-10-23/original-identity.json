@@ -1,0 +1,17 @@
+{
+  "source_sha256": {
+    "Native.h": "b15ade87d76b71bebcf120481d929e2e86f25defbe76bbb690bf4a53845fa3a4",
+    "ModelCatalog.generated.swift": "6e6a7afe1dfbea039158da76b9c3cc5f5d93b96f80b0d9db9be0b2468690b6eb",
+    "Native.cpp": "7acd42c993fb1a01ce9d32ae95f0b99323c2cefe530933b0b3fe4b782e0f3602",
+    "Models.swift": "8abf1bafb4d98ab98c489df59f7479e96f6eb22e4e9fc046530de4c5f4c10ef4",
+    "NativeTextPreflight.swift": "eae30ec12e4a61c21e71256776745317d5467b7871475fc6582ad055d36dbf1f",
+    "ModelSuggestions.swift": "b8ec9bceb5757f01885eb9c9c8b22c6db0e060316d8d0aafd32b0a839849d1e7",
+    "TextDraft.swift": "86cce35b9e33ec868735c2c6f19818152fc8e0acfa69854e8757bc367d6b6c0f",
+    "RuntimeContracts.swift": "cdee2487e229b266c158d66263e5d02f6a8487e14eb2cca9bc49d05d67ad06b5"
+  },
+  "packet_sha256": "47f1797303c82d58180f913e697d30c590a69097afed98141d164862bd0d70c5",
+  "native_library_sha256": "8d6fe61c9152e9f5ef9ecd0098e98cd0a77fe550d44aa5475b9eac5e704e908c",
+  "native_library_provenance": "Supplied local library; not attested by this harness",
+  "evidence_kind": "mac-native-preflight-not-phone",
+  "qualified": false
+}

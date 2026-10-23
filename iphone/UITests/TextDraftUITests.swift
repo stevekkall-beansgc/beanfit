@@ -27,6 +27,9 @@ final class TextDraftUITests: XCTestCase {
         wait(write)
         let editor = app.textViews["textDraftInput"]
         replace(editor,with:"The meeting is Thursday. Bring a blue folder.")
+        let finishEditing = app.buttons["finishTextEditing"]
+        XCTAssertTrue(finishEditing.waitForExistence(timeout:5))
+        finishEditing.tap()
         write.tap()
         let output = app.staticTexts["textDraftOutput"]
         XCTAssertTrue(output.waitForExistence(timeout:20))
@@ -39,7 +42,8 @@ final class TextDraftUITests: XCTestCase {
         replace(editor,with:"Please return the green folder on Monday.")
         XCTAssertFalse(output.exists)
         XCTAssertFalse(app.buttons["Copy reviewed draft"].exists)
-        app.swipeUp() // Dismiss the editor keyboard before leaving the app.
+        XCTAssertTrue(finishEditing.waitForExistence(timeout:5))
+        // Leave the editor focused: scene changes must release it automatically.
         XCUIDevice.shared.press(.home)
         // Observe after a real background/foreground transition, not a notification injection.
         Thread.sleep(forTimeInterval:2)

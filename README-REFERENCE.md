@@ -231,11 +231,19 @@ separate release gates.
 ## On-device catalog and suggestions
 
 The canonical catalog is `src/beanfit/catalog/on_device.json`, checked on
-2026-10-22 against exact Hugging Face revisions, file sizes and SHA-256 values.
+2026-10-23 against exact Hugging Face revisions, file sizes and SHA-256 values.
 It has six text entries: LFM2.5 230M, 350M QAD, 1.2B Instruct, 2.6B, and
 Qwen3.5 0.8B/2B. Vision, transcription and speech-output components are also
 listed, with their required weight components counted together. Model-file
 sizes are not working-memory measurements or complete installation sizes.
+
+The current short-text trial order starts with Qwen3.5 2B. Earlier LFM1.2B text
+configurations failed factual acceptance and remain held for that experience,
+even when a memory allowance would fit the file. Shopping failure gates remain
+unchanged. The native pilot uses a separate non-model reply formatter; this is
+not a model-only reply benchmark. Preliminary Pocket resource evidence is not
+full phone quality, thermal or device-family qualification. `selection` remains
+null without reviewed, comparable complete-configuration receipts.
 
 The first experiences are short text, voice notes and semantic search. Voice
 notes prioritize Fluid Speech Mini's compiled Core ML package, including its
