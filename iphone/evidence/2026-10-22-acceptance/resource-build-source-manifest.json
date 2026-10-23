@@ -1,7 +1,6 @@
 {
   "schema": "jb.beanfit-text.integration.v1",
   "host_only": true,
-  "beanfit_source": "/Users/stephenkall/beans/worktrees/beanfit-text-20261022",
   "source_files_sha256": {
     "Native.cpp": "7acd42c993fb1a01ce9d32ae95f0b99323c2cefe530933b0b3fe4b782e0f3602",
     "Native.h": "b15ade87d76b71bebcf120481d929e2e86f25defbe76bbb690bf4a53845fa3a4",
@@ -15,5 +14,7 @@
   },
   "runtime_revision": "2145525a4081d66ff1a87cf43ef809f95a85ac0c",
   "model_downloaded": false,
-  "signing_or_install_performed": false
+  "signing_or_install_performed": false,
+  "local_source_path_omitted": true,
+  "original_local_manifest_sha256": "9e2b535146f095e8ffd1fcd5963b367e3dfe67893ee550d9d42e9343442c36c7"
 }
