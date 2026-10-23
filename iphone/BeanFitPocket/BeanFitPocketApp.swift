@@ -2,7 +2,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 @MainActor final class PocketModel: ObservableObject {
-    @Published var selected = LocalModel.catalog.first { $0.id == "liquid12" }!
+    @Published var selected = LocalModel.catalog.first { $0.id == "qwen2" }!
     @Published var selectedExperience = "text_assistant"
     @Published var smallestDownload = false
     @Published var testMemoryMiB = ""
