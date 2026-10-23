@@ -1,0 +1,48 @@
+{
+  "ready_for_phone_testing": true,
+  "ready_for_distribution": false,
+  "qualified": false,
+  "phone_operations": false,
+  "independent_sign_off": false,
+  "implementation_commit": "b7e53c0fe7a6545e6d04aaec7c194e275b9194b4",
+  "runner_review_commit": "eff924d5763c56591490cfe5bf244131df1cc6ab",
+  "host_implementation_commit": "11284e71c71f413976697c312bf7112abe0f67eb",
+  "findings": [
+    {
+      "id": "N1",
+      "priority": 1,
+      "finding": "Prior build numbers did not distinguish the final candidates",
+      "disposition": "Fixed: Pocket2/beanSprout1317 verified in all four built bundles; embedded extension/Clip versions agree. Runner rejects wrong local bundle/build/executable before install and wrong returned build/version."
+    },
+    {
+      "id": "N2",
+      "priority": 1,
+      "finding": "A physical packet poll timeout could leave its app running",
+      "disposition": "Local repair: owned console launch, bounded SIGINT/termination cleanup and retained incomplete reports; child-process test passes. Actual devicectl signal forwarding/app exit remains a phone confirmation gate, explicitly unverified."
+    },
+    {
+      "id": "N3",
+      "priority": 1,
+      "finding": "Final physical quality/resources/heat/UI/Instruments acceptance is incomplete",
+      "disposition": "Open: six exact-build packet commands and manual checks prepared; no phone operations."
+    },
+    {
+      "id": "N4",
+      "priority": 1,
+      "finding": "beanSprout branch contains an older unmerged native baseline and broader unrelated work",
+      "disposition": "Open publication hold: 108 baseline native files listed separately; focused text patch provided. Full branch must not be merged as a text-only release."
+    },
+    {
+      "id": "N5",
+      "priority": 2,
+      "finding": "Earlier authored pipeline review has3 task/clarity failures out of60",
+      "disposition": "Retained:57/60 task/clarity and phrase screens,60/60 factual in that authored Mac sample. No test expectation changes; pipeline sources unchanged. This is historical corroboration, not final phone acceptance."
+    },
+    {
+      "id": "N6",
+      "priority": 1,
+      "finding": "Earlier Pocket quality packet stopped after four cases",
+      "disposition": "Open: not reproduced or proven fixed. Fresh phone outputs/flow receipts and owned console behavior must be reviewed."
+    }
+  ]
+}
