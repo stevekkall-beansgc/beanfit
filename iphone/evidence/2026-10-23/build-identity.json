@@ -1,0 +1,53 @@
+{
+  "evidence_kind": "local-build-identity-not-phone",
+  "qualified": false,
+  "phone_operations": false,
+  "source_files_sha256": {
+    "Native.cpp": "7acd42c993fb1a01ce9d32ae95f0b99323c2cefe530933b0b3fe4b782e0f3602",
+    "Native.h": "b15ade87d76b71bebcf120481d929e2e86f25defbe76bbb690bf4a53845fa3a4",
+    "Models.swift": "8abf1bafb4d98ab98c489df59f7479e96f6eb22e4e9fc046530de4c5f4c10ef4",
+    "RuntimeContracts.swift": "cdee2487e229b266c158d66263e5d02f6a8487e14eb2cca9bc49d05d67ad06b5",
+    "LocalInference.swift": "053e4f39f7e97c0241bc866d4c4584d5dd1910336f077d1020d4bd3023b6e11d",
+    "ModelSuggestions.swift": "b8ec9bceb5757f01885eb9c9c8b22c6db0e060316d8d0aafd32b0a839849d1e7",
+    "ModelCatalog.generated.swift": "6e6a7afe1dfbea039158da76b9c3cc5f5d93b96f80b0d9db9be0b2468690b6eb",
+    "TextDraft.swift": "86cce35b9e33ec868735c2c6f19818152fc8e0acfa69854e8757bc367d6b6c0f",
+    "TextDraftView.swift": "53ed9c2867de7653e2a575d035c12ed903365f87788ec0223d612835b44e8bce"
+  },
+  "builds": [
+    {
+      "host": "pocket",
+      "target": "iphoneos",
+      "bundle_id": "com.beanlabs.BeanFitPocket",
+      "build": "1",
+      "executable_sha256": "f1b9ce7d2baee1649d744b32032acd2c656be152a7fd90f8391fc89b4111244d",
+      "signature_verified": true,
+      "existing_profile_expiry_utc": "2027-10-07T13:41:36Z",
+      "profile_metadata_note": "Expiry parsed from embedded CMS payload; not a fresh issuer verification."
+    },
+    {
+      "host": "beansprout",
+      "target": "iphoneos",
+      "bundle_id": "com.jumpingbeans.v2.imessageprototype",
+      "build": "1310",
+      "executable_sha256": "98c931256c6767f0e9ef2d00625f85fef1c5123613b50261518cc4b13bbf3175",
+      "signature_verified": true,
+      "existing_profile_expiry_utc": "2027-10-07T21:27:32Z",
+      "profile_metadata_note": "Expiry parsed from embedded CMS payload; not a fresh issuer verification."
+    },
+    {
+      "host": "pocket",
+      "target": "iphonesimulator",
+      "bundle_id": "com.beanlabs.BeanFitPocket",
+      "build": "1",
+      "executable_sha256": "aea64641fc3fe6676b5e71bdb83490461518ee871b04ecabbbedbe534cbd178c"
+    },
+    {
+      "host": "beansprout",
+      "target": "iphonesimulator",
+      "bundle_id": "com.jumpingbeans.v2.imessageprototype",
+      "build": "1",
+      "executable_sha256": "5bccdbf5775ee5e2f12401a61688c9870cfc1988e4d76c806c1e9a5b069e41c2"
+    }
+  ],
+  "scope": "Final shared-source generic device builds and the simulator apps used in finalized UI receipts. Hashes bind local executable files, not a reproducible-build attestation. No install, phone latency, heat or resource measurement."
+}

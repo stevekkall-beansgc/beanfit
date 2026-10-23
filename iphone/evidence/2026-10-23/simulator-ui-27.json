@@ -12,8 +12,8 @@
   "failed_tests": 0,
   "skipped_tests": 0,
   "pocket_background_unload_passed": true,
-  "pocket_background_unload_ms": 362.7534997649491,
+  "pocket_background_unload_ms": 331.8942915648222,
   "beansprout_background_unload_passed": true,
-  "beansprout_background_unload_ms": 204.31383326649666,
+  "beansprout_background_unload_ms": 306.0121666640043,
   "temporary_simulator_removed": true
 }

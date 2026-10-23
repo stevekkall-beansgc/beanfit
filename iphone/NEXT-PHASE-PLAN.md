@@ -5,8 +5,8 @@ beanSprout's missing UIKit background notification path, refines text output
 with transparent bounded cleanup, and aligns the CLI/native/companion trial
 suggestions. Mac and simulator evidence is retained separately from physical
 qualification; every receipt remains unqualified. The source release candidate
-for web token/inventory fixes is isolated on current main, excluding the native
-baseline. Phone quality, resource/thermal and Instruments checks still remain;
+for web inventory fixes is isolated on updated main, excluding the native
+baseline and preserving its separately merged token renewal. Phone quality, resource/thermal and Instruments checks still remain;
 voice notes/search stay deferred. See the current [text guide](README.md) and
 [October 23 review](evidence/2026-10-23/README.md). Historical checkpoints follow.
 

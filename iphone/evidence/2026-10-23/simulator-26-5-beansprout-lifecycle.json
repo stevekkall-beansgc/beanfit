@@ -1,20 +1,20 @@
 [
   {
-    "duration_ms" : 200.18583349883556,
+    "duration_ms" : 314.42566681653261,
     "model_unloaded" : true,
     "reason" : "Paused in background. Model memory released.",
-    "resident_bytes" : 412041216
+    "resident_bytes" : 412860416
   },
   {
-    "duration_ms" : 134.5576667226851,
+    "duration_ms" : 115.64708361402154,
     "model_unloaded" : true,
     "reason" : "Stopped. Model memory released.",
-    "resident_bytes" : 416399360
+    "resident_bytes" : 417447936
   },
   {
-    "duration_ms" : 12.893749866634607,
+    "duration_ms" : 10.813625063747168,
     "model_unloaded" : true,
     "reason" : "Stopped. Model memory released.",
-    "resident_bytes" : 414089216
+    "resident_bytes" : 417579008
   }
 ]

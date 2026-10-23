@@ -30,7 +30,11 @@ Both Pocket and beanSprout passed the complete real typing/copy/edit/background/
 reopen/reload/dismiss test on iOS 26.5 and iOS 27 simulators. These are four host/
 runtime combinations, not four physical phones. Sanitized reports and separate
 lifecycle receipts are retained here. Background unload times were under two
-seconds in each simulator; no phone latency or thermal claim follows.
+seconds in each simulator; no phone latency or thermal claim follows. Final
+local build identities cover the same nine shared source files, both tested
+simulator executables and both generic iPhone executables. Device signatures
+verify using existing profiles; no profile was renewed or phone accessed. The
+record is `build-identity.json`, not a store-distribution or provisioning claim.
 
 ## Text pipeline and honest evidence
 
@@ -94,8 +98,10 @@ catalog JSON differs from its prior v0.8.0 caller profile; independent content
 expectations and all Mac ranking/launch arithmetic are unchanged. Full local
 HTTP/CLI/D1 tests pass without relaxing that exact-source check.
 
-The web token/inventory fixes have a separate current-main candidate in Hub task
-1315, excluding the native baseline. The native text candidate in task 1314 still
+The web fixes have a separate current-main candidate in Hub task 1315, excluding
+the native baseline. On final fetch, token renewal was already merged in V2
+PR #27 and its exact token bytes agree; only inventory freshness remains in the
+web implementation diff. The candidates also incorporate the newer CI updates. The native text candidate in task 1314 still
 needs phone acceptance. No branch was pushed, no tag/Release was created and no
 cloud deployment or migration occurred during this work. Voice/search remain
 deferred.
