@@ -27,7 +27,8 @@ else
   destination='generic/platform=iOS Simulator'
   signing=(CODE_SIGNING_ALLOWED=NO)
 fi
-xcodebuild -project "$root/BeanFitPocket.xcodeproj" -scheme BeanFitPocket \
+xcodebuild -project "$root/BeanFitPocket.xcodeproj" -scheme BeanFitTextUITests build-for-testing \
   -configuration Release -sdk "$platform" -destination "$destination" \
   -derivedDataPath "$BF_OUTPUT/$platform" "${signing[@]}" \
+  "CURRENT_PROJECT_VERSION=${BF_BUILD_NUMBER:-1}" \
   "BF_LLAMA_SOURCE=$BF_LLAMA_SOURCE" "BF_LLAMA_BUILD=$native"

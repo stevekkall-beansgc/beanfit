@@ -8,7 +8,10 @@ checkpoints.
 
 Pocket uses `CURRENT_PROJECT_VERSION` for its Info.plist build identity. Keep the
 ordinary project default at 1; the current test candidate explicitly builds with
-`CURRENT_PROJECT_VERSION=2`. The device qualification runner accepts
+`CURRENT_PROJECT_VERSION=2` (or `BF_BUILD_NUMBER=2` with the build wrapper).
+The wrapper uses the checked-in shared `BeanFitTextUITests` scheme, including
+for generic device builds; an auto-created `BeanFitPocket` scheme is not required.
+The device qualification runner accepts
 `--expected-build` and `--expected-app-sha256` with `--app`, rejects mismatched
 local candidates before device operations, and compares returned app build/version.
 Each run requires a new evidence directory. App build/version are recorded in
