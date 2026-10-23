@@ -1,3 +1,8 @@
+> Historical evidence: the catalog-only subset was released as v0.8.1. This
+> native continuation preserves additional failures and experiments below. The
+> sanitized resource source manifest from that release is retained; its original
+> local manifest hash is recorded. These receipts do not qualify the new builds.
+
 # Text acceptance checkpoint — October 22, 2026
 
 **Incomplete; no release qualification.** Physical testing stopped when the user

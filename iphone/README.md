@@ -1,3 +1,26 @@
+## Current native candidate — October 23
+
+The native continuation now includes released BeanFit v0.8.1 catalog metadata.
+Qwen2 remains a comparison candidate; no model is qualified or automatically
+selected. Reply drafting is the separate own-facts formatter. The public catalog
+and web inventory releases are complete; historical notes below describe earlier
+checkpoints.
+
+Pocket uses `CURRENT_PROJECT_VERSION` for its Info.plist build identity. Keep the
+ordinary project default at 1; the current test candidate explicitly builds with
+`CURRENT_PROJECT_VERSION=2`. The device qualification runner accepts
+`--expected-build` and `--expected-app-sha256` with `--app`, rejects mismatched
+local candidates before device operations, and compares returned app build/version.
+Each run requires a new evidence directory. App build/version are recorded in
+synthetic reports and UI lifecycle receipts; ordinary drafts remain in memory.
+Executable hashes identify local files, not reproducible build attestations.
+
+The October 23 no-phone candidate report records fresh generic iPhone and
+simulator builds. Full phone quality, load cycles, heat, real UI and Instruments
+checks still gate release. The earlier four-case Pocket interruption remains
+unresolved. Historical evidence must not be relabelled as this candidate's phone
+acceptance. Voice notes and search remain deferred.
+
 # BeanFit Pocket — native iPhone prototype
 
 For developers building local AI experiences in Legume Labs apps. Import a

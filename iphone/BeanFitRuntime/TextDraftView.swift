@@ -66,7 +66,9 @@ import CryptoKit
             loaded = false; busy = false; work = nil; status = message
             if ProcessInfo.processInfo.arguments.contains("--text-ui-test") {
                 uiEvents.append(["reason":message,"duration_ms":(ProcessInfo.processInfo.systemUptime-started)*1000,
-                                 "model_unloaded":true,"resident_bytes":currentResources().resident])
+                                 "model_unloaded":true,"resident_bytes":currentResources().resident,
+                                 "app_version":Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String ?? "unknown",
+                                 "app_build":Bundle.main.object(forInfoDictionaryKey:"CFBundleVersion") as? String ?? "unknown"])
                 let url = FileManager.default.urls(for:.documentDirectory,in:.userDomainMask)[0].appendingPathComponent("text-ui-lifecycle.json")
                 try? JSONSerialization.data(withJSONObject:uiEvents,options:[.prettyPrinted,.sortedKeys]).write(to:url,options:.atomic)
             }
@@ -193,7 +195,9 @@ import CryptoKit
             let evidence = "physical-device-process-only"
             #endif
             var report: [String: Any] = ["schema":"beanfit.text.integration.v1", "run_id":runID,
-                "bundle":Bundle.main.bundleIdentifier ?? "unknown", "model":model.id, "model_sha256":model.sha256,
+                "bundle":Bundle.main.bundleIdentifier ?? "unknown",
+                "app_version":Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String ?? "unknown",
+                "app_build":Bundle.main.object(forInfoDictionaryKey:"CFBundleVersion") as? String ?? "unknown", "model":model.id, "model_sha256":model.sha256,
                 "runtime_revision":ModelSuggestions.catalog.runtime_revision, "evidence_kind":evidence,
                 "completed":complete, "qualified":false, "started_at":ISO8601DateFormatter().string(from: started),
                 "application_state":UIApplication.shared.applicationState.rawValue,
@@ -293,7 +297,9 @@ extension TextDraftModel {
             let thermalOK = !thermal.contains { ($0["state"] as? Int ?? 3) >= 2 }
             let screensOK = !records.isEmpty && records.allSatisfy { $0["passed"] as? Bool == true }
             var report: [String:Any] = ["schema":"beanfit.text.qualification.v1","run_id":runID,"phase":phase,
-                "bundle":Bundle.main.bundleIdentifier ?? "unknown","model":model.id,"model_sha256":model.sha256,
+                "bundle":Bundle.main.bundleIdentifier ?? "unknown",
+                "app_version":Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String ?? "unknown",
+                "app_build":Bundle.main.object(forInfoDictionaryKey:"CFBundleVersion") as? String ?? "unknown","model":model.id,"model_sha256":model.sha256,
                 "runtime_revision":ModelSuggestions.catalog.runtime_revision,"packet_sha256":packetHash,
                 "completed":completed,"qualified":false,"records":records,"measurements":encoded(measurements),"flow_events":flowEvents,
                 "thermal_samples":thermal,"real_memory_warnings":warnings,"injected_warning_handler_calls":injectedWarnings,

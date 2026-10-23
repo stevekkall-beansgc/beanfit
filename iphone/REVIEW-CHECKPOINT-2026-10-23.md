@@ -1,3 +1,12 @@
+# Superseding native preparation checkpoint
+
+The catalog/web updates described below have since shipped as BeanFit v0.8.1,
+companion v0.6.2 and V2 inventory v2.5.3. The native continuation incorporates
+those released main commits. The final local preparation report is
+`outputs/beanfit-native-candidates-20261023/REVIEW.md` in the beans workspace.
+The earlier executable hashes remain historical; use the new build identities
+for the next phone session. No native release or physical acceptance is implied.
+
 # No-phone review checkpoint — October 23
 
 The four authorized preparation items are complete locally. No phone was used.

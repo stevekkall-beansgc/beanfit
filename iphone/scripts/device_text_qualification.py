@@ -10,11 +10,36 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import plistlib
 import subprocess
 import shutil
 import tempfile
 import time
 import uuid
+
+
+def app_identity(app, bundle, expected_build=None, expected_sha256=None):
+    """Check the supplied local candidate before any device operation."""
+    app = app.resolve()
+    info = plistlib.loads((app / 'Info.plist').read_bytes())
+    if info.get('CFBundleIdentifier') != bundle:
+        raise ValueError('Candidate bundle does not match the requested app')
+    executable = (app / info['CFBundleExecutable']).resolve()
+    if executable.parent != app or not executable.is_file():
+        raise ValueError('Invalid candidate executable')
+    build = info['CFBundleVersion']
+    if expected_build is not None and build != expected_build:
+        raise ValueError('Candidate build does not match the reviewed build')
+    hasher = hashlib.sha256()
+    with executable.open('rb') as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+            hasher.update(chunk)
+    digest = hasher.hexdigest()
+    if expected_sha256 is not None and digest != expected_sha256:
+        raise ValueError('Candidate executable does not match the reviewed hash')
+    return {'bundle':bundle, 'app_version':info['CFBundleShortVersionString'],
+            'app_build':build, 'executable_sha256':digest,
+            'info_plist_sha256':hashlib.sha256((app / 'Info.plist').read_bytes()).hexdigest()}
 
 
 def main():
@@ -23,11 +48,16 @@ def main():
     parser.add_argument('--bundle', required=True, choices=['com.beanlabs.BeanFitPocket', 'com.jumpingbeans.v2.imessageprototype'])
     parser.add_argument('--phase', choices=['quality', 'resource', 'thermal'], required=True)
     parser.add_argument('--app', type=Path)
+    parser.add_argument('--expected-build', help='Reject a different local or reported app build')
+    parser.add_argument('--expected-app-sha256', help='Reviewed executable hash; requires --app')
     parser.add_argument('--model-id', default='qwen2', choices=['liquid12', 'qwen08', 'qwen2'],
                         help='Expected model in the supplied app build; changing this does not reconfigure the app')
     parser.add_argument('--model', type=Path)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    if args.expected_app_sha256 and not args.app:
+        parser.error('--expected-app-sha256 requires --app')
+    identity = app_identity(args.app, args.bundle, args.expected_build, args.expected_app_sha256) if args.app else None
     devices = json.loads(args.inventory.read_text())['result']['devices']
     physical = [d for d in devices if d['hardwareProperties'].get('reality') == 'physical'
                 and d['connectionProperties'].get('tunnelState') == 'connected']
@@ -45,9 +75,6 @@ def main():
     artifact = next(m for m in catalog['models'] if m['id'] == args.model_id)['artifacts'][0]
     digest = hashlib.sha256(packet.read_bytes()).hexdigest()
     assert digest == '47f1797303c82d58180f913e697d30c590a69097afed98141d164862bd0d70c5'
-    args.output.mkdir(parents=True, exist_ok=True)
-    if args.app:
-        run('device', 'install', 'app', '--device', device, str(args.app))
     if args.model:
         assert args.model.stat().st_size == artifact['bytes']
         hasher = hashlib.sha256()
@@ -55,6 +82,12 @@ def main():
             for chunk in iter(lambda: stream.read(1024 * 1024), b''):
                 hasher.update(chunk)
         assert hasher.hexdigest() == artifact['sha256']
+    args.output.mkdir(parents=True, exist_ok=False)
+    if identity:
+        (args.output / 'candidate-identity.json').write_text(json.dumps(identity, indent=2) + '\n')
+    if args.app:
+        run('device', 'install', 'app', '--device', device, str(args.app))
+    if args.model:
         with tempfile.TemporaryDirectory(prefix='beanfit-model-transfer-') as temp:
             models = Path(temp) / 'Models'; models.mkdir()
             try:
@@ -91,6 +124,11 @@ def main():
     assert report['evidence_kind'] == 'physical-device-resident-and-footprint'
     assert report['packet_sha256'] == digest and not report['qualified']
     assert report['model_sha256'] == artifact['sha256']
+    assert report['bundle'] == args.bundle and report['phase'] == args.phase
+    if identity:
+        assert report.get('app_build') == identity['app_build'] and report.get('app_version') == identity['app_version'], 'Reported app differs from supplied candidate'
+    if args.expected_build:
+        assert report.get('app_build') == args.expected_build, 'Reported build differs from reviewed candidate'
     if args.phase == 'quality' and report['completed']:
         assert len(report['records']) == 36
     print(json.dumps({key:report.get(key) for key in ['phase','completed','automatic_pass','error','peak_resident_bytes','conservative_peak_bytes','thermal_gate','model_unloaded']}))
