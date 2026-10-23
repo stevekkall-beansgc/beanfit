@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import plistlib
+import signal
 import subprocess
 import shutil
 import tempfile
@@ -40,6 +41,30 @@ def app_identity(app, bundle, expected_build=None, expected_sha256=None):
     return {'bundle':bundle, 'app_version':info['CFBundleShortVersionString'],
             'app_build':build, 'executable_sha256':digest,
             'info_plist_sha256':hashlib.sha256((app / 'Info.plist').read_bytes()).hexdigest()}
+
+
+def stop_owned_console(process):
+    """Interrupt only our launch handle; devicectl forwards SIGINT to its app.
+
+    Never discover/terminate arbitrary phone PIDs. The final physical packet must
+    verify this platform forwarding behavior; a local process exit is not proof.
+    """
+    interrupted = process.poll() is None
+    if interrupted:
+        process.send_signal(signal.SIGINT)
+        try:
+            process.wait(timeout=15)
+        except subprocess.TimeoutExpired:
+            process.terminate()
+            try:
+                process.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait(timeout=5)
+                return {'interrupt_forwarding_requested':True, 'console_force_killed':True,
+                        'remote_exit_verified':False}
+    return {'interrupt_forwarding_requested':interrupted, 'console_force_killed':False,
+            'remote_exit_verified':False}
 
 
 def main():
@@ -99,27 +124,40 @@ def main():
     run('device', 'copy', 'to', '--device', device, '--source', str(packet), '--destination', 'Documents/text-quality-packet.json',
         '--domain-type', 'appDataContainer', '--domain-identifier', args.bundle)
     run_id = str(uuid.uuid4())
-    run('device', 'process', 'launch', '--device', device, '--terminate-existing', args.bundle,
-        '--text-qualify', '--phase=' + args.phase, '--run-id=' + run_id)
     report = None
     with tempfile.TemporaryDirectory(prefix='beanfit-qualification-') as temp:
         path = Path(temp) / 'report.json'
         deadline = time.monotonic() + 900
         last_count = -1
-        while time.monotonic() < deadline:
-            if run('device', 'copy', 'from', '--device', device, '--source', 'Documents/text-qualification.json',
-                   '--destination', str(path), '--domain-type', 'appDataContainer', '--domain-identifier', args.bundle, required=False):
-                current = json.loads(path.read_text())
-                if current.get('run_id') == run_id:
-                    report = current
-                    (args.output / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
-                    count = len(report['records'])
-                    if count != last_count:
-                        print(json.dumps({'phase':args.phase, 'records':count}), flush=True)
-                        last_count = count
-                    if report.get('completed') or report.get('error'):
+        # --console owns the launch lifetime and forwards catchable signals to
+        # that app (installed devicectl help). Keep its device metadata ephemeral.
+        with (Path(temp) / 'console.log').open('w') as console:
+            process = subprocess.Popen(['xcrun', 'devicectl', 'device', 'process', 'launch',
+                '--device', device, '--terminate-existing', '--console', args.bundle,
+                '--text-qualify', '--phase=' + args.phase, '--run-id=' + run_id],
+                stdout=console, stderr=subprocess.STDOUT)
+            try:
+                while time.monotonic() < deadline:
+                    if run('device', 'copy', 'from', '--device', device, '--source', 'Documents/text-qualification.json',
+                           '--destination', str(path), '--domain-type', 'appDataContainer', '--domain-identifier', args.bundle, required=False):
+                        current = json.loads(path.read_text())
+                        if current.get('run_id') == run_id:
+                            report = current
+                            (args.output / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
+                            count = len(report['records'])
+                            if count != last_count:
+                                print(json.dumps({'phase':args.phase, 'records':count}), flush=True)
+                                last_count = count
+                            if report.get('completed') or report.get('error'):
+                                break
+                    if process.poll() is not None:
                         break
-            time.sleep(5)
+                    time.sleep(5)
+            finally:
+                cleanup = stop_owned_console(process)
+                cleanup.update(run_id=run_id, completed=bool(report and report.get('completed')),
+                               qualified=False, physical_cleanup_confirmation_required=True)
+                (args.output / 'runner-cleanup.json').write_text(json.dumps(cleanup, indent=2) + '\n')
     assert report is not None, 'No fresh report'
     assert report['evidence_kind'] == 'physical-device-resident-and-footprint'
     assert report['packet_sha256'] == digest and not report['qualified']

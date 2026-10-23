@@ -1,8 +1,11 @@
 """Offline rejection checks for exact native test candidates."""
 import hashlib
 import importlib.util
+import os
 from pathlib import Path
 import plistlib
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -12,6 +15,24 @@ spec.loader.exec_module(runner)
 
 
 class CandidateIdentityTests(unittest.TestCase):
+    @unittest.skipUnless(os.name == 'posix', 'The macOS devicectl console uses POSIX SIGINT')
+    def test_owned_console_is_interrupted_and_reaped(self):
+        process = subprocess.Popen([sys.executable, '-u', '-c',
+            'import time; print("ready", flush=True); time.sleep(60)'],
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+        try:
+            self.assertEqual(process.stdout.readline().strip(), 'ready')
+            cleanup = runner.stop_owned_console(process)
+            self.assertIsNotNone(process.poll())
+            self.assertTrue(cleanup['interrupt_forwarding_requested'])
+            self.assertFalse(cleanup['console_force_killed'])
+            self.assertFalse(cleanup['remote_exit_verified'])
+        finally:
+            if process.poll() is None:
+                process.kill()
+                process.wait()
+            process.stdout.close()
+
     def test_wrong_build_bundle_or_executable_cannot_be_accepted(self):
         with tempfile.TemporaryDirectory() as temp:
             app = Path(temp) / "Synthetic.app"

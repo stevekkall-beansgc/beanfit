@@ -14,7 +14,11 @@ for generic device builds; an auto-created `BeanFitPocket` scheme is not require
 The device qualification runner accepts
 `--expected-build` and `--expected-app-sha256` with `--app`, rejects mismatched
 local candidates before device operations, and compares returned app build/version.
-Each run requires a new evidence directory. App build/version are recorded in
+Each run requires a new evidence directory. The packet runner owns a devicectl
+console launch and interrupts only that launch on completion, error or timeout.
+A local child-process check verifies bounded cleanup; actual devicectl signal
+forwarding and phone model release still need physical confirmation. The cleanup
+receipt deliberately keeps `remote_exit_verified=false`. App build/version are recorded in
 synthetic reports and UI lifecycle receipts; ordinary drafts remain in memory.
 Executable hashes identify local files, not reproducible build attestations.
 
