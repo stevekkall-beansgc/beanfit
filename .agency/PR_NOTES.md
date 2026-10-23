@@ -3,9 +3,9 @@
 Pocket adds local summary/rewrite through pinned Qwen2 and a separate own-facts
 reply formatter, with bounded CPU/context/input, cancellation/background/idle
 unload and explicit human review. Released v0.8.1 catalog holds remain intact.
-Pocket build2 and the actual beanSprout build1317 use identical shared sources.
+Pocket build 2 and the actual beanSprout build 1317 use identical shared sources.
 
-Both actual simulator hosts pass on iOS26.5/27; generic signed iPhone builds and
+Both actual simulator hosts pass on iOS 26.5/27; generic signed iPhone builds and
 registered QA pass. Source/build identities and authored review are in
 iphone/evidence/2026-10-23-native-candidates/. No final physical acceptance or
 independent sign-off is claimed. Full phone quality/resources/heat/UI/Instruments,
