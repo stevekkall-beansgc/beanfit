@@ -1,0 +1,12 @@
+{
+  "iphone/BeanFitRuntime/LocalInference.swift": "9cc5d0951a423f95a5541f80502cd81350e09e61190c98ac7eac550a4ba9f682",
+  "iphone/BeanFitRuntime/Native.h": "25ba26f33a88169028d2f480a7c10025e9424d6816d69ff3868725f3d7d6a5ed",
+  "iphone/BeanFitRuntime/TextDraftView.swift": "c812e96e1d3d235974f2d2da1fad370c5a120c3e1d2f88bea142081a57a1b1a0",
+  "iphone/BeanFitRuntime/ModelCatalog.generated.swift": "5e17edd1253d3a72cd5090c5497eee75bae2fb7e3ac20d2636682d6ae44c4c82",
+  "iphone/BeanFitRuntime/Native.cpp": "f1652aa04bb236dec54b9913f4c3b0250e1374987e1b6145c0ba7a15deb501e4",
+  "iphone/BeanFitRuntime/Models.swift": "8abf1bafb4d98ab98c489df59f7479e96f6eb22e4e9fc046530de4c5f4c10ef4",
+  "iphone/BeanFitRuntime/ModelSuggestions.swift": "bd08c9e6b0f38978702ed5eea794a0051c5eba5cea0ee800393df6f69953d369",
+  "iphone/BeanFitRuntime/TextDraft.swift": "13e00c4b070180ba708df0ad79c0373e74d49056b5199a9d19f0afbb9099e799",
+  "iphone/BeanFitRuntime/RuntimeContracts.swift": "cda2c0ac2de070e1ec4b51d3f17ac70a98aed2f3f6ce652c66f58ff57b20df53",
+  "iphone/BeanFitPocket/BeanFitPocketApp.swift": "b3f73e2897c4c16594414c7b6932281e3fe46af4bdf7d5e84a300c5431e9eff0"
+}

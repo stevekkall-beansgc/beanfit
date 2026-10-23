@@ -51,7 +51,7 @@ struct ModelSuggestion: Identifiable {
     var eligibleForTrial: Bool { status == "needs_device_evidence" }
     var explanation: String {
         switch status {
-        case "known_task_failure": return "Failed the existing shopping tests; use reviewed manual filters."
+        case "known_task_failure": return "An earlier configuration failed this experience's tests; held until a revised configuration passes review."
         case "requires_runtime_integration": return "This capability needs additional app support."
         case "unsupported_or_unknown_device": return "This phone is outside the current evaluation list."
         case "unsupported_or_unknown_os": return "The current Pocket runtime requires iOS 26 or newer."

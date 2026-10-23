@@ -17,8 +17,17 @@ class OnDeviceSuggestions(unittest.TestCase):
         result = suggest(experience="text_assistant", device="iPhone15,3", os_major=26)
         self.assertIsNone(result["selection"])
         self.assertEqual(result["status"], "needs_device_evidence")
-        self.assertEqual(result["trial_order"][0], "liquid12")
+        self.assertEqual(result["trial_order"][0], "qwen2")
         self.assertTrue(all(row["memory_fit"] == "unknown" for row in result["candidates"]))
+
+    def test_failed_text_configuration_stays_held_even_with_memory_allowance(self):
+        result = suggest(experience="text_assistant", device="iPhone15,3", os_major=26,
+                         memory_budget_bytes=2_000_000_000)
+        failed = next(row for row in result["candidates"] if row["id"] == "liquid12")
+        self.assertEqual(failed["status"], "known_task_failure")
+        self.assertFalse(failed["eligible_for_trial"])
+        self.assertNotIn("liquid12", result["trial_order"])
+        self.assertIsNone(result["selection"])
 
     def test_failed_shopping_models_do_not_return_as_suggestions(self):
         result = suggest(experience="shopping_filters", device="iPhone15,3", os_major=26)
@@ -30,7 +39,7 @@ class OnDeviceSuggestions(unittest.TestCase):
         result = suggest(experience="text_assistant", device="iPhone15,3", os_major=26, memory_budget_bytes=200_000_000)
         self.assertEqual(result["trial_order"], ["liquid230"])
         self.assertIsNone(result["selection"])
-        self.assertEqual(next(r for r in result["candidates"] if r["id"] == "liquid12")["status"], "weights_exceed_memory_budget")
+        self.assertEqual(next(r for r in result["candidates"] if r["id"] == "qwen2")["status"], "weights_exceed_memory_budget")
 
     def test_other_modalities_need_their_runtime_components(self):
         for experience in ("image_description", "transcription", "speech_output", "semantic_search", "decision_classification"):
@@ -93,33 +102,33 @@ class CatalogQualification(unittest.TestCase):
     def test_reviewed_peak_memory_selects_winner_not_download_size(self):
         from beanfit.on_device import select_catalog
         p, tiny = self.inputs("liquid230", 950_000_000)
-        _, larger = self.inputs("liquid12", 900_000_000)
+        _, larger = self.inputs("qwen2", 900_000_000)
         result = select_catalog(p, [tiny, larger])
-        self.assertEqual(result["selection"]["id"], "liquid12")
+        self.assertEqual(result["selection"]["id"], "qwen2")
         self.assertEqual(result["catalog_rejections"], [])
 
     def test_wrong_artifact_and_simulator_cannot_qualify(self):
         from beanfit.on_device import select_catalog
-        p, row = self.inputs("liquid12")
+        p, row = self.inputs("qwen2")
         row["candidate"]["artifact_sha256"] = "0" * 64
         self.assertIsNone(select_catalog(p, [row])["selection"])
-        p, row = self.inputs("liquid12")
+        p, row = self.inputs("qwen2")
         row["evidence_kind"] = "simulator"
         self.assertIsNone(select_catalog(p, [row])["selection"])
 
     def test_reviewed_memory_is_not_overridden_by_file_size_screen(self):
         from beanfit.on_device import select_catalog
-        p, row = self.inputs("liquid12", 300_000_000)
+        p, row = self.inputs("qwen2", 300_000_000)
         p["memory_budget_bytes"] = 500_000_000
         # Synthetic selector fixture: mapped files and resident memory differ.
-        self.assertEqual(select_catalog(p, [row])["selection"]["id"], "liquid12")
+        self.assertEqual(select_catalog(p, [row])["selection"]["id"], "qwen2")
 
     def test_quality_failure_outweighs_low_memory(self):
         from beanfit.on_device import select_catalog
         p, small = self.inputs("liquid230", 200_000_000)
-        _, large = self.inputs("liquid12")
+        _, large = self.inputs("qwen2")
         small["trials"][2]["quality_pass"] = False
-        self.assertEqual(select_catalog(p, [small, large])["selection"]["id"], "liquid12")
+        self.assertEqual(select_catalog(p, [small, large])["selection"]["id"], "qwen2")
 
     def test_experience_binding_and_existing_task_failure(self):
         from beanfit.on_device import select_catalog
@@ -127,6 +136,13 @@ class CatalogQualification(unittest.TestCase):
         with self.assertRaises(ValueError): select_catalog(p, [row], experience="shopping_filters")
         p["catalog_experience"] = "shopping_filters"
         result = select_catalog(p, [row], experience="shopping_filters")
+        self.assertIsNone(result["selection"])
+        self.assertEqual(len(result["catalog_rejections"]), 1)
+
+    def test_known_text_failure_cannot_be_promoted_by_a_passing_receipt(self):
+        from beanfit.on_device import select_catalog
+        p, row = self.inputs("liquid12")
+        result = select_catalog(p, [row])
         self.assertIsNone(result["selection"])
         self.assertEqual(len(result["catalog_rejections"]), 1)
 

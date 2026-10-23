@@ -19,7 +19,9 @@ assert len(doc["models"]) == 15
 assert len(doc["reference_models"]) == 3
 base = ("--device", "iPhone15,3", "--ios", "26")
 general = cli(*base)
-assert general["selection"] is None and general["trial_order"][0] == "liquid12"
+assert general["selection"] is None and general["trial_order"][0] == "qwen2"
+assert "liquid12" not in general["trial_order"]
+assert next(row for row in general["candidates"] if row["id"] == "liquid12")["status"] == "known_task_failure"
 shopping = cli(*base, "--experience", "shopping_filters")
 assert "liquid350" not in shopping["trial_order"] and "qwen08" not in shopping["trial_order"]
 assert "liquid26" not in shopping["trial_order"]

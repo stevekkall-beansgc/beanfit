@@ -5,8 +5,9 @@ import CryptoKit
     static func main() throws {
         precondition(Set(LocalModel.catalog.map(\.id)) == Set(["liquid230", "liquid350", "liquid12", "qwen08", "qwen2"]))
         let textCandidates = ModelSuggestions.suggestions(experience: "text_assistant", device: "iPhone15,3", osMajor: 26)
-        precondition(textCandidates.first?.id == "liquid12")
-        precondition(textCandidates.filter { $0.eligibleForTrial }.count == 5)
+        precondition(textCandidates.first?.id == "qwen2")
+        precondition(textCandidates.first(where:{$0.id == "liquid12"})?.status == "known_task_failure")
+        precondition(textCandidates.filter { $0.eligibleForTrial }.count == 4)
         let shoppingCandidates = ModelSuggestions.suggestions(experience: "shopping_filters", device: "iPhone15,3", osMajor: 26)
         precondition(shoppingCandidates.filter { $0.eligibleForTrial }.map(\.id) == ["liquid230", "liquid12", "qwen2"])
         let constrained = ModelSuggestions.suggestions(experience: "text_assistant", device: "iPhone15,3", osMajor: 26, memoryBudgetBytes: 200_000_000)
