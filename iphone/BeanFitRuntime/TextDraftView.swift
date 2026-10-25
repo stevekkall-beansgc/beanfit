@@ -19,6 +19,7 @@ import CryptoKit
     private var revision = 0
     private var measurements: [Measurement] = []
     private var warnings = 0
+    private var thermalObservation = TextThermalObservation(initial: ProcessInfo.processInfo.thermalState.rawValue)
     private var injectedWarnings = 0
     private var idle: Task<Void, Never>?
     private var lastDraftAt = Date.distantPast
@@ -80,6 +81,7 @@ import CryptoKit
     }
     func thermalChanged(injected: Int? = nil) {
         let state = syntheticTest ? (injected ?? ProcessInfo.processInfo.thermalState.rawValue) : ProcessInfo.processInfo.thermalState.rawValue
+        thermalObservation.observe(state, injected: syntheticTest && injected != nil)
         if state >= 2 { stop(message: "Let the iPhone cool. Model memory released.") }
     }
     private func releaseWhenIdle() {
@@ -281,9 +283,12 @@ extension TextDraftModel {
         let started = ProcessInfo.processInfo.systemUptime
         var records: [[String: Any]] = [], thermal: [[String: Any]] = []
         var packetHash = "", completed = false, failure: String?
+        thermalObservation = TextThermalObservation(initial: ProcessInfo.processInfo.thermalState.rawValue)
         let sampler = Task {
             while !Task.isCancelled {
-                thermal.append(["seconds":ProcessInfo.processInfo.systemUptime-started,"state":ProcessInfo.processInfo.thermalState.rawValue])
+                let state = ProcessInfo.processInfo.thermalState.rawValue
+                thermalObservation.observe(state)
+                thermal.append(["seconds":ProcessInfo.processInfo.systemUptime-started,"state":state])
                 do { try await Task.sleep(nanoseconds: 1_000_000_000) } catch { break }
             }
         }
@@ -294,7 +299,8 @@ extension TextDraftModel {
             let kernelPeak = measurements.compactMap { $0.resources?.end.kernelPeakResident }.max() ?? 0
             let peakResident = max(measurements.compactMap { $0.resources?.peakResident }.max() ?? 0,kernelPeak)
             let conservativePeak = (measurements.map(\.observedPeakProcessBytes).max() ?? 0) + UInt64(model.bytes)
-            let thermalOK = !thermal.contains { ($0["state"] as? Int ?? 3) >= 2 }
+            thermalObservation.observe(ProcessInfo.processInfo.thermalState.rawValue)
+            let thermalOK = thermalObservation.permitsAcceptance && !thermal.contains { ($0["state"] as? Int ?? 3) >= 2 }
             let screensOK = !records.isEmpty && records.allSatisfy { $0["passed"] as? Bool == true }
             var report: [String:Any] = ["schema":"beanfit.text.qualification.v1","run_id":runID,"phase":phase,
                 "bundle":Bundle.main.bundleIdentifier ?? "unknown",
@@ -305,7 +311,7 @@ extension TextDraftModel {
                 "thermal_samples":thermal,"real_memory_warnings":warnings,"injected_warning_handler_calls":injectedWarnings,
                 "model_unloaded":!loaded,"peak_resident_bytes":peakResident,"conservative_peak_bytes":conservativePeak,
                 "kernel_peak_resident_bytes":kernelPeak,"target_start_cadence_seconds":15,
-                "resource_budget_bytes":cap,"thermal_gate":thermalOK,"elapsed_seconds":ProcessInfo.processInfo.systemUptime-started,
+                "resource_budget_bytes":cap,"thermal_gate":thermalOK,"highest_real_thermal_state":thermalObservation.highestState,"elapsed_seconds":ProcessInfo.processInfo.systemUptime-started,
                 "automatic_pass":completed && screensOK && warnings == 0 && thermalOK && kernelPeak > 0 && peakResident < cap && conservativePeak < cap,
                 "limits":["Synthetic packet; authored factual/style review required.","Whole app process RSS includes resident mappings. Unrelated OS memory is not measured as zero.","Injected handlers are not real OS pressure or sensor events.","No all-iPhone or battery-endurance qualification."]]
             #if targetEnvironment(simulator)

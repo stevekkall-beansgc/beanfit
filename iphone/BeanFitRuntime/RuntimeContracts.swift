@@ -52,3 +52,15 @@ protocol LocalInferenceClient: AnyObject {
     func unload() async
     func cancel()
 }
+
+// Capture real thermal transitions even when a brief hot state falls between
+// periodic samples. Deliberate policy injections are never sensor evidence.
+struct TextThermalObservation {
+    private(set) var highestState: Int
+    init(initial: Int) { highestState = (0...3).contains(initial) ? initial : 3 }
+    mutating func observe(_ state: Int, injected: Bool = false) {
+        guard !injected else { return }
+        highestState = max(highestState, (0...3).contains(state) ? state : 3)
+    }
+    var permitsAcceptance: Bool { highestState < 2 }
+}

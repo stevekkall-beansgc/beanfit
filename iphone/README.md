@@ -99,8 +99,8 @@ less memory, but is not a claim that an AI model passed reply-generation tests.
 Unsupported Ask directions fail with an instruction to write the question directly.
 
 Edits retire output. Stop, Done, backgrounding, memory warnings and serious heat
-cancel and unload. The model releases after 30 seconds idle, uses two CPU threads
-at nominal temperature and one at fair, and spaces AI draft starts by 15 seconds.
+cancel and unload. The model releases after 30 seconds idle, uses one CPU thread
+to limit sustained heat, and spaces AI draft starts by 15 seconds.
 Loading requires model bytes plus 384 MiB of OS-reported available process memory.
 That value is a process budget, not free system RAM.
 
@@ -268,7 +268,7 @@ A web product needs a native host/bridge before it can call this interface.
 
 Only one model is resident per engine. Contexts are created per request and freed
 afterward. Generation has a 2048-token context, a 256-token hard output maximum,
-and a 90-second cancellation deadline. It uses two CPU threads at nominal thermal state and one at fair; Metal and
+and a 90-second cancellation deadline. It uses one CPU thread to limit sustained heat; Metal and
 Accelerate are disabled in this first build. Stop cancels inference; unloading
 waits for serialized native work. Backgrounding and memory warnings request
 cancellation and unloading. Import/hash verification is not instantaneously

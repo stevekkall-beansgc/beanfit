@@ -3,6 +3,12 @@ import CryptoKit
 
 @main struct ContractTests {
     static func main() async throws {
+        var thermal = TextThermalObservation(initial: 0)
+        thermal.observe(1); precondition(thermal.permitsAcceptance)
+        thermal.observe(3, injected: true); precondition(thermal.highestState == 1)
+        thermal.observe(2); thermal.observe(0)
+        precondition(!thermal.permitsAcceptance && thermal.highestState == 2, "Brief real heat must remain a failed gate after cooling")
+        precondition(!TextThermalObservation(initial: -1).permitsAcceptance)
         let weightBytes: Int64 = 730_895_168
         precondition(TextResourcePolicy.permits(thermal: 0, available: 2_000_000_000, modelBytes: weightBytes))
         precondition(TextResourcePolicy.permits(thermal: 1, available: 2_000_000_000, modelBytes: weightBytes))

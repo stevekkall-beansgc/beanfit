@@ -12,7 +12,7 @@ struct Engine {
     std::atomic<bool> cancel{false};
     std::string result, error;
     int tokens = 0;
-    int threads = 2;
+    int threads = 1;
     int text_sampling = 0;
     double first = -1;
 };
