@@ -1,3 +1,5 @@
+> October25 amendment: native publication is held after real iPhone14ProMax heat failures. Pocket2 stopped hot after12 quality cases; a nominal-start one-thread Pocket3 run stopped after4. Do not resume unchanged sustained-use packets or publish these binaries. Preserve the failed reports, improve the power/runtime path, then freeze and test a new exact candidate. See [physical hold evidence](evidence/2026-10-25-phone/README.md). The original four-case interruption remains separately unresolved. No native tag, TestFlight or App Store upload has occurred.
+
 # iPhone product enablement — checkpoint and next phase
 
 October 23 update: the authorized no-phone work fixes simulator editor focus and
