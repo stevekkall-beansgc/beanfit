@@ -126,8 +126,7 @@ final class EmbeddedInference: LocalInferenceClient, @unchecked Sendable {
                 guard let model = self.loaded else { continuation.resume(throwing: RuntimeFailure.message("Load a model first")); return }
                 bf_set_text_sampling(self.handle, 0)
                 let started = Date(), timer = FootprintSampler(), before = ProcessInfo.processInfo.thermalState.rawValue
-                // Bound sustained CPU heat on the6GB phone; do not increase on a cold start.
-                let threads = 1
+                let threads = before == 0 ? 2 : 1
                 bf_set_threads(self.handle, Int32(threads))
                 let deadline = DispatchWorkItem { [weak self] in self?.cancel() }
                 DispatchQueue.global().asyncAfter(deadline: .now()+90, execute: deadline)

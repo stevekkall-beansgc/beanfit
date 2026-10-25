@@ -11,3 +11,5 @@ iphone/evidence/2026-10-23-native-candidates/. No final physical acceptance or
 independent sign-off is claimed. Full phone quality/resources/heat/UI/Instruments,
 runner cleanup confirmation and the earlier interruption investigation remain
 open. Voice/search stay deferred. Source publication is being prepared under the October25 user release request; native app distribution remains held until physical acceptance and the standard release gates pass.
+
+October25 release hold: Pocket2 passed resource checks but stopped hot after12 summaries. Pocket3’s nominal-start single-thread quality run stopped hot after4 cases. Native publication remains held. Retain the real-event thermal-reporting fix, preserve the adaptive CPU baseline, and do not promote the failed single-thread experiment. Physical evidence is in iphone/evidence/2026-10-25-phone/.

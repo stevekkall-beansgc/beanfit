@@ -77,7 +77,7 @@ Liveness is not performance evidence. This version has no telemetry.
 shows task-specific candidates from the October 23 pinned on-device catalog.
 Start with text, voice notes (`--experience transcription`) and search
 (`--experience semantic_search`). Voice notes and search still need app integration.
-These are test suggestions, not measured memory-fit or quality winners.
+These are test suggestions, not measured memory-fit or quality winners. The CPU-only Pocket text prototype has failed sustained-use heat acceptance on iPhone14ProMax; native distribution is held. [Physical evidence](iphone/evidence/2026-10-25-phone/README.md) records the failures.
 [Candidate selection and app synchronization](README-REFERENCE.md#on-device-catalog-and-suggestions)
 explain the evidence gates and the separate legacy Mac estimates.
 
