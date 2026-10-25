@@ -1,0 +1,70 @@
+{
+  "schema": "beanfit.text.acceptance-checkpoint.v1",
+  "date": "2026-10-22",
+  "qualified": false,
+  "decision": "Physical acceptance incomplete; retain text-only candidate and defer voice/search.",
+  "frozen_packet_sha256": "47f1797303c82d58180f913e697d30c590a69097afed98141d164862bd0d70c5",
+  "phone": {
+    "model": "iPhone 14 Pro Max",
+    "hardware": "iPhone15,3",
+    "os": "26.6.1"
+  },
+  "pipeline": {
+    "ai": "Qwen3.5-2B-Q4_K_M summarize/rewrite, greedy",
+    "reply": "deterministic local facts formatter, no model",
+    "context_tokens": 2048,
+    "output_tokens": 192,
+    "input_utf8_bytes": 2400,
+    "cpu_threads": "2 nominal, 1 fair",
+    "batch_tokens": 64,
+    "ai_start_interval_seconds": 15,
+    "idle_unload_seconds": 30
+  },
+  "pocket_resource": true,
+  "pocket_full_quality": false,
+  "pocket_sustained_thermal": "pending",
+  "beansprout_physical_packets": "pending",
+  "instruments_cross_check": "pending: initial attach used a CoreDevice identifier; next attempt must use Instruments/UDID mapping in private inventory. No VM Tracker receipt claimed.",
+  "ui_acceptance": "pending: initial actual-phone UI test failed a model content assertion; remaining lifecycle steps were not reached.",
+  "release": "unreleased",
+  "limits": [
+    "Resource receipt predates the final status/diagnostic changes; re-run the exact final build.",
+    "Initial LFM quality and serious-heat failures retained.",
+    "No claim of all-device memory fit, battery endurance or independent human quality acceptance."
+  ],
+  "simulator_functional_packet": {
+    "completed_cases": 36,
+    "phrase_screens_passed": 35,
+    "qualified": false,
+    "scope": "Simulator flow only; unavailable iOS process-memory headroom bypassed for explicit synthetic launch. Not phone memory, latency or thermal proof.",
+    "differences_from_mac_preflight": [
+      "s03 wording",
+      "s12 wording",
+      "w05 adds disappointment and an information-request sentence requiring human review",
+      "w09 wording"
+    ]
+  },
+  "final_shared_source_files_sha256": {
+    "Native.cpp": "7acd42c993fb1a01ce9d32ae95f0b99323c2cefe530933b0b3fe4b782e0f3602",
+    "Native.h": "b15ade87d76b71bebcf120481d929e2e86f25defbe76bbb690bf4a53845fa3a4",
+    "Models.swift": "8abf1bafb4d98ab98c489df59f7479e96f6eb22e4e9fc046530de4c5f4c10ef4",
+    "RuntimeContracts.swift": "cdee2487e229b266c158d66263e5d02f6a8487e14eb2cca9bc49d05d67ad06b5",
+    "LocalInference.swift": "053e4f39f7e97c0241bc866d4c4584d5dd1910336f077d1020d4bd3023b6e11d",
+    "ModelSuggestions.swift": "bd08c9e6b0f38978702ed5eea794a0051c5eba5cea0ee800393df6f69953d369",
+    "ModelCatalog.generated.swift": "5e17edd1253d3a72cd5090c5497eee75bae2fb7e3ac20d2636682d6ae44c4c82",
+    "TextDraft.swift": "d9ebe2ca233e66bca07c5c6589cbd289f8739dff80934d67a63e989b524fdb85",
+    "TextDraftView.swift": "83401275e1519865770f7444544bfa54cdc6195497e2843cd179c5a07e0cf8ca"
+  },
+  "simulator_ui": {
+    "complete": false,
+    "observed_steps": [
+      "typed synthetic passage",
+      "Thursday and blue content assertions",
+      "copy status",
+      "edit retirement",
+      "actual background/foreground transition with disabled Write button"
+    ],
+    "remaining_issue": "XCTest waits for app idleness after reactivation; full reload/dismissal test did not finish. Keyboard navigation and duplicate Load controls were improved, but a full UI pass is still pending.",
+    "physical_acceptance": false
+  }
+}

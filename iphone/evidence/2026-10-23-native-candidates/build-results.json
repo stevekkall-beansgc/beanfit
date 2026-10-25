@@ -1,0 +1,22 @@
+[
+  {
+    "name": "pocket-iphonesimulator",
+    "exit_code": 0,
+    "seconds": 1.65
+  },
+  {
+    "name": "pocket-iphoneos",
+    "exit_code": 0,
+    "seconds": 11.62
+  },
+  {
+    "name": "beansprout-iphonesimulator",
+    "exit_code": 0,
+    "seconds": 41.3
+  },
+  {
+    "name": "beansprout-iphoneos",
+    "exit_code": 0,
+    "seconds": 35.51
+  }
+]

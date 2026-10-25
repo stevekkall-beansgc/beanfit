@@ -1,0 +1,64 @@
+{
+  "schema": "beanfit.text.acceptance.v1",
+  "purpose": "Final authored holdout, frozen before adding bounded unsupported-transition normalization. Earlier holdouts are now retained regressions, not claimed unseen. No independent-user-study claim.",
+  "cases": [
+    {
+      "id": "hs31",
+      "task": "summarize",
+      "text": "Shelf delivery is scheduled for June 7. Sam can help only if the loading bay is available. The delivery price has not been confirmed.",
+      "expectation": "Keep delivery date, conditional help and unconfirmed price as separate facts.",
+      "required": [
+        "June 7",
+        "Sam",
+        "only if|conditional|provided",
+        "price",
+        "not.*confirmed|unconfirmed"
+      ],
+      "forbidden": [
+        "therefore.*price",
+        "consequently.*price",
+        "so.*price"
+      ]
+    },
+    {
+      "id": "hs32",
+      "task": "summarize",
+      "text": "Because the venue flooded, the concert was cancelled. Refunds have not been issued. Organizers will publish an update on July 16.",
+      "expectation": "Preserve actual supplied cause, cancellation, unpaid refunds and update date.",
+      "required": [
+        "flood",
+        "cancel",
+        "refund",
+        "not|no refunds",
+        "July 16"
+      ],
+      "forbidden": []
+    },
+    {
+      "id": "hw31",
+      "task": "rewrite",
+      "text": "please send the revised invoice for seven items at $7.25 each. I have not authorized a charge.",
+      "expectation": "Preserve invoice request, seven, unit amount and no authorization; no promise/payment.",
+      "required": [
+        "seven|7",
+        "7.25",
+        "not authorized|haven.t authorized"
+      ],
+      "forbidden": [
+        "I will send",
+        "I have paid"
+      ]
+    },
+    {
+      "id": "hw32",
+      "task": "rewrite",
+      "text": "Keep this exact quote: \"Therefore, the south door stays closed.\" The instruction applies only on Wednesday.",
+      "expectation": "Preserve exact quoted connector and Wednesday-only condition.",
+      "required": [
+        "Therefore, the south door stays closed.",
+        "only on Wednesday"
+      ],
+      "forbidden": []
+    }
+  ]
+}

@@ -6,11 +6,14 @@
 #include <string>
 #include <vector>
 #include <mach/mach.h>
+#include <os/proc.h>
 struct Engine {
     llama_model *model = nullptr;
     std::atomic<bool> cancel{false};
     std::string result, error;
     int tokens = 0;
+    int threads = 2;
+    int text_sampling = 0;
     double first = -1;
 };
 static bool aborted(void *p) { return static_cast<Engine *>(p)->cancel.load(); }
@@ -24,6 +27,8 @@ void bf_unload(void *p) {
 void bf_destroy(void *p) { bf_unload(p); delete static_cast<Engine *>(p); }
 void bf_prepare(void *p) { static_cast<Engine *>(p)->cancel = false; }
 void bf_cancel(void *p) { static_cast<Engine *>(p)->cancel = true; }
+void bf_set_threads(void *p, int threads) { static_cast<Engine *>(p)->threads = std::clamp(threads, 1, 2); }
+void bf_set_text_sampling(void *p, int profile) { static_cast<Engine *>(p)->text_sampling = std::clamp(profile, 0, 2); }
 int bf_load(void *p, const char *path) {
     auto e = static_cast<Engine *>(p); bf_unload(p); e->error.clear();
     auto params = llama_model_default_params(); params.n_gpu_layers = 0;
@@ -40,6 +45,17 @@ uint64_t bf_footprint() {
     if (task_info(mach_task_self(), TASK_VM_INFO, (task_info_t)&info, &count) != KERN_SUCCESS) return 0;
     return info.phys_footprint;
 }
+bf_resource_snapshot bf_resources() {
+    task_vm_info_data_t info{}; mach_msg_type_number_t count = TASK_VM_INFO_COUNT;
+    if (task_info(mach_task_self(), TASK_VM_INFO, (task_info_t)&info, &count) != KERN_SUCCESS) return {};
+    return {info.phys_footprint, info.resident_size, info.virtual_size, info.internal,
+            info.external, info.compressed, os_proc_available_memory()};
+}
+uint64_t bf_peak_resident() {
+    task_vm_info_data_t info{}; mach_msg_type_number_t count = TASK_VM_INFO_COUNT;
+    if (task_info(mach_task_self(), TASK_VM_INFO, (task_info_t)&info, &count) != KERN_SUCCESS) return 0;
+    return info.resident_size_peak;
+}
 const char *bf_generate(void *p, const char *prompt, const char *grammar, int max_tokens) {
     auto e = static_cast<Engine *>(p); e->error.clear(); e->result.clear(); e->tokens = 0; e->first = -1;
     if (!e->model) { e->error = "Load a model first"; return nullptr; }
@@ -51,8 +67,8 @@ const char *bf_generate(void *p, const char *prompt, const char *grammar, int ma
     }
     std::vector<llama_token> tokens(count);
     llama_tokenize(vocab, input.data(), (int)input.size(), tokens.data(), count, true, true);
-    auto cp = llama_context_default_params(); cp.n_ctx = 2048; cp.n_batch = 256;
-    cp.n_threads = 4; cp.n_threads_batch = 4; cp.abort_callback = aborted; cp.abort_callback_data = p;
+    auto cp = llama_context_default_params(); cp.n_ctx = 2048; cp.n_batch = 64; cp.n_ubatch = 64;
+    cp.n_threads = e->threads; cp.n_threads_batch = e->threads; cp.abort_callback = aborted; cp.abort_callback_data = p;
     auto ctx = llama_init_from_model(e->model, cp);
     if (!ctx) { e->error = "Could not allocate model context"; return nullptr; }
     auto sampler = llama_sampler_chain_init(llama_sampler_chain_default_params());
@@ -61,11 +77,20 @@ const char *bf_generate(void *p, const char *prompt, const char *grammar, int ma
         if (!gs) { e->error = "Invalid output grammar"; llama_sampler_free(sampler); llama_free(ctx); return nullptr; }
         llama_sampler_chain_add(sampler, gs);
     }
-    llama_sampler_chain_add(sampler, llama_sampler_init_greedy());
+    if (e->text_sampling == 0) {
+        llama_sampler_chain_add(sampler, llama_sampler_init_greedy());
+    } else {
+        // Vendor text presets; seed is fixed for reproducible acceptance runs.
+        const bool qwen = e->text_sampling == 1;
+        llama_sampler_chain_add(sampler, llama_sampler_init_penalties(llama_vocab_n_tokens(vocab), 256, qwen ? 1.0f : 1.05f, 0.0f, qwen ? 2.0f : 0.0f));
+        llama_sampler_chain_add(sampler, llama_sampler_init_top_k(qwen ? 20 : 50));
+        llama_sampler_chain_add(sampler, llama_sampler_init_temp(qwen ? 1.0f : 0.1f));
+        llama_sampler_chain_add(sampler, llama_sampler_init_dist(42));
+    }
     auto start = std::chrono::steady_clock::now();
     bool ok = true, finished = false;
-    for (int i = 0; i < count && ok; i += 256) {
-        int n = std::min(256, count-i);
+    for (int i = 0; i < count && ok; i += 64) {
+        int n = std::min(64, count-i);
         if (aborted(p) || llama_decode(ctx, llama_batch_get_one(tokens.data()+i, n)) != 0) ok = false;
     }
     for (int i = 0; i < max_tokens && ok; ++i) {

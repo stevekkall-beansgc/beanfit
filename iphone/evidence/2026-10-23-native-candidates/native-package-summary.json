@@ -1,0 +1,19 @@
+{
+  "evidence_kind": "local-native-package-not-phone",
+  "qualified": false,
+  "configurations": {
+    "debug": {
+      "xctests": 181,
+      "xctest_failures": 0,
+      "swift_testing_passes": 14,
+      "passed": true
+    },
+    "release": {
+      "xctests": 181,
+      "xctest_failures": 0,
+      "swift_testing_passes": 12,
+      "passed": true
+    }
+  },
+  "release_synthetic_creation_compile_gate_passed": true
+}

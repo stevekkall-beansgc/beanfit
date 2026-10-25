@@ -1,0 +1,30 @@
+{
+  "qualified": false,
+  "phone_operations": false,
+  "shared_source_sha256": {
+    "Native.cpp": "7acd42c993fb1a01ce9d32ae95f0b99323c2cefe530933b0b3fe4b782e0f3602",
+    "Native.h": "b15ade87d76b71bebcf120481d929e2e86f25defbe76bbb690bf4a53845fa3a4",
+    "Models.swift": "8abf1bafb4d98ab98c489df59f7479e96f6eb22e4e9fc046530de4c5f4c10ef4",
+    "RuntimeContracts.swift": "cdee2487e229b266c158d66263e5d02f6a8487e14eb2cca9bc49d05d67ad06b5",
+    "LocalInference.swift": "053e4f39f7e97c0241bc866d4c4584d5dd1910336f077d1020d4bd3023b6e11d",
+    "ModelSuggestions.swift": "b8ec9bceb5757f01885eb9c9c8b22c6db0e060316d8d0aafd32b0a839849d1e7",
+    "ModelCatalog.generated.swift": "dcc13fd4b891587166fe9175b485c2af45ff255cd6978bb6e271b841562fe37d",
+    "TextDraft.swift": "86cce35b9e33ec868735c2c6f19818152fc8e0acfa69854e8757bc367d6b6c0f",
+    "TextDraftView.swift": "405afb6ebff8bde8c8b147664e2d4bc2498e548f28238ab7fe81565c285bf671"
+  },
+  "shared_sources_equal": true,
+  "inference_and_prompt_sources_unchanged_from_05b3235": {
+    "Native.cpp": true,
+    "Native.h": true,
+    "LocalInference.swift": true,
+    "TextDraft.swift": true,
+    "RuntimeContracts.swift": true,
+    "Models.swift": true
+  },
+  "frozen_packet_sha256": "47f1797303c82d58180f913e697d30c590a69097afed98141d164862bd0d70c5",
+  "released_web_paths_equal_current_main": true,
+  "older_native_baseline_file_count": 108,
+  "older_native_baseline_publication_approved": false,
+  "catalog_release": "v0.8.1",
+  "implementation_review": "Implementer-authored structural/adversarial review with automated corroboration; not independent sign-off."
+}

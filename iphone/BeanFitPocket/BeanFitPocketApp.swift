@@ -2,7 +2,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 @MainActor final class PocketModel: ObservableObject {
-    @Published var selected = LocalModel.catalog.first { $0.id == "liquid12" }!
+    @Published var selected = LocalModel.catalog.first { $0.id == "qwen2" }!
     @Published var selectedExperience = "text_assistant"
     @Published var smallestDownload = false
     @Published var testMemoryMiB = ""
@@ -315,8 +315,10 @@ import UniformTypeIdentifiers
     @Environment(\.scenePhase) private var scenePhase
     var body: some Scene {
         WindowGroup {
-            ContentView(model: model)
-                .task { await model.smoke() }
+            Group {
+                if (ProcessInfo.processInfo.arguments.contains("--text-smoke") || ProcessInfo.processInfo.arguments.contains("--text-qualify")) { LocalTextDraftView() }
+                else { ContentView(model: model).task { await model.smoke() } }
+            }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)) { _ in
                     model.memoryWarnings += 1; model.cancelWork()
                 }
@@ -332,6 +334,7 @@ import UniformTypeIdentifiers
 struct ContentView: View {
     @ObservedObject var model: PocketModel
     @State private var importer = false
+    @State private var textAssistant = false
     var body: some View {
         NavigationStack {
             Form {
@@ -340,6 +343,15 @@ struct ContentView: View {
                     Text("Prototype · no remote inference").font(.caption).foregroundStyle(.secondary)
                     Text(model.status).accessibilityIdentifier("runtimeStatus")
                     if model.busy { ProgressView(); Button("Stop") { model.cancelWork() } }
+                }
+                Section("Write on this iPhone") {
+                    Button("Write with local AI") {
+                        model.perform("Releasing current model…") {
+                            await model.runtime.unload(); model.loadedID = nil
+                            try Task.checkCancellation(); textAssistant = true
+                        }
+                    }.disabled(model.busy)
+                    Text("Short summaries, rewrites and reply drafts. Review before using.").font(.caption)
                 }
                 Section("Shop the merchant catalog") {
                     Text("Suggestions stay on this iPhone. Searching sends only your reviewed keywords and USD budget to Jumping Beans.").font(.caption).foregroundStyle(.secondary)
@@ -440,6 +452,7 @@ struct ContentView: View {
                     if let url = model.exportURL { ShareLink("Share measurements", item: url) }
                 }
             }.navigationTitle("BeanFit Pocket")
+            .sheet(isPresented: $textAssistant) { LocalTextDraftView() }
             .fileImporter(isPresented: $importer, allowedContentTypes: [.data]) { result in
                 switch result { case .success(let url): model.importModel(url); case .failure(let error): model.status = error.localizedDescription }
             }

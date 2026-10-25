@@ -1,0 +1,26 @@
+[
+  {
+    "app_build" : "1317",
+    "app_version" : "0.2.0",
+    "duration_ms" : 342.14733354747295,
+    "model_unloaded" : true,
+    "reason" : "Paused in background. Model memory released.",
+    "resident_bytes" : 487522304
+  },
+  {
+    "app_build" : "1317",
+    "app_version" : "0.2.0",
+    "duration_ms" : 109.90849975496531,
+    "model_unloaded" : true,
+    "reason" : "Stopped. Model memory released.",
+    "resident_bytes" : 489553920
+  },
+  {
+    "app_build" : "1317",
+    "app_version" : "0.2.0",
+    "duration_ms" : 12.729291804134846,
+    "model_unloaded" : true,
+    "reason" : "Stopped. Model memory released.",
+    "resident_bytes" : 489570304
+  }
+]

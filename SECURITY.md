@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-The current source identifies itself as `0.8.1`. Its reporting scope is the
+The current source identifies itself as `0.9.0`. Its reporting scope is the
 CLI and experimental Pocket prototype described below; this designation is not release proof or security
 clearance. Confirm publication through the annotated tag and GitHub Release
 at the same tested commit. The historical `v0.5.1` release embeds runtime/package
@@ -11,7 +11,8 @@ those already published artifacts.
 
 | Version | Supported |
 | --- | --- |
-| `0.8.1` source | Report suspected vulnerabilities; publication requires release proof |
+| `0.9.0` source | Report suspected vulnerabilities; publication requires release proof |
+| `v0.8.1` existing release | Report suspected vulnerabilities in the published catalog/suggestion release |
 | `v0.5.1` existing release | Report suspected vulnerabilities; identity mismatch above |
 | Earlier versions | No declared support |
 

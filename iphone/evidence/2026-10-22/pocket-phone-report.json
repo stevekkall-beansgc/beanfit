@@ -1,0 +1,121 @@
+{
+  "application_state": 0,
+  "bundle": "com.beanlabs.BeanFitPocket",
+  "completed": true,
+  "evidence_kind": "physical-device-process-only",
+  "limits": [
+    "Synthetic lexical functional checks, not broad writing-quality acceptance.",
+    "Process footprint is sampled and excludes whole-stack allocations; no memory-fit claim."
+  ],
+  "memory_warnings": 0,
+  "model": "liquid12",
+  "model_sha256": "b1b3de114215d9507409a662a501a631095a479a419584e8a2ded6304b19b4f5",
+  "model_unloaded": true,
+  "qualified": false,
+  "records": [
+    {
+      "duration_ms": 2430.5739402770996,
+      "id": "summary-date",
+      "input": "The community picnic is on Tuesday. Bring a red blanket. The picnic is not on Wednesday.",
+      "output": "The community picnic is scheduled for Tuesday, and attendees should bring a red blanket. The event is not taking place on Wednesday.",
+      "passed": true,
+      "repeat": 0
+    },
+    {
+      "duration_ms": 2265.4929161071777,
+      "id": "summary-amount",
+      "input": "The blue notebook costs 12 dollars. Pickup is Friday. Delivery is unavailable.",
+      "output": "The blue notebook costs $12, pickup is scheduled for Friday, and delivery is not available.",
+      "passed": true,
+      "repeat": 0
+    },
+    {
+      "duration_ms": 2109.149932861328,
+      "id": "rewrite-date",
+      "input": "hey please return my green folder on Monday thanks",
+      "output": "Please send my green folder back on Monday, thank you.",
+      "passed": true,
+      "repeat": 0
+    },
+    {
+      "duration_ms": 2431.5099716186523,
+      "id": "rewrite-negation",
+      "input": "I cannot attend on Friday. Please suggest another day.",
+      "output": "I'm sorry, but I won't be able to attend on Friday. Could you suggest an alternative date instead?",
+      "passed": true,
+      "repeat": 0
+    },
+    {
+      "duration_ms": 2350.2320051193237,
+      "id": "reply-facts",
+      "input": "Message: Can you return the folder on Monday? Reply facts: Yes. I will bring the green folder on Monday.",
+      "output": "Yes, I will bring the green folder on Monday.",
+      "passed": true,
+      "repeat": 0
+    },
+    {
+      "duration_ms": 2337.627053260803,
+      "id": "reply-decline",
+      "input": "Message: Can you attend on Friday? Reply facts: I cannot attend on Friday. Ask about Monday instead.",
+      "output": "I cannot attend on Friday. Please consider Monday instead.",
+      "passed": true,
+      "repeat": 0
+    },
+    {
+      "duration_ms": 2746.3769912719727,
+      "id": "summary-date",
+      "input": "The community picnic is on Tuesday. Bring a red blanket. The picnic is not on Wednesday.",
+      "output": "The community picnic is scheduled for Tuesday, and attendees should bring a red blanket. The event is not taking place on Wednesday.",
+      "passed": true,
+      "repeat": 1
+    },
+    {
+      "duration_ms": 2480.1909923553467,
+      "id": "summary-amount",
+      "input": "The blue notebook costs 12 dollars. Pickup is Friday. Delivery is unavailable.",
+      "output": "The blue notebook costs $12, pickup is scheduled for Friday, and delivery is not available.",
+      "passed": true,
+      "repeat": 1
+    },
+    {
+      "duration_ms": 2258.221983909607,
+      "id": "rewrite-date",
+      "input": "hey please return my green folder on Monday thanks",
+      "output": "Please send my green folder back on Monday, thank you.",
+      "passed": true,
+      "repeat": 1
+    },
+    {
+      "duration_ms": 2587.211012840271,
+      "id": "rewrite-negation",
+      "input": "I cannot attend on Friday. Please suggest another day.",
+      "output": "I'm sorry, but I won't be able to attend on Friday. Could you suggest an alternative date instead?",
+      "passed": true,
+      "repeat": 1
+    },
+    {
+      "duration_ms": 2497.177004814148,
+      "id": "reply-facts",
+      "input": "Message: Can you return the folder on Monday? Reply facts: Yes. I will bring the green folder on Monday.",
+      "output": "Yes, I will bring the green folder on Monday.",
+      "passed": true,
+      "repeat": 1
+    },
+    {
+      "duration_ms": 2459.41698551178,
+      "id": "reply-decline",
+      "input": "Message: Can you attend on Friday? Reply facts: I cannot attend on Friday. Ask about Monday instead.",
+      "output": "I cannot attend on Friday. Please consider Monday instead.",
+      "passed": true,
+      "repeat": 1
+    },
+    {
+      "id": "stop-request",
+      "passed": true
+    }
+  ],
+  "run_id": "b88fcbaa-a935-4777-aad7-d40b6a9e4f17",
+  "runtime_revision": "2145525a4081d66ff1a87cf43ef809f95a85ac0c",
+  "schema": "beanfit.text.integration.v1",
+  "started_at": "2026-10-22T15:57:24Z"
+}

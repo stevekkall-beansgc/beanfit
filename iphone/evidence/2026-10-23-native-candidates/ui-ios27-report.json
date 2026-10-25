@@ -1,0 +1,19 @@
+{
+  "evidence_kind": "simulator-ui-not-phone",
+  "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+  "model_sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+  "qualified": false,
+  "completed": true,
+  "passed": true,
+  "phone_operations": false,
+  "xcode_exit": 0,
+  "tests": 2,
+  "passed_tests": 2,
+  "failed_tests": 0,
+  "skipped_tests": 0,
+  "pocket_background_unload_passed": true,
+  "pocket_background_unload_ms": 368.7981250695884,
+  "beansprout_background_unload_passed": true,
+  "beansprout_background_unload_ms": 342.14733354747295,
+  "temporary_simulator_removed": true
+}

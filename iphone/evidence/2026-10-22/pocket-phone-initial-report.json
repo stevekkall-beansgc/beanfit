@@ -1,0 +1,20 @@
+{
+  "bundle": "com.beanlabs.BeanFitPocket",
+  "completed": false,
+  "error": "Generation cancelled",
+  "evidence_kind": "physical-device-process-only",
+  "limits": [
+    "Synthetic lexical functional checks, not broad writing-quality acceptance.",
+    "Process footprint is sampled and excludes whole-stack allocations; no memory-fit claim."
+  ],
+  "memory_warnings": 0,
+  "model": "liquid12",
+  "model_sha256": "b1b3de114215d9507409a662a501a631095a479a419584e8a2ded6304b19b4f5",
+  "model_unloaded": true,
+  "qualified": false,
+  "records": [],
+  "run_id": "822f3306-0129-4d19-a6d5-325ff1010067",
+  "runtime_revision": "2145525a4081d66ff1a87cf43ef809f95a85ac0c",
+  "schema": "beanfit.text.integration.v1",
+  "started_at": "2026-10-22T15:37:22Z"
+}

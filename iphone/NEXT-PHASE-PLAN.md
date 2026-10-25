@@ -1,4 +1,34 @@
+> October25 amendment: native publication is held after real iPhone14ProMax heat failures. Pocket2 stopped hot after12 quality cases; a nominal-start one-thread Pocket3 run stopped after4. Do not resume unchanged sustained-use packets or publish these binaries. Preserve the failed reports, improve the power/runtime path, then freeze and test a new exact candidate. See [physical hold evidence](evidence/2026-10-25-phone/README.md). The original four-case interruption remains separately unresolved. No native tag, TestFlight or App Store upload has occurred.
+
 # iPhone product enablement — checkpoint and next phase
+
+October 23 update: the authorized no-phone work fixes simulator editor focus and
+beanSprout's missing UIKit background notification path, refines text output
+with transparent bounded cleanup, and aligns the CLI/native/companion trial
+suggestions. Mac and simulator evidence is retained separately from physical
+qualification; every receipt remains unqualified. The source release candidate
+for web inventory fixes is isolated on updated main, excluding the native
+baseline and preserving its separately merged token renewal. Phone quality, resource/thermal and Instruments checks still remain;
+voice notes/search stay deferred. See the current [text guide](README.md) and
+[October 23 review](evidence/2026-10-23/README.md). Historical checkpoints follow.
+
+October 22 acceptance update: text remains first; voice notes and search are
+still deferred. The frozen 36-case packet exposed critical LFM1.2B factual
+failures and a hotter prompt variant failed sustained use. The current candidate
+uses Qwen3.5 2B for summaries/rewrites and an explicitly labelled non-model reply
+formatter. Pocket passed its revised resource packet on iPhone 14 Pro Max / iOS
+26.6.1. Full quality, sustained thermal, real UI and Instruments checks remain
+pending; beanSprout must complete the corresponding packets. The user needed
+the phone, so physical testing stopped with the model unloaded. Simulator/Mac
+checks do not fill the missing phone gates.
+
+See [current text instructions](README.md#october-22-text-acceptance-in-progress)
+and [the acceptance checkpoint](evidence/2026-10-22-acceptance/README.md).
+Existing shopping failures and no-model shopping behavior remain unchanged.
+The local web token/inventory fixes pass 870 product assertions, but are not
+published. beanSprout's preserved native baseline still needs release review.
+No App Store, TestFlight, voice or search rollout is claimed. Historical
+checkpoints below describe earlier states and do not override this update.
 
 October 15 update: model-catalog and recommendation work resumed on the user's
 instruction. Current source preserves the October 6 shopping preview and failed

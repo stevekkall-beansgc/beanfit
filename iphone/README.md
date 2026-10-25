@@ -1,3 +1,33 @@
+## Current native candidate — October 23
+
+The native continuation now includes released BeanFit v0.8.1 catalog metadata.
+Qwen2 remains a comparison candidate; no model is qualified or automatically
+selected. Reply drafting is the separate own-facts formatter. The public catalog
+and web inventory releases are complete; historical notes below describe earlier
+checkpoints.
+
+Pocket uses `CURRENT_PROJECT_VERSION` for its Info.plist build identity. Keep the
+ordinary project default at 1; the current test candidate explicitly builds with
+`CURRENT_PROJECT_VERSION=2` (or `BF_BUILD_NUMBER=2` with the build wrapper).
+The wrapper uses the checked-in shared `BeanFitTextUITests` scheme, including
+for generic device builds; an auto-created `BeanFitPocket` scheme is not required.
+The device qualification runner accepts
+`--expected-build` and `--expected-app-sha256` with `--app`, rejects mismatched
+local candidates before device operations, and compares returned app build/version.
+Each run requires a new evidence directory. The packet runner owns a devicectl
+console launch and interrupts only that launch on completion, error or timeout.
+A local child-process check verifies bounded cleanup; actual devicectl signal
+forwarding and phone model release still need physical confirmation. The cleanup
+receipt deliberately keeps `remote_exit_verified=false`. App build/version are recorded in
+synthetic reports and UI lifecycle receipts; ordinary drafts remain in memory.
+Executable hashes identify local files, not reproducible build attestations.
+
+The October 23 no-phone candidate report records fresh generic iPhone and
+simulator builds. Full phone quality, load cycles, heat, real UI and Instruments
+checks still gate release. The earlier four-case Pocket interruption remains
+unresolved. Historical evidence must not be relabelled as this candidate's phone
+acceptance. Voice notes and search remain deferred.
+
 # BeanFit Pocket — native iPhone prototype
 
 For developers building local AI experiences in Legume Labs apps. Import a
@@ -8,6 +38,115 @@ without a server; catalog searches need internet.
 Start with [Build and run](#build-and-run). You need Xcode, iOS 26 or newer,
 and a separately obtained model file. [Tests and evidence](#tests-and-evidence)
 explain how to check the prototype without treating a simulator as phone proof.
+
+## October 23: no-phone refinement
+
+The current source fixes editor focus across background/reopen and observes
+UIKit lifecycle notifications as well as SwiftUI scene state. This matters in
+the beanSprout host: its SwiftUI view did not inherit background scene state,
+so the previous containing app could keep the model loaded. The same real
+copy/edit/background/reload/dismiss tests now cover both app hosts in disposable
+simulators. This does not qualify physical phone memory, heat or latency.
+
+Summaries/rewrites use revised Qwen2 instructions with bounded output cleanup.
+The cleanup removes simple reported editorial output-control annotations and
+explicit rewrite labels. Ambiguous leading Draft status is retained or restored.
+It normalizes a few model-added causal transitions when the
+source has no recognized causal wording. It retains uncertain mixed clauses,
+requested literal/security text and business quotations. This is a limited
+style policy, not a semantic fact checker or prompt-injection security boundary.
+The UI marks normalized drafts for comparison with the original. Synthetic
+reports retain raw model text and edit counts; ordinary drafts stay in memory.
+Reply drafts still use the separate facts formatter without model inference.
+
+The original 36-case packet and additional frozen/regression packets retain
+all failures. See [the October 23 evidence and review](evidence/2026-10-23/README.md).
+The Mac results are source validation, not phone acceptance. Voice notes and
+search remain deferred. BeanFit's CLI, native chooser and companion now place
+Qwen2 first for comparison and hold the failed LFM1.2B text configuration.
+
+Two reproducible local harnesses are available:
+
+```sh
+python3 iphone/scripts/mac_text_preflight.py --help
+python3 iphone/scripts/simulator_text_ui.py --help
+```
+
+The first snapshots the actual Swift adapter before compiling it with a supplied,
+separately reviewed local native library. It verifies the pinned GGUF on load
+and records source, packet and library hashes. The second uses prebuilt simulator
+apps and an `.xctestrun` specification, creates its own account-free simulator,
+runs both host UI tests, requires finalized results plus background unload
+receipts, and deletes only its temporary simulator. Neither accesses a phone,
+downloads weights, creates signing assets or calls an AI provider. Raw Xcode
+bundles stay private; use the sanitized JSON reports when sharing evidence.
+
+## October 22: text acceptance in progress
+
+The development apps expose **Write with local AI** in Pocket and the beanSprout
+containing app. Summarize and Rewrite use the pinned Qwen3.5 2B Q4_K_M candidate
+(`qwen2`, 1,280,835,840 bytes), with CPU inference, a 2,048-token context,
+2,400 UTF-8 input bytes and at most 192 output tokens. Import the exact model
+from Files, tap **Load model**, write a short passage and choose **Write draft**.
+Review the result before **Copy reviewed draft**. No automatic model download,
+sending, saving or tool access is enabled.
+
+**Draft a reply** is a separate local formatter: enter your own complete facts
+and questions in the facts field. Supported “Ask…” directions become questions;
+other factual sentences are retained. The incoming message has no instruction
+channel and no model is loaded for this task. This preserves facts with much
+less memory, but is not a claim that an AI model passed reply-generation tests.
+Unsupported Ask directions fail with an instruction to write the question directly.
+
+Edits retire output. Stop, Done, backgrounding, memory warnings and serious heat
+cancel and unload. The model releases after 30 seconds idle, uses two CPU threads
+at nominal temperature and one at fair, and spaces AI draft starts by 15 seconds.
+Loading requires model bytes plus 384 MiB of OS-reported available process memory.
+That value is a process budget, not free system RAM.
+
+The [frozen 36-case acceptance protocol](Tests/TEXT-ACCEPTANCE.md) supersedes the
+six-case functional demonstration for release decisions. Initial LFM2.5 1.2B phone
+runs exposed critical factual failures; a later prompt variant reached serious
+heat and stopped. Failed attempts are retained. Qwen3.5 0.8B/2B and LFM1.2B were
+compared locally; Mac preflights are not phone qualification. Qwen2 with greedy
+sampling and the formatter is the current candidate, not a production selection.
+
+On iPhone 14 Pro Max / iOS 26.6.1, Pocket's revised resource packet passed five
+load/write/unload cycles, short-draft timing, Stop, idle unloading and injected
+warning/heat handlers. Peak resident memory including mapped pages was 1,384.5
+MiB; the conservative peak footprint plus full GGUF was 1,369.5 MiB, below the
+frozen 1,536 MiB cap. The subsequent quality packet completed four cases before
+an interrupted operation; it did not pass the full acceptance gate. The user
+needed the phone, so further physical tests stopped. Full quality, five-minute
+thermal runs, real UI lifecycle checks and the Instruments cross-check remain
+pending, including the corresponding beanSprout runs. Every raw receipt keeps
+`qualified: false`. See [the acceptance checkpoint](evidence/2026-10-22-acceptance/README.md).
+
+beanSprout embeds the shared runtime only in its containing app, excluding the
+Messages extension and App Clip. Its preserved native baseline is unmerged and
+not approved for publication. WebMCP token renewal and fresh member catalogs fix
+the local web release gates (870 assertions passed); those source fixes have not
+been deployed. Voice notes and search remain deferred.
+
+Run a physical packet after building/signing the candidate:
+
+```sh
+xcrun devicectl list devices --json-output /private/tmp/connected-devices.json
+python3 iphone/scripts/device_text_qualification.py \
+  --inventory /private/tmp/connected-devices.json \
+  --bundle com.beanlabs.BeanFitPocket --phase resource --model-id qwen2 \
+  --app /absolute/path/BeanFitPocket.app \
+  --model /absolute/path/Qwen3.5-2B-Q4_K_M.gguf \
+  --output /absolute/path/text-phone-evidence
+```
+
+Use `--phase quality` and `--phase thermal` separately. For beanSprout use
+`com.jumpingbeans.v2.imessageprototype` and its prepared app. Device identifiers
+stay in private inventory; retained reports contain synthetic text only. Explicit
+`--text-smoke`/`--text-qualify` launches export synthetic test results; ordinary
+drafts are not exported. Simulator synthetic runs may bypass unavailable process
+headroom for functional checks only; they are labelled simulator and never phone
+memory evidence. Keep all failed runs when comparing candidates.
 
 ## October 15 model refresh candidate
 
@@ -129,7 +268,7 @@ A web product needs a native host/bridge before it can call this interface.
 
 Only one model is resident per engine. Contexts are created per request and freed
 afterward. Generation has a 2048-token context, a 256-token hard output maximum,
-and a 90-second cancellation deadline. It uses four CPU threads; Metal and
+and a 90-second cancellation deadline. It uses two CPU threads at nominal thermal state and one at fair; Metal and
 Accelerate are disabled in this first build. Stop cancels inference; unloading
 waits for serialized native work. Backgrounding and memory warnings request
 cancellation and unloading. Import/hash verification is not instantaneously
@@ -172,3 +311,7 @@ size alone.
 
 See [the next-phase plan](NEXT-PHASE-PLAN.md) for the agreed purpose, remaining
 product work, qualification gates, and exact resume point.
+
+## October25 physical release hold
+
+The CPU-only text prototype has not passed sustained-use heat acceptance on iPhone14ProMax/iOS26.6.1. The original adaptive policy and a one-thread experiment both reached protective heat stops. Model memory was released; app distribution remains held. The single-thread experiment was not adopted as a fix. [Retained physical failures](evidence/2026-10-25-phone/README.md) explain the unchanged gates and thermal-reporting correction.

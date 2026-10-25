@@ -81,7 +81,7 @@ See [ROADMAP.md](ROADMAP.md) for the full plan.
 
 ## Current source candidate
 
-Package metadata and `beanfit --version` identify this source as `0.8.1`.
+Package metadata and `beanfit --version` identify this source as `0.9.0`.
 The sample above is a shortened fixture transcript, not a measured inference
 run or release proof. Confirm a published version through its annotated tag
 and GitHub Release at the same tested commit; a checkout alone is not proof

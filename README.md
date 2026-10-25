@@ -59,7 +59,7 @@ transcript, catalog controls, supported scope and development commands.
 
 ## Current source candidate
 
-Source package identity is `0.8.1`; matching tags and GitHub Releases provide
+Source package identity is `0.9.0`; matching tags and GitHub Releases provide
 release proof. Historical `v0.5.1` embeds `0.5.0`; those published artifacts
 are unchanged. [Release history](https://github.com/stevekkall-beansgc/beanfit/releases)
 and the [roadmap](ROADMAP.md) distinguish shipped source from planned
@@ -77,7 +77,7 @@ Liveness is not performance evidence. This version has no telemetry.
 shows task-specific candidates from the October 23 pinned on-device catalog.
 Start with text, voice notes (`--experience transcription`) and search
 (`--experience semantic_search`). Voice notes and search still need app integration.
-These are test suggestions, not measured memory-fit or quality winners.
+These are test suggestions, not measured memory-fit or quality winners. The CPU-only Pocket text prototype has failed sustained-use heat acceptance on iPhone14ProMax; native distribution is held. [Physical evidence](iphone/evidence/2026-10-25-phone/README.md) records the failures.
 [Candidate selection and app synchronization](README-REFERENCE.md#on-device-catalog-and-suggestions)
 explain the evidence gates and the separate legacy Mac estimates.
 

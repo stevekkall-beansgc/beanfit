@@ -1,0 +1,580 @@
+{
+  "automatic_pass": false,
+  "bundle": "com.beanlabs.BeanFitPocket",
+  "completed": false,
+  "conservative_peak_bytes": 1434044528,
+  "elapsed_seconds": 65.88539000001037,
+  "error": "Writing on this iPhone\u2026",
+  "evidence_kind": "physical-device-resident-and-footprint",
+  "injected_warning_handler_calls": 0,
+  "kernel_peak_resident_bytes": 1409548288,
+  "limits": [
+    "Synthetic packet; authored factual/style review required.",
+    "Whole app process RSS includes resident mappings. Unrelated OS memory is not measured as zero.",
+    "Injected handlers are not real OS pressure or sensor events.",
+    "No all-iPhone or battery-endurance qualification."
+  ],
+  "measurements": [
+    {
+      "baselineProcessBytes": 19104592,
+      "contextTokens": 2048,
+      "device": "iPhone15,3",
+      "durationMs": 2236.2879514694214,
+      "endProcessBytes": 95569704,
+      "evidenceKind": "physical-device-process-only",
+      "id": "2969F1FA-E34E-4CCB-9958-5F74C4EDD73D",
+      "memoryAccounting": "Sampled task_vm_info.phys_footprint at 20ms; app process only, may miss peaks; excludes unaccounted system services. Not whole-stack qualification.",
+      "memorySamples": 113,
+      "model": "qwen2",
+      "modelSHA256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "observedPeakProcessBytes": 100074440,
+      "os": "Version 26.6.1 (Build 23G83)",
+      "outcome": "completed",
+      "outputTokens": 0,
+      "resources": {
+        "baseline": {
+          "available": 3202120880,
+          "compressed": 0,
+          "externalBytes": 32768000,
+          "footprint": 19104592,
+          "internalBytes": 18644992,
+          "kernelPeakResident": 51642368,
+          "resident": 51445760,
+          "virtualBytes": 420146479104
+        },
+        "end": {
+          "available": 3125655768,
+          "compressed": 0,
+          "externalBytes": 1126154240,
+          "footprint": 95569704,
+          "internalBytes": 94437376,
+          "kernelPeakResident": 1232896000,
+          "resident": 1225768960,
+          "virtualBytes": 421496848384
+        },
+        "peakCompressed": 0,
+        "peakExternal": 1132396544,
+        "peakInternal": 99532800,
+        "peakResident": 1232011264
+      },
+      "stage": "verify-and-load",
+      "startedAt": "2026-10-22T17:38:03Z",
+      "thermalAfter": 0,
+      "thermalBefore": 0
+    },
+    {
+      "baselineProcessBytes": 95766312,
+      "contextTokens": 2048,
+      "cpuThreads": 2,
+      "device": "iPhone15,3",
+      "durationMs": 6335.530996322632,
+      "endProcessBytes": 153192304,
+      "evidenceKind": "physical-device-process-only",
+      "firstTokenMs": 5284.807583,
+      "id": "F0F1AFAA-2AFD-4B9F-89C6-D67D9C314EA3",
+      "memoryAccounting": "Sampled task_vm_info.phys_footprint at 20ms; app process only, may miss peaks; excludes unaccounted system services. Not whole-stack qualification.",
+      "memorySamples": 318,
+      "model": "qwen2",
+      "modelSHA256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "observedPeakProcessBytes": 153208688,
+      "os": "Version 26.6.1 (Build 23G83)",
+      "outcome": "completed",
+      "outputTokens": 19,
+      "resources": {
+        "baseline": {
+          "available": 3125459160,
+          "compressed": 0,
+          "externalBytes": 1126170624,
+          "footprint": 95766312,
+          "internalBytes": 94633984,
+          "kernelPeakResident": 1232896000,
+          "resident": 1225981952,
+          "virtualBytes": 421496979456
+        },
+        "end": {
+          "available": 3068033168,
+          "compressed": 109068288,
+          "externalBytes": 1304788992,
+          "footprint": 153192304,
+          "internalBytes": 43057152,
+          "kernelPeakResident": 1383694336,
+          "resident": 1347993600,
+          "virtualBytes": 421827395584
+        },
+        "peakCompressed": 112869376,
+        "peakExternal": 1304788992,
+        "peakInternal": 148668416,
+        "peakResident": 1381662720
+      },
+      "stage": "generate",
+      "startedAt": "2026-10-22T17:38:06Z",
+      "thermalAfter": 0,
+      "thermalBefore": 0
+    },
+    {
+      "baselineProcessBytes": 107120424,
+      "contextTokens": 2048,
+      "cpuThreads": 2,
+      "device": "iPhone15,3",
+      "durationMs": 5445.327997207642,
+      "endProcessBytes": 147720048,
+      "evidenceKind": "physical-device-process-only",
+      "firstTokenMs": 4305.583666,
+      "id": "FD4FB6FF-B9DE-41C5-80FF-84F0A9B9CE92",
+      "memoryAccounting": "Sampled task_vm_info.phys_footprint at 20ms; app process only, may miss peaks; excludes unaccounted system services. Not whole-stack qualification.",
+      "memorySamples": 274,
+      "model": "qwen2",
+      "modelSHA256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "observedPeakProcessBytes": 147736432,
+      "os": "Version 26.6.1 (Build 23G83)",
+      "outcome": "completed",
+      "outputTokens": 20,
+      "resources": {
+        "baseline": {
+          "available": 3114105048,
+          "compressed": 87130112,
+          "externalBytes": 1304854528,
+          "footprint": 107120424,
+          "internalBytes": 18857984,
+          "kernelPeakResident": 1383694336,
+          "resident": 1326383104,
+          "virtualBytes": 421508726784
+        },
+        "end": {
+          "available": 3073505424,
+          "compressed": 46989312,
+          "externalBytes": 1304854528,
+          "footprint": 147720048,
+          "internalBytes": 99549184,
+          "kernelPeakResident": 1407238144,
+          "resident": 1407205376,
+          "virtualBytes": 421823496192
+        },
+        "peakCompressed": 87130112,
+        "peakExternal": 1304854528,
+        "peakInternal": 99565568,
+        "peakResident": 1407221760
+      },
+      "stage": "generate",
+      "startedAt": "2026-10-22T17:38:21Z",
+      "thermalAfter": 0,
+      "thermalBefore": 0
+    },
+    {
+      "baselineProcessBytes": 106972968,
+      "contextTokens": 2048,
+      "cpuThreads": 2,
+      "device": "iPhone15,3",
+      "durationMs": 5548.748970031738,
+      "endProcessBytes": 146589552,
+      "evidenceKind": "physical-device-process-only",
+      "firstTokenMs": 4412.969084,
+      "id": "B8DC44D9-24BD-43ED-8245-28C9858B706E",
+      "memoryAccounting": "Sampled task_vm_info.phys_footprint at 20ms; app process only, may miss peaks; excludes unaccounted system services. Not whole-stack qualification.",
+      "memorySamples": 279,
+      "model": "qwen2",
+      "modelSHA256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "observedPeakProcessBytes": 146605936,
+      "os": "Version 26.6.1 (Build 23G83)",
+      "outcome": "completed",
+      "outputTokens": 20,
+      "resources": {
+        "baseline": {
+          "available": 3114252504,
+          "compressed": 46972928,
+          "externalBytes": 1304854528,
+          "footprint": 106972968,
+          "internalBytes": 58867712,
+          "kernelPeakResident": 1407451136,
+          "resident": 1367932928,
+          "virtualBytes": 421508792320
+        },
+        "end": {
+          "available": 3074635920,
+          "compressed": 46006272,
+          "externalBytes": 1304854528,
+          "footprint": 146589552,
+          "internalBytes": 99270656,
+          "kernelPeakResident": 1408401408,
+          "resident": 1408368640,
+          "virtualBytes": 421824135168
+        },
+        "peakCompressed": 46972928,
+        "peakExternal": 1304854528,
+        "peakInternal": 99287040,
+        "peakResident": 1408385024
+      },
+      "stage": "generate",
+      "startedAt": "2026-10-22T17:38:36Z",
+      "thermalAfter": 0,
+      "thermalBefore": 0
+    },
+    {
+      "baselineProcessBytes": 107038504,
+      "contextTokens": 2048,
+      "cpuThreads": 2,
+      "device": "iPhone15,3",
+      "durationMs": 5943.325996398926,
+      "endProcessBytes": 146524016,
+      "evidenceKind": "physical-device-process-only",
+      "firstTokenMs": 4628.388625,
+      "id": "E5CB1C74-83A0-409A-B056-E452085E5793",
+      "memoryAccounting": "Sampled task_vm_info.phys_footprint at 20ms; app process only, may miss peaks; excludes unaccounted system services. Not whole-stack qualification.",
+      "memorySamples": 299,
+      "model": "qwen2",
+      "modelSHA256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "observedPeakProcessBytes": 146622320,
+      "os": "Version 26.6.1 (Build 23G83)",
+      "outcome": "completed",
+      "outputTokens": 23,
+      "resources": {
+        "baseline": {
+          "available": 3114186968,
+          "compressed": 45940736,
+          "externalBytes": 1304870912,
+          "footprint": 107038504,
+          "internalBytes": 59965440,
+          "kernelPeakResident": 1408892928,
+          "resident": 1369096192,
+          "virtualBytes": 421509300224
+        },
+        "end": {
+          "available": 3074701456,
+          "compressed": 44908544,
+          "externalBytes": 1304870912,
+          "footprint": 146524016,
+          "internalBytes": 100302848,
+          "kernelPeakResident": 1409548288,
+          "resident": 1409515520,
+          "virtualBytes": 421824069632
+        },
+        "peakCompressed": 45940736,
+        "peakExternal": 1304870912,
+        "peakInternal": 100401152,
+        "peakResident": 1409531904
+      },
+      "stage": "generate",
+      "startedAt": "2026-10-22T17:38:51Z",
+      "thermalAfter": 0,
+      "thermalBefore": 0
+    }
+  ],
+  "model": "qwen2",
+  "model_sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+  "model_unloaded": true,
+  "packet_sha256": "47f1797303c82d58180f913e697d30c590a69097afed98141d164862bd0d70c5",
+  "peak_resident_bytes": 1409548288,
+  "phase": "quality",
+  "qualified": false,
+  "real_memory_warnings": 0,
+  "records": [
+    {
+      "duration_ms": 6336.359977722168,
+      "expectation": "Use Thursday and Cedar Park; Tuesday is superseded. Preserve red blanket.",
+      "id": "s01",
+      "input": "The picnic was planned for Tuesday. Correction: it is now Thursday at Cedar Park. Bring a red blanket.",
+      "output": "The picnic is now scheduled for Thursday at Cedar Park, and attendees must bring a red blanket.",
+      "passed": true,
+      "task": "summarize",
+      "used_model": true
+    },
+    {
+      "duration_ms": 5481.745004653931,
+      "expectation": "Keep 12 dollars, Friday pickup, and unavailable delivery; do not offer delivery.",
+      "id": "s02",
+      "input": "The blue notebook costs 12 dollars. Pickup is Friday. Delivery is unavailable.",
+      "output": "The blue notebook costs 12 dollars and pickup is scheduled for Friday, but delivery is unavailable.",
+      "passed": true,
+      "task": "summarize",
+      "used_model": true
+    },
+    {
+      "duration_ms": 5583.471059799194,
+      "expectation": "Luis can attend Monday; Maya cannot. No reversal of attendance.",
+      "id": "s03",
+      "input": "Maya cannot attend the Monday meeting. Luis can attend. Do not count Maya as confirmed.",
+      "output": "Maya cannot attend the Monday meeting, and Luis can attend. Do not count Maya as confirmed.",
+      "passed": true,
+      "task": "summarize",
+      "used_model": true
+    },
+    {
+      "duration_ms": 5982.048988342285,
+      "expectation": "Retain 3-4 pm, free admission, and June 8 registration deadline.",
+      "id": "s04",
+      "input": "The workshop begins at 3 pm and ends at 4 pm. It is free. Registration closes on June 8.",
+      "output": "The workshop is free and runs from 3 pm to 4 pm, with registration closing on June 8.",
+      "passed": true,
+      "task": "summarize",
+      "used_model": true
+    }
+  ],
+  "resource_budget_bytes": 1610612736,
+  "run_id": "2c8b66d9-864e-46b7-ad7f-5369920d7b9c",
+  "runtime_revision": "2145525a4081d66ff1a87cf43ef809f95a85ac0c",
+  "schema": "beanfit.text.qualification.v1",
+  "target_start_cadence_seconds": 15,
+  "thermal_gate": true,
+  "thermal_samples": [
+    {
+      "seconds": 0.15037308336468413,
+      "state": 0
+    },
+    {
+      "seconds": 1.1515370833221823,
+      "state": 0
+    },
+    {
+      "seconds": 2.171108041657135,
+      "state": 0
+    },
+    {
+      "seconds": 3.175280583323911,
+      "state": 0
+    },
+    {
+      "seconds": 4.195235999999568,
+      "state": 0
+    },
+    {
+      "seconds": 5.2153645000071265,
+      "state": 0
+    },
+    {
+      "seconds": 6.234585958358366,
+      "state": 0
+    },
+    {
+      "seconds": 7.235247416712809,
+      "state": 0
+    },
+    {
+      "seconds": 8.255237000004854,
+      "state": 0
+    },
+    {
+      "seconds": 9.319993791694287,
+      "state": 0
+    },
+    {
+      "seconds": 10.339176875015255,
+      "state": 0
+    },
+    {
+      "seconds": 11.405452541657723,
+      "state": 0
+    },
+    {
+      "seconds": 12.437225583358668,
+      "state": 0
+    },
+    {
+      "seconds": 13.504194291657768,
+      "state": 0
+    },
+    {
+      "seconds": 14.532530583324842,
+      "state": 0
+    },
+    {
+      "seconds": 15.546893791703042,
+      "state": 0
+    },
+    {
+      "seconds": 16.60558175004553,
+      "state": 0
+    },
+    {
+      "seconds": 17.60961937502725,
+      "state": 0
+    },
+    {
+      "seconds": 18.612699749995954,
+      "state": 0
+    },
+    {
+      "seconds": 19.61464625003282,
+      "state": 0
+    },
+    {
+      "seconds": 20.6172157083638,
+      "state": 0
+    },
+    {
+      "seconds": 21.620452708331868,
+      "state": 0
+    },
+    {
+      "seconds": 22.639562791679054,
+      "state": 0
+    },
+    {
+      "seconds": 23.69464150001295,
+      "state": 0
+    },
+    {
+      "seconds": 24.720610500022303,
+      "state": 0
+    },
+    {
+      "seconds": 25.762618500040844,
+      "state": 0
+    },
+    {
+      "seconds": 26.807870500022545,
+      "state": 0
+    },
+    {
+      "seconds": 27.869816499995068,
+      "state": 0
+    },
+    {
+      "seconds": 28.921677791688126,
+      "state": 0
+    },
+    {
+      "seconds": 29.959732791699935,
+      "state": 0
+    },
+    {
+      "seconds": 30.983054500014987,
+      "state": 0
+    },
+    {
+      "seconds": 31.98458375001792,
+      "state": 0
+    },
+    {
+      "seconds": 32.98827620834345,
+      "state": 0
+    },
+    {
+      "seconds": 33.98988158337306,
+      "state": 0
+    },
+    {
+      "seconds": 34.995123625034466,
+      "state": 0
+    },
+    {
+      "seconds": 36.00828033336438,
+      "state": 0
+    },
+    {
+      "seconds": 37.02828387502814,
+      "state": 0
+    },
+    {
+      "seconds": 38.04828779166564,
+      "state": 0
+    },
+    {
+      "seconds": 39.10025404166663,
+      "state": 0
+    },
+    {
+      "seconds": 40.140361458354164,
+      "state": 0
+    },
+    {
+      "seconds": 41.16137475002324,
+      "state": 0
+    },
+    {
+      "seconds": 42.208203041693196,
+      "state": 0
+    },
+    {
+      "seconds": 43.25992662500357,
+      "state": 0
+    },
+    {
+      "seconds": 44.32006337499479,
+      "state": 0
+    },
+    {
+      "seconds": 45.35882737499196,
+      "state": 0
+    },
+    {
+      "seconds": 46.38815295835957,
+      "state": 0
+    },
+    {
+      "seconds": 47.42482658335939,
+      "state": 0
+    },
+    {
+      "seconds": 48.43650212499779,
+      "state": 0
+    },
+    {
+      "seconds": 49.456501166685484,
+      "state": 0
+    },
+    {
+      "seconds": 50.4586074166582,
+      "state": 0
+    },
+    {
+      "seconds": 51.476500083343126,
+      "state": 0
+    },
+    {
+      "seconds": 52.496503208356444,
+      "state": 0
+    },
+    {
+      "seconds": 53.51650758337928,
+      "state": 0
+    },
+    {
+      "seconds": 54.55699420836754,
+      "state": 0
+    },
+    {
+      "seconds": 55.55955175001873,
+      "state": 0
+    },
+    {
+      "seconds": 56.62029366666684,
+      "state": 0
+    },
+    {
+      "seconds": 57.64447300002212,
+      "state": 0
+    },
+    {
+      "seconds": 58.67868470837129,
+      "state": 0
+    },
+    {
+      "seconds": 59.702413749997504,
+      "state": 0
+    },
+    {
+      "seconds": 60.70699883333873,
+      "state": 0
+    },
+    {
+      "seconds": 61.71045045834035,
+      "state": 0
+    },
+    {
+      "seconds": 62.71373341669096,
+      "state": 0
+    },
+    {
+      "seconds": 63.714693125046324,
+      "state": 0
+    },
+    {
+      "seconds": 64.71687470836332,
+      "state": 0
+    },
+    {
+      "seconds": 65.82568400003947,
+      "state": 0
+    }
+  ]
+}

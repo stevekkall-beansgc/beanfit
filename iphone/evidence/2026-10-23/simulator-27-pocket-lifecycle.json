@@ -1,0 +1,20 @@
+[
+  {
+    "duration_ms" : 331.8942915648222,
+    "model_unloaded" : true,
+    "reason" : "Paused in background. Model memory released.",
+    "resident_bytes" : 509329408
+  },
+  {
+    "duration_ms" : 70.428458042442799,
+    "model_unloaded" : true,
+    "reason" : "Stopped. Model memory released.",
+    "resident_bytes" : 511459328
+  },
+  {
+    "duration_ms" : 11.894083581864834,
+    "model_unloaded" : true,
+    "reason" : "Stopped. Model memory released.",
+    "resident_bytes" : 509214720
+  }
+]

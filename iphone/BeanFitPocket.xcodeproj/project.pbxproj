@@ -125,6 +125,10 @@
 				<string>000000000000000000000201</string>
 				<string>BF2026101500000000000001</string>
 				<string>BF2026101500000000000002</string>
+				<string>F10000000000000000000000</string>
+				<string>F10000000000000000000001</string>
+				<string>689AAC2F5C4CE3FB3F4EF063</string>
+				<string>024E15BE137421732D07D9C3</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -146,6 +150,8 @@
 				<string>000000000000000000000202</string>
 				<string>BF2026101500000000000101</string>
 				<string>BF2026101500000000000102</string>
+				<string>F20000000000000000000000</string>
+				<string>F20000000000000000000001</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -204,6 +210,8 @@
 				<string>5.0</string>
 				<key>TARGETED_DEVICE_FAMILY</key>
 				<string>1</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
 			</dict>
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
@@ -261,6 +269,8 @@
 				<key>SWIFT_VERSION</key>
 				<string>5.0</string>
 				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1</string>
+				<key>CURRENT_PROJECT_VERSION</key>
 				<string>1</string>
 			</dict>
 			<key>isa</key>
@@ -343,6 +353,16 @@
 			<dict>
 				<key>LastUpgradeCheck</key>
 				<string>2700</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>266B7625C426445D604CFAEC</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>27.0</string>
+						<key>TestTargetID</key>
+						<string>000000000000000000000011</string>
+					</dict>
+				</dict>
 			</dict>
 			<key>buildConfigurationList</key>
 			<string>000000000000000000000014</string>
@@ -366,6 +386,7 @@
 			<key>targets</key>
 			<array>
 				<string>000000000000000000000011</string>
+				<string>266B7625C426445D604CFAEC</string>
 			</array>
 		</dict>
 		<key>000000000000000000000101</key>
@@ -439,6 +460,237 @@
 			<string>PBXBuildFile</string>
 			<key>fileRef</key>
 			<string>BF2026101500000000000002</string>
+		</dict>
+		<key>F10000000000000000000000</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>BeanFitRuntime/TextDraft.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F20000000000000000000000</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>fileRef</key>
+			<string>F10000000000000000000000</string>
+		</dict>
+		<key>F10000000000000000000001</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>BeanFitRuntime/TextDraftView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F20000000000000000000001</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>fileRef</key>
+			<string>F10000000000000000000001</string>
+		</dict>
+		<key>689AAC2F5C4CE3FB3F4EF063</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UITests/TextDraftUITests.swift</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>024E15BE137421732D07D9C3</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>path</key>
+			<string>BeanFitTextUITests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>25E0F138ADC2C32C5313A8F2</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>fileRef</key>
+			<string>689AAC2F5C4CE3FB3F4EF063</string>
+		</dict>
+		<key>9A54005A5099232C709107A1</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>buildActionMask</key>
+			<integer>2147483647</integer>
+			<key>files</key>
+			<array>
+				<string>25E0F138ADC2C32C5313A8F2</string>
+			</array>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<integer>0</integer>
+		</dict>
+		<key>5E790562862E355A3A5719A2</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>buildActionMask</key>
+			<integer>2147483647</integer>
+			<key>files</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<integer>0</integer>
+		</dict>
+		<key>F3918AA3603A10403B2E8A02</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>buildActionMask</key>
+			<integer>2147483647</integer>
+			<key>files</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<integer>0</integer>
+		</dict>
+		<key>AF76B239966A06D5D047CF4C</key>
+		<dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.beanlabs.BeanFitTextUITests</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>GENERATE_INFOPLIST_FILE</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>5.0</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>26.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1</string>
+				<key>CODE_SIGN_STYLE</key>
+				<string>Automatic</string>
+				<key>TEST_TARGET_NAME</key>
+				<string>BeanFitPocket</string>
+				<key>ENABLE_TESTING_SEARCH_PATHS</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>Y2S73JGJPZ</string>
+			</dict>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>F22C2FB722809E5D82FFFD68</key>
+		<dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.beanlabs.BeanFitTextUITests</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>GENERATE_INFOPLIST_FILE</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>5.0</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>26.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1</string>
+				<key>CODE_SIGN_STYLE</key>
+				<string>Automatic</string>
+				<key>TEST_TARGET_NAME</key>
+				<string>BeanFitPocket</string>
+				<key>ENABLE_TESTING_SEARCH_PATHS</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>Y2S73JGJPZ</string>
+			</dict>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>6DD3B7DA2FC50EAA6A3277E6</key>
+		<dict>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+			<key>buildConfigurations</key>
+			<array>
+				<string>AF76B239966A06D5D047CF4C</string>
+				<string>F22C2FB722809E5D82FFFD68</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<integer>0</integer>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+		</dict>
+		<key>F09CD6DF81DCF1573D52C555</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>containerPortal</key>
+			<string>000000000000000000000015</string>
+			<key>proxyType</key>
+			<integer>1</integer>
+			<key>remoteGlobalIDString</key>
+			<string>000000000000000000000011</string>
+			<key>remoteInfo</key>
+			<string>BeanFitPocket</string>
+		</dict>
+		<key>73A4F93F372BA1C06354510C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>000000000000000000000011</string>
+			<key>targetProxy</key>
+			<string>F09CD6DF81DCF1573D52C555</string>
+		</dict>
+		<key>266B7625C426445D604CFAEC</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>buildConfigurationList</key>
+			<string>6DD3B7DA2FC50EAA6A3277E6</string>
+			<key>buildPhases</key>
+			<array>
+				<string>9A54005A5099232C709107A1</string>
+				<string>5E790562862E355A3A5719A2</string>
+				<string>F3918AA3603A10403B2E8A02</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>73A4F93F372BA1C06354510C</string>
+			</array>
+			<key>name</key>
+			<string>BeanFitTextUITests</string>
+			<key>productName</key>
+			<string>BeanFitTextUITests</string>
+			<key>productReference</key>
+			<string>024E15BE137421732D07D9C3</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.ui-testing</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

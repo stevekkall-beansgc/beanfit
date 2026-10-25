@@ -1,5 +1,15 @@
 import Foundation
 
+struct ResourceSnapshot: Codable {
+    let footprint, resident, virtualBytes, internalBytes, externalBytes, compressed, available: UInt64
+    var kernelPeakResident: UInt64? = nil
+}
+struct ResourceMeasurement: Codable {
+    let baseline: ResourceSnapshot
+    let end: ResourceSnapshot
+    let peakResident, peakInternal, peakExternal, peakCompressed: UInt64
+}
+
 struct Measurement: Codable, Identifiable {
     let id: UUID
     let stage: String
@@ -20,6 +30,8 @@ struct Measurement: Codable, Identifiable {
     let outcome: String
     let thermalBefore: Int
     let thermalAfter: Int
+    var resources: ResourceMeasurement? = nil
+    var cpuThreads: Int? = nil
     let memoryAccounting: String = "Sampled task_vm_info.phys_footprint at 20ms; app process only, may miss peaks; excludes unaccounted system services. Not whole-stack qualification."
 }
 
@@ -39,4 +51,16 @@ protocol LocalInferenceClient: AnyObject {
     func generate(system: String, user: String, grammar: String?, maxTokens: Int) async throws -> InferenceResult
     func unload() async
     func cancel()
+}
+
+// Capture real thermal transitions even when a brief hot state falls between
+// periodic samples. Deliberate policy injections are never sensor evidence.
+struct TextThermalObservation {
+    private(set) var highestState: Int
+    init(initial: Int) { highestState = (0...3).contains(initial) ? initial : 3 }
+    mutating func observe(_ state: Int, injected: Bool = false) {
+        guard !injected else { return }
+        highestState = max(highestState, (0...3).contains(state) ? state : 3)
+    }
+    var permitsAcceptance: Bool { highestState < 2 }
 }

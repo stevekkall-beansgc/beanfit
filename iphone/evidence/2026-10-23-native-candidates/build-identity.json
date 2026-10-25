@@ -1,0 +1,94 @@
+{
+  "qualified": false,
+  "phone_operations": false,
+  "evidence_kind": "local-native-build-identity-not-phone",
+  "builds": [
+    {
+      "host": "pocket",
+      "sdk": "iphonesimulator",
+      "app_path": "pocket-iphonesimulator/Build/Products/Release-iphonesimulator/BeanFitPocket.app",
+      "bundle": "com.beanlabs.BeanFitPocket",
+      "app_version": "0.1.0",
+      "app_build": "2",
+      "executable_sha256": "7b6da9552ecf045dc878cb346c201cbce8cbb17f8a7e5b9d30d94867c5410a11",
+      "info_plist_sha256": "6f577ec98e68588da41277306205b948a72ac93fa067e9dcd721b1b88100ea1d",
+      "gguf_bundled": false
+    },
+    {
+      "host": "pocket",
+      "sdk": "iphoneos",
+      "app_path": "pocket-iphoneos/Build/Products/Release-iphoneos/BeanFitPocket.app",
+      "bundle": "com.beanlabs.BeanFitPocket",
+      "app_version": "0.1.0",
+      "app_build": "2",
+      "executable_sha256": "2ba0ed2d52baf88eb8b68e4cf9c264a8bfb6ad25d8968b4bd7c3c40cac3418fc",
+      "info_plist_sha256": "f1ed376211e4c9f08ad6d1ae0182354bd3d867d5bda7013796486b7bb302e49a",
+      "existing_signature_verified": true,
+      "gguf_bundled": false,
+      "existing_profile_expiry_utc": "2027-10-07T13:41:36Z",
+      "profile_note": "Expiry parsed from existing embedded CMS payload, not a fresh issuer verification; no profile refresh performed."
+    },
+    {
+      "host": "beansprout",
+      "sdk": "iphonesimulator",
+      "app_path": "beansprout-iphonesimulator/Build/Products/Release-iphonesimulator/JumpingBeansPrototype.app",
+      "bundle": "com.jumpingbeans.v2.imessageprototype",
+      "app_version": "0.2.0",
+      "app_build": "1317",
+      "executable_sha256": "567f868ec1dc8d3601c2ec299c994923bd68b42579c853bce71fd580b33bc392",
+      "info_plist_sha256": "65ebe2280f903ca29e7cbd15f7845e5ad4b2edf9dd35dedd9593a94884e45800",
+      "gguf_bundled": false,
+      "actual_embedding_runtime_and_model_retained": true,
+      "embedded_targets": [
+        {
+          "bundle": "com.jumpingbeans.v2.imessageprototype.CardClip",
+          "build": "1317",
+          "added_text_runtime_symbols": false,
+          "model_artifacts_bundled": false
+        },
+        {
+          "bundle": "com.jumpingbeans.v2.imessageprototype.MessagesExtension",
+          "build": "1317",
+          "added_text_runtime_symbols": false,
+          "model_artifacts_bundled": false
+        }
+      ],
+      "existing_embedding_model_sha256": "2d079ee2f6f066b1f368e8d7c819f55214eaef1d0513b312321901f30ab286fb"
+    },
+    {
+      "host": "beansprout",
+      "sdk": "iphoneos",
+      "app_path": "beansprout-iphoneos/Build/Products/Release-iphoneos/JumpingBeansPrototype.app",
+      "bundle": "com.jumpingbeans.v2.imessageprototype",
+      "app_version": "0.2.0",
+      "app_build": "1317",
+      "executable_sha256": "57997ccdc8bc033d98a21a78441fef49762bbcc1e96ba416d97f877fe02158fa",
+      "info_plist_sha256": "b2cf108ecf6eb2a98c89832645e23881f6f7d61959f1c8b54bc753b5eb7b868a",
+      "existing_signature_verified": true,
+      "gguf_bundled": false,
+      "actual_embedding_runtime_and_model_retained": true,
+      "embedded_targets": [
+        {
+          "bundle": "com.jumpingbeans.v2.imessageprototype.CardClip",
+          "build": "1317",
+          "added_text_runtime_symbols": false,
+          "model_artifacts_bundled": false
+        },
+        {
+          "bundle": "com.jumpingbeans.v2.imessageprototype.MessagesExtension",
+          "build": "1317",
+          "added_text_runtime_symbols": false,
+          "model_artifacts_bundled": false
+        }
+      ],
+      "existing_embedding_model_sha256": "2d079ee2f6f066b1f368e8d7c819f55214eaef1d0513b312321901f30ab286fb",
+      "existing_profile_expiry_utc": "2027-10-07T21:27:32Z",
+      "profile_note": "Expiry parsed from existing embedded CMS payload, not a fresh issuer verification; no profile refresh performed."
+    }
+  ],
+  "core_source_commit": "b7e53c0fe7a6545e6d04aaec7c194e275b9194b4",
+  "host_source_commit": "11284e71c71f413976697c312bf7112abe0f67eb",
+  "scope": "Signed generic developer builds and simulator binaries; local hashes are not reproducible-build or store-distribution attestations.",
+  "review_head_after_build": "eff924d5763c56591490cfe5bf244131df1cc6ab",
+  "changes_after_build": "Developer README/build wrapper and external phone-runner identity/lifetime checks only; compiled app sources unchanged."
+}

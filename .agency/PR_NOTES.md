@@ -1,14 +1,15 @@
-## What
-Update text trial ordering to Qwen3.5 2B, hold the failed LFM1.2B text configuration, synchronize catalog mirrors and include the historical evidence behind those descriptions. Advance source identity to 0.8.1.
+# Native text candidates — phone acceptance pending
 
-## Why
-Users currently see a first suggestion whose tested text configuration failed factual acceptance. Suggestions need to reflect that evidence while the newer candidate still awaits complete phone qualification.
+Pocket adds local summary/rewrite through pinned Qwen2 and a separate own-facts
+reply formatter, with bounded CPU/context/input, cancellation/background/idle
+unload and explicit human review. Released v0.8.1 catalog holds remain intact.
+Pocket build 2 and the reviewed beanSprout build 1318 use identical shared sources.
 
-## Risk
-These are comparison suggestions, not memory-fit or production guarantees. All models remain unqualified and selection remains empty. Runtime/device/artifact pins and non-text task ordering stay intact. The native generation integration is excluded.
+Both actual simulator hosts pass on iOS 26.5/27; generic signed iPhone builds and
+registered QA pass. Source/build identities and authored review are in
+iphone/evidence/2026-10-23-native-candidates/. No final physical acceptance or
+independent sign-off is claimed. Full phone quality/resources/heat/UI/Instruments,
+runner cleanup confirmation and the earlier interruption investigation remain
+open. Voice/search stay deferred. Source publication is being prepared under the October25 user release request; native app distribution remains held until physical acceptance and the standard release gates pass.
 
-## Test
-Canonical unit/offline checks, native metadata contracts, generated snapshot equality, registry metadata validation and exact-source companion acceptance are required. Existing Mac ranking goldens remain unchanged; final CI/release proof is attached to the exact merged commit.
-
-## Review-focus
-Check failed-configuration precedence, readable experience-specific labels, evidence references and preserved phone qualification holds. Publish this canonical catalog with the matching web snapshot; do not include the separate native pilot branch.
+October25 release hold: Pocket2 passed resource checks but stopped hot after12 summaries. Pocket3’s nominal-start single-thread quality run stopped hot after4 cases. Native publication remains held. Retain the real-event thermal-reporting fix, preserve the adaptive CPU baseline, and do not promote the failed single-thread experiment. Physical evidence is in iphone/evidence/2026-10-25-phone/.

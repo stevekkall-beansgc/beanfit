@@ -1,0 +1,29 @@
+{
+  "bundle": "com.beanlabs.BeanFitPocket",
+  "completed": false,
+  "error": "Generation cancelled",
+  "evidence_kind": "physical-device-process-only",
+  "limits": [
+    "Synthetic lexical functional checks, not broad writing-quality acceptance.",
+    "Process footprint is sampled and excludes whole-stack allocations; no memory-fit claim."
+  ],
+  "memory_warnings": 0,
+  "model": "liquid12",
+  "model_sha256": "b1b3de114215d9507409a662a501a631095a479a419584e8a2ded6304b19b4f5",
+  "model_unloaded": true,
+  "qualified": false,
+  "records": [
+    {
+      "duration_ms": 2758.025050163269,
+      "id": "summary-date",
+      "input": "The community picnic is on Tuesday. Bring a red blanket. The picnic is not on Wednesday.",
+      "output": "The community picnic is scheduled for Tuesday, and attendees should bring a red blanket. The event is not taking place on Wednesday.",
+      "passed": true,
+      "repeat": 0
+    }
+  ],
+  "run_id": "72d06e5e-921f-4aa2-9600-68302faa5c18",
+  "runtime_revision": "2145525a4081d66ff1a87cf43ef809f95a85ac0c",
+  "schema": "beanfit.text.integration.v1",
+  "started_at": "2026-10-22T15:39:19Z"
+}
