@@ -15,6 +15,12 @@ def cli(*args):
 
 
 doc = cli("--catalog")
+mac = cli("--platform", "mac")
+assert mac == doc["mac_recommendations"]
+assert mac["schema"] == "beanfit.mac.recommendations.v1"
+assert next(m for m in mac["models"] if m["id"] == "lfm3_17b_mac")["runtime_status"] == "awaiting_runtime_support"
+assert all(m["evidence"] and m["artifacts"] for m in mac["models"])
+assert doc["native_release_hold"]["status"] == "held"
 assert len(doc["models"]) == 15
 assert len(doc["reference_models"]) == 3
 base = ("--device", "iPhone15,3", "--ios", "26")
