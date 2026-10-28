@@ -59,7 +59,7 @@ transcript, catalog controls, supported scope and development commands.
 
 ## Current source candidate
 
-Source package identity is `0.8.1`; matching tags and GitHub Releases provide
+Source package identity is `0.9.0`; matching tags and GitHub Releases provide
 release proof. Historical `v0.5.1` embeds `0.5.0`; those published artifacts
 are unchanged. [Release history](https://github.com/stevekkall-beansgc/beanfit/releases)
 and the [roadmap](ROADMAP.md) distinguish shipped source from planned
@@ -70,6 +70,21 @@ A receipt requires a clean checkout of the exact release commit and records the
 SHA-256 of `scripts/validate_catalog.py`; the
 [catalog guide](README-REFERENCE.md#honesty-policy) explains the live check.
 Liveness is not performance evidence. This version has no telemetry.
+
+## Mac choices from published evaluations
+
+`PYTHONPATH=src python3 -m beanfit suggest --platform mac` lists the October 28
+role-based choices: Qwen3.8 27B for general work, LFM2.5 24B-A2B for tool-based
+agents, Qwen3 4B Instruct for an existing lightweight MLX setup, and LFM3 1.7B
+awaiting runtime support. Published evaluations determine these choices; no
+local model benchmark is required. Each choice identifies publisher or
+independent evidence, exact quantized weights and runtime limits.
+
+This command does not scan installed models or infer loaded memory from weight
+sizes. The older eight-row Mac fit engine above and stored pairing snapshots
+remain separate. Mac recommendations do not qualify the native iPhone runtime;
+its CPU-only Qwen3.5 2B configuration failed sustained heat acceptance on the
+reviewed iPhone 14 Pro Max.
 
 ## Current iPhone model candidates
 

@@ -136,6 +136,8 @@ def select_catalog(profile, receipts, *, experience="text_assistant"):
 
 def suggest_main(argv=None):
     parser = argparse.ArgumentParser(prog="beanfit suggest", description=__doc__)
+    parser.add_argument("--platform", choices=["iphone", "mac"], default="iphone",
+                        help="Mac choices use published evaluations; iPhone trials remain separate")
     parser.add_argument("--experience", default="text_assistant")
     parser.add_argument("--device", default="unknown", help="hardware identifier, for example iPhone15,3")
     parser.add_argument("--ios", type=int, dest="os_major")
@@ -147,6 +149,14 @@ def suggest_main(argv=None):
     parser.add_argument("--receipts", type=Path, help="reviewed physical trials with exact catalog identity")
     args = parser.parse_args(argv)
     try:
+        if args.platform == "mac":
+            if (args.profile or args.receipts or args.catalog or args.device != "unknown"
+                    or args.os_major is not None or args.memory_budget_mib is not None
+                    or args.context_tokens != 2048 or args.experience != "text_assistant"
+                    or args.preference != "balanced"):
+                raise ValueError("Mac recommendations do not accept iPhone trial or receipt options")
+            print(json.dumps(catalog()["mac_recommendations"], indent=2, allow_nan=False))
+            return 0
         if bool(args.profile) != bool(args.receipts) or (args.catalog and args.profile):
             raise ValueError("provide both --profile and --receipts; do not combine them with --catalog")
         if args.profile:

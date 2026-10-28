@@ -4,6 +4,36 @@ from beanfit.on_device import catalog, suggest
 
 
 class OnDeviceSuggestions(unittest.TestCase):
+    def test_mac_choices_have_sources_and_remain_separate_from_phone_trials(self):
+        doc = catalog()
+        mac = doc["mac_recommendations"]
+        self.assertEqual(mac["schema"], "beanfit.mac.recommendations.v1")
+        ids = {m["id"] for m in mac["models"]}
+        for model in mac["models"]:
+            self.assertTrue(model["evidence"])
+            self.assertTrue(all(e["kind"] in ("publisher", "independent", "runtime_status")
+                                for e in model["evidence"]))
+            self.assertTrue(all(len(a["sha256"]) == 64 for a in model["artifacts"]))
+        self.assertEqual(next(m for m in mac["models"] if m["id"] == "lfm3_17b_mac")
+                         ["runtime_status"], "awaiting_runtime_support")
+        for task in doc["experiences"]:
+            self.assertTrue(ids.isdisjoint(r["id"] for r in suggest(experience=task["id"])["candidates"]))
+        self.assertEqual(doc["native_release_hold"]["status"], "held")
+
+    def test_mac_cli_uses_published_recommendations_and_rejects_phone_options(self):
+        import contextlib
+        import io
+        import json
+        from beanfit.on_device import suggest_main
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.assertEqual(suggest_main(["--platform", "mac"]), 0)
+        self.assertEqual(json.loads(out.getvalue()), catalog()["mac_recommendations"])
+        for option in (["--ios", "26"], ["--memory-budget-mib", "1024"], ["--catalog"],
+                       ["--profile", "missing.json", "--receipts", "missing.json"]):
+            with contextlib.redirect_stderr(io.StringIO()):
+                self.assertEqual(suggest_main(["--platform", "mac", *option]), 2)
+
     def test_current_text_models_have_pinned_artifacts(self):
         models = catalog()["models"]
         self.assertTrue({"liquid230", "liquid350", "liquid12", "liquid26", "qwen08", "qwen2"} <= {m["id"] for m in models})
