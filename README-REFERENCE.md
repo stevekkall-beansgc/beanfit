@@ -81,7 +81,7 @@ See [ROADMAP.md](ROADMAP.md) for the full plan.
 
 ## Current source candidate
 
-Package metadata and `beanfit --version` identify this source as `0.8.1`.
+Package metadata and `beanfit --version` identify this source as `0.9.0`.
 The sample above is a shortened fixture transcript, not a measured inference
 run or release proof. Confirm a published version through its annotated tag
 and GitHub Release at the same tested commit; a checkout alone is not proof
@@ -329,3 +329,20 @@ native model chooser uses the same catalog, shows task-specific trial ordering,
 verifies files on load and blocks known shopping failures in that task. It does
 not automatically download models or qualify a device. Catalog access/license
 terms, including the custom LFM license, still apply to each artifact.
+
+## Published Mac recommendations
+
+Use `python3 -m beanfit suggest --platform mac` with `PYTHONPATH=src`. The
+`beanfit.mac.recommendations.v1` response is canonical catalog metadata with
+role-specific decisions, pinned weight artifacts, dated evidence provenance and
+runtime limitations. It accepts no iPhone trial/profile options. It requires no
+hardware probe, model download or inference. `--export-catalog` also includes
+these choices within `on_device_catalog.mac_recommendations`.
+
+The companion exposes the same document through `/api/models/suggest?platform=mac`
+and renders it at `/models?platform=mac`. Run
+`python3 scripts/sync_on_device_catalog.py --app-root /path/to/beanfit-app` to
+refresh the native catalog mirror and companion together. The eight-model legacy
+Mac engine, scores, fit estimates, and paired snapshots are unchanged. Model
+choices based on published evaluations do not establish device memory fit or
+remove the separately recorded native release hold.

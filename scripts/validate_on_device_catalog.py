@@ -38,6 +38,24 @@ def validate(doc):
     for model in doc.get("reference_models", []):
         assert model["evaluation_scope"] == "mac_reference_only"
         assert model["runtime_status"] == "requires_integration"
+    mac = doc["mac_recommendations"]
+    assert mac["schema"] == "beanfit.mac.recommendations.v1"
+    mac_ids = [m["id"] for m in mac["models"]]
+    assert mac_ids and len(mac_ids) == len(set(mac_ids))
+    assert set(mac_ids).isdisjoint(ids)
+    for model in mac["models"]:
+        assert model["runtime_status"] in ("publisher_supported_mlx", "awaiting_runtime_support")
+        assert model["artifacts"] and model["evidence"] and model["limitations"]
+        for source in model["evidence"]:
+            assert source["kind"] in ("publisher", "independent", "runtime_status")
+            assert source["url"].startswith("https://") and source["reviewed_on"]
+        for item in model["artifacts"]:
+            assert re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", item["repository"])
+            assert re.fullmatch(r"[0-9a-f]{40}", item["revision"])
+            assert re.fullmatch(r"[0-9a-f]{64}", item["sha256"])
+            assert type(item["bytes"]) is int and item["bytes"] > 0
+            assert not item["filename"].startswith("/") and ".." not in item["filename"].split("/")
+    assert doc["native_release_hold"]["status"] == "held"
     experiences = {task["id"] for task in doc["experiences"]}
     assert all(set(model["capabilities"]) <= experiences for model in all_models)
     for task in doc["experiences"]:
@@ -54,8 +72,8 @@ def main():
     doc = json.loads((ROOT / "src/beanfit/catalog/on_device.json").read_text())
     validate(doc)
     groups = {}
-    for model in doc["models"] + doc.get("reference_models", []):
-        for item in model["artifacts"] + ([model["q8_artifact"]] if model["q8_artifact"] else []):
+    for model in doc["models"] + doc.get("reference_models", []) + doc["mac_recommendations"]["models"]:
+        for item in model["artifacts"] + ([model["q8_artifact"]] if model.get("q8_artifact") else []):
             groups.setdefault((item["repository"], item["revision"]), []).append(item)
 
     def check(pair):

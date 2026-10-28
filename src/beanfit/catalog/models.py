@@ -14,7 +14,13 @@ from typing import NamedTuple
 # file sizes must not be substituted for these legacy memory estimates.
 # October 22 research comparisons live in on_device.json reference_models:
 # Gemma 4 E2B QAT GGUF, LFM2.5 24B-A2B MLX 4-bit, and EmbeddingGemma 2.
-# They intentionally have no Ollama aliases, inferred MLX alternatives, q8 size
+# October 28 role-based Mac recommendations also live in on_device.json. Their
+# selected MLX 4-bit artifacts are pinned separately from this legacy engine.
+# Ollama aliases and q8 variants are explicitly omitted: neither is selected.
+# Published file bytes are not measured RAM and no editorial quality scores are
+# assigned. User-directed selection relies on published evaluations, not local
+# model benchmarks. These choices do not enter the legacy fit ranking.
+# The research references intentionally have no Ollama aliases, inferred MLX alternatives, q8 size
 # where unpublished, memory estimates or editorial scores. Only the publisher's
 # exact listed artifacts are pinned; they never enter iPhone suggestions or the
 # legacy Mac ranking until their runtimes and evidence are reviewed.
